@@ -7,6 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateShop extends Migration
 {
     /**
+     * https://github.com/amsgames/laravel-shop#database-setup
      * Run the migrations.
      *
      * @return void
