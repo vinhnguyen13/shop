@@ -1,0 +1,160 @@
+.grid-horizontal-scroll {
+	overflow-x: auto;
+	min-height: 520px;
+}
+.grid {
+	min-width: 100%;
+	font-size: 14px;
+}
+.grid td, .grid th {
+	border: 1px solid rgba(0,0,0,0.1);
+	padding: 4px;
+    max-width: 300px;
+}
+.grid-nice .grid-body td, .grid-nice .grid-body th, .grid-nice .grid-title td, .grid-nice .grid-title th {
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.grid-head {
+	margin-bottom: 12px;
+}
+.grid-counter {
+	float: right;
+    height: 32px;
+    line-height: 32px;
+    font-weight: 700;
+}
+#grid-actions, .grid-action {
+	float: left;
+}
+.grid-action {
+	margin-right: 4px;
+}
+.btn-grid {
+	padding: 4px 8px;
+    border: 1px solid #f39c12;
+}
+.btn-grid .glyphicon {
+	margin-right: 4px;
+}
+.btn-grid .caret {
+	margin-left: 4px;
+}
+.btn-grid span {
+	vertical-align: middle;
+}
+.sort a:after {
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 4px;
+    vertical-align: top;
+}
+.asc a:after {
+	content: /*"\e113"*/ "\e151";
+}
+.desc a:after {
+	content: /*"\e114"*/ "\e152";
+}
+.has-popup {
+	position: relative;
+}
+.grid-popup-wrap {
+	display: none;
+	position: absolute;
+    top: 100%;
+    margin-top: 10px;
+    border: 1px solid #949494;
+    background: #FFF;
+    border-radius: 4px;
+	box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+	z-index: 999;
+}
+.grid-popup-show {
+	display: block;
+}
+.grid-popup-wrap .arrow {
+	width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 8px solid #949494;
+    position: absolute;
+    top: -8px;
+}
+.grid-popup-wrap .arrow:after {
+	content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 7px solid white;
+    position: absolute;
+    top: 1px;
+    left: -8px;
+}
+.cb {
+	display: block;
+    white-space: nowrap;
+    margin-bottom: 0px;
+    padding: 2px 8px;
+}
+.cb input {
+	margin: 0;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.cb span {
+	vertical-align: middle;
+    line-height: 21px;
+}
+.toggle-columns {
+	padding-top: 6px;
+}
+.toggle-columns .btn {
+	display: block;
+    border-radius: 0;
+    margin: 8px;
+}
+.grid-action .btn-primary, .grid-action .btn-success {
+	padding: 0px 24px;
+    line-height: 32px;
+    height: 32px;
+}
+#grid-loading {
+	position: fixed;
+    background: rgba(0, 0, 0, 0.32);
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 9;
+    display: none;
+}
+#grid-loading img {
+	position: absolute;
+    width: 42px;
+    left: 50%;
+    margin-left: 4px;
+    top: 50%;
+    margin-top: 4px;
+}
+.grid input[type=text], .grid select {
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	min-width: 48px;
+}
+.grid input[type=text] {
+	padding: 0 4px;
+}
+.grid .glyphicon {
+	margin-right: 4px;
+	display: inline-block;
+}
+.grid a.glyphicon-last-child {
+	margin-right: 0px;
+}

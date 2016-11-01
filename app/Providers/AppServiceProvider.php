@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\FileViewFinder;
+use Request;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('view.finder', function($app)
+        {
+            /**
+             * set themes
+             */
+            $paths = $app['config']['view.paths'];
+            if(Request::is('admin') || Request::is('admin/*')){
+                $theme = \Config::get('site.theme.backend');
+            }elseif(Request::is('api') || Request::is('api/*')){
+                $theme = \Config::get('site.theme.backend');
+            }else{
+                $theme = \Config::get('site.theme.frontend');
+            }
+//            $paths = Config::get('view.paths');
+            array_unshift($paths, base_path() . '/resources/themes/' . $theme . '/views');
+            \Config::set('view.paths', $paths);
+
+            return new FileViewFinder($app['files'], $paths);
+        });
     }
 }
