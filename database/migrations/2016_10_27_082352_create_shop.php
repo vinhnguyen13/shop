@@ -40,6 +40,10 @@ class CreateShop extends Migration
             $table->decimal('totalTax');
             $table->decimal('totalShipping');
             $table->decimal('total');
+            $table->decimal('displayTotalPrice');
+            $table->decimal('displayTotalTax');
+            $table->decimal('displayTotalShipping');
+            $table->decimal('displayTotal');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')
