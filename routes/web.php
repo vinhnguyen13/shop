@@ -20,7 +20,7 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
      */
     Route::get('/login', ['uses' => '\App\Http\Controllers\Auth\LoginController@showLoginForm', 'as' => 'login']);
     Route::post('/login', ['uses' => '\App\Http\Controllers\Auth\LoginController@login', 'as' => 'login']);
-    Route::post('/logout', ['uses' => '\App\Http\Controllers\Auth\AuthController@logout', 'as' => 'logout']);
+    Route::any('/logout', ['uses' => '\App\Http\Controllers\Auth\AuthController@logout', 'as' => 'logout']);
     Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@showRegistrationForm', 'as' => 'register']);
     Route::post('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@register', 'as' => 'register.store']);
     Route::get('/password/forgot', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm', 'as' => 'password.form']);
