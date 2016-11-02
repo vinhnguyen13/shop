@@ -14,6 +14,20 @@ class CreateShop extends Migration
      */
     public function up()
     {
+        /*
+         * https://www.princeton.edu/~rcurtis/ultradev/ecommdatabase.html
+         * https://www.princeton.edu/~rcurtis/ultradev/ecommdatabase2.html
+         *
+         * Suppliers()
+         * Products
+         * Orders
+         * Customers
+         * Shippers
+         * Payment
+         */
+
+
+
         // Create table for storing carts
         /*
          * id — Cart id.
