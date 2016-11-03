@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `shop_category`;
 
 CREATE TABLE `shop_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -31,93 +31,203 @@ CREATE TABLE `shop_category` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_category` */
 
-/*Table structure for table `shop_customers` */
+insert  into `shop_category`(`id`,`parent_id`,`name`,`description`,`image`,`status`,`order`,`created_at`,`updated_at`) values (1,0,'Nike',NULL,NULL,1,NULL,NULL,NULL),(2,0,'Air Jordan',NULL,NULL,1,NULL,NULL,NULL),(3,0,'Adidas',NULL,NULL,1,NULL,NULL,NULL),(4,0,'ASICS TIGER',NULL,NULL,1,NULL,NULL,NULL),(5,0,'CONVERSE',NULL,NULL,1,NULL,NULL,NULL),(6,0,'PUMA',NULL,NULL,1,NULL,NULL,NULL);
 
-DROP TABLE IF EXISTS `shop_customers`;
+/*Table structure for table `shop_customer` */
 
-CREATE TABLE `shop_customers` (
+DROP TABLE IF EXISTS `shop_customer`;
+
+CREATE TABLE `shop_customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `class` varchar(50) DEFAULT NULL,
-  `room` varchar(50) DEFAULT NULL,
-  `building` varchar(50) DEFAULT NULL,
-  `address1` varchar(50) DEFAULT NULL,
-  `address2` varchar(50) DEFAULT NULL,
-  `country_id` varchar(50) DEFAULT NULL,
-  `city_id` varchar(50) DEFAULT NULL,
-  `district_id` varchar(50) DEFAULT NULL,
-  `phone` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `card` varchar(50) DEFAULT NULL,
-  `card_type` varchar(50) DEFAULT NULL,
-  `card_exp_mo` varchar(50) DEFAULT NULL,
-  `card_exp_yr` varchar(50) DEFAULT NULL,
-  `billing_address` varchar(50) DEFAULT NULL,
-  `billing_country` varchar(50) DEFAULT NULL,
-  `billing_city` varchar(50) DEFAULT NULL,
-  `billing_district` varchar(50) DEFAULT NULL,
-  `ship_address` varchar(50) DEFAULT NULL,
-  `ship_country` varchar(50) DEFAULT NULL,
-  `ship_city` varchar(50) DEFAULT NULL,
-  `ship_district` varchar(50) DEFAULT NULL,
-  `date_entered` varchar(50) DEFAULT NULL,
+  `customer_group_id` int(11) NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `phone` varchar(32) NOT NULL,
+  `fax` varchar(32) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `card` text,
+  `wishlist` text,
+  `newsletter` tinyint(1) DEFAULT '0',
+  `ip` varchar(40) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `company` varchar(40) DEFAULT NULL,
+  `address_1` varchar(128) DEFAULT NULL,
+  `address_2` varchar(128) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `shop_customers` */
+/*Data for the table `shop_customer` */
 
-/*Table structure for table `shop_order_details` */
+/*Table structure for table `shop_customer_group` */
 
-DROP TABLE IF EXISTS `shop_order_details`;
+DROP TABLE IF EXISTS `shop_customer_group`;
 
-CREATE TABLE `shop_order_details` (
+CREATE TABLE `shop_customer_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `description` text NOT NULL,
+  `order` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_customer_group` */
+
+insert  into `shop_customer_group`(`id`,`name`,`description`,`order`) values (1,'Default','test',0);
+
+/*Table structure for table `shop_length_class` */
+
+DROP TABLE IF EXISTS `shop_length_class`;
+
+CREATE TABLE `shop_length_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) NOT NULL,
+  `unit` varchar(4) NOT NULL,
+  `value` decimal(15,8) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_length_class` */
+
+insert  into `shop_length_class`(`id`,`title`,`unit`,`value`) values (1,'Centimeter','cm',1.00000000),(2,'Millimeter','mm',10.00000000),(3,'Inch','in',0.39370000);
+
+/*Table structure for table `shop_manufacturer` */
+
+DROP TABLE IF EXISTS `shop_manufacturer`;
+
+CREATE TABLE `shop_manufacturer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `order` int(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_manufacturer` */
+
+insert  into `shop_manufacturer`(`id`,`name`,`image`,`order`) values (1,'Nike','catalog/demo/htc_logo.jpg',0),(2,'Air Jordan','catalog/demo/palm_logo.jpg',0),(3,'Adidas','catalog/demo/hp_logo.jpg',0),(4,'ASICS TIGER','catalog/demo/apple_logo.jpg',0),(5,'CONVERSE','catalog/demo/canon_logo.jpg',0),(6,'PUMA','catalog/demo/sony_logo.jpg',0);
+
+/*Table structure for table `shop_order` */
+
+DROP TABLE IF EXISTS `shop_order`;
+
+CREATE TABLE `shop_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_no` int(11) NOT NULL DEFAULT '0',
+  `invoice_prefix` varchar(26) NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  `store_name` varchar(64) NOT NULL,
+  `store_url` varchar(255) NOT NULL,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `customer_group_id` int(11) NOT NULL DEFAULT '0',
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `telephone` varchar(32) NOT NULL,
+  `fax` varchar(32) NOT NULL,
+  `custom_field` text NOT NULL,
+  `payment_firstname` varchar(32) NOT NULL,
+  `payment_lastname` varchar(32) NOT NULL,
+  `payment_company` varchar(40) NOT NULL,
+  `payment_address_1` varchar(128) NOT NULL,
+  `payment_address_2` varchar(128) NOT NULL,
+  `payment_city` varchar(128) NOT NULL,
+  `payment_postcode` varchar(10) NOT NULL,
+  `payment_country` varchar(128) NOT NULL,
+  `payment_country_id` int(11) NOT NULL,
+  `payment_zone` varchar(128) NOT NULL,
+  `payment_zone_id` int(11) NOT NULL,
+  `payment_address_format` text NOT NULL,
+  `payment_custom_field` text NOT NULL,
+  `payment_method` varchar(128) NOT NULL,
+  `payment_code` varchar(128) NOT NULL,
+  `shipper_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `order_status_id` int(11) NOT NULL DEFAULT '0',
+  `affiliate_id` int(11) NOT NULL,
+  `commission` decimal(15,4) NOT NULL,
+  `marketing_id` int(11) NOT NULL,
+  `tracking` varchar(64) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `currency_id` int(11) NOT NULL,
+  `currency_code` varchar(3) NOT NULL,
+  `currency_value` decimal(15,8) NOT NULL DEFAULT '1.00000000',
+  `ip` varchar(40) NOT NULL,
+  `forwarded_ip` varchar(40) NOT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `accept_language` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_order` */
+
+insert  into `shop_order`(`id`,`invoice_no`,`invoice_prefix`,`store_id`,`store_name`,`store_url`,`customer_id`,`customer_group_id`,`firstname`,`lastname`,`email`,`telephone`,`fax`,`custom_field`,`payment_firstname`,`payment_lastname`,`payment_company`,`payment_address_1`,`payment_address_2`,`payment_city`,`payment_postcode`,`payment_country`,`payment_country_id`,`payment_zone`,`payment_zone_id`,`payment_address_format`,`payment_custom_field`,`payment_method`,`payment_code`,`shipper_id`,`comment`,`total`,`order_status_id`,`affiliate_id`,`commission`,`marketing_id`,`tracking`,`language_id`,`currency_id`,`currency_code`,`currency_value`,`ip`,`forwarded_ip`,`user_agent`,`accept_language`,`created_at`,`updated_at`) values (1,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Vinh','Nguyen','vinh@abc.com','098909056565','','[]','Vinh','Nguyen','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',407.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 11:24:20','2015-11-11 11:30:21'),(2,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Lenh','Quach','lenh@abc.com','5655','','[]','Lenh','Quach','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',207.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 16:57:05','2016-11-03 11:40:15');
+
+/*Table structure for table `shop_order_product` */
+
+DROP TABLE IF EXISTS `shop_order_product`;
+
+CREATE TABLE `shop_order_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `order_code` varchar(50) DEFAULT NULL,
-  `price` decimal(15,4) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `discount` decimal(15,4) DEFAULT NULL,
-  `total` decimal(15,4) DEFAULT NULL,
-  `sku` varchar(50) DEFAULT NULL,
-  `size` varchar(50) DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `fulfiled` tinyint(1) DEFAULT NULL,
-  `ship_date` timestamp NULL DEFAULT NULL,
-  `bill_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `shop_order_details` */
-
-/*Table structure for table `shop_orders` */
-
-DROP TABLE IF EXISTS `shop_orders`;
-
-CREATE TABLE `shop_orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) DEFAULT NULL,
-  `order_code` varchar(50) DEFAULT NULL,
-  `payment_id` int(11) DEFAULT NULL,
-  `order_date` timestamp NULL DEFAULT NULL,
-  `ship_date` timestamp NULL DEFAULT NULL,
-  `required_date` timestamp NULL DEFAULT NULL,
-  `shipper_id` int(11) DEFAULT NULL,
-  `freight` decimal(15,4) DEFAULT NULL,
-  `sale_tax` decimal(15,4) DEFAULT NULL,
-  `transaction_status` tinyint(1) DEFAULT NULL,
-  `err_loc` varchar(50) DEFAULT NULL,
-  `err_msg` varchar(255) DEFAULT NULL,
-  `fulfiled` tinyint(1) DEFAULT NULL,
-  `deleted` tinyint(1) DEFAULT NULL,
-  `paid` tinyint(1) DEFAULT NULL,
-  `payment_date` timestamp NULL DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `model` varchar(64) NOT NULL,
+  `quantity` int(4) NOT NULL,
+  `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `reward` int(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-/*Data for the table `shop_orders` */
+/*Data for the table `shop_order_product` */
+
+insert  into `shop_order_product`(`id`,`order_id`,`product_id`,`name`,`model`,`quantity`,`price`,`total`,`tax`,`reward`) values (5,1,33,'Samsung SyncMaster 941BW','Product 6',1,200.0000,200.0000,0.0000,0),(6,1,40,'iPhone','product 11',2,101.0000,202.0000,0.0000,0),(8,2,40,'iPhone1','product 11',2,101.0000,202.0000,0.0000,0);
+
+/*Table structure for table `shop_order_status` */
+
+DROP TABLE IF EXISTS `shop_order_status`;
+
+CREATE TABLE `shop_order_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_order_status` */
+
+insert  into `shop_order_status`(`id`,`name`) values (1,'Pending'),(2,'Processing'),(3,'Shipped'),(5,'Complete'),(7,'Canceled'),(8,'Denied'),(9,'Canceled Reversal'),(10,'Failed'),(11,'Refunded'),(12,'Reversed'),(13,'Chargeback'),(14,'Expired'),(15,'Processed'),(16,'Voided');
+
+/*Table structure for table `shop_order_total` */
+
+DROP TABLE IF EXISTS `shop_order_total`;
+
+CREATE TABLE `shop_order_total` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_order_total` */
+
+insert  into `shop_order_total`(`id`,`order_id`,`code`,`title`,`value`,`sort_order`) values (7,1,'sub_total','Sub-Total',402.0000,1),(8,1,'shipping','Flat Shipping Rate',5.0000,3),(9,1,'total','Total',407.0000,9),(13,2,'sub_total','Sub-Total',202.0000,1),(14,2,'shipping','Flat Shipping Rate',5.0000,3),(15,2,'total','Total',207.0000,9);
 
 /*Table structure for table `shop_payment` */
 
@@ -132,59 +242,160 @@ CREATE TABLE `shop_payment` (
 
 /*Data for the table `shop_payment` */
 
-/*Table structure for table `shop_products` */
+/*Table structure for table `shop_product` */
 
-DROP TABLE IF EXISTS `shop_products`;
+DROP TABLE IF EXISTS `shop_product`;
 
-CREATE TABLE `shop_products` (
+CREATE TABLE `shop_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sku` varchar(50) DEFAULT NULL,
-  `vendor_product_id` int(11) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `sku` varchar(64) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
-  `supplier_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `quantity_per_unit` int(11) DEFAULT NULL,
-  `unit_price` varchar(10) DEFAULT NULL,
-  `msrp` varchar(50) DEFAULT NULL,
-  `available_size` varchar(50) DEFAULT NULL,
-  `available_colors` varchar(50) DEFAULT NULL,
-  `size` varchar(50) DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `discount` decimal(15,4) DEFAULT NULL,
-  `unit_weight` varchar(10) DEFAULT NULL,
-  `unit_in_stock` varchar(10) DEFAULT NULL,
-  `unit_on_order` varchar(10) DEFAULT NULL,
-  `reorder_level` varchar(10) DEFAULT NULL,
-  `product_available` tinyint(1) DEFAULT NULL,
-  `discount_available` tinyint(1) DEFAULT NULL,
-  `current_order` int(11) DEFAULT NULL,
+  `location` varchar(128) NOT NULL,
+  `quantity` int(4) NOT NULL DEFAULT '0',
+  `stock_status_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `ranking` int(11) DEFAULT NULL,
-  `note` varchar(500) DEFAULT NULL,
+  `manufacturer_id` int(11) NOT NULL,
+  `shipping` tinyint(1) NOT NULL DEFAULT '1',
+  `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `points` int(8) NOT NULL DEFAULT '0',
+  `tax_class_id` int(11) NOT NULL,
+  `date_available` date NOT NULL DEFAULT '0000-00-00',
+  `weight` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `weight_class_id` int(11) NOT NULL DEFAULT '0',
+  `length` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `width` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `height` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `length_class_id` int(11) NOT NULL DEFAULT '0',
+  `subtract` tinyint(1) NOT NULL DEFAULT '1',
+  `minimum` int(11) NOT NULL DEFAULT '1',
+  `order` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `viewed` int(5) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
-/*Data for the table `shop_products` */
+/*Data for the table `shop_product` */
 
-/*Table structure for table `shop_shippers` */
+insert  into `shop_product`(`id`,`category_id`,`supplier_id`,`sku`,`name`,`description`,`location`,`quantity`,`stock_status_id`,`image`,`manufacturer_id`,`shipping`,`price`,`points`,`tax_class_id`,`date_available`,`weight`,`weight_class_id`,`length`,`width`,`height`,`length_class_id`,`subtract`,`minimum`,`order`,`status`,`viewed`,`created_at`,`updated_at`) values (28,1,0,'','Nike 1',NULL,'',939,1,'catalog/demo/htc_touch_hd_1.jpg',1,1,100.0000,200,1,'2009-02-03',146.40000000,2,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 16:06:50','2011-09-30 01:05:39'),(29,1,0,'','Nike 2',NULL,'',999,4,'catalog/demo/palm_treo_pro_1.jpg',1,1,279.9900,0,1,'2009-02-03',133.00000000,2,0.00000000,0.00000000,0.00000000,3,1,1,0,1,0,'2009-02-03 16:42:17','2011-09-30 01:06:08'),(30,1,0,'','Nike 3',NULL,'',7,4,'catalog/demo/canon_eos_5d_1.jpg',1,1,100.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 16:59:00','2011-09-30 01:05:23'),(31,2,0,'','Air Jordan 1',NULL,'',1000,4,'catalog/demo/nikon_d300_1.jpg',2,1,80.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,3,1,1,0,1,0,'2009-02-03 17:00:10','2011-09-30 01:06:00'),(32,2,0,'','Air Jordan 2',NULL,'',999,4,'catalog/demo/ipod_touch_1.jpg',2,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 17:07:26','2011-09-30 01:07:22'),(33,2,0,'','Air Jordan 3',NULL,'',999,4,'catalog/demo/samsung_syncmaster_941bw.jpg',2,1,200.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,1,'2009-02-03 17:08:31','2011-09-30 01:06:29'),(34,3,0,'','Adidas 1',NULL,'',1000,4,'catalog/demo/ipod_shuffle_1.jpg',3,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 18:07:54','2011-09-30 01:07:17'),(35,3,0,'','Adidas 2',NULL,'',1000,3,'',3,0,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 18:08:31','2011-09-30 01:06:17'),(36,3,0,'','Adidas 3',NULL,'',994,4,'catalog/demo/ipod_nano_1.jpg',3,0,100.0000,100,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 18:09:19','2011-09-30 01:07:12'),(40,3,0,'','Adidas 4',NULL,'',966,3,'catalog/demo/iphone_1.jpg',3,1,101.0000,0,1,'2009-02-03',10.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,12,'2009-02-03 21:07:12','2015-11-11 14:48:01'),(41,3,0,'','Adidas 5',NULL,'',977,3,'catalog/demo/imac_1.jpg',3,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 21:07:26','2011-09-30 01:06:44'),(42,3,0,'','Adidas 6',NULL,'',990,3,'catalog/demo/apple_cinema_30.jpg',3,1,100.0000,400,1,'2009-02-04',12.50000000,1,1.00000000,2.00000000,3.00000000,1,1,2,0,1,3,'2009-02-03 21:07:37','2011-09-30 00:46:19'),(43,4,0,'','ASICS TIGER 1',NULL,'',929,3,'catalog/demo/macbook_1.jpg',4,0,500.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,3,'2009-02-03 21:07:49','2011-09-30 01:05:46'),(44,4,0,'','ASICS TIGER 2',NULL,'',1000,3,'catalog/demo/macbook_air_1.jpg',4,1,1000.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:00','2011-09-30 01:05:53'),(45,4,0,'','ASICS TIGER 3',NULL,'',998,3,'catalog/demo/macbook_pro_1.jpg',4,1,2000.0000,0,2,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:17','2011-09-15 22:22:01'),(46,5,0,'','CONVERSE 1',NULL,'',1000,3,'catalog/demo/sony_vaio_1.jpg',5,1,1000.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:29','2011-09-30 01:06:39'),(47,5,0,'','CONVERSE 2',NULL,'',1000,3,'catalog/demo/hp_1.jpg',5,1,100.0000,400,1,'2009-02-03',1.00000000,1,0.00000000,0.00000000,0.00000000,1,0,1,0,1,0,'2009-02-03 21:08:40','2011-09-30 01:05:28'),(48,6,0,'','PUMA 1',NULL,'test 2',995,3,'catalog/demo/ipod_classic_1.jpg',6,1,100.0000,0,1,'2009-02-08',1.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-08 17:21:51','2011-09-30 01:07:06'),(49,6,0,'','PUMA 2',NULL,'',10,1,'catalog/demo/samsung_tab_1.jpg',6,1,199.9900,0,1,'2011-04-25',0.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,1,1,1,'2011-04-26 08:57:34','2016-11-03 11:13:38');
 
-DROP TABLE IF EXISTS `shop_shippers`;
+/*Table structure for table `shop_product_discount` */
 
-CREATE TABLE `shop_shippers` (
+DROP TABLE IF EXISTS `shop_product_discount`;
+
+CREATE TABLE `shop_product_discount` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(32) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_group_id` int(11) NOT NULL,
+  `quantity` int(4) NOT NULL DEFAULT '0',
+  `priority` int(5) NOT NULL DEFAULT '1',
+  `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `date_start` date NOT NULL DEFAULT '0000-00-00',
+  `date_end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_product_discount` */
+
+insert  into `shop_product_discount`(`id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end`) values (438,42,1,10,1,88.0000,'0000-00-00','0000-00-00'),(439,42,1,20,1,77.0000,'0000-00-00','0000-00-00'),(440,42,1,30,1,66.0000,'0000-00-00','0000-00-00'),(445,40,1,2,1,90.0000,'2015-11-10','2015-11-13');
+
+/*Table structure for table `shop_product_image` */
+
+DROP TABLE IF EXISTS `shop_product_image`;
+
+CREATE TABLE `shop_product_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `order` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2394 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_product_image` */
+
+insert  into `shop_product_image`(`id`,`product_id`,`image`,`order`) values (1968,43,'catalog/demo/macbook_3.jpg',0),(1969,43,'catalog/demo/macbook_2.jpg',0),(1970,43,'catalog/demo/macbook_4.jpg',0),(1971,43,'catalog/demo/macbook_5.jpg',0),(1972,44,'catalog/demo/macbook_air_3.jpg',0),(1973,44,'catalog/demo/macbook_air_2.jpg',0),(1974,44,'catalog/demo/macbook_air_4.jpg',0),(1975,45,'catalog/demo/macbook_pro_4.jpg',0),(1976,45,'catalog/demo/macbook_pro_3.jpg',0),(1977,45,'catalog/demo/macbook_pro_2.jpg',0),(1983,31,'catalog/demo/nikon_d300_5.jpg',0),(1984,31,'catalog/demo/nikon_d300_4.jpg',0),(1985,31,'catalog/demo/nikon_d300_2.jpg',0),(1986,31,'catalog/demo/nikon_d300_3.jpg',0),(1987,29,'catalog/demo/palm_treo_pro_2.jpg',0),(1988,29,'catalog/demo/palm_treo_pro_3.jpg',0),(1989,48,'catalog/demo/ipod_classic_2.jpg',0),(1990,48,'catalog/demo/ipod_classic_3.jpg',0),(1991,48,'catalog/demo/ipod_classic_4.jpg',0),(1992,46,'catalog/demo/sony_vaio_3.jpg',0),(1993,46,'catalog/demo/sony_vaio_2.jpg',0),(1994,46,'catalog/demo/sony_vaio_4.jpg',0),(1995,46,'catalog/demo/sony_vaio_5.jpg',0),(1998,36,'catalog/demo/ipod_nano_3.jpg',0),(1999,36,'catalog/demo/ipod_nano_2.jpg',0),(2000,36,'catalog/demo/ipod_nano_4.jpg',0),(2001,36,'catalog/demo/ipod_nano_5.jpg',0),(2002,34,'catalog/demo/ipod_shuffle_3.jpg',0),(2003,34,'catalog/demo/ipod_shuffle_2.jpg',0),(2004,34,'catalog/demo/ipod_shuffle_4.jpg',0),(2005,34,'catalog/demo/ipod_shuffle_5.jpg',0),(2006,32,'catalog/demo/ipod_touch_4.jpg',0),(2007,32,'catalog/demo/ipod_touch_3.jpg',0),(2008,32,'catalog/demo/ipod_touch_2.jpg',0),(2009,32,'catalog/demo/ipod_touch_5.jpg',0),(2010,32,'catalog/demo/ipod_touch_6.jpg',0),(2011,32,'catalog/demo/ipod_touch_7.jpg',0),(2034,28,'catalog/demo/htc_touch_hd_3.jpg',0),(2035,28,'catalog/demo/htc_touch_hd_2.jpg',0),(2313,42,'catalog/demo/canon_eos_5d_2.jpg',0),(2314,42,'catalog/demo/canon_eos_5d_1.jpg',0),(2315,42,'catalog/demo/compaq_presario.jpg',0),(2316,42,'catalog/demo/hp_1.jpg',0),(2317,42,'catalog/demo/canon_logo.jpg',0),(2320,47,'catalog/demo/hp_2.jpg',0),(2321,47,'catalog/demo/hp_3.jpg',0),(2344,30,'catalog/demo/canon_eos_5d_3.jpg',0),(2345,30,'catalog/demo/canon_eos_5d_2.jpg',0),(2350,41,'catalog/demo/imac_2.jpg',0),(2351,41,'catalog/demo/imac_3.jpg',0),(2377,40,'catalog/demo/iphone_4.jpg',0),(2378,40,'catalog/demo/iphone_3.jpg',0),(2379,40,'catalog/demo/iphone_5.jpg',0),(2380,40,'catalog/demo/iphone_2.jpg',0),(2381,40,'catalog/demo/iphone_6.jpg',0),(2388,49,'catalog/demo/samsung_tab_2.jpg',0),(2389,49,'catalog/demo/samsung_tab_3.jpg',0),(2390,49,'catalog/demo/samsung_tab_4.jpg',0),(2391,49,'catalog/demo/samsung_tab_5.jpg',0),(2392,49,'catalog/demo/samsung_tab_6.jpg',0),(2393,49,'catalog/demo/samsung_tab_7.jpg',0);
+
+/*Table structure for table `shop_product_reward` */
+
+DROP TABLE IF EXISTS `shop_product_reward`;
+
+CREATE TABLE `shop_product_reward` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL DEFAULT '0',
+  `customer_group_id` int(11) NOT NULL DEFAULT '0',
+  `points` int(8) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=548 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_product_reward` */
+
+insert  into `shop_product_reward`(`id`,`product_id`,`customer_group_id`,`points`) values (329,43,1,600),(331,44,1,700),(333,45,1,800),(337,31,1,0),(339,29,1,0),(343,48,1,0),(345,33,1,0),(347,46,1,0),(351,36,1,0),(353,34,1,0),(355,32,1,0),(379,28,1,400),(425,35,1,0),(515,42,1,100),(519,47,1,300),(539,30,1,200),(545,41,1,0),(547,49,1,1000);
+
+/*Table structure for table `shop_product_special` */
+
+DROP TABLE IF EXISTS `shop_product_special`;
+
+CREATE TABLE `shop_product_special` (
+  `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `customer_group_id` int(11) NOT NULL,
+  `priority` int(5) NOT NULL DEFAULT '1',
+  `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `date_start` date NOT NULL DEFAULT '0000-00-00',
+  `date_end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`product_special_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_product_special` */
+
+insert  into `shop_product_special`(`product_special_id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end`) values (419,42,1,1,90.0000,'0000-00-00','0000-00-00'),(438,30,1,1,80.0000,'0000-00-00','0000-00-00'),(439,30,1,2,90.0000,'0000-00-00','0000-00-00');
+
+/*Table structure for table `shop_shipper` */
+
+DROP TABLE IF EXISTS `shop_shipper`;
+
+CREATE TABLE `shop_shipper` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) DEFAULT NULL,
+  `company` varchar(40) DEFAULT NULL,
+  `address_1` varchar(128) DEFAULT NULL,
+  `address_2` varchar(128) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `code` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `shop_shippers` */
+/*Data for the table `shop_shipper` */
 
-/*Table structure for table `shop_suppliers` */
+/*Table structure for table `shop_stock_status` */
 
-DROP TABLE IF EXISTS `shop_suppliers`;
+DROP TABLE IF EXISTS `shop_stock_status`;
 
-CREATE TABLE `shop_suppliers` (
+CREATE TABLE `shop_stock_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_stock_status` */
+
+insert  into `shop_stock_status`(`id`,`name`) values (1,'In Stock'),(2,'Pre-Order'),(3,'Out Of Stock'),(4,'2-3 Days');
+
+/*Table structure for table `shop_supplier` */
+
+DROP TABLE IF EXISTS `shop_supplier`;
+
+CREATE TABLE `shop_supplier` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `company_name` varchar(255) DEFAULT NULL,
   `contact_name` varchar(255) DEFAULT NULL,
@@ -208,7 +419,39 @@ CREATE TABLE `shop_suppliers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `shop_suppliers` */
+/*Data for the table `shop_supplier` */
+
+/*Table structure for table `shop_tax_class` */
+
+DROP TABLE IF EXISTS `shop_tax_class`;
+
+CREATE TABLE `shop_tax_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) DEFAULT NULL,
+  `rate` decimal(15,4) DEFAULT NULL,
+  `type` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_tax_class` */
+
+insert  into `shop_tax_class`(`id`,`title`,`rate`,`type`) values (1,'VAT (20%)',20.0000,'P'),(2,'Eco Tax (-2.00)',2.0000,'F');
+
+/*Table structure for table `shop_weight_class` */
+
+DROP TABLE IF EXISTS `shop_weight_class`;
+
+CREATE TABLE `shop_weight_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) NOT NULL,
+  `unit` varchar(4) NOT NULL,
+  `value` decimal(15,8) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_weight_class` */
+
+insert  into `shop_weight_class`(`id`,`title`,`unit`,`value`) values (1,'Kilogram','kg',1.00000000),(2,'Gram','g',1000.00000000),(3,'Pound ','lb',2.20460000),(4,'Ounce','oz',35.27400000);
 
 /*Table structure for table `sys_city` */
 
