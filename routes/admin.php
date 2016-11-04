@@ -26,8 +26,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/', ['uses' => 'HomeController@index', 'as'=>'admin.home.index'])->middleware(['auth']);
         /*
-                 * User
-                 */
+         * User
+         */
         Route::get('/user', ['uses' => 'UserController@index', 'as'=>'admin.user.index']);
         Route::get('/user/create', ['uses' => 'UserController@create', 'as'=>'admin.user.create']);
         Route::post('/user/store', ['uses' => 'UserController@store', 'as'=>'admin.user.store']);
@@ -37,5 +37,56 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::delete('/user/delete-file', ['uses' => 'UserController@deleteFile', 'as' => 'admin.user.deleteFile']);
         Route::post('/user/upload', ['uses' => 'UserController@uploadAvatar', 'as' => 'admin.user.upload']);
         Route::delete('/user/delete-temp-file', ['uses' => 'UserController@deleteTempFile', 'as' => 'admin.user.deleteTempFile']);
+        /*
+         * Categories
+         */
+        Route::get('/category', ['uses' => 'CategoryController@index', 'as'=>'admin.category.index']);
+        Route::get('/category/create', ['uses' => 'CategoryController@index', 'as'=>'admin.category.create']);
+        Route::get('/category/edit/{id}', ['uses' => 'CategoryController@edit', 'as'=>'admin.category.edit']);
+        Route::get('/category/show/{id}', ['uses' => 'CategoryController@show', 'as'=>'admin.category.show']);
+        /*
+         * Products
+         */
+        Route::get('/product', ['uses' => 'ProductController@index', 'as'=>'admin.product.index']);
+        Route::get('/product/create', ['uses' => 'ProductController@create', 'as'=>'admin.product.create']);
+        Route::get('/product/edit/{id}', ['uses' => 'ProductController@edit', 'as'=>'admin.product.edit']);
+        Route::get('/product/show/{id}', ['uses' => 'ProductController@show', 'as'=>'admin.product.show']);
+        /*
+         * Manufacturers
+         */
+        Route::get('/manufacturer', ['uses' => 'ManufacturerController@index', 'as'=>'admin.manufacturer.index']);
+        Route::get('/manufacturer/create', ['uses' => 'ManufacturerController@create', 'as'=>'admin.manufacturer.create']);
+        Route::get('/manufacturer/edit/{id}', ['uses' => 'ManufacturerController@edit', 'as'=>'admin.manufacturer.edit']);
+        Route::get('/manufacturer/show/{id}', ['uses' => 'ManufacturerController@show', 'as'=>'admin.manufacturer.show']);
+        /*
+         * Shipper
+         */
+        Route::get('/shipper', ['uses' => 'ShipperController@index', 'as'=>'admin.shipper.index']);
+        Route::get('/shipper/create', ['uses' => 'ShipperController@create', 'as'=>'admin.shipper.create']);
+        Route::get('/shipper/edit/{id}', ['uses' => 'ShipperController@edit', 'as'=>'admin.shipper.edit']);
+        Route::get('/shipper/show/{id}', ['uses' => 'ShipperController@show', 'as'=>'admin.shipper.show']);
+        Route::get('/shipper/transport', ['uses' => 'ShipperController@transport', 'as'=>'admin.shipper.transport']);
+        /*
+         * Supplier
+         */
+        Route::get('/supplier', ['uses' => 'SupplierController@index', 'as'=>'admin.supplier.index']);
+        Route::get('/supplier/create', ['uses' => 'SupplierController@create', 'as'=>'admin.supplier.create']);
+        Route::get('/supplier/edit/{id}', ['uses' => 'SupplierController@edit', 'as'=>'admin.supplier.edit']);
+        Route::get('/supplier/show/{id}', ['uses' => 'SupplierController@show', 'as'=>'admin.supplier.show']);
+        /*
+         * Customer
+         */
+        Route::get('/customer', ['uses' => 'CustomerController@index', 'as'=>'admin.customer.index']);
+        Route::get('/customer/create', ['uses' => 'CustomerController@create', 'as'=>'admin.customer.create']);
+        Route::get('/customer/edit/{id}', ['uses' => 'CustomerController@edit', 'as'=>'admin.customer.edit']);
+        Route::get('/customer/show/{id}', ['uses' => 'CustomerController@show', 'as'=>'admin.customer.show']);
+        /*
+         * Order
+         */
+        Route::get('/order', ['uses' => 'OrderController@index', 'as'=>'admin.order.index']);
+        Route::get('/order/create', ['uses' => 'OrderController@create', 'as'=>'admin.order.create']);
+        Route::get('/order/edit/{id}', ['uses' => 'OrderController@edit', 'as'=>'admin.order.edit']);
+        Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
+
     });
 });

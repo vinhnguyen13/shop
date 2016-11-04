@@ -18,8 +18,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        
-//        $chk = (new User())->checkAccess(8, 'Admin');
         return view('home.index', ['content'=> PHP_EOL.\Illuminate\Foundation\Inspiring::quote().PHP_EOL]);
     }
 
