@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.6.26 : Database - test
+MySQL - 5.6.26 : Database - shop
 *********************************************************************
 */
 
@@ -12,9 +12,116 @@ MySQL - 5.6.26 : Database - test
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`test` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`shop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `test`;
+USE `shop`;
+
+/*Table structure for table `cp_code` */
+
+DROP TABLE IF EXISTS `cp_code`;
+
+CREATE TABLE `cp_code` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(32) DEFAULT NULL,
+  `cp_event_id` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1' COMMENT '1: active\n0: not active',
+  `count` int(11) DEFAULT '0' COMMENT 'so lan su dung code',
+  `limit` int(11) DEFAULT '0',
+  `use_repeat` tinyint(4) DEFAULT '0' COMMENT '0: Ko su dung nhieu lan \n1: Su dung nhieu lan',
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT '0.00' COMMENT 'so % hoac so tien duoc giam',
+  `amount_type` tinyint(4) DEFAULT '1' COMMENT '1: Giam theo % \n2: Giam theo so tien',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code_UNIQUE` (`code`) USING BTREE,
+  KEY `cp_event_idx` (`cp_event_id`) USING BTREE,
+  CONSTRAINT `cp_code_ibfk_1` FOREIGN KEY (`cp_event_id`) REFERENCES `cp_event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `cp_code` */
+
+insert  into `cp_code`(`id`,`code`,`cp_event_id`,`status`,`count`,`limit`,`use_repeat`,`created_at`,`updated_at`,`amount`,`amount_type`) values (1,'I641J3',1,1,1880,0,0,1467185636,1476259370,35.00,2),(2,'DONATE_35KEYS',2,1,136,0,0,1470733889,1476160171,35.00,2);
+
+/*Table structure for table `cp_event` */
+
+DROP TABLE IF EXISTS `cp_event`;
+
+CREATE TABLE `cp_event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(3200) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1' COMMENT '1: active\n0: not active',
+  `type` tinyint(1) DEFAULT '1',
+  `created_at` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `start_date` int(11) DEFAULT NULL,
+  `end_date` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `cp_event` */
+
+insert  into `cp_event`(`id`,`name`,`description`,`status`,`type`,`created_at`,`created_by`,`start_date`,`end_date`) values (1,'Beta Launch','Beta Launch',1,1,1476342294,8,1464714000,1506099540),(2,'From System','From System',1,2,1470733860,1,1469984400,1577811540);
+
+/*Table structure for table `cp_history` */
+
+DROP TABLE IF EXISTS `cp_history`;
+
+CREATE TABLE `cp_history` (
+  `user_id` int(11) NOT NULL,
+  `cp_code_id` int(11) NOT NULL,
+  `cp_event_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `cp_history` */
+
+/*Table structure for table `migrations` */
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `migrations` */
+
+insert  into `migrations`(`id`,`migration`,`batch`) values (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_10_26_073353_create_sessions_table',1),(4,'2016_10_27_082352_create_shop',2),(5,'2016_10_14_143425_user_table_add_roles',3);
+
+/*Table structure for table `password_resets` */
+
+DROP TABLE IF EXISTS `password_resets`;
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `password_resets` */
+
+/*Table structure for table `sessions` */
+
+DROP TABLE IF EXISTS `sessions`;
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8_unicode_ci,
+  `payload` text COLLATE utf8_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  UNIQUE KEY `sessions_id_unique` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `sessions` */
+
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('ikXWpSQCdZzk85kwHMkzen1VcqfiI95lsYexCiWK',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUUdKWTZVb2o3MlR0SzdVUmNNZkhScXNOQVNTTnNHekdWUGdqNG5VRCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vY2F0ZWdvcnkvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODI1NDMxNztzOjE6ImMiO2k6MTQ3ODI0MjU2NjtzOjE6ImwiO3M6MToiMCI7fX0=',1478254317);
 
 /*Table structure for table `shop_category` */
 
@@ -109,7 +216,7 @@ CREATE TABLE `shop_manufacturer` (
   `image` varchar(255) DEFAULT NULL,
   `order` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_manufacturer` */
 
@@ -151,6 +258,9 @@ CREATE TABLE `shop_order` (
   `payment_code` varchar(128) NOT NULL,
   `shipper_id` int(11) NOT NULL,
   `comment` text NOT NULL,
+  `totalPrice` decimal(15,4) DEFAULT '0.0000',
+  `totalTax` decimal(15,4) DEFAULT '0.0000',
+  `totalShipping` decimal(15,4) DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `order_status_id` int(11) NOT NULL DEFAULT '0',
   `affiliate_id` int(11) NOT NULL,
@@ -172,7 +282,7 @@ CREATE TABLE `shop_order` (
 
 /*Data for the table `shop_order` */
 
-insert  into `shop_order`(`id`,`invoice_no`,`invoice_prefix`,`store_id`,`store_name`,`store_url`,`customer_id`,`customer_group_id`,`firstname`,`lastname`,`email`,`telephone`,`fax`,`custom_field`,`payment_firstname`,`payment_lastname`,`payment_company`,`payment_address_1`,`payment_address_2`,`payment_city`,`payment_postcode`,`payment_country`,`payment_country_id`,`payment_zone`,`payment_zone_id`,`payment_address_format`,`payment_custom_field`,`payment_method`,`payment_code`,`shipper_id`,`comment`,`total`,`order_status_id`,`affiliate_id`,`commission`,`marketing_id`,`tracking`,`language_id`,`currency_id`,`currency_code`,`currency_value`,`ip`,`forwarded_ip`,`user_agent`,`accept_language`,`created_at`,`updated_at`) values (1,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Vinh','Nguyen','vinh@abc.com','098909056565','','[]','Vinh','Nguyen','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',407.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 11:24:20','2015-11-11 11:30:21'),(2,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Lenh','Quach','lenh@abc.com','5655','','[]','Lenh','Quach','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',207.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 16:57:05','2016-11-03 11:40:15');
+insert  into `shop_order`(`id`,`invoice_no`,`invoice_prefix`,`store_id`,`store_name`,`store_url`,`customer_id`,`customer_group_id`,`firstname`,`lastname`,`email`,`telephone`,`fax`,`custom_field`,`payment_firstname`,`payment_lastname`,`payment_company`,`payment_address_1`,`payment_address_2`,`payment_city`,`payment_postcode`,`payment_country`,`payment_country_id`,`payment_zone`,`payment_zone_id`,`payment_address_format`,`payment_custom_field`,`payment_method`,`payment_code`,`shipper_id`,`comment`,`totalPrice`,`totalTax`,`totalShipping`,`total`,`order_status_id`,`affiliate_id`,`commission`,`marketing_id`,`tracking`,`language_id`,`currency_id`,`currency_code`,`currency_value`,`ip`,`forwarded_ip`,`user_agent`,`accept_language`,`created_at`,`updated_at`) values (1,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Vinh','Nguyen','vinh@abc.com','098909056565','','[]','Vinh','Nguyen','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',402.0000,0.0000,5.0000,407.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 11:24:20','2015-11-11 11:30:21'),(2,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'Lenh','Quach','lenh@abc.com','5655','','[]','Lenh','Quach','','1321','','HCM','05950905','Viet Nam',230,'Bac Lieu',3754,'','[]','Cash On Delivery','cod',0,'',202.0000,0.0000,5.0000,207.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 16:57:05','2016-11-03 11:40:15');
 
 /*Table structure for table `shop_order_product` */
 
@@ -209,25 +319,6 @@ CREATE TABLE `shop_order_status` (
 /*Data for the table `shop_order_status` */
 
 insert  into `shop_order_status`(`id`,`name`) values (1,'Pending'),(2,'Processing'),(3,'Shipped'),(5,'Complete'),(7,'Canceled'),(8,'Denied'),(9,'Canceled Reversal'),(10,'Failed'),(11,'Refunded'),(12,'Reversed'),(13,'Chargeback'),(14,'Expired'),(15,'Processed'),(16,'Voided');
-
-/*Table structure for table `shop_order_total` */
-
-DROP TABLE IF EXISTS `shop_order_total`;
-
-CREATE TABLE `shop_order_total` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `code` varchar(32) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-
-/*Data for the table `shop_order_total` */
-
-insert  into `shop_order_total`(`id`,`order_id`,`code`,`title`,`value`,`sort_order`) values (7,1,'sub_total','Sub-Total',402.0000,1),(8,1,'shipping','Flat Shipping Rate',5.0000,3),(9,1,'total','Total',407.0000,9),(13,2,'sub_total','Sub-Total',202.0000,1),(14,2,'shipping','Flat Shipping Rate',5.0000,3),(15,2,'total','Total',207.0000,9);
 
 /*Table structure for table `shop_payment` */
 
@@ -499,6 +590,27 @@ CREATE TABLE `sys_district` (
 /*Data for the table `sys_district` */
 
 insert  into `sys_district`(`id`,`name`,`city_id`,`country_id`) values (3,'Quận 1',3756,230),(4,'Quận 2',3756,230),(5,'Quận 3',3756,230),(6,'Quận 4',3756,230),(7,'Quận 5',3756,230),(8,'Quận 6',3756,230),(9,'Quận 7',3756,230),(10,'Quận 8',3756,230),(11,'Quận 9',3756,230),(12,'Quận 10',3756,230),(13,'Quận 11',3756,230),(14,'Quận 12',3756,230),(15,'Thủ Đức',3756,230),(16,'Tân Phú',3756,230),(17,'Tân Bình',3756,230),(18,'Phú Nhuận',3756,230),(19,'Gò Vấp',3756,230),(20,'Bình Thạnh',3756,230),(21,'Bình Tân',3756,230),(22,'Bình Chánh',3756,230),(23,'Cần Giờ',3756,230),(24,'Củ Chi',3756,230),(25,'Hóc Môn',3756,230),(26,'Nhà Bè',3756,230),(27,'Ba Đình',3752,230),(28,'Hoàn Kiếm',3752,230),(30,'Tay Hồ',3752,230),(31,'Long Biên',3752,230),(32,'Cầu Giấy',3752,230),(33,'Đống Đa',3752,230),(34,'Hai Bà Trưng',3752,230),(35,'Hoàng Mai',3752,230),(36,'Thanh Xuân',3752,230),(37,'Hà Đông',3752,230),(38,'Tx Sơn Tây',3752,230),(39,'H. Ba Vi',3752,230),(40,'Chương Mỹ',3752,230),(41,'Đan Phượng',3752,230),(42,'Đông Anh',3752,230),(43,'Gia Lâm',3752,230),(44,'Hoài Đức',3752,230),(45,'Mê Linh',3752,230),(46,'Mỹ Đức',3752,230),(47,'Phú Xuyên',3752,230),(48,'Phú Thọ',3752,230),(49,'Quốc Oai',3752,230),(50,'Sóc Sơn',3752,230),(51,'Thạch Thất',3752,230),(52,'Thanh Oai',3752,230),(53,'Thanh Trì',3752,230),(55,'Từ Liêm',3752,230),(56,'Ứng Hòa',3752,230),(57,'Long Xuyên',3727,230),(58,'Châu Đốc',3727,230),(59,'Tân Châu',3727,230),(60,'An Phú',3727,230),(61,'Châu Phú',3727,230),(62,'Châu Thành',3727,230),(63,'Chợ Mới',3727,230),(64,'Phú Tân',3727,230),(65,'Thoại Sơn',3727,230),(66,'Tịnh Biên',3727,230),(67,'Trí Tôn',3727,230),(68,'Bắc Giang',3728,230),(69,'Yên Thế',3728,230),(70,'Tân  Yên',3728,230),(71,'Lúc Ngạn',3728,230),(72,'Hiệp Hòa',3728,230),(73,'Lạng Giang',3728,230),(74,'Sơn Động',3728,230),(75,'Lục Nam',3727,230),(76,'Lục Nam',3728,230),(77,'Việt Yên',3728,230),(78,'Yên Dũng',3728,230),(79,'Bạc Liêu',3729,230),(80,'Bắc Kạn',3729,230),(81,'Ba Bể',3729,230),(82,'Bạch Thông',3729,230),(83,'Chợ Đồn',3729,230),(84,'Chợ Mới',3729,230),(85,'Na Ri',3729,230),(86,'Ngân Sơn',3729,230),(87,'Pác Nặm',3729,230),(88,'Bạc Liêu',3730,230),(89,'Hồng Dân',3730,230),(90,'Hòa Bình',3730,230),(91,'Giá Rai',3730,230),(92,'Phước Long',3730,230),(93,'Vĩnh Lợi',3730,230),(94,'Đông Hải',3730,230),(95,'Bắc Ning',3731,230),(96,'Từ Sơn',3727,230),(97,'Lương Tài',3731,230),(98,'Quế Võ',3731,230),(99,'Thuận Thành',3731,230),(100,'Tiên Du',3731,230),(101,'Yên Phong',3731,230),(102,'Vũng Tàu',3732,230),(103,'Bà Rịa',3732,230),(104,'Long Điền',3732,230),(105,'Đất Đỏ',3732,230),(106,'Xuyên Mộc',3732,230),(107,'Châu Đức',3732,230),(108,'Tân Thành',3732,230),(109,'Côn Đảo',3732,230),(110,'Bến Tre',3733,230),(111,'Ba Tri',3733,230),(112,'Bình Đại',3733,230),(113,'Châu Thành',3733,230),(114,'Chợ Lách',3733,230),(115,'Giồng Trôm',3733,230),(116,'Mỏ Cày Bắc',3733,230),(117,'Mỏ Cày Nam',3733,230),(118,'Thạnh Phú',3733,230),(119,'Quy Nhơn',3734,230),(120,'An Nhơn',3734,230),(121,'An Lão',3734,230),(122,'Hoài Ân',3734,230),(123,'Hoài Nhơn',3734,230),(124,'Phù Cát',3734,230),(125,'Phù Mỹ',3734,230),(126,'Tuy Phước',3734,230),(127,'Tây Sơn',3734,230),(128,'Vân Canh',3734,230),(129,'Vĩnh Thạnh',3734,230),(130,'Thủ Dầu Một',3735,230),(131,'Thuận An',3735,230),(132,'Dĩ An',3735,230),(133,'Bến Cát',3735,230),(134,'Dầu Tiếng',3735,230),(135,'Tân Uyên',3735,230),(136,'Phú Giáo',3735,230),(137,'Đồng Xoài',3736,230),(138,'Bình Long',3736,230),(139,'Phước Long',3736,230),(140,'Bù Đăng',3736,230),(141,'Bù Đốp',3736,230),(142,'Bù Gia Mập',3736,230),(143,'Chơn Thành',3736,230),(144,'Đồng Phú',3736,230),(145,'Hớn Quán',3736,230),(146,'Lộc Ninh',3736,230),(147,'Phan Thiết',3737,230),(148,'La Gi',3737,230),(149,'Tuy Phong',3737,230),(150,'Bắc Bình',3737,230),(151,'Hàm Thuận Bắc',3737,230),(152,'Hàm Thuận Nam',3737,230),(153,'Tán Linh',3737,230),(154,'Ham Tân',3737,230),(155,'Đức Linh',3737,230),(156,'Phú Quý',3737,230),(157,'Cà mau',3738,230),(158,'Đầm Dơi',3738,230),(159,'Ngọc Hiển',3738,230),(160,'Cái Nước',3738,230),(161,'Trần Văn Thời',3738,230),(162,'U Minh',3738,230),(163,'Thới Bình',3738,230),(164,'Nam Căn',3738,230),(165,'Phú Tân',3738,230),(166,'Ninh Kiều',3739,230),(167,'Bình Thủy',3739,230),(168,'Cái Răng',3739,230),(169,'Ô Môn',3739,230),(170,'Thốt Nốt',3739,230),(171,'Phong Điền',3739,230),(172,'Cờ Đỏ',3739,230),(173,'Thới Lai',3739,230),(174,'Vinh Thạnh',3739,230),(175,'Cao Bằng',3740,230),(176,'Bảo Lạc',3740,230),(177,'Bảo Lâm',3740,230),(178,'Hạ Lang',3740,230),(179,'Hạ Quảng',3740,230),(180,'Hòa An',3740,230),(181,'Nguyên Bình',3740,230),(182,'Phục Hòa',3740,230),(183,'Quảng Uyên',3740,230),(184,'Thạch An',3740,230),(185,'Thông Nông',3740,230),(186,'Trà Lĩnh',3740,230),(187,'Trùng Khánh',3740,230),(188,'Buôn Mê Thuộc',3741,230),(189,'Buôn Hồ',3741,230),(190,'Ea Súp',3741,230),(191,'Krong Bong',3741,230),(192,'krong Buk',3741,230),(193,'Krong Pak',3741,230),(194,'Krong Nang',3741,230),(195,'krong Ana',3741,230),(196,'M\'Drak',3741,230),(197,'lak',3741,230),(198,'Ea kar',3741,230),(199,'Ea H\'leo',3741,230),(200,'Cu M\'gar',3741,230),(201,'Cu Kuin',3741,230),(202,'Buôn Dôn',3741,230),(203,'Gia Nghĩa',3742,230),(204,'Cư Jut',3742,230),(205,'Dak Glong',3742,230),(206,'Dlk Mil',3742,230),(207,'Dak Rlap',3742,230),(208,'Dak Song',3742,230),(209,'Krong No',3742,230),(210,'Tuy Đức',3742,230),(211,'Hải Châu',3743,230),(212,'Thanh kê',3743,230),(213,'Sơn Trà',3743,230),(214,'Ngũ Hành Sơn',3743,230),(215,'Liên Chiều',3743,230),(216,'Cấm Lệ',3743,230),(217,'Hòa Vàng',3743,230),(218,'Hoàng Sa',3743,230),(219,'Điện Biên Phủ',3744,230),(220,'Mường Lay',3744,230),(221,'Điện Biên',3744,230),(222,'Điện Biên Đông',3744,230),(223,'Mường Ánh',3744,230),(224,'Mường Chà',3744,230),(225,'Mường Chè',3744,230),(226,'Mường Nhé',3744,230),(227,'Tùa Chùa',3744,230),(228,'Tuần Giáo',3744,230),(229,'nậm Pồ',3744,230),(240,'Cao Lãnh',3746,230),(241,'Sa Đéc',3746,230),(242,'Hông Ngự',3746,230),(246,'Lai Vung',3746,230),(247,'Lắp Vò',3746,230),(248,'Tam Nông',3746,230),(249,'Tân Hồng',3746,230),(250,'Thanh Bình',3746,230),(252,'Pleiku',3747,230),(253,'An Khê',3747,230),(254,'Ayun Pa',3747,230),(255,'Chu Pah',3747,230),(256,'Chu Pong',3747,230),(257,'Chu Se',3747,230),(258,'Dak Đoa',3747,230),(259,'Chư Pu7h',3747,230),(260,'Phú Thiện',3747,230),(261,'Mang Yang',3747,230),(262,'krong Pa',3747,230),(263,'kong Chro',3747,230),(264,'K\'bang',3747,230),(265,'La Pa',3747,230),(266,'La Grai',3747,230),(267,'Đức Cơ',3747,230),(268,'Dak Pơ',3747,230),(269,'Hà Giang',3748,230),(270,'Bắc Mê',3748,230),(271,'Bắc Quang',3748,230),(272,'Đồng Văn',3748,230),(273,'Hoang Su Phi',3748,230),(274,'Mèo Vạc',3748,230),(275,'Quản Bạ',3748,230),(276,'Quang Bình',3748,230),(277,'Vị Xuyên',3748,230),(278,'Xin Mần',3748,230),(279,'Yên Minh',3748,230),(280,'Hải Dương',3749,230),(281,'Chi Linh',3749,230),(282,'Nam Sách',3749,230),(283,'Kinh Môn',3749,230),(284,'Kim Thành',3749,230),(285,'Thanh Hà',3749,230),(286,'Kinh Môn',3749,230),(287,'Kim Thành',3749,230),(288,'Thanh Hà',3749,230),(289,'Cẩm Giàng',3749,230),(290,'Bình Giang',3749,230),(291,'Gia Lộc',3749,230),(292,'Tứ Kỳ',3749,230),(293,'Ninh Giang',3749,230),(294,'Thanh Miện',3749,230),(295,'Biên Hòa',3745,230),(296,'Long Khánh',3745,230),(297,'Nhơn Trạch',3745,230),(298,'Trảng Bom',3745,230),(299,'Thống Nhất',3745,230),(300,'Vĩnh Cửu',3745,230),(301,'Cẩm Mỹ',3745,230),(302,'Xuân Lộc',3745,230),(303,'Tân Phú',3745,230),(304,'Định Quan1',3745,230),(309,'Châu Thành',3746,230),(310,'Dương Kinh',3750,230),(311,'Đồ Sơn',3750,230),(312,'Kiến An',3750,230),(313,'Hải An',3750,230),(314,'Hồng Bàng',3750,230),(315,'Ngô Quyền',3750,230),(316,'Lê Chân',3750,230),(317,'An Dương',3750,230),(318,'An Lão',3750,230),(319,'Bạch Long Vĩ',3750,230),(320,'Cát Hải',3750,230),(321,'Kiến Thụy',3750,230),(322,'Tiên Lãng',3750,230),(323,'Vĩnh Bảo',3750,230),(324,'Thúy Nguyên',3750,230),(325,'Phủ Lý',3751,230),(326,'Duy Tiên',3751,230),(327,'Kim Bảng',3751,230),(328,'Lý Nhân',3751,230),(329,'Thanh Liêm',3751,230),(330,'Bình Lục',3751,230),(331,'Hà Tĩnh',3754,230),(332,'Hồng Lĩnh',3754,230),(333,'Cẩm Xuyên',3754,230),(334,'Can Lộc',3754,230),(335,'Đức Lộc',3754,230),(336,'Đức Thọ',3754,230),(337,'Hương Khê',3754,230),(338,'Hương Sơn',3754,230),(339,'Kỳ Anh',3754,230),(340,'Nghi Xuân',3754,230),(341,'Thạch Hà',3754,230),(342,'Vũ Quang',3754,230),(343,'Lộc Hà',3754,230),(344,'Hòa Bình',3755,230),(345,'Lương Sơn',3755,230),(346,'Cao Phong',3755,230),(347,'Đà Bắc',3755,230),(348,'Kỳ Sơn',3755,230),(349,'Lạc Sơn',3755,230),(350,'Lạc Thủy',3755,230),(351,'Mai Châu',3755,230),(352,'Tân Lạc',3755,230),(353,'Yên Thủy',3755,230),(354,'Vị Thanh',3757,230),(355,'Ngã Bảy',3757,230),(356,'Châu Thành',3757,230),(357,'Châu Thành A',3757,230),(358,'Long Mỹ',3757,230),(359,'Phụng Hiệp',3757,230),(360,'Vị Thủy',3757,230),(361,'Hưng yên',3758,230),(362,'Ân Thi',3758,230),(363,'Khoái Châu',3758,230),(364,'Kim Động',3758,230),(365,'Mỹ Hảo',3758,230),(366,'Phú cừ',3758,230),(367,'Tiên Lữ',3758,230),(368,'Văn Giang',3758,230),(369,'Văn Lâm',3758,230),(370,'Yên Mỹ',3758,230),(371,'Rạch Giá',3986,230),(372,'Hà Tiên',3986,230),(373,'An Biên',3986,230),(374,'An Minh',3986,230),(375,'Châu Thành',3986,230),(376,'Giồng Riềng',3986,230),(377,'Giang Thành',3986,230),(378,'Gò Quan',3986,230),(379,'Hòn Đất',3986,230),(380,'U Minh Thượng',3986,230),(381,'Kiên Lương',3986,230),(382,'Tân Hiệp',3986,230),(383,'Vĩnh Thuận',3986,230),(384,'Kiên Hải',3986,230),(385,'Phú Quốc',3986,230),(386,'Tân An',3987,230),(387,'Kiến Tường',3987,230),(388,'Bến Lức',3987,230),(389,'Cần Đước',3987,230),(390,'Châu Thành',3987,230),(391,'Dức Huệ',3987,230),(392,'Mộc Hóa',3987,230),(393,'Cần Giuộc',3987,230),(394,'Châu Thành',3987,230),(395,'Đức Huệ',3987,230),(396,'Mộc Hóa',3987,230),(397,'Tân Hưng',3987,230),(398,'Tân Thạnh',3987,230),(399,'Tân Trụ',3987,230),(400,'Thạnh Hóa',3987,230),(401,'Thủ Thừa',3987,230),(402,'Vĩnh Hưng',3987,230),(403,'Đức Hòa',3987,230),(404,'Nha Trang',3989,230),(405,'Cam Ranh',3989,230),(406,'Ninh Hòa',3989,230),(407,'Vạn Ninh',3989,230),(408,'Diên Khánh',3989,230),(409,'Khánh Vĩnh',3989,230),(410,'Khánh Sơn',3989,230),(411,'Cam Lâm',3989,230),(412,'Huyện đảo Trường Sa',3989,230),(413,'Kon Tum',3990,230),(414,'Fak Glei',3990,230),(415,'Dak Hà',3990,230),(416,'Dak Tô',3990,230),(417,'kon Plong6',3990,230),(418,'kon Rẫy',3990,230),(419,'Ngọc Hồi',3990,230),(420,'Sa Thầy',3990,230),(421,'Tu Mơ Rông',3990,230),(422,'Lai Châu',3991,230),(423,'Mường Tè',3991,230),(424,'Phong thổ',3991,230),(425,'Sìn Hồ',3991,230),(426,'Tam Đường',3991,230),(427,'Than Uyên',3991,230),(428,'Tân Uyên',3991,230),(429,'Nậm Nhùn',3991,230),(430,'Đà Lạt',3992,230),(431,'Bảo Lộc',3992,230),(432,'Bảo Lâm',3992,230),(433,'Cát Tiên',3992,230),(434,'Di Linh',3992,230),(435,'Đam Rông',3992,230),(436,'Đạ Teh',3992,230),(437,'Đơn Dương',3992,230),(438,'Lạc Dương',3992,230),(439,'Lâm Hà',3992,230),(440,'Đức Trọng',3992,230),(441,'Tràng Định',3993,230),(442,'Văn Lãng',3993,230),(443,'Văn Quan',3993,230),(444,'Bình Gia',3993,230),(445,'Bắc Sơn',3993,230),(446,'Hữu Lũng',3993,230),(447,'Chi lăng',3993,230),(448,'Cao Lộc',3993,230),(449,'Lộc Bình',3993,230),(450,'Đình Lập',3993,230),(451,'Lào Cai',3994,230),(452,'Bảo Thắng',3994,230),(453,'Bảo Yên',3994,230),(454,'Bắc Hà',3994,230),(455,'Mường Khương',3994,230),(456,'Sa Pa',3994,230),(457,'Si Ma Cai',3994,230),(458,'Văn Bàn',3994,230),(459,'Nam Định',3995,230),(460,'Giao Thuy3',3995,230),(461,'Hải Hậu',3995,230),(462,'Mỹ Lộc',3995,230),(463,'Nam Trực',3995,230),(464,'Nghĩa Hưng',3995,230),(465,'Trực Ninh',3995,230),(466,'Vụ Bản',3995,230),(467,'Xuân Trường',3995,230),(468,'Ý Yên',3995,230),(469,'Vinh',3996,230),(470,'Cửa Lò',3996,230),(471,'Hoàng Mai',3996,230),(472,'Thái Hòa',3996,230),(473,'Anh Sơn',3996,230),(474,'Con Cuông',3996,230),(475,'Diễn Châu',3996,230),(476,'Đô Lương',3996,230),(477,'Hưng Nguyên',3996,230),(478,'Quỳ Châu',3996,230),(479,'Kỳ Sơn',3996,230),(480,'Nam Đàn',3996,230),(481,'Nghỉ Lộc',3996,230),(482,'Nghĩa Đàn',3996,230),(483,'Quế Phong',3996,230),(484,'Quỳ Hợp',3996,230),(485,'Quỳnh Lưu',3996,230),(486,'Tân kỳ',3996,230),(487,'Thanh Chương',3996,230),(488,'Tương Dương',3996,230),(489,'Yên Thành',3996,230),(490,'Ninh Bình',3997,230),(491,'Tam Điệp',3997,230),(492,'Nho Quan',3997,230),(493,'Gia Viễn',3997,230),(494,'Hoa Lư',3997,230),(495,'Yên Khánh',3997,230),(496,'Kim Sơn',3997,230),(497,'Yên Mô',3997,230),(498,'Phan Rang',3998,230),(499,'Bác Ái',3998,230),(500,'Ninh hải',3998,230),(501,'Ninh Phước',3998,230),(502,'Ninh Sơn',3998,230),(503,'Hàm Thuận Bắc',3998,230),(504,'Hàm Thuận Nam',3998,230),(505,'Việt Trì',3999,230),(506,'TX Phú Thọ',3999,230),(507,'Cầm Khê',3999,230),(508,'Đoan Hùng',3999,230),(509,'Hạ Hòa',3999,230),(510,'Lâm Thao',3999,230),(511,'Phù Ninh',3999,230),(512,'Tam Nông',3999,230),(513,'Tân Sơn',3999,230),(514,'Thanh ba',3999,230),(515,'Thanh Sơn',3999,230),(516,'Thanh Thủy',3999,230),(517,'Yên Lập',3999,230),(518,'Tuy Hòa',4000,230),(519,'Sông Cầu',4000,230),(520,'Đông Hòa',4000,230),(521,'Đồng Xuân',4000,230),(522,'Phú Hòa',4000,230),(523,'Sơn Hòa',4000,230),(524,'Sông Hinh',4000,230),(525,'Tuy An',4000,230),(526,'Tây Hòa',4000,230),(527,'Đồng Hới',4001,230),(528,'Minh Hóa',4001,230),(529,'Tuy Hóa',4001,230),(530,'Quảng Trạch',4001,230),(531,'Bố Trạch',4001,230),(532,'Quảng Ninh',4001,230),(533,'Lệ Thủy',4001,230),(534,'Tam Kỳ',4002,230),(535,'Hội An',4002,230),(536,'Điện Bàn',4002,230),(537,'Thăng Bình',4002,230),(538,'Bắc Trà My',4002,230),(539,'Nam Trà My',4002,230),(540,'Núi Thành',4002,230),(541,'Phước Sơn',4002,230),(542,'Tiên Phước',4002,230),(543,'Hiệp Đức',4002,230),(544,'Nông Sơn',4002,230),(545,'Đông Giang',4002,230),(546,'Nam Giang',4002,230),(547,'Đại Lộc',4002,230),(548,'Phú Ninh',4002,230),(549,'Tây Giang',4002,230),(550,'Duy Xuyên',4002,230),(551,'Quế Sơn',4002,230),(552,'Quảng NGãi',4003,230),(553,'Ba Tơ',4003,230),(554,'Bình Sơn',4003,230),(555,'Đức Phổ',4003,230),(556,'Minh Long',4003,230),(557,'Mộ Đức',4003,230),(558,'Lý Sơn',4003,230),(559,'Tư Nghĩa',4003,230),(560,'Trà Bồng',4003,230),(561,'Tây Trà',4003,230),(562,'Sơn Tịnh',4003,230),(563,'Sơn Tây',4003,230),(564,'Sơn Hà',4003,230),(565,'Nghĩa Hành',4003,230),(566,'Hạ Long',4004,230),(567,'Móng Cái',4004,230),(568,'Uông Bí',4004,230),(569,'Cẩm Phá',4004,230),(570,'Quảng Yên',4004,230),(571,'Vân Đồn',4004,230),(572,'Hoành Bồ',4004,230),(573,'Đầm Hà',4004,230),(574,'Cô Tô',4004,230),(575,'Đông Triều',4004,230),(576,'Tiên Yên',4004,230),(577,'hải Hà',4004,230),(578,'Bình Liêu',4004,230),(579,'Ba Chẽ',4004,230),(580,'Đông Hà',4005,230),(581,'TX. Quảng Trị',4005,230),(582,'Cam Lộ',4005,230),(583,'Cồn Cỏ',4005,230),(584,'Đa Krong',4005,230),(585,'Gio Linh',4005,230),(586,'Hải Lăng',4005,230),(587,'Hướng Hóa',4005,230),(588,'Triệu Phong',4005,230),(589,'Vĩnh Linh',4005,230),(590,'Sóc Trăng',4006,230),(591,'Vĩnh Châu',4006,230),(592,'Ngã Năm',4006,230),(593,'Long Phú',4006,230),(594,'Kế Sách',4006,230),(595,'Mỹ Tú',4006,230),(596,'Mỹ Xuyên',4006,230),(597,'Trần Đề',4006,230),(598,'Thạnh Trị',4006,230),(599,'Châu Thành',4006,230),(600,'Cù Lao Dung',4006,230),(601,'Sơn La',4007,230),(602,'Quỳnh Nhai',4007,230),(603,'mường La',4007,230),(604,'Thuận Châu',4007,230),(605,'Phù Yên',4007,230),(606,'Bắc Yên',4007,230),(607,'Mai Sơn',4007,230),(608,'Sông Mã',4007,230),(609,'Yên Châu',4007,230),(610,'Mộc Châu',4007,230),(611,'Sốp Cộp',4007,230),(612,'Tây Ninh',4008,230),(613,'Tân Biên',4008,230),(614,'Tân Châu',4008,230),(615,'Dương Minh Châu',4008,230),(616,'Châu Thành',4008,230),(617,'Hòa Thành',4008,230),(618,'Bến Cầu',4008,230),(619,'Gò Dầu',4008,230),(620,'Trảng Bàng',4008,230),(621,'Thái Bình',4009,230),(622,'Đông Hưng',4009,230),(623,'Hưng Hà',4009,230),(624,'Kiến Xương',4009,230),(625,'Quỳnh Phụ',4009,230),(626,'Thái Thụy',4009,230),(627,'Tiền Hài',4009,230),(628,'Vũ Thư',4009,230),(629,'Thái Nguyên',4010,230),(630,'Sông Công',4010,230),(631,'Đại Từ',4010,230),(632,'Định Hóa',4010,230),(633,'Đồng Hủ',4010,230),(634,'Phổ Yên',4010,230),(635,'Phú Yên',4010,230),(636,'Phú Bình',4010,230),(637,'Phú Lương',4010,230),(638,'Võ Nhai',4010,230),(639,'Thanh Hóa',4011,230),(640,'Bim Sơn',4011,230),(641,'Sầm Sơn',4011,230),(642,'Bá Thước',4011,230),(643,'Sầm Sơn',4011,230),(644,'Bá Thước',4011,230),(645,'Đông Sơn',4011,230),(646,'Hà Trung',4011,230),(647,'Hậu Lộc',4011,230),(648,'Hoằng Hóa',4011,230),(649,'Lang Chánh',4011,230),(650,'Mường Lát',4011,230),(651,'Nga Sơn',4011,230),(652,'Ngọc Lặc',4011,230),(653,'Như Thanh',4011,230),(654,'Như Xuân',4011,230),(655,'Nông Cống',4011,230),(656,'Quang Hóa',4011,230),(657,'Quan Sơn',4011,230),(658,'Quảng Xương',4011,230),(659,'Thạch Thành',4011,230),(660,'Thiệu Hóa',4011,230),(661,'Thọ Xuân',4011,230),(662,'Thường Xuân',4011,230),(663,'Tĩnh Gia',4011,230),(664,'Triệu Sơn',4011,230),(665,'Vĩnh Lộc',4011,230),(666,'Yên Định',4011,230),(667,'Tp Huế',4012,230),(668,'Hương Thủy',4012,230),(669,'Hương Trà',4012,230),(670,'A Lưới',4012,230),(671,'Nam Đông',4012,230),(672,'Phong Điền',4012,230),(673,'Phú Lộc',4012,230),(674,'Phú Vàng',4012,230),(675,'Quảng Điển',4012,230),(676,'Mỹ Tho',4013,230),(677,'Gò Công',4013,230),(678,'Cái Bè',4013,230),(679,'Gò Công Đông',4013,230),(680,'Gò Công Tây',4013,230),(681,'Chợ Gạo',4013,230),(682,'Châu Thành',4013,230),(683,'Tân Phước',4013,230),(684,'Cai Lậy',4013,230),(685,'Tân Phú Đông',4013,230),(686,'Trà Vinh',4014,230),(687,'Càng Long',4014,230),(688,'Cầu kê',4014,230),(689,'Tiểu Cần',4014,230),(690,'Châu Thành',4014,230),(691,'Cầu Ngang',4014,230),(692,'Trà Cù',4014,230),(693,'Duyên Hải',4014,230),(694,'Tuyên Quang',4015,230),(695,'Chiêm Hóa',4015,230),(696,'Hàm Yên',4015,230),(697,'Na Hang',4015,230),(698,'Sơn Dương',4015,230),(699,'yên Sơn',4015,230),(700,'Lâm Bình',4015,230),(701,'Vĩnh Long',4016,230),(702,'Bình Minh',4016,230),(703,'Bình Tân',4016,230),(704,'Long Hổ',4016,230),(705,'Măng Thịt',4016,230),(706,'Tam Bình',4016,230),(707,'Trà Ôn',4016,230),(708,'Vũng Liêm',4016,230),(709,'Vĩnh Yên',4017,230),(710,'Phúc Yên',4017,230),(711,'Bình Xuyên',4017,230),(712,'Lập Thạch',4017,230),(713,'Sông Lô',4017,230),(714,'Tam Dương',4017,230),(715,'Tam Đảo',4017,230),(716,'Vĩnh Tường',4017,230),(717,'Yên Lạc',4017,230),(718,'Yên Bái',4018,230),(719,'Nghĩa Lộ',4018,230),(720,'Lục Yên',4018,230),(721,'Mù Cang Chái',4018,230),(722,'Trấn Yên',4018,230),(723,'Trạm Tấu',4018,230),(724,'Văn Chấn',4018,230),(725,'Văn Yên',4018,230),(726,'Yên Bình',4018,230);
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `roles` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`,`roles`) values (1,'Vinh Quang Nguyen','quangvinhit2007@gmail.com','$2y$10$bGDbmU.Af6hFRL1KyodtN.VqtGvJv1xz3NoruyvDoWt.IkMM./6dK','nParYi7e89bYZxY58G9Yv2T4hbUp5i6EvyxYBs2JKhNaaiDfJEUebwoWkSId','2016-10-31 11:51:38','2016-11-01 09:12:58',1),(2,'Vinh Quang Nguyen','quangvinhit2010@gmail.com','$2y$10$DObje8wkVH/hdiFvW7vOv.8HCjbTF1TTezecD2WqrV.hTHcMJxK8a','wdHagFNLgaY0rYugygG6xSkI1Y959fqLVDSimqPf9LL6ePTFCWyM7ABCnJSE','2016-11-01 08:47:40','2016-11-01 08:55:45',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
