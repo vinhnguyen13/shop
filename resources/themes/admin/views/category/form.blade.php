@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <?php
-$isNewRecord = !empty($user->id) ? false : true;
+$isNewRecord = !empty($model->id) ? false : true;
 ?>
 @section('content-header')
     @include('layouts._partials.content-header', ['data'=>['h1'=>'User', 'h1_href'=>route('admin.user.index'), 'h1_small'=>$isNewRecord ? 'Create' : 'Edit']])
@@ -15,18 +15,18 @@ $isNewRecord = !empty($user->id) ? false : true;
             {{ Form::open(['route' => 'admin.user.store', 'files' => true]) }}
                 <div class="form-group">
                     {{ Form::label(null, 'Username') }}
-                    {{ Form::text('username', $user->username,['class' => 'form-control'])}}
-                    {{ Form::hidden('id', $user->id) }}
+                    {{ Form::text('name', $model->name,['class' => 'form-control'])}}
+                    {{ Form::hidden('id', $model->id) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Email') }}
-                    {{ Form::text('email', $user->email,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Description') }}
+                    {{ Form::textarea('description', $model->description,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Password') }}
-                    {{ Form::text('password', null,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Image') }}
+                    {{ Form::file('avatar', ['url' => route('admin.category.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
                 </div>
 
                 <div class="form-group">

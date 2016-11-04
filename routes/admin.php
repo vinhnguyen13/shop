@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          * Categories
          */
         Route::get('/category', ['uses' => 'CategoryController@index', 'as'=>'admin.category.index']);
-        Route::get('/category/create', ['uses' => 'CategoryController@index', 'as'=>'admin.category.create']);
+        Route::get('/category/create', ['uses' => 'CategoryController@create', 'as'=>'admin.category.create']);
         Route::get('/category/edit/{id}', ['uses' => 'CategoryController@edit', 'as'=>'admin.category.edit']);
         Route::get('/category/show/{id}', ['uses' => 'CategoryController@show', 'as'=>'admin.category.show']);
         /*
