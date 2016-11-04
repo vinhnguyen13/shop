@@ -29,8 +29,6 @@ $isNewRecord = !empty($user->id) ? false : true;
                     {{ Form::text('password', null,['class' => 'form-control'])}}
                 </div>
 
-                @include('user.form-profile', compact('profile'))
-
                 <div class="form-group">
                     {{ Form::submit('Save', array('class' => 'btn btn-primary btn-flat')) }}
                 </div>

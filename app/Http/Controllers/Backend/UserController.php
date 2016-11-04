@@ -31,8 +31,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $user = new User();
-        $profile = new Profile();
-        return view('user.form', compact('user', 'profile', 'avatar'));
+        return view('user.form', compact('user'));
     }
 
     public function edit(Request $request, $id)
@@ -63,15 +62,11 @@ class UserController extends Controller
     {
         $input = Input::all();
         $data = [
-            'username'=> $request->input('username'),
             'email'=> $request->input('email'),
             'password'=> $request->input('email'),
             'name'=> $request->input('name'),
-            'bio'=> $request->input('bio'),
-            'mobile'=> $request->input('mobile'),
-            'avatar'=> $request->input('avatar'),
         ];
-        $return = app(\App\Models\User::class)->updateData($data);
+        $return = app(User::class)->updateData($data);
         if(!empty($return->id)){
             return Redirect::route('user.index');
         }else{
