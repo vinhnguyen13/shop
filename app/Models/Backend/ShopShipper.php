@@ -8,7 +8,7 @@ use DB;
 
 class ShopShipper extends MainShopShipper
 {
-    public function grid(){
+    public function gridIndex(){
         $query = DB::table('shop_shipper AS a');
         $grid = new Grid($query, [
             'id',

@@ -8,7 +8,7 @@ use DB;
 
 class ShopProduct extends MainShopProduct
 {
-    public function grid(){
+    public function gridIndex(){
         $query = DB::table('shop_product AS a');
         $grid = new Grid($query, [
             'id',

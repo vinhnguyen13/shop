@@ -16,7 +16,7 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopOrder::class)->grid();
+        $grid = app(ShopOrder::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{

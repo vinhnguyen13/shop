@@ -15,7 +15,7 @@ class SupplierController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopSupplier::class)->grid();
+        $grid = app(ShopSupplier::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{

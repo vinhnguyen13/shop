@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopCategory::class)->grid();
+        $grid = app(ShopCategory::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{

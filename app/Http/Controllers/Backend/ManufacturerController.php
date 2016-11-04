@@ -15,7 +15,7 @@ class ManufacturerController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopManufacturer::class)->grid();
+        $grid = app(ShopManufacturer::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{

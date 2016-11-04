@@ -8,7 +8,7 @@ use App\Helpers\Grid;
 
 class ShopCategory extends MainShopCategory
 {
-    public function grid(){
+    public function gridIndex(){
         $query = DB::table('shop_category AS a');
         $grid = new Grid($query, [
             'id',

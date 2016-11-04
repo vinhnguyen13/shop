@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopProduct::class)->grid();
+        $grid = app(ShopProduct::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{

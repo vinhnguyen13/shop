@@ -15,7 +15,7 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopCustomer::class)->grid();
+        $grid = app(ShopCustomer::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{
