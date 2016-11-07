@@ -8,6 +8,8 @@ use App\Helpers\Grid;
 
 class ShopCategory extends MainShopCategory
 {
+    protected $fillable = ['parent_id', 'name', 'description', 'image', 'status', 'order'];
+
     const STATUS_DISABLE = 0;
     const STATUS_ENABLE = 1;
 
@@ -42,14 +44,28 @@ class ShopCategory extends MainShopCategory
             ],
             'status' => [
             ],
-            'created_at'=> [
+            'updated_at'=> [
             ],
         ]);
         return $grid;
     }
 
-    public function updateData($data){
+    /**
+     * Create or update a related record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        $instance = $this->firstOrNew($attributes);
 
+        $instance->fill($values);
+
+        $instance->save();
+
+        return $instance;
     }
 
 }

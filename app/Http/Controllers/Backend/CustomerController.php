@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ShopCustomer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
@@ -20,6 +22,41 @@ class CustomerController extends Controller
             return $grid->table();
         }else{
             return view('customer.index', compact('grid'));
+        }
+    }
+
+    public function create(Request $request)
+    {
+        $model = new ShopCustomer();
+        return view('customer.form', compact('model', 'image'));
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $model = ShopCustomer::find($id);
+        if(!empty($model))
+            return view('customer.form', compact('model'));
+        else
+            return abort(404, 'Not Found');
+    }
+
+    public function store(Request $request)
+    {
+        $input = Input::all();
+        unset($input['_token']);
+        if(!empty($input['id'])){
+            $attributes = ['id'=>$input['id']];
+        }else{
+            $attributes = ['id'=>$input['id']];
+        }
+        if(empty($input['order'])){
+            $input['order'] = 0;
+        }
+        $return = app(ShopCustomer::class)->updateOrCreate($attributes, $input);
+        if(!empty($return->id)){
+            return $this->index($request);
+        }else{
+            return Redirect::back();
         }
     }
 }

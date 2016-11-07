@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\ShopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -42,9 +43,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        $return = app(ShopCategory::class)->updateData($input);
+        unset($input['_token']);
+        if(!empty($input['id'])){
+            $attributes = ['id'=>$input['id']];
+        }else{
+            $attributes = ['id'=>$input['id']];
+        }
+        if(empty($input['order'])){
+            $input['order'] = 0;
+        }
+        $return = app(ShopCategory::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
-            return Redirect::route('user.index');
+            return $this->index($request);
         }else{
             return Redirect::back();
         }

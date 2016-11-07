@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/product', ['uses' => 'ProductController@index', 'as'=>'admin.product.index']);
         Route::get('/product/create', ['uses' => 'ProductController@create', 'as'=>'admin.product.create']);
+        Route::get('/product/store', ['uses' => 'ProductController@store', 'as'=>'admin.product.store']);
         Route::get('/product/edit/{id}', ['uses' => 'ProductController@edit', 'as'=>'admin.product.edit']);
         Route::get('/product/show/{id}', ['uses' => 'ProductController@show', 'as'=>'admin.product.show']);
         /*
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/manufacturer', ['uses' => 'ManufacturerController@index', 'as'=>'admin.manufacturer.index']);
         Route::get('/manufacturer/create', ['uses' => 'ManufacturerController@create', 'as'=>'admin.manufacturer.create']);
+        Route::get('/manufacturer/store', ['uses' => 'ManufacturerController@store', 'as'=>'admin.manufacturer.store']);
         Route::get('/manufacturer/edit/{id}', ['uses' => 'ManufacturerController@edit', 'as'=>'admin.manufacturer.edit']);
         Route::get('/manufacturer/show/{id}', ['uses' => 'ManufacturerController@show', 'as'=>'admin.manufacturer.show']);
         /*
@@ -64,6 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/shipper', ['uses' => 'ShipperController@index', 'as'=>'admin.shipper.index']);
         Route::get('/shipper/create', ['uses' => 'ShipperController@create', 'as'=>'admin.shipper.create']);
+        Route::get('/shipper/store', ['uses' => 'ShipperController@store', 'as'=>'admin.shipper.store']);
         Route::get('/shipper/edit/{id}', ['uses' => 'ShipperController@edit', 'as'=>'admin.shipper.edit']);
         Route::get('/shipper/show/{id}', ['uses' => 'ShipperController@show', 'as'=>'admin.shipper.show']);
         Route::get('/shipper/transport', ['uses' => 'ShipperController@transport', 'as'=>'admin.shipper.transport']);
@@ -72,6 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/supplier', ['uses' => 'SupplierController@index', 'as'=>'admin.supplier.index']);
         Route::get('/supplier/create', ['uses' => 'SupplierController@create', 'as'=>'admin.supplier.create']);
+        Route::get('/supplier/store', ['uses' => 'SupplierController@store', 'as'=>'admin.supplier.store']);
         Route::get('/supplier/edit/{id}', ['uses' => 'SupplierController@edit', 'as'=>'admin.supplier.edit']);
         Route::get('/supplier/show/{id}', ['uses' => 'SupplierController@show', 'as'=>'admin.supplier.show']);
         /*
@@ -79,6 +83,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/customer', ['uses' => 'CustomerController@index', 'as'=>'admin.customer.index']);
         Route::get('/customer/create', ['uses' => 'CustomerController@create', 'as'=>'admin.customer.create']);
+        Route::get('/customer/store', ['uses' => 'CustomerController@store', 'as'=>'admin.customer.store']);
         Route::get('/customer/edit/{id}', ['uses' => 'CustomerController@edit', 'as'=>'admin.customer.edit']);
         Route::get('/customer/show/{id}', ['uses' => 'CustomerController@show', 'as'=>'admin.customer.show']);
         /*
@@ -86,6 +91,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/order', ['uses' => 'OrderController@index', 'as'=>'admin.order.index']);
         Route::get('/order/create', ['uses' => 'OrderController@create', 'as'=>'admin.order.create']);
+        Route::get('/order/store', ['uses' => 'OrderController@store', 'as'=>'admin.order.store']);
         Route::get('/order/edit/{id}', ['uses' => 'OrderController@edit', 'as'=>'admin.order.edit']);
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
 
