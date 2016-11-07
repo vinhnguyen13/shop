@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ShopCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -27,6 +28,26 @@ class CategoryController extends Controller
     {
         $model = new ShopCategory();
         return view('category.form', compact('model', 'image'));
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $model = ShopCategory::find($id);
+        if(!empty($model))
+            return view('category.form', compact('model'));
+        else
+            return abort(404, 'Not Found');
+    }
+
+    public function store(Request $request)
+    {
+        $input = Input::all();
+        $return = app(ShopCategory::class)->updateData($input);
+        if(!empty($return->id)){
+            return Redirect::route('user.index');
+        }else{
+            return Redirect::back();
+        }
     }
 
 }
