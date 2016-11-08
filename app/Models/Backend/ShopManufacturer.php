@@ -8,6 +8,8 @@ use DB;
 
 class ShopManufacturer extends MainShopManufacturer
 {
+    protected $fillable = ['name', 'image', 'order'];
+
     public function gridIndex(){
         $query = DB::table('shop_manufacturer AS a');
         $grid = new Grid($query, [
@@ -27,11 +29,8 @@ class ShopManufacturer extends MainShopManufacturer
     public function updateOrCreate(array $attributes, array $values = [])
     {
         $instance = $this->firstOrNew($attributes);
-
         $instance->fill($values);
-
         $instance->save();
-
         return $instance;
     }
 }

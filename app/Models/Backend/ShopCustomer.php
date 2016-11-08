@@ -36,14 +36,7 @@ class ShopCustomer extends MainShopCustomer
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
-//        $instance->setRawAttributes($values, true);
-
         $instance->save();
-        echo "<pre>";
-        print_r($instance);
-        echo "</pre>";
-        exit;
-
         return $instance;
     }
 }

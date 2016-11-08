@@ -8,6 +8,9 @@ use DB;
 
 class ShopSupplier extends MainShopSupplier
 {
+    protected $fillable = ['company_name', 'contact_name', 'contact_title', 'address', 'country_id', 'city_id', 'district_id',
+        'phone', 'fax', 'email', 'card', 'url', 'payment_method', 'discount_type', 'type_goods', 'notes', 'discount_available', 'current_order', 'logo', 'customer_id'];
+
     public function gridIndex(){
         $query = DB::table('shop_supplier AS a');
         $grid = new Grid($query, [
@@ -29,11 +32,8 @@ class ShopSupplier extends MainShopSupplier
     public function updateOrCreate(array $attributes, array $values = [])
     {
         $instance = $this->firstOrNew($attributes);
-
         $instance->fill($values);
-
         $instance->save();
-
         return $instance;
     }
 }

@@ -49,9 +49,6 @@ class CustomerController extends Controller
         }else{
             $attributes = ['id'=>$input['id']];
         }
-        if(empty($input['order'])){
-            $input['order'] = 0;
-        }
         $return = app(ShopCustomer::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
             return $this->index($request);

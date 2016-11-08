@@ -60,11 +60,8 @@ class ShopCategory extends MainShopCategory
     public function updateOrCreate(array $attributes, array $values = [])
     {
         $instance = $this->firstOrNew($attributes);
-
         $instance->fill($values);
-
         $instance->save();
-
         return $instance;
     }
 
