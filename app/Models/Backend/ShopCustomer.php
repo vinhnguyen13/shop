@@ -35,10 +35,14 @@ class ShopCustomer extends MainShopCustomer
     public function updateOrCreate(array $attributes, array $values = [])
     {
         $instance = $this->firstOrNew($attributes);
-
         $instance->fill($values);
+//        $instance->setRawAttributes($values, true);
 
         $instance->save();
+        echo "<pre>";
+        print_r($instance);
+        echo "</pre>";
+        exit;
 
         return $instance;
     }
