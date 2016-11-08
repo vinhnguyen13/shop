@@ -53,7 +53,7 @@ class CategoryController extends Controller
         }
         $return = app(ShopCategory::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
-            return $this->index($request);
+            return Redirect::route('admin.category.index');
         }else{
             return Redirect::back();
         }

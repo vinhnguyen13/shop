@@ -50,7 +50,7 @@ class CustomerController extends Controller
         }
         $return = app(ShopCustomer::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
-            return $this->index($request);
+            return Redirect::route('admin.customer.index');
         }else{
             return Redirect::back();
         }

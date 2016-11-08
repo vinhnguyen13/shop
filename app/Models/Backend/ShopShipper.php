@@ -14,9 +14,15 @@ class ShopShipper extends MainShopShipper
         $query = DB::table('shop_shipper AS a');
         $grid = new Grid($query, [
             'id',
-            'firstname',
-            'lastname',
-            'company',
+            'firstname' => [
+                'filter' => 'like',
+            ],
+            'lastname' => [
+                'filter' => 'like',
+            ],
+            'company' => [
+                'filter' => 'like',
+            ],
         ]);
         return $grid;
     }

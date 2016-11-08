@@ -55,7 +55,7 @@ class ShipperController extends Controller
         }
         $return = app(ShopShipper::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
-            return $this->index($request);
+            return Redirect::route('admin.shipper.index');
         }else{
             return Redirect::back();
         }

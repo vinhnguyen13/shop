@@ -15,9 +15,15 @@ class ShopSupplier extends MainShopSupplier
         $query = DB::table('shop_supplier AS a');
         $grid = new Grid($query, [
             'id',
-            'company_name',
-            'contact_name',
-            'contact_title',
+            'company_name' => [
+                'filter' => 'like',
+            ],
+            'contact_name' => [
+                'filter' => 'like',
+            ],
+            'contact_title' => [
+                'filter' => 'like',
+            ],
         ]);
         return $grid;
     }

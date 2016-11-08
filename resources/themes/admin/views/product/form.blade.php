@@ -14,65 +14,181 @@ $isNewRecord = !empty($model->id) ? false : true;
         <div class="box-body">
             {{ Form::open(['route' => 'admin.product.store', 'files' => true]) }}
                 {{ Form::hidden('id', $model->id) }}
-                <div class="form-group">
-                    {{ Form::label(null, 'Firstname') }}
-                    {{ Form::text('firstname', $model->firstname,['class' => 'form-control'])}}
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">General</a></li>
+                        <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Data</a></li>
+                        <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Links</a></li>
+                        <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Discount</a></li>
+                        <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Special</a></li>
+                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Image</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <div class="form-group">
+                                {{ Form::label(null, 'Sku') }}
+                                {{ Form::text('sku', $model->sku,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Name') }}
+                                {{ Form::text('name', $model->name,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Description') }}
+                                {{ Form::text('description', $model->description,['class' => 'form-control'])}}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_2">
+                            <div class="form-group">
+                                {{ Form::label(null, 'Location') }}
+                                {{ Form::text('location', $model->location,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Quantity') }}
+                                {{ Form::text('quantity', $model->quantity,['class' => 'form-control'])}}
+                            </div>
+
+                            <?php
+                            $stock_status = \App\Models\ShopStockStatus::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Out Of Stock Status') }}
+                                {!! Form::select('stock_status_id', $stock_status, $model->stock_status_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Requires Shipping') }} : 
+                                {{ Form::radio('shipping', '1', !empty($model->shipping) ? true : false) }} Yes
+                                {{ Form::radio('shipping', '0', empty($model->shipping) ? true : false) }} No
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Price') }}
+                                {{ Form::text('price', $model->price,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Points') }}
+                                {{ Form::text('points', $model->points,['class' => 'form-control'])}}
+                            </div>
+
+                            <?php
+                            $taxs = \App\Models\ShopTaxClass::query()->orderBy('id')->pluck('title', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Tax Class') }}
+                                {!! Form::select('tax_class_id', $taxs, $model->tax_class_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Date Available') }}
+                                {{ Form::text('date_available', $model->date_available,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Weight') }}
+                                {{ Form::text('weight', $model->weight,['class' => 'form-control'])}}
+                            </div>
+
+                            <?php
+                            $weights = \App\Models\ShopWeightClass::query()->orderBy('id')->pluck('title', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Weight Class') }}
+                                {!! Form::select('weight_class_id', $weights, $model->weight_class_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Length') }}
+                                {{ Form::text('length', $model->length,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Width') }}
+                                {{ Form::text('width', $model->width,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Height') }}
+                                {{ Form::text('height', $model->height,['class' => 'form-control'])}}
+                            </div>
+
+                            <?php
+                            $lengths = \App\Models\ShopLengthClass::query()->orderBy('id')->pluck('title', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Length Class') }}
+                                {!! Form::select('length_class_id', $lengths, $model->length_class_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Subtract') }}
+                                {{ Form::text('subtract', $model->subtract,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Minimum') }}
+                                {{ Form::text('minimum', $model->minimum,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Order') }}
+                                {{ Form::text('order', $model->order,['class' => 'form-control'])}}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label(null, 'Status') }}
+                                {{ Form::text('status', $model->status,['class' => 'form-control'])}}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_3">
+                            <?php
+                            $manufacturers = \App\Models\ShopManufacturer::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Manufacturer') }}
+                                {!! Form::select('manufacturer_id', $manufacturers, $model->manufacturer_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <?php
+                            $categories = \App\Models\ShopCategory::where('status', true)->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Category') }}
+                                {!! Form::select('category_id', $categories, $model->category_id, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <?php
+                            $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('company_name', 'id')->prepend('- Please Select -', 0);
+                            ?>
+                            <div class="form-group">
+                                {{ Form::label(null, 'Supplier') }}
+                                {!! Form::select('supplier_id', $suppliers, $model->supplier_id, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_4">
+                        </div>
+                        <div class="tab-pane" id="tab_5">
+                        </div>
+                        <div class="tab-pane" id="tab_6">
+                            <div class="form-group">
+                                {{ Form::label(null, 'Image') }}
+                                {{ Form::file('image', ['url' => route('admin.product.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.tab-content -->
                 </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Lastname') }}
-                    {{ Form::text('lastname', $model->lastname,['class' => 'form-control'])}}
-                </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Phone') }}
-                    {{ Form::text('phone', $model->phone,['class' => 'form-control'])}}
-                </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Fax') }}
-                    {{ Form::text('fax', $model->fax,['class' => 'form-control'])}}
-                </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Email') }}
-                    {{ Form::text('email', $model->email,['class' => 'form-control'])}}
-                </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Card') }}
-                    {{ Form::text('card', $model->card,['class' => 'form-control'])}}
-                </div>
 
-                <div class="form-group">
-                    {{ Form::label(null, 'Company') }}
-                    {{ Form::text('company', $model->company,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Address 1') }}
-                    {{ Form::text('address_1', $model->address_1,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Address 2') }}
-                    {{ Form::text('address_2', $model->address_2,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Country') }}
-                    {{ Form::text('country_id', $model->country_id,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'City') }}
-                    {{ Form::text('city_id', $model->city_id,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'District') }}
-                    {{ Form::text('district_id', $model->district_id,['class' => 'form-control'])}}
-                </div>
 
                 <div class="form-group">
                     {{ Form::submit('Save', array('class' => 'btn btn-primary btn-flat')) }}

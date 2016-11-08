@@ -14,7 +14,10 @@ class ShopManufacturer extends MainShopManufacturer
         $query = DB::table('shop_manufacturer AS a');
         $grid = new Grid($query, [
             'id',
-            'name',
+            'name' => [
+                'label' => 'Name',
+                'filter' => 'like',
+            ],
         ]);
         return $grid;
     }

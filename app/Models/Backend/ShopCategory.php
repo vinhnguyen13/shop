@@ -45,6 +45,7 @@ class ShopCategory extends MainShopCategory
             'status' => [
             ],
             'updated_at'=> [
+                'filter' => false,
             ],
         ]);
         return $grid;

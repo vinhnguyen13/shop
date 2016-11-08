@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
         $return = app(ShopProduct::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
-            return $this->index($request);
+            return Redirect::route('admin.product.index');
         }else{
             return Redirect::back();
         }
