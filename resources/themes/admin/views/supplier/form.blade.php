@@ -13,20 +13,40 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
         <div class="box-body">
             {{ Form::open(['route' => 'admin.supplier.store', 'files' => true]) }}
+                {{ Form::hidden('id', $model->id) }}
                 <div class="form-group">
-                    {{ Form::label(null, 'Supplier Group') }}
-                    {{ Form::text('Supplier_group_id', $model->Supplier_group_id,['class' => 'form-control'])}}
-                    {{ Form::hidden('id', $model->id) }}
+                    {{ Form::label(null, 'Company Name') }}
+                    {{ Form::text('company_name', $model->company_name,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Firstname') }}
-                    {{ Form::text('firstname', $model->firstname,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Contact Name') }}
+                    {{ Form::text('contact_name', $model->contact_name,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Lastname') }}
-                    {{ Form::text('lastname', $model->lastname,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Contact Title') }}
+                    {{ Form::text('contact_title', $model->contact_title,['class' => 'form-control'])}}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label(null, 'Address') }}
+                    {{ Form::text('address', $model->address,['class' => 'form-control'])}}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label(null, 'Country') }}
+                    {{ Form::text('country_id', $model->country_id,['class' => 'form-control'])}}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label(null, 'City') }}
+                    {{ Form::text('city_id', $model->city_id,['class' => 'form-control'])}}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label(null, 'District') }}
+                    {{ Form::text('district_id', $model->district_id,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
@@ -44,39 +64,45 @@ $isNewRecord = !empty($model->id) ? false : true;
                     {{ Form::text('email', $model->email,['class' => 'form-control'])}}
                 </div>
 
+
                 <div class="form-group">
-                    {{ Form::label(null, 'Card') }}
-                    {{ Form::text('card', $model->card,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Payment Method') }}
+                    {{ Form::text('payment_method', $model->payment_method,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Company') }}
-                    {{ Form::text('company', $model->company,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Discount Type') }}
+                    {{ Form::text('discount_type', $model->discount_type,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Address 1') }}
-                    {{ Form::text('address_1', $model->address_1,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Discount Available') }}
+                    {{ Form::text('discount_available', $model->discount_available,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Address 2') }}
-                    {{ Form::text('address_2', $model->address_2,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Type Goods') }}
+                    {{ Form::text('type_goods', $model->type_goods,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Country') }}
-                    {{ Form::text('country_id', $model->country_id,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Notes') }}
+                    {{ Form::text('notes', $model->notes,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'City') }}
-                    {{ Form::text('city_id', $model->city_id,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Order') }}
+                    {{ Form::text('order', $model->order,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'District') }}
-                    {{ Form::text('district_id', $model->district_id,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Url') }}
+                    {{ Form::text('url', $model->url,['class' => 'form-control'])}}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label(null, 'Logo') }}
+                    {{ Form::text('logo', $model->logo,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">

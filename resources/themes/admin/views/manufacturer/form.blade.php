@@ -13,21 +13,21 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
         <div class="box-body">
             {{ Form::open(['route' => 'admin.manufacturer.store', 'files' => true]) }}
-            <div class="form-group">
-                {{ Form::label(null, 'Name') }}
-                {{ Form::text('name', $model->name,['class' => 'form-control'])}}
                 {{ Form::hidden('id', $model->id) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label(null, 'Name') }}
+                    {{ Form::text('name', $model->name,['class' => 'form-control'])}}
+                </div>
 
-            <div class="form-group">
-                {{ Form::label(null, 'Image') }}
-                {{ Form::file('avatar', ['url' => route('admin.category.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label(null, 'Image') }}
+                    {{ Form::file('avatar', ['url' => route('admin.category.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                </div>
 
-            <div class="form-group">
-                {{ Form::label(null, 'Order') }}
-                {{ Form::text('order', $model->order,['class' => 'form-control'])}}
-            </div>
+                <div class="form-group">
+                    {{ Form::label(null, 'Order') }}
+                    {{ Form::text('order', $model->order,['class' => 'form-control'])}}
+                </div>
 
                 <div class="form-group">
                     {{ Form::submit('Save', array('class' => 'btn btn-primary btn-flat')) }}

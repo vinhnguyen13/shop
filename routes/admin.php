@@ -94,6 +94,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/order/store', ['uses' => 'OrderController@store', 'as'=>'admin.order.store']);
         Route::get('/order/edit/{id}', ['uses' => 'OrderController@edit', 'as'=>'admin.order.edit']);
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
+        /* Coupon Event routing*/
+        Route::get('/coupon-event', ['uses' => 'CouponEventController@index', 'as' => 'admin.cpevent.index']);
+        Route::get('/coupon-event/create', ['uses' => 'CouponEventController@create', 'as' => 'admin.cpevent.create']);
+        Route::get('/coupon-event/edit/{id}', ['uses' => 'CouponEventController@edit', 'as' => 'admin.cpevent.edit']);
+        Route::get('/coupon-event/delete/{id}', ['uses' => 'CouponEventController@destroy', 'as' => 'admin.cpevent.delete']);
+        Route::get('/coupon-event/show/{id}', ['uses' => 'CouponEventController@show', 'as' => 'admin.cpevent.show']);
+        Route::post('/coupon-event/create', ['uses' => 'CouponEventController@store', 'as' => 'admin.cpevent.store']);
+        Route::patch('/coupon-event/edit/{id}', ['uses' => 'CouponEventController@update', 'as' => 'admin.cpevent.update']);
 
+        /* Coupon Code routing*/
+        Route::get('/coupon-code', ['uses' => 'CouponCodeController@index', 'as' => 'admin.cpcode.index']);
+        Route::get('/coupon-code/create', ['uses' => 'CouponCodeController@create', 'as' => 'admin.cpcode.create']);
+        Route::get('/coupon-code/create-random', ['uses' => 'CouponCodeController@createRandom', 'as' => 'admin.cpcode.create-random']);
+        Route::get('/coupon-code/edit/{id}', ['uses' => 'CouponCodeController@edit', 'as' => 'admin.cpcode.edit']);
+        Route::get('/coupon-code/delete/{id}', ['uses' => 'CouponCodeController@destroy', 'as' => 'admin.cpcode.delete']);
+        Route::get('/coupon-code/show/{id}', ['uses' => 'CouponCodeController@show', 'as' => 'admin.cpcode.show']);
+        Route::post('/coupon-code/create', ['uses' => 'CouponCodeController@store', 'as' => 'admin.cpcode.store']);
+        Route::post('/coupon-code/create-random', ['uses' => 'CouponCodeController@storeRandom', 'as' => 'admin.cpcode.store-random']);
+        Route::patch('/coupon-code/edit/{id}', ['uses' => 'CouponCodeController@update', 'as' => 'admin.cpcode.update']);
+        Route::get('/coupon-code/donate', ['uses' => 'CouponCodeController@donate', 'as' => 'admin.cpcode.donate']);
+        Route::post('/coupon-code/donate', ['uses' => 'CouponCodeController@donate', 'as' => 'admin.cpcode.donate']);
     });
 });

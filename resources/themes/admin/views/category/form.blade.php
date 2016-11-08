@@ -13,10 +13,10 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
         <div class="box-body">
             {{ Form::open(['route' => 'admin.category.store', 'files' => true]) }}
+                {{ Form::hidden('id', $model->id) }}
                 <div class="form-group">
                     {{ Form::label(null, 'Name') }}
                     {{ Form::text('name', $model->name,['class' => 'form-control'])}}
-                    {{ Form::hidden('id', $model->id) }}
                 </div>
 
                 <div class="form-group">

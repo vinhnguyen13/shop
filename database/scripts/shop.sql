@@ -121,7 +121,7 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('KOe0uipmfyUbxV7XXzgYqiVpJxqt98Aak1SfatcL',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiekNGd01MVjJzQXowNktrRlhOdUlHU3pReWVUVzhxTGltSjBuam1LMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9sb2NhbC5zaG9wLmNvbS9hZG1pbi9jYXRlZ29yeS9lZGl0LzEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODUwMjA2ODtzOjE6ImMiO2k6MTQ3ODQ5OTY3MztzOjE6ImwiO3M6MToiMCI7fX0=',1478502068),('pqAqp5kZQYo1WYb8fh6MM2cmDOKp1hhNxSpGiGYa',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUmFoY1RHM0JmWGFldWdGSUVzS1pMY1M3YURyV1JzZE0xTmp2Tno1MCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vc3VwcGxpZXIvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODYwMjgzNjtzOjE6ImMiO2k6MTQ3ODU5OTgzODtzOjE6ImwiO3M6MToiMCI7fX0=',1478602837),('qISCs8RGMLKm4LBrohNR8NdskpW9GJMBpTvDgxV0',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWUc3TGQzcTJmY0JuMHhpWnNYVEdWbkJYSGdRQjBSRXdLY1hDSlpWbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbC5zaG9wLmNvbSI7fXM6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDc4NTk5ODM4O3M6MToiYyI7aToxNDc4NTk5ODM4O3M6MToibCI7czoxOiIwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1478599838);
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('KOe0uipmfyUbxV7XXzgYqiVpJxqt98Aak1SfatcL',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiekNGd01MVjJzQXowNktrRlhOdUlHU3pReWVUVzhxTGltSjBuam1LMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9sb2NhbC5zaG9wLmNvbS9hZG1pbi9jYXRlZ29yeS9lZGl0LzEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODUwMjA2ODtzOjE6ImMiO2k6MTQ3ODQ5OTY3MztzOjE6ImwiO3M6MToiMCI7fX0=',1478502068),('pqAqp5kZQYo1WYb8fh6MM2cmDOKp1hhNxSpGiGYa',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUmFoY1RHM0JmWGFldWdGSUVzS1pMY1M3YURyV1JzZE0xTmp2Tno1MCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vc3VwcGxpZXIvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODYwNTI3NjtzOjE6ImMiO2k6MTQ3ODU5OTgzODtzOjE6ImwiO3M6MToiMCI7fX0=',1478605276),('qISCs8RGMLKm4LBrohNR8NdskpW9GJMBpTvDgxV0',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWUc3TGQzcTJmY0JuMHhpWnNYVEdWbkJYSGdRQjBSRXdLY1hDSlpWbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbC5zaG9wLmNvbSI7fXM6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDc4NTk5ODM4O3M6MToiYyI7aToxNDc4NTk5ODM4O3M6MToibCI7czoxOiIwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1478599838);
 
 /*Table structure for table `shop_category` */
 
@@ -509,21 +509,22 @@ CREATE TABLE `shop_supplier` (
   `phone` varchar(32) DEFAULT NULL,
   `fax` varchar(32) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL,
   `payment_method` tinyint(1) DEFAULT NULL,
   `discount_type` tinyint(1) DEFAULT NULL,
+  `discount_available` decimal(15,4) DEFAULT NULL,
   `type_goods` tinyint(1) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
-  `discount_available` decimal(15,4) DEFAULT NULL,
-  `current_order` int(11) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_supplier` */
+
+insert  into `shop_supplier`(`id`,`company_name`,`contact_name`,`contact_title`,`address`,`country_id`,`city_id`,`district_id`,`phone`,`fax`,`email`,`payment_method`,`discount_type`,`discount_available`,`type_goods`,`notes`,`order`,`url`,`logo`,`created_at`,`updated_at`) values (1,'Giay VN','Vinh','leader','27 Le Thi Hong, phuong 17, Go Vap',1,2,3,'907403513','907403513','quangvinhit2007@gmail.com',1,1,10.0000,1,'0',0,'0','0','2016-11-08 11:41:16','2016-11-08 11:41:16');
 
 /*Table structure for table `shop_tax_class` */
 

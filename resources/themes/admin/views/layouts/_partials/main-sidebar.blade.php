@@ -58,8 +58,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coupon</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Event</a></li>
+                    <li><a href="{{route('admin.cpevent.index')}}"><i class="fa fa-circle-o"></i> Coupon</a></li>
+                    <li><a href="{{route('admin.cpcode.index')}}"><i class="fa fa-circle-o"></i> Event</a></li>
                 </ul>
             </li>
             <li class="treeview">

@@ -13,6 +13,7 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
         <div class="box-body">
             {{ Form::open(['route' => 'admin.product.store', 'files' => true]) }}
+                {{ Form::hidden('id', $model->id) }}
                 <div class="form-group">
                     {{ Form::label(null, 'Firstname') }}
                     {{ Form::text('firstname', $model->firstname,['class' => 'form-control'])}}

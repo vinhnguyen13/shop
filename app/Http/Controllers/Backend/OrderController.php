@@ -7,7 +7,6 @@
  */
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Backend\ShopOrder;
 use App\Models\Backend\ShopProduct;
 use Illuminate\Http\Request;
