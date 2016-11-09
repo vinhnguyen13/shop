@@ -14,6 +14,20 @@ class ShopProduct extends Model
             'category_id' => 'required',
             'quantity' => 'required',
             'price' => 'required',
+            'points' => 'numeric|min:0',
         ];
+    }
+
+    protected static function boot() {
+        parent::boot();
+        static::saving(function($model) {
+            foreach($model->attributes as $key => $value) {
+                if($value === '') {
+                    unset($model->attributes[$key]);
+//                    $model->{$key} = null;
+                }
+            }
+            
+        });
     }
 }

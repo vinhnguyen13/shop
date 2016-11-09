@@ -47,12 +47,7 @@ class ShipperController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        unset($input['_token']);
-        $attributes = [];
-        if(!empty($input['id'])){
-            $attributes = ['id'=>$input['id']];
-        }
-        $return = app(ShopShipper::class)->updateOrCreate($attributes, $input);
+        $return = app(ShopShipper::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
             return Redirect::route('admin.shipper.index');
         }else{

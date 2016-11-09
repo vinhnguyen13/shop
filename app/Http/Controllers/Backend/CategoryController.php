@@ -42,15 +42,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        unset($input['_token']);
-        $attributes = [];
-        if(!empty($input['id'])){
-            $attributes = ['id'=>$input['id']];
-        }
-        if(empty($input['order'])){
-            $input['order'] = 0;
-        }
-        $return = app(ShopCategory::class)->updateOrCreate($attributes, $input);
+        $return = app(ShopCategory::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
             return Redirect::route('admin.category.index');
         }else{
