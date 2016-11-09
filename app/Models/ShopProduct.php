@@ -8,6 +8,19 @@ class ShopProduct extends Model
 {
     protected $table = 'shop_product';
 
+    protected static function boot() {
+        parent::boot();
+        static::saving(function($model) {
+            foreach($model->attributes as $key => $value) {
+                if($value === '') {
+                    unset($model->attributes[$key]);
+//                    $model->{$key} = null;
+                }
+            }
+
+        });
+    }
+
     public function rules()
     {
         return [
@@ -18,16 +31,4 @@ class ShopProduct extends Model
         ];
     }
 
-    protected static function boot() {
-        parent::boot();
-        static::saving(function($model) {
-            foreach($model->attributes as $key => $value) {
-                if($value === '') {
-                    unset($model->attributes[$key]);
-//                    $model->{$key} = null;
-                }
-            }
-            
-        });
-    }
 }
