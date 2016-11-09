@@ -12,6 +12,15 @@ $isNewRecord = !empty($model->id) ? false : true;
             <h3 class="box-title"><?php echo $isNewRecord ? "Create" : "Edit"?> Product</h3>
         </div>
         <div class="box-body">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
             {{ Form::open(['route' => 'admin.product.store', 'files' => true]) }}
                 {{ Form::hidden('id', $model->id) }}
 
@@ -177,7 +186,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                         <div class="tab-pane" id="tab_6">
                             <div class="form-group">
                                 {{ Form::label(null, 'Image') }}
-                                {{ Form::file('image', ['url' => route('admin.product.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                                {{ Form::file('image', ['url' => route('admin.upload', ['type'=>'product']), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
                             </div>
                         </div>
                     </div>

@@ -27,6 +27,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function rules()
+    {
+        return [
+            'email' => 'required|email|unique:user,email,'.$this->id,
+        ];
+    }
     /**
      * @param $input
      */

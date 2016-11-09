@@ -25,6 +25,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          * Default
          */
         Route::get('/', ['uses' => 'HomeController@index', 'as'=>'admin.home.index'])->middleware(['auth']);
+        /*Upload*/
+        Route::post('/upload/{type}', ['uses' => 'HomeController@upload', 'as' => 'admin.upload']);
+        Route::delete('/upload/{type}/delete-temp-file', ['uses' => 'HomeController@deleteTempFile', 'as' => 'admin.deleteTempFile']);
+        Route::delete('/upload/{type}/delete-file', ['uses' => 'ProductController@deleteFile', 'as' => 'admin.deleteFile']);
         /*
          * User
          */
@@ -34,9 +38,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/user/edit/{id}', ['uses' => 'UserController@edit', 'as'=>'admin.user.edit'])/*->middleware('can:update,App\Modules\Backend\Models\User')*/;
         Route::get('/user/delete/{id}', ['uses' => 'UserController@delete', 'as'=>'admin.user.delete']);
         Route::get('/user/show/{id}', ['uses' => 'UserController@show', 'as'=>'admin.user.show']);
-        Route::delete('/user/delete-file', ['uses' => 'UserController@deleteFile', 'as' => 'admin.user.deleteFile']);
-        Route::post('/user/upload', ['uses' => 'UserController@uploadAvatar', 'as' => 'admin.user.upload']);
-        Route::delete('/user/delete-temp-file', ['uses' => 'UserController@deleteTempFile', 'as' => 'admin.user.deleteTempFile']);
         /*
          * Categories
          */

@@ -10,9 +10,9 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Profile;
 use App\Models\Backend\User;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Input;
 use Storage;
-use Image;
 use Redirect;
 
 class UserController extends Controller

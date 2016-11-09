@@ -11,6 +11,8 @@ use App\Models\Backend\ShopProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Image;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -43,16 +45,16 @@ class ProductController extends Controller
     {
         $input = Input::all();
         unset($input['_token']);
+        $attributes = [];
         if(!empty($input['id'])){
-            $attributes = ['id'=>$input['id']];
-        }else{
             $attributes = ['id'=>$input['id']];
         }
         $return = app(ShopProduct::class)->updateOrCreate($attributes, $input);
         if(!empty($return->id)){
             return Redirect::route('admin.product.index');
         }else{
-            return Redirect::back();
+            return Redirect::back()->withErrors($return);
         }
     }
+
 }

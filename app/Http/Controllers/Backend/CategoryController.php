@@ -43,9 +43,8 @@ class CategoryController extends Controller
     {
         $input = Input::all();
         unset($input['_token']);
+        $attributes = [];
         if(!empty($input['id'])){
-            $attributes = ['id'=>$input['id']];
-        }else{
             $attributes = ['id'=>$input['id']];
         }
         if(empty($input['order'])){
