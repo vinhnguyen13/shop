@@ -43,6 +43,38 @@ class ShopProduct extends Model
         ];
     }
 
+    /**
+     * Create or update a related record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        $instance = $this->firstOrNew($attributes);
+        $instance->fill($values);
+        $validate = $instance->validate($instance->attributes, $instance->rules());
+        if (!empty($values['images'])) {
+            $instance->saveImages($values['images']);
+        }else{
+            if (empty($values['imagesReal'])) {
+                $instance->attributes['image'] = null;
+                $instance->attributes['folder'] = null;
+            }
+        }
+        if($validate->passes()){
+            $instance->save();
+            return $instance;
+        }else{
+            return $validate->getMessageBag();
+        }
+    }
+
+    /**
+     * @param null $folder
+     * @return array
+     */
     public function propertyMedias($folder = null)
     {
         $sizes = [
@@ -50,26 +82,35 @@ class ShopProduct extends Model
             'medium' => [480, 360, 'crop'],
             'thumb' => [240, 180, 'crop'],
         ];
-        if(empty($folder)){
+        if (empty($folder)) {
             $folder = uniqid();
         }
         return [
-            'sizes'=>$sizes,
-            'folderTmp'=>$folder,
-            'pathReal'=>app(UploadMedia::class)->getPathDay(self::uploadFolder.DS),
-            'pathTmp'=>app(UploadMedia::class)->getPathDay(self::uploadFolder.DS.'temp'.DS.$folder.DS),
+            'sizes' => $sizes,
+            'folderTmp' => $folder,
+            'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
+            'pathTmpNotDay' => self::uploadFolder . DS . 'temp' . DS . $folder . DS,
+            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . 'temp' . DS . $folder . DS),
         ];
     }
 
+    /**
+     * @param $images
+     */
     public function saveImages($images)
     {
         if ($images) {
-            $image = $images[0];
-            $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder.DS);
-            $path = pathinfo($image);
-            $this->attributes['image'] = $path['basename'];
-            $this->attributes['folder'] = $newPath;
-            app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
+            foreach($images as $image) {
+                if (app(ImageService::class)->exists($image)) {
+                    $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
+                    $path = pathinfo($image);
+                    $this->attributes['image'] = $path['basename'];
+                    $this->attributes['folder'] = $newPath;
+                    app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
+                    $folders = explode(DS, $path['dirname']);
+                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . 'temp' . DS . $folders[2]);
+                }
+            }
         }
     }
 

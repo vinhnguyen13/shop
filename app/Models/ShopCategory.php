@@ -32,25 +32,6 @@ class ShopCategory extends Model
         });
     }
 
-    public function propertyMedias($folder = null)
-    {
-        $sizes = [
-            'large' => [960, 720, 'resize'],
-            'medium' => [480, 360, 'crop'],
-            'thumb' => [240, 180, 'crop'],
-        ];
-        if (empty($folder)) {
-            $folder = uniqid();
-        }
-        return [
-            'sizes' => $sizes,
-            'folderTmp' => $folder,
-            'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
-            'pathTmpNotDay' => self::uploadFolder . DS . 'temp' . DS . $folder . DS,
-            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . 'temp' . DS . $folder . DS),
-        ];
-    }
-
     /**
      * Create or update a related record matching the attributes, and fill it with values.
      *
@@ -72,6 +53,29 @@ class ShopCategory extends Model
         }
         $instance->save();
         return $instance;
+    }
+
+    /**
+     * @param null $folder
+     * @return array
+     */
+    public function propertyMedias($folder = null)
+    {
+        $sizes = [
+            'large' => [960, 720, 'resize'],
+            'medium' => [480, 360, 'crop'],
+            'thumb' => [240, 180, 'crop'],
+        ];
+        if (empty($folder)) {
+            $folder = uniqid();
+        }
+        return [
+            'sizes' => $sizes,
+            'folderTmp' => $folder,
+            'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
+            'pathTmpNotDay' => self::uploadFolder . DS . 'temp' . DS . $folder . DS,
+            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . 'temp' . DS . $folder . DS),
+        ];
     }
 
     /**

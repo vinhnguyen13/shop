@@ -192,13 +192,6 @@ $isNewRecord = !empty($model->id) ? false : true;
                     </div>
                     <!-- /.tab-content -->
                 </div>
-
-
-
-
-
-
-
                 <div class="form-group">
                     {{ Form::submit('Save', array('class' => 'btn btn-primary btn-flat')) }}
                 </div>
