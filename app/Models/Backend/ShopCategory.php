@@ -30,23 +30,4 @@ class ShopCategory extends MainShopCategory
         ]);
         return $grid;
     }
-
-    /**
-     * Create or update a related record matching the attributes, and fill it with values.
-     *
-     * @param  array $attributes
-     * @param  array $values
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function updateOrCreate(array $attributes, array $values = [])
-    {
-        $instance = $this->firstOrNew($attributes);
-        $instance->fill($values);
-        if (!empty($values['images'])) {
-            $instance->saveImages($values['images']);
-        }
-        $instance->save();
-        return $instance;
-    }
-
 }

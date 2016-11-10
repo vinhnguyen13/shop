@@ -36,15 +36,6 @@ class HomeController extends Controller
         return ['files' => 'upload failed'];
     }
 
-    public function deleteTempFile(Request $request, $type)
-    {
-        $response = app(UploadMedia::class)->deleteTempFile($request, $type);
-        if (!empty($response)) {
-            return $response;
-        }
-        return [];
-    }
-
     public function deleteFile(Request $request, $type)
     {
         $response = app(UploadMedia::class)->deleteFile($request, $type);
@@ -53,4 +44,5 @@ class HomeController extends Controller
         }
         return [];
     }
+
 }

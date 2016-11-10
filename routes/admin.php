@@ -27,8 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/', ['uses' => 'HomeController@index', 'as'=>'admin.home.index'])->middleware(['auth']);
         /*Upload*/
         Route::post('/upload/{type}', ['uses' => 'HomeController@upload', 'as' => 'admin.upload']);
-        Route::delete('/upload/{type}/delete-temp-file', ['uses' => 'HomeController@deleteTempFile', 'as' => 'admin.deleteTempFile']);
-        Route::delete('/upload/{type}/delete-file', ['uses' => 'ProductController@deleteFile', 'as' => 'admin.deleteFile']);
+        Route::delete('/upload/{type}/delete-file', ['uses' => 'HomeController@deleteFile', 'as' => 'admin.deleteFile']);
         /*
          * User
          */

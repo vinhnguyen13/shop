@@ -113,6 +113,12 @@ class ImageService
                 $this->delete($path . DIRECTORY_SEPARATOR . self::folder($size) . DIRECTORY_SEPARATOR . $name);
             }
         }
+        return true;
+    }
+
+    public function deleteDirectory($path)
+    {
+        return $this->disk->deleteDirectory($path);
     }
 
     /**
@@ -160,5 +166,10 @@ class ImageService
             $this->disk->delete($path);
         }
         return false;
+    }
+
+    public function exists($path)
+    {
+        return $this->disk->exists($path);
     }
 }

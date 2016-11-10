@@ -8,9 +8,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Backend\ShopCategory;
+use App\Services\ImageService;
+use App\Services\UploadMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Storage;
 
 class CategoryController extends Controller
 {
@@ -33,9 +36,22 @@ class CategoryController extends Controller
     public function edit(Request $request, $id)
     {
         $model = ShopCategory::find($id);
-        if(!empty($model))
-            return view('category.form', compact('model'));
-        else
+        if(!empty($model)) {
+            if($model->image && app(ImageService::class)->exists($model->folder .DS. $model->image)) {
+                $image[] = app(UploadMedia::class)->loadImages(
+                    $model->image,
+                    Storage::url($model->folder .DS. $model->image),
+                    route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $model->image, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_REAL]),
+                    Storage::url($model->folder .DS. app(ImageService::class)->folder('thumb') . DS . $model->image),
+                    'DELETE',
+                    'imagesReal[]',
+                    $model->folder .DS. $model->image
+                );
+            }else{
+                $image = null;
+            }
+            return view('category.form', compact('model', 'image'));
+        }else
             return abort(404, 'Not Found');
     }
 

@@ -18,6 +18,8 @@ class UploadMedia
 {
     const UPLOAD_PRODUCT = 'product';
     const UPLOAD_CATEGORY = 'category';
+    const DELETE_TMP = 'tmp';
+    const DELETE_REAL = 'real';
     /**
      * @param null $path
      * @return null|string
@@ -65,43 +67,17 @@ class UploadMedia
             if (!empty($pathFolder) && $file = Input::file('image')) {
                 $name = uniqid() . '.' . $file->getClientOriginalExtension();
                 $imageService->putWithSize($pathFolder, $file, $name);
-                $response = [
-                    'name' => $name,
-                    'url' => Storage::url($pathFolder ."/". $name),
-                    'deleteUrl' => route('admin.deleteTempFile', ['_token' => csrf_token(), 'name' => $name, 'type' => $type, 'folder' => $folder]),
-                    'thumbnailUrl' => Storage::url($pathFolder ."/". $imageService->folder('thumb') . "/" . $name),
-                    'deleteType' => 'DELETE',
-                    'input' => [
-                        'name' => 'images[]',
-                        'value' => $pathFolder ."/". $name
-                    ]
-                ];
-
-                return ['files' => [$response]];
+                $image[] = $this->loadImages(
+                    $name,
+                    Storage::url($pathFolder .DS. $name),
+                    route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_TMP, 'folder' => $folder]),
+                    Storage::url($pathFolder .DS. $imageService->folder('thumb') . DS . $name),
+                    'DELETE',
+                    'images[]',
+                    $pathFolder .DS. $name
+                );
+                return ['files' => $image];
             }
-        }
-        return false;
-    }
-
-    /**
-     * @param $request
-     * @param $type
-     * @return array
-     */
-    public function deleteTempFile($request, $type)
-    {
-        if (!empty($type)) {
-            $folder = $request->get('folder');
-            $propertyMedia = $this->getPropertyMediaWithType($type, $folder);
-            $pathFolder = $propertyMedia['pathTmp'];
-            $imageService = app(ImageService::class);
-            $imageService->setSize($propertyMedia['sizes']);
-            $name = Input::get('name');
-            if (!empty($pathFolder) && $name) {
-                $res = $imageService->deleteWithSize($pathFolder, $name);
-                return ['delete_file' => $res];
-            }
-            return [];
         }
         return false;
     }
@@ -115,18 +91,53 @@ class UploadMedia
     {
         if (!empty($type)) {
             $folder = $request->get('folder');
+            $name = $request->get('name');
+            $delete = $request->get('delete');
             $propertyMedia = $this->getPropertyMediaWithType($type, $folder);
-            $pathFolder = $propertyMedia['pathReal'];
             $imageService = app(ImageService::class);
             $imageService->setSize($propertyMedia['sizes']);
-            $name = Input::get('name');
-            if (!empty($pathFolder) && $name) {
-                $res = $imageService->deleteWithSize($pathFolder, $name);
-                return ['delete_file' => $res];
+            if($delete == self::DELETE_TMP){
+                $pathFolder = $propertyMedia['pathTmpNotDay'];
+                if (!empty($pathFolder) && $name) {
+                    $res = $imageService->deleteDirectory($pathFolder);
+                    return ['delete_file' => $res];
+                }
+            }elseif($delete == self::DELETE_REAL){
+                $pathFolder = $propertyMedia['pathReal'];
+                if (!empty($pathFolder) && $name) {
+                    $res = $imageService->deleteWithSize($pathFolder, $name);
+                    return ['delete_file' => $res];
+                }
             }
             return [];
         }
         return false;
+    }
+
+    /**
+     * @param $name
+     * @param $url
+     * @param $deleteUrl
+     * @param $thumbnailUrl
+     * @param string $deleteType
+     * @param string $input_name
+     * @param $input_value
+     * @return array
+     */
+    public function loadImages($name, $url, $deleteUrl, $thumbnailUrl, $deleteType = 'DELETE', $input_name = 'images[]', $input_value)
+    {
+        $return = [
+            'name' => $name,
+            'url' => $url,
+            'deleteUrl' => $deleteUrl,
+            'thumbnailUrl' => $thumbnailUrl,
+            'deleteType' => $deleteType,
+            'input' => [
+                'name' => $input_name,
+                'value' => $input_value
+            ]
+        ];
+        return $return;
     }
 
 
