@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class ShopShipper extends Model
 {
     protected $table = 'shop_shipper';
-
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
     protected static function boot() {
         parent::boot();
         static::saving(function($model) {

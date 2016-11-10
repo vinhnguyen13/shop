@@ -151,7 +151,7 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                             <div class="form-group">
                                 {{ Form::label(null, 'Status') }}
-                                {{ Form::text('status', $model->status,['class' => 'form-control'])}}
+                                {{ Form::select('status', \App\Helpers\AppHelper::statusLabel(), $model->status,['class' => 'form-control'])}}
                             </div>
                         </div>
                         <div class="tab-pane" id="tab_3">
@@ -186,7 +186,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                         <div class="tab-pane" id="tab_6">
                             <div class="form-group">
                                 {{ Form::label(null, 'Image') }}
-                                {{ Form::file('image', ['url' => route('admin.upload', ['type'=>'product']), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                                {{ Form::file('image', ['url' => route('admin.upload', ['type'=>\App\Services\UploadMedia::UPLOAD_PRODUCT]), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
                             </div>
                         </div>
                     </div>

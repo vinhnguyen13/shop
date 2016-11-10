@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 {{ Form::label('status', 'Status') }}
-                <div>{{ \App\Models\Backend\CmsShow::statusLabel($cpevent->status) }}</div>
+                <div>{{ \App\Helpers\AppHelper::statusLabel($cpevent->status) }}</div>
             </div>
 
         </div>

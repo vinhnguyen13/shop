@@ -26,12 +26,12 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                 <div class="form-group">
                     {{ Form::label(null, 'Image') }}
-                    {{ Form::file('avatar', ['url' => route('admin.category.index'), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                    {{ Form::file('image', ['url' => route('admin.upload', ['type'=>\App\Services\UploadMedia::UPLOAD_CATEGORY]), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
                 </div>
 
                 <div class="form-group">
                     {{ Form::label(null, 'Status') }}
-                    {{ Form::select('status', \App\Models\Backend\ShopCategory::statusLabel(), $model->status,['class' => 'form-control'])}}
+                    {{ Form::select('status', \App\Helpers\AppHelper::statusLabel(), $model->status,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">

@@ -58,7 +58,7 @@
 
             <div class="form-group">
                 {{ Form::label('status', 'Status') }}
-                {{ Form::select('status', \App\Models\Backend\CmsShow::statusLabel(), $cpevent->status, ['class' => 'form-control'])}}
+                {{ Form::select('status', \App\Helpers\AppHelper::statusLabel(), $cpevent->status, ['class' => 'form-control'])}}
             </div>
 
             <div class="form-group">

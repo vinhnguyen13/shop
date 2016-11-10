@@ -6,7 +6,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
-
+define('DS', DIRECTORY_SEPARATOR);
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

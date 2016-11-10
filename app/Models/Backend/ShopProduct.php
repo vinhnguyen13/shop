@@ -4,16 +4,10 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopProduct as MainShopProduct;
-use App\Models\Traits\HasValidator;
 use DB;
 
 class ShopProduct extends MainShopProduct
 {
-    use HasValidator;
-    protected $fillable = ['category_id', 'supplier_id', 'sku', 'name', 'description', 'location', 'quantity', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'subtract', 'minimum', 'order', 'status'];
-
-    const uploadFolder = 'products';
-
     public function gridIndex(){
         $query = DB::table('shop_product AS a');
         $grid = new Grid($query, [
