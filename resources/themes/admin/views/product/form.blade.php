@@ -180,8 +180,10 @@ $isNewRecord = !empty($model->id) ? false : true;
                             </div>
                         </div>
                         <div class="tab-pane" id="tab_4">
+                            @include('product._partials.form-discount')
                         </div>
                         <div class="tab-pane" id="tab_5">
+                            @include('product._partials.form-special')
                         </div>
                         <div class="tab-pane" id="tab_6">
                             <div class="form-group">

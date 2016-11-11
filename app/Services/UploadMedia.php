@@ -20,6 +20,7 @@ class UploadMedia
     const UPLOAD_CATEGORY = 'category';
     const DELETE_TMP = 'tmp';
     const DELETE_REAL = 'real';
+    const TEMP_FOLDER = 'temp';
     /**
      * @param null $path
      * @return null|string
@@ -73,7 +74,7 @@ class UploadMedia
                     route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_TMP, 'folder' => $folder]),
                     Storage::url($pathFolder .DS. $imageService->folder('thumb') . DS . $name),
                     'DELETE',
-                    ['name'=>'images[]', 'value'=>$pathFolder .DS. $name],
+                    ['name'=>'images['.$name.'][]', 'value'=>$pathFolder .DS. $name],
                     ['name'=>'orderImage['.$name.'][]', 'value'=>'']
 
                 );

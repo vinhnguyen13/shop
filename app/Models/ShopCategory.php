@@ -73,8 +73,8 @@ class ShopCategory extends Model
             'sizes' => $sizes,
             'folderTmp' => $folder,
             'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
-            'pathTmpNotDay' => self::uploadFolder . DS . 'temp' . DS . $folder . DS,
-            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . 'temp' . DS . $folder . DS),
+            'pathTmpNotDay' => self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS,
+            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS),
         ];
     }
 
@@ -92,7 +92,7 @@ class ShopCategory extends Model
                 $this->attributes['folder'] = $newPath;
                 app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
                 $folders = explode(DS, $path['dirname']);
-                app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . 'temp' . DS . $folders[2]);
+                app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
             }
         }
     }

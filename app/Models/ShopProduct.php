@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\HasValidator;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopProduct extends Model
@@ -20,11 +21,12 @@ class ShopProduct extends Model
      *
      * @return void
      */
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
-        static::saving(function($model) {
-            foreach($model->attributes as $key => $value) {
-                if($value === '') {
+        static::saving(function ($model) {
+            foreach ($model->attributes as $key => $value) {
+                if ($value === '') {
                     unset($model->attributes[$key]);
 //                    $model->{$key} = null;
                 }
@@ -46,8 +48,8 @@ class ShopProduct extends Model
     /**
      * Create or update a related record matching the attributes, and fill it with values.
      *
-     * @param  array  $attributes
-     * @param  array  $values
+     * @param  array $attributes
+     * @param  array $values
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function updateOrCreate(array $attributes, array $values = [])
@@ -55,40 +57,59 @@ class ShopProduct extends Model
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
         $validate = $instance->validate($instance->attributes, $instance->rules());
-        if (!empty($values['images'])) {
-            $instance->saveImages($values['images']);
-        }else{
-            if (empty($values['imagesReal'])) {
-                $instance->attributes['image'] = null;
-                $instance->attributes['folder'] = null;
-            }
-        }
-        if($validate->passes()){
+        $instance->processingImages($values);
+        if ($validate->passes()) {
             $instance->save();
             return $instance;
-        }else{
+        } else {
             return $validate->getMessageBag();
         }
     }
+
     /**
      * @param $images
      */
-    public function saveImages($images)
+    public function processingImages($values)
     {
-        if ($images) {
-            foreach($images as $image) {
+        if (!empty($values['images'])) {
+            foreach ($values['images'] as $key => $image) {
+                $image = $image[0];
                 if (app(ImageService::class)->exists($image)) {
                     $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
                     $path = pathinfo($image);
-                    $this->attributes['image'] = $path['basename'];
-                    $this->attributes['folder'] = $newPath;
                     app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
                     $folders = explode(DS, $path['dirname']);
-                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . 'temp' . DS . $folders[2]);
+                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
+                    $productImage = new ShopProductImage();
+                    $productImage->fill([
+                        'product_id' => $this->id,
+                        'image' => $path['basename'],
+                        'folder' => str_replace(DS . UploadMedia::TEMP_FOLDER . DS . $folders[2], '', $path['dirname']),
+                        'order' => !empty($values['orderImage'][$key][0]) ? $values['orderImage'][$key][0] : 0,
+                        'uploaded_at' => Carbon::now(),
+                    ])->save();
                 }
             }
+        } else {
+
+        }
+        if (!empty($values['orderImage'])) {
+            foreach ($values['orderImage'] as $key => $value) {
+                $productImage = ShopProductImage::query()->where(['id' => $key])->first();
+                $productImage->attributes['order'] = $value[0];
+                $productImage->save();
+            }
+        }
+        $imageDefault = ShopProductImage::query()->where(['product_id' => $this->id])->orderBy('order', 'asc')->first();
+        if (!empty($imageDefault)) {
+            $this->attributes['image'] = $imageDefault->image;
+            $this->attributes['folder'] = $imageDefault->image;
+        } else {
+            $this->attributes['image'] = null;
+            $this->attributes['folder'] = null;
         }
     }
+
     /**
      * @param null $folder
      * @return array
@@ -107,11 +128,10 @@ class ShopProduct extends Model
             'sizes' => $sizes,
             'folderTmp' => $folder,
             'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
-            'pathTmpNotDay' => self::uploadFolder . DS . 'temp' . DS . $folder . DS,
-            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . 'temp' . DS . $folder . DS),
+            'pathTmpNotDay' => self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS,
+            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS),
         ];
     }
-
 
 
 }

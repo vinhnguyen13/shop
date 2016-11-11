@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopProduct as MainShopProduct;
+use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
@@ -43,11 +44,15 @@ class ShopProduct extends MainShopProduct
                     route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_REAL]),
                     Storage::url($folder .DS. app(ImageService::class)->folder('thumb') . DS . $name),
                     'DELETE',
-                    ['name'=>'imagesReal[]', 'value'=>$folder .DS. $name],
+                    ['name'=>'imagesReal['.$image->id.'][]', 'value'=>$folder .DS. $name],
                     ['name'=>'orderImage['.$image->id.'][]', 'value'=>$image->order]
                 );
             }
         }
         return $imageList;
+    }
+
+    public function getDiscountToForm(){
+        $discounts = ShopProductDiscount::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
     }
 }
