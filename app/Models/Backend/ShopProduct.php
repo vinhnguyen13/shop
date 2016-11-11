@@ -6,6 +6,7 @@ use App\Helpers\Grid;
 use App\Models\ShopProduct as MainShopProduct;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
+use App\Models\ShopProductSpecial;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
 use Image;
@@ -54,5 +55,11 @@ class ShopProduct extends MainShopProduct
 
     public function getDiscountToForm(){
         $discounts = ShopProductDiscount::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
+        return $discounts;
+    }
+
+    public function getSpecialToForm(){
+        $specials = ShopProductSpecial::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
+        return $specials;
     }
 }

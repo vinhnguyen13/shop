@@ -35,7 +35,9 @@ class ProductController extends Controller
         $model = ShopProduct::find($id);
         if(!empty($model)) {
             $image = $model->getImagesToForm();
-            return view('product.form', compact('model', 'image'));
+            $discounts = $model->getDiscountToForm();
+            $specials = $model->getSpecialToForm();
+            return view('product.form', compact('model', 'image', 'discounts', 'specials'));
         }else
             return abort(404, 'Not Found');
     }

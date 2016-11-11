@@ -121,7 +121,7 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('K1qGE4vAh8HUNAJ91cgp8GBOUqNmGVNeXeQp6pLE',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiOTlFQVVMVEI5eDJESjBrZlpyR2VJdWhKSTFNRWhTY3loV2ROYUt0bCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vcHJvZHVjdC9lZGl0LzI4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODg1NjQ4ODtzOjE6ImMiO2k6MTQ3ODg0MjI3MjtzOjE6ImwiO3M6MToiMCI7fX0=',1478856488);
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('K1qGE4vAh8HUNAJ91cgp8GBOUqNmGVNeXeQp6pLE',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiOTlFQVVMVEI5eDJESjBrZlpyR2VJdWhKSTFNRWhTY3loV2ROYUt0bCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vcHJvZHVjdC9lZGl0LzI4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODg2NjcyODtzOjE6ImMiO2k6MTQ3ODg0MjI3MjtzOjE6ImwiO3M6MToiMCI7fX0=',1478866729);
 
 /*Table structure for table `shop_category` */
 
@@ -395,11 +395,11 @@ CREATE TABLE `shop_product_discount` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=448 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_product_discount` */
 
-insert  into `shop_product_discount`(`id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end`) values (438,42,1,10,1,88.0000,'0000-00-00','0000-00-00'),(439,42,1,20,1,77.0000,'0000-00-00','0000-00-00'),(440,42,1,30,1,66.0000,'0000-00-00','0000-00-00'),(445,40,1,2,1,90.0000,'2015-11-10','2015-11-13');
+insert  into `shop_product_discount`(`id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end`) values (438,42,1,10,1,88.0000,'0000-00-00','0000-00-00'),(439,42,1,20,1,77.0000,'0000-00-00','0000-00-00'),(440,42,1,30,1,66.0000,'0000-00-00','0000-00-00'),(445,40,1,2,1,90.0000,'2015-11-10','2015-11-13'),(446,28,1,10,1,88.0000,'2016-11-23','2016-11-24'),(447,28,1,10,1,88.0000,'2016-11-07','2016-11-10');
 
 /*Table structure for table `shop_product_image` */
 
@@ -441,20 +441,20 @@ insert  into `shop_product_reward`(`id`,`product_id`,`customer_group_id`,`points
 DROP TABLE IF EXISTS `shop_product_special`;
 
 CREATE TABLE `shop_product_special` (
-  `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
   `date_end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`product_special_id`),
+  PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_product_special` */
 
-insert  into `shop_product_special`(`product_special_id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end`) values (419,42,1,1,90.0000,'0000-00-00','0000-00-00'),(438,30,1,1,80.0000,'0000-00-00','0000-00-00'),(439,30,1,2,90.0000,'0000-00-00','0000-00-00');
+insert  into `shop_product_special`(`id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end`) values (419,42,1,1,90.0000,'0000-00-00','0000-00-00'),(438,30,1,1,80.0000,'0000-00-00','0000-00-00'),(439,30,1,2,90.0000,'0000-00-00','0000-00-00');
 
 /*Table structure for table `shop_shipper` */
 

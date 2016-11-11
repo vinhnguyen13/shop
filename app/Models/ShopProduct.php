@@ -58,6 +58,8 @@ class ShopProduct extends Model
         $instance->fill($values);
         $validate = $instance->validate($instance->attributes, $instance->rules());
         $instance->processingImages($values);
+        $instance->processingDiscount($values);
+        $instance->processingSpecial($values);
         if ($validate->passes()) {
             $instance->save();
             return $instance;
@@ -107,6 +109,70 @@ class ShopProduct extends Model
         } else {
             $this->attributes['image'] = null;
             $this->attributes['folder'] = null;
+        }
+    }
+
+    public function processingDiscount($values)
+    {
+        if (!empty($values['product_discount'])) {
+            foreach ($values['product_discount'] as $key => $value) {
+                $productDiscount = ShopProductDiscount::query()->where(['product_id'=>$this->id,
+                    'customer_group_id'=>$value['customer_group_id'],
+                    'price'=>$value['price'],
+                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
+                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d')]);
+                if(empty($productDiscount)){
+                    $productDiscount = new ShopProductDiscount();
+                }
+                $productDiscount->fill([
+                    'product_id'=>$this->id,
+                    'customer_group_id'=>$value['customer_group_id'],
+                    'quantity'=>$value['quantity'],
+                    'priority'=>$value['priority'],
+                    'price'=>$value['price'],
+                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
+                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d'),
+                ]);
+                $validate = $productDiscount->validate($productDiscount->attributes, $productDiscount->rules());
+                if ($validate->passes()) {
+                    $productDiscount->save();
+                    return $productDiscount;
+                } else {
+                    return $validate->getMessageBag();
+                }
+
+            }
+        }
+    }
+
+    public function processingSpecial($values)
+    {
+        if (!empty($values['product_special'])) {
+            foreach ($values['product_special'] as $key => $value) {
+                $productSpecial = ShopProductSpecial::query()->where(['product_id'=>$this->id,
+                    'customer_group_id'=>$value['customer_group_id'],
+                    'price'=>$value['price'],
+                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
+                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d')]);
+                if(empty($productSpecial)){
+                    $productSpecial = new ShopProductSpecial();
+                }
+                $productSpecial->fill([
+                    'product_id'=>$this->id,
+                    'customer_group_id'=>$value['customer_group_id'],
+                    'priority'=>$value['priority'],
+                    'price'=>$value['price'],
+                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
+                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d'),
+                ])->save();
+                $validate = $productSpecial->validate($productSpecial->attributes, $productSpecial->rules());
+                if ($validate->passes()) {
+                    $productSpecial->save();
+                    return $productSpecial;
+                } else {
+                    return $validate->getMessageBag();
+                }
+            }
         }
     }
 
