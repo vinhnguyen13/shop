@@ -204,3 +204,15 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
     </div>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
+@endpush
+@push('scripts')
+<script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $('.date').datepicker({
+        pickTime: false
+    });
+</script>
+@endpush
