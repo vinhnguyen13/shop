@@ -70,7 +70,25 @@ class ShopProduct extends Model
             return $validate->getMessageBag();
         }
     }
-
+    /**
+     * @param $images
+     */
+    public function saveImages($images)
+    {
+        if ($images) {
+            foreach($images as $image) {
+                if (app(ImageService::class)->exists($image)) {
+                    $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
+                    $path = pathinfo($image);
+                    $this->attributes['image'] = $path['basename'];
+                    $this->attributes['folder'] = $newPath;
+                    app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
+                    $folders = explode(DS, $path['dirname']);
+                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . 'temp' . DS . $folders[2]);
+                }
+            }
+        }
+    }
     /**
      * @param null $folder
      * @return array
@@ -94,24 +112,6 @@ class ShopProduct extends Model
         ];
     }
 
-    /**
-     * @param $images
-     */
-    public function saveImages($images)
-    {
-        if ($images) {
-            foreach($images as $image) {
-                if (app(ImageService::class)->exists($image)) {
-                    $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
-                    $path = pathinfo($image);
-                    $this->attributes['image'] = $path['basename'];
-                    $this->attributes['folder'] = $newPath;
-                    app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
-                    $folders = explode(DS, $path['dirname']);
-                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . 'temp' . DS . $folders[2]);
-                }
-            }
-        }
-    }
+
 
 }

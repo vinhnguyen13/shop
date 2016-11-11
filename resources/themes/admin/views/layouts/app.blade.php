@@ -47,9 +47,9 @@
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.0
+            <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="https://www.metvuong.com">MetVuong.Com</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="/">vSoft</a>.</strong> All rights reserved.
     </footer>
     @include('layouts._partials.control-sidebar')
     <!-- Add the sidebar's background. This div must be placed

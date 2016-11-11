@@ -23,5 +23,8 @@
 				<span>Cancel</span>
 			</button>
 		{% } %}
+		{% if (file.order) { %}
+			<input type="text" name="{%=file.order.name%}" value="{%=file.order.value%}" placeholder="Order">
+		{% } %}
 	</li>
 {% } %}
