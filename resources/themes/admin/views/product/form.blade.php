@@ -47,7 +47,7 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                             <div class="form-group">
                                 {{ Form::label(null, 'Description') }}
-                                {{ Form::text('description', $model->description,['class' => 'form-control'])}}
+                                {{ Form::textarea('description', $model->description,['id'=>'content', 'class' => 'form-control'])}}
                             </div>
                         </div>
                         <div class="tab-pane" id="tab_2">
@@ -206,13 +206,19 @@ $isNewRecord = !empty($model->id) ? false : true;
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="/themes/admin/plugins/iCheck/all.css">
 @endpush
 @push('scripts')
-<script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-    $('.date').datepicker({
-        pickTime: false
-    });
-</script>
+    <script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="/rofilde-ckeditor/laravel-ckeditor/ckeditor.js"></script>
+    <script src="/themes/admin/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace( 'content' );
+        CKEDITOR.config.height = 500;
+
+        $('.date').datepicker({
+            pickTime: false
+        });
+    </script>
 @endpush
