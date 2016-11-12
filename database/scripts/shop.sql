@@ -121,7 +121,7 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('K1qGE4vAh8HUNAJ91cgp8GBOUqNmGVNeXeQp6pLE',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiOTlFQVVMVEI5eDJESjBrZlpyR2VJdWhKSTFNRWhTY3loV2ROYUt0bCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vbG9jYWwuc2hvcC5jb20vYWRtaW4vcHJvZHVjdC9lZGl0LzI4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODg2NjcyODtzOjE6ImMiO2k6MTQ3ODg0MjI3MjtzOjE6ImwiO3M6MToiMCI7fX0=',1478866729);
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('78wtffmrLQQdg42ayjiyudoa8Ai7EKb1HDTdFwdY',1,'127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiemMzOGVCTmRtbWo3ZEQ5SlMwZUpsZUdmQVZwR0VqcGpYZXFCS0Y4MSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9sb2NhbC5zaG9wLmNvbS9hZG1pbi9wcm9kdWN0L2VkaXQvMjgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ3ODk0MzAzMjtzOjE6ImMiO2k6MTQ3ODkyNDUxNztzOjE6ImwiO3M6MToiMCI7fX0=',1478943032);
 
 /*Table structure for table `shop_category` */
 
@@ -380,6 +380,19 @@ CREATE TABLE `shop_product` (
 
 insert  into `shop_product`(`id`,`category_id`,`supplier_id`,`sku`,`name`,`description`,`location`,`quantity`,`stock_status_id`,`image`,`folder`,`manufacturer_id`,`shipping`,`price`,`points`,`tax_class_id`,`date_available`,`weight`,`weight_class_id`,`length`,`width`,`height`,`length_class_id`,`subtract`,`minimum`,`order`,`status`,`viewed`,`created_at`,`updated_at`) values (28,1,0,'','Nike 1','','',939,1,'582450c8819b9.jpg','582450c8819b9.jpg',1,1,100.0000,200,1,'2009-02-03',146.40000000,2,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 16:06:50','2016-11-11 09:27:51'),(29,1,0,'','Nike 2',NULL,'',999,4,'catalog/demo/palm_treo_pro_1.jpg',NULL,1,1,279.9900,0,1,'2009-02-03',133.00000000,2,0.00000000,0.00000000,0.00000000,3,1,1,0,1,0,'2009-02-03 16:42:17','2011-09-30 01:06:08'),(30,1,0,'','Nike 3',NULL,'',7,4,'catalog/demo/canon_eos_5d_1.jpg',NULL,1,1,100.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 16:59:00','2011-09-30 01:05:23'),(31,2,0,'','Air Jordan 1',NULL,'',1000,4,'catalog/demo/nikon_d300_1.jpg',NULL,2,1,80.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,3,1,1,0,1,0,'2009-02-03 17:00:10','2011-09-30 01:06:00'),(32,2,0,'','Air Jordan 2',NULL,'',999,4,'catalog/demo/ipod_touch_1.jpg',NULL,2,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 17:07:26','2011-09-30 01:07:22'),(33,2,0,'','Air Jordan 3',NULL,'',999,4,'catalog/demo/samsung_syncmaster_941bw.jpg',NULL,2,1,200.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,1,'2009-02-03 17:08:31','2011-09-30 01:06:29'),(34,3,0,'','Adidas 1',NULL,'',1000,4,'catalog/demo/ipod_shuffle_1.jpg',NULL,3,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 18:07:54','2011-09-30 01:07:17'),(35,3,0,'','Adidas 2',NULL,'',1000,3,'',NULL,3,0,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 18:08:31','2011-09-30 01:06:17'),(36,3,0,'','Adidas 3',NULL,'',994,4,'catalog/demo/ipod_nano_1.jpg',NULL,3,0,100.0000,100,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 18:09:19','2011-09-30 01:07:12'),(40,3,0,'','Adidas 4',NULL,'',966,3,'catalog/demo/iphone_1.jpg',NULL,3,1,101.0000,0,1,'2009-02-03',10.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,12,'2009-02-03 21:07:12','2015-11-11 14:48:01'),(41,3,0,'','Adidas 5',NULL,'',977,3,'catalog/demo/imac_1.jpg',NULL,3,1,100.0000,0,1,'2009-02-03',5.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,0,1,0,'2009-02-03 21:07:26','2011-09-30 01:06:44'),(42,3,0,'','Adidas 6',NULL,'',990,3,'catalog/demo/apple_cinema_30.jpg',NULL,3,1,100.0000,400,1,'2009-02-04',12.50000000,1,1.00000000,2.00000000,3.00000000,1,1,2,0,1,3,'2009-02-03 21:07:37','2011-09-30 00:46:19'),(43,4,0,'','ASICS TIGER 1',NULL,'',929,3,'catalog/demo/macbook_1.jpg',NULL,4,0,500.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,3,'2009-02-03 21:07:49','2011-09-30 01:05:46'),(44,4,0,'','ASICS TIGER 2',NULL,'',1000,3,'catalog/demo/macbook_air_1.jpg',NULL,4,1,1000.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:00','2011-09-30 01:05:53'),(45,4,0,'','ASICS TIGER 3',NULL,'',998,3,'catalog/demo/macbook_pro_1.jpg',NULL,4,1,2000.0000,0,2,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:17','2011-09-15 22:22:01'),(46,5,0,'','CONVERSE 1',NULL,'',1000,3,'catalog/demo/sony_vaio_1.jpg',NULL,5,1,1000.0000,0,1,'2009-02-03',0.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-03 21:08:29','2011-09-30 01:06:39'),(47,5,0,'','CONVERSE 2',NULL,'',1000,3,'catalog/demo/hp_1.jpg',NULL,5,1,100.0000,400,1,'2009-02-03',1.00000000,1,0.00000000,0.00000000,0.00000000,1,0,1,0,1,0,'2009-02-03 21:08:40','2011-09-30 01:05:28'),(48,6,0,'','PUMA 1',NULL,'test 2',995,3,'catalog/demo/ipod_classic_1.jpg',NULL,6,1,100.0000,0,1,'2009-02-08',1.00000000,1,0.00000000,0.00000000,0.00000000,2,1,1,0,1,0,'2009-02-08 17:21:51','2011-09-30 01:07:06'),(49,6,0,'','PUMA 2',NULL,'',10,1,'catalog/demo/samsung_tab_1.jpg',NULL,6,1,199.9900,0,1,'2009-02-08',0.00000000,1,0.00000000,0.00000000,0.00000000,1,1,1,1,1,1,'2011-04-26 08:57:34','2016-11-03 11:13:38'),(50,0,0,NULL,'Nike 4',NULL,NULL,123,0,NULL,NULL,0,0,9000000.0000,0,0,NULL,0.00000000,0,0.00000000,0.00000000,0.00000000,0,1,1,0,0,0,'2016-11-09 11:44:31','2016-11-09 11:44:31');
 
+/*Table structure for table `shop_product_category` */
+
+DROP TABLE IF EXISTS `shop_product_category`;
+
+CREATE TABLE `shop_product_category` (
+  `product_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `shop_product_category` */
+
+insert  into `shop_product_category`(`product_id`,`category_id`) values (28,1),(28,2),(28,4);
+
 /*Table structure for table `shop_product_discount` */
 
 DROP TABLE IF EXISTS `shop_product_discount`;
@@ -399,7 +412,7 @@ CREATE TABLE `shop_product_discount` (
 
 /*Data for the table `shop_product_discount` */
 
-insert  into `shop_product_discount`(`id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end`) values (438,42,1,10,1,88.0000,'0000-00-00','0000-00-00'),(439,42,1,20,1,77.0000,'0000-00-00','0000-00-00'),(440,42,1,30,1,66.0000,'0000-00-00','0000-00-00'),(445,40,1,2,1,90.0000,'2015-11-10','2015-11-13'),(446,28,1,10,1,88.0000,'2016-11-23','2016-11-24'),(447,28,1,10,1,88.0000,'2016-11-07','2016-11-10');
+insert  into `shop_product_discount`(`id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end`) values (438,42,1,10,1,88.0000,'0000-00-00','0000-00-00'),(439,42,1,20,1,77.0000,'0000-00-00','0000-00-00'),(440,42,1,30,1,66.0000,'0000-00-00','0000-00-00'),(445,40,1,2,1,90.0000,'2015-11-10','2015-11-13'),(446,28,1,10,1,88.0000,'2016-11-23','2016-11-24'),(447,28,1,6,7,99.0000,'2016-11-07','2016-11-10');
 
 /*Table structure for table `shop_product_image` */
 
@@ -450,11 +463,11 @@ CREATE TABLE `shop_product_special` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=441 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shop_product_special` */
 
-insert  into `shop_product_special`(`id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end`) values (419,42,1,1,90.0000,'0000-00-00','0000-00-00'),(438,30,1,1,80.0000,'0000-00-00','0000-00-00'),(439,30,1,2,90.0000,'0000-00-00','0000-00-00');
+insert  into `shop_product_special`(`id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end`) values (419,28,1,1,90.0000,'2017-04-11','2017-04-11');
 
 /*Table structure for table `shop_shipper` */
 

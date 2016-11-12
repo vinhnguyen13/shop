@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopProduct as MainShopProduct;
+use App\Models\ShopProductCategory;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
 use App\Models\ShopProductSpecial;
@@ -61,5 +62,17 @@ class ShopProduct extends MainShopProduct
     public function getSpecialToForm(){
         $specials = ShopProductSpecial::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
         return $specials;
+    }
+
+    public function getCategoriesToForm(){
+        $categories = ShopProductCategory::query()->where(['product_id'=>$this->id])->get();
+        if(!empty($categories)){
+            $return = [];
+            foreach ($categories as $category)
+            {
+                $return[] = $category->category_id;
+            }
+            return $return;
+        }
     }
 }

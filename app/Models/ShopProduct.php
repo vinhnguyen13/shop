@@ -60,6 +60,7 @@ class ShopProduct extends Model
         $instance->processingImages($values);
         $instance->processingDiscount($values);
         $instance->processingSpecial($values);
+        $instance->processingCategory($values);
         if ($validate->passes()) {
             $instance->save();
             return $instance;
@@ -166,6 +167,19 @@ class ShopProduct extends Model
                 } else {
                     $err[] = $validate->getMessageBag();
                 }
+            }
+        }
+    }
+
+    public function processingCategory($values){
+        if (!empty($values['category'])) {
+            ShopProductCategory::query()->where(['product_id' => $this->id])->delete();
+            foreach ($values['category'] as $catid) {
+                $productCategory = new ShopProductCategory();
+                $productCategory->fill([
+                    'product_id' => $this->id,
+                    'category_id' => $catid
+                ])->save();
             }
         }
     }

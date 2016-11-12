@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/category/store', ['uses' => 'CategoryController@store', 'as'=>'admin.category.store']);
         Route::get('/category/edit/{id}', ['uses' => 'CategoryController@edit', 'as'=>'admin.category.edit']);
         Route::get('/category/show/{id}', ['uses' => 'CategoryController@show', 'as'=>'admin.category.show']);
+        Route::get('/category/list', ['uses' => 'CategoryController@getList', 'as'=>'admin.category.getList']);
         /*
          * Products
          */

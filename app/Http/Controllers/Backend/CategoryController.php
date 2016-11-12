@@ -66,4 +66,15 @@ class CategoryController extends Controller
         }
     }
 
+    public function getList(Request $request){
+
+        $cancha = $request->input('term');
+        $categories = ShopCategory::all();
+        $result = [];
+        foreach ($categories as $category) {
+            $result[] = [ 'id' => $category->id, 'value' => $category->name ];;
+        }
+        return $result;
+    }
+
 }

@@ -168,7 +168,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                             ?>
                             <div class="form-group">
                                 {{ Form::label(null, 'Category') }}
-                                {!! Form::select('category_id', $categories, $model->category_id, ['class' => 'form-control']) !!}
+                                {!! Form::select('category[]', $categories, $categoriesSelected, ['class' => 'form-control category-list', 'multiple'=>'multiple', 'style'=>'width: 100%;']) !!}
                             </div>
 
                             <?php
@@ -208,11 +208,13 @@ $isNewRecord = !empty($model->id) ? false : true;
 @push('styles')
     <link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet" href="/themes/admin/plugins/iCheck/all.css">
+    <link rel="stylesheet" href="/themes/admin/plugins/select2/select2.min.css">
 @endpush
 @push('scripts')
     <script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
     <script src="/rofilde-ckeditor/laravel-ckeditor/ckeditor.js"></script>
     <script src="/themes/admin/plugins/iCheck/icheck.min.js"></script>
+    <script src="/themes/admin/plugins/select2/select2.js"></script>
     <script type="text/javascript">
         CKEDITOR.replace( 'content' );
         CKEDITOR.config.height = 500;
@@ -220,5 +222,7 @@ $isNewRecord = !empty($model->id) ? false : true;
         $('.date').datepicker({
             pickTime: false
         });
+
+        $( ".category-list" ).select2();
     </script>
 @endpush
