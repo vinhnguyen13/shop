@@ -53,4 +53,12 @@ class ProductController extends Controller
         }
     }
 
+    public function deleteReference(Request $request)
+    {
+        $type = $request->get('type');
+        $id = $request->get('id');
+        $return = app(ShopProduct::class)->deleteReference($type, $id);
+        return ['return' => $return];
+    }
+
 }

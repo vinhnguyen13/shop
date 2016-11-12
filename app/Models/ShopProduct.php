@@ -116,11 +116,9 @@ class ShopProduct extends Model
     {
         if (!empty($values['product_discount'])) {
             foreach ($values['product_discount'] as $key => $value) {
-                $productDiscount = ShopProductDiscount::query()->where(['product_id'=>$this->id,
-                    'customer_group_id'=>$value['customer_group_id'],
-                    'price'=>$value['price'],
-                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
-                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d')]);
+                $date_start = !empty($value['date_start']) ? $value['date_start'] : date('d/m/Y');
+                $date_end = !empty($value['date_end']) ? $value['date_end'] : date('d/m/Y');
+                $productDiscount = ShopProductDiscount::query()->where(['id'=>$key])->first();
                 if(empty($productDiscount)){
                     $productDiscount = new ShopProductDiscount();
                 }
@@ -130,15 +128,14 @@ class ShopProduct extends Model
                     'quantity'=>$value['quantity'],
                     'priority'=>$value['priority'],
                     'price'=>$value['price'],
-                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
-                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d'),
+                    'date_start'=>Carbon::createFromFormat('d/m/Y', $date_start)->format('Y-m-d'),
+                    'date_end'=>Carbon::createFromFormat('d/m/Y', $date_end)->format('Y-m-d'),
                 ]);
                 $validate = $productDiscount->validate($productDiscount->attributes, $productDiscount->rules());
                 if ($validate->passes()) {
                     $productDiscount->save();
-                    return $productDiscount;
                 } else {
-                    return $validate->getMessageBag();
+                    $err[] = $validate->getMessageBag();
                 }
 
             }
@@ -149,11 +146,9 @@ class ShopProduct extends Model
     {
         if (!empty($values['product_special'])) {
             foreach ($values['product_special'] as $key => $value) {
-                $productSpecial = ShopProductSpecial::query()->where(['product_id'=>$this->id,
-                    'customer_group_id'=>$value['customer_group_id'],
-                    'price'=>$value['price'],
-                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
-                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d')]);
+                $date_start = !empty($value['date_start']) ? $value['date_start'] : date('d/m/Y');
+                $date_end = !empty($value['date_end']) ? $value['date_end'] : date('d/m/Y');
+                $productSpecial = ShopProductSpecial::query()->where(['id'=>$key])->first();
                 if(empty($productSpecial)){
                     $productSpecial = new ShopProductSpecial();
                 }
@@ -162,18 +157,38 @@ class ShopProduct extends Model
                     'customer_group_id'=>$value['customer_group_id'],
                     'priority'=>$value['priority'],
                     'price'=>$value['price'],
-                    'date_start'=>Carbon::parse($value['date_start'])->format('Y-m-d'),
-                    'date_end'=>Carbon::parse($value['date_end'])->format('Y-m-d'),
-                ])->save();
+                    'date_start'=>Carbon::createFromFormat('d/m/Y', $date_start)->format('Y-m-d'),
+                    'date_end'=>Carbon::createFromFormat('d/m/Y', $date_end)->format('Y-m-d'),
+                ]);
                 $validate = $productSpecial->validate($productSpecial->attributes, $productSpecial->rules());
                 if ($validate->passes()) {
                     $productSpecial->save();
-                    return $productSpecial;
                 } else {
-                    return $validate->getMessageBag();
+                    $err[] = $validate->getMessageBag();
                 }
             }
         }
+    }
+
+    public function deleteReference($type, $id)
+    {
+        if(!empty($type)){
+            switch($type){
+                case 'discount':
+                    $productSpecial = ShopProductDiscount::query()->where(['id'=>$id])->first();
+                    if(!empty($productSpecial)){
+                        return $productSpecial->delete();
+                    }
+                    break;
+                case 'special':
+                    $productSpecial = ShopProductSpecial::query()->where(['id'=>$id])->first();
+                    if(!empty($productSpecial)){
+                        return $productSpecial->delete();
+                    }
+                    break;
+            }
+        }
+        return false;
     }
 
     /**

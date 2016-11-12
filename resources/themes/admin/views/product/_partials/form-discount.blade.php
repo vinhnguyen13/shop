@@ -12,7 +12,10 @@
     </thead>
     <tbody>
     @if ($discounts)
-        @foreach($discounts as $key=>$discount)
+        @foreach($discounts as $discount)
+            @php
+            $key = $discount->id;
+            @endphp
             <tr id="discount-row{{$key}}">
                 <td class="text-left">
                     <select name="product_discount[{{$key}}][customer_group_id]" class="form-control">

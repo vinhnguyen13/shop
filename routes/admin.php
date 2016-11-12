@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/product/store', ['uses' => 'ProductController@store', 'as'=>'admin.product.store']);
         Route::get('/product/edit/{id}', ['uses' => 'ProductController@edit', 'as'=>'admin.product.edit']);
         Route::get('/product/show/{id}', ['uses' => 'ProductController@show', 'as'=>'admin.product.show']);
+        Route::post('/product/delete-reference', ['uses' => 'ProductController@deleteReference', 'as'=>'admin.product.deleteReference']);
         /*
          * Manufacturers
          */

@@ -11,7 +11,10 @@
     </thead>
     <tbody>
     @if ($specials)
-        @foreach($specials as $key=>$special)
+        @foreach($specials as $special)
+            @php
+            $key = $special->id;
+            @endphp
             <tr id="special-row{{$key}}">
                 <td class="text-left">
                     <select name="product_special[{{$key}}][customer_group_id]" class="form-control">
@@ -40,7 +43,7 @@
                         </span>
                     </div>
                 </td>
-                <td class="text-left"><button type="button" onclick="$('#special-row{{$key}}').remove();" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button></td>
+                <td class="text-left"><button type="button" onclick="removeSpecial({{$key}});" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button></td>
             </tr>
         @endforeach
     @endif
@@ -74,6 +77,20 @@
             todayHighlight: true
         });
         special_row++;
+    }
+
+    function removeSpecial(key) {
+        if(key) {
+            $('#special-row' + key).remove();
+            $.ajax({
+                type: "POST",
+                url: '{{ route('admin.product.deleteReference', ['_token' => csrf_token()]) }}',
+                data: {type: 'special', id: key},
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
     }
 </script>
 @endpush
