@@ -33,4 +33,8 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
      */
     Route::get('/login/redirect/{provider}', ['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
     Route::get('/login/callback/{provider}', ['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+    /*
+     * Product
+     */
+    Route::get('/product', ['uses' => 'ProductController@index'])->name('product.index');
 });
