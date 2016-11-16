@@ -42,7 +42,7 @@ class ShopProduct extends Model
     {
         return [
             'quantity' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric|min:2',
             'points' => 'numeric|min:0',
         ];
     }
