@@ -87,9 +87,8 @@
             $.ajax({
                 type: "POST",
                 url: '{{ route('admin.product.deleteReference', ['_token' => csrf_token()]) }}',
-                data: {type: 'special', id: key},
+                data: {type: '{{\App\Models\Backend\ShopProduct::TYPE_DISCOUNT}}', id: key},
                 success: function (data) {
-                    alert(data);
                 }
             });
         }

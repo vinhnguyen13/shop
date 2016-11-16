@@ -224,5 +224,22 @@ $isNewRecord = !empty($model->id) ? false : true;
         });
 
         $( ".category-list" ).select2();
+
+        $(document).on('click', '.template-download .btn-danger.delete', function (e) {
+            var imgId = $(this).attr('data-imgid');
+            removeImage(imgId);
+        });
+
+        function removeImage(key) {
+            if(key) {
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('admin.product.deleteReference', ['_token' => csrf_token()]) }}',
+                    data: {type: '{{\App\Models\Backend\ShopProduct::TYPE_IMAGE}}', id: key},
+                    success: function (data) {
+                    }
+                });
+            }
+        }
     </script>
 @endpush

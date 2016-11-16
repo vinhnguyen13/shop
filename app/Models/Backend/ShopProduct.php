@@ -43,9 +43,10 @@ class ShopProduct extends MainShopProduct
                 $imageList[] = app(UploadMedia::class)->loadImages(
                     $name,
                     Storage::url($folder .DS. $name),
-                    route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_REAL]),
-                    Storage::url($folder .DS. app(ImageService::class)->folder('thumb') . DS . $name),
+                    route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_PRODUCT, 'delete'=>UploadMedia::DELETE_REAL]),
                     'DELETE',
+                    $image->id,
+                    Storage::url($folder .DS. app(ImageService::class)->folder('thumb') . DS . $name),
                     ['name'=>'imagesReal['.$image->id.'][]', 'value'=>$folder .DS. $name],
                     ['name'=>'orderImage['.$image->id.'][]', 'value'=>$image->order]
                 );

@@ -15,6 +15,9 @@ class ShopProduct extends Model
     protected $fillable = ['category_id', 'supplier_id', 'sku', 'name', 'description', 'location', 'quantity', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'subtract', 'minimum', 'order', 'status'];
 
     const uploadFolder = 'products';
+    const TYPE_IMAGE = 'image';
+    const TYPE_DISCOUNT = 'discount';
+    const TYPE_SPECIAL = 'special';
 
     /**
      * The "booting" method of the model.
@@ -99,8 +102,10 @@ class ShopProduct extends Model
         if (!empty($values['orderImage'])) {
             foreach ($values['orderImage'] as $key => $value) {
                 $productImage = ShopProductImage::query()->where(['id' => $key])->first();
-                $productImage->attributes['order'] = $value[0];
-                $productImage->save();
+                if(!empty($productImage)){
+                    $productImage->attributes['order'] = $value[0];
+                    $productImage->save();
+                }
             }
         }
         $imageDefault = ShopProductImage::query()->where(['product_id' => $this->id])->orderBy('order', 'asc')->first();
@@ -188,18 +193,18 @@ class ShopProduct extends Model
     {
         if(!empty($type)){
             switch($type){
-                case 'discount':
-                    $productSpecial = ShopProductDiscount::query()->where(['id'=>$id])->first();
-                    if(!empty($productSpecial)){
-                        return $productSpecial->delete();
-                    }
+                case self::TYPE_DISCOUNT:
+                    $model = ShopProductDiscount::query()->where(['id'=>$id])->first();
                     break;
-                case 'special':
-                    $productSpecial = ShopProductSpecial::query()->where(['id'=>$id])->first();
-                    if(!empty($productSpecial)){
-                        return $productSpecial->delete();
-                    }
+                case self::TYPE_SPECIAL:
+                    $model = ShopProductSpecial::query()->where(['id'=>$id])->first();
                     break;
+                case self::TYPE_IMAGE:
+                    $model = ShopProductImage::query()->where(['id'=>$id])->first();
+                    break;
+            }
+            if(!empty($model)){
+                return $model->delete();
             }
         }
         return false;

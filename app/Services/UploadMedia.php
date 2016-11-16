@@ -72,8 +72,9 @@ class UploadMedia
                     $name,
                     Storage::url($pathFolder .DS. $name),
                     route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_TMP, 'folder' => $folder]),
-                    Storage::url($pathFolder .DS. $imageService->folder('thumb') . DS . $name),
                     'DELETE',
+                    null,
+                    Storage::url($pathFolder .DS. $imageService->folder('thumb') . DS . $name),
                     ['name'=>'images['.$name.'][]', 'value'=>$pathFolder .DS. $name],
                     ['name'=>'orderImage['.$name.'][]', 'value'=>'']
 
@@ -126,14 +127,15 @@ class UploadMedia
      * @param $input_value
      * @return array
      */
-    public function loadImages($name, $url, $deleteUrl, $thumbnailUrl, $deleteType = 'DELETE', $input, $order)
+    public function loadImages($name, $url, $deleteUrl, $deleteType = 'DELETE', $imgId, $thumbnailUrl, $input, $order)
     {
         $return = [
             'name' => $name,
             'url' => $url,
             'deleteUrl' => $deleteUrl,
-            'thumbnailUrl' => $thumbnailUrl,
             'deleteType' => $deleteType,
+            'imgId' => $imgId,
+            'thumbnailUrl' => $thumbnailUrl,
             'input' => $input,
             'order' => $order,
         ];

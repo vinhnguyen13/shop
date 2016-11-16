@@ -13,7 +13,7 @@
             </span>
 		{% } %}
 		{% if (file.deleteUrl) { %}
-			<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+			<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-imgid="{%=file.imgId%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
 				<i class="glyphicon glyphicon-trash"></i>
 				<span>Delete</span>
 			</button>
