@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    @if ($specials)
+    @if (!empty($specials))
         @foreach($specials as $special)
             @php
             $key = $special->id;
