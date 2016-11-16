@@ -27,9 +27,9 @@
         <!-- Logo -->
         <a href="{{route('admin.home.index')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>MV</b></span>
+            <span class="logo-mini"><b>AD</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>MetVuong Admin</b></span>
+            <span class="logo-lg"><b>Admin</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         @include('layouts._partials.nav')

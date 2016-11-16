@@ -106,7 +106,7 @@ class ShopProduct extends Model
         $imageDefault = ShopProductImage::query()->where(['product_id' => $this->id])->orderBy('order', 'asc')->first();
         if (!empty($imageDefault)) {
             $this->attributes['image'] = $imageDefault->image;
-            $this->attributes['folder'] = $imageDefault->image;
+            $this->attributes['folder'] = $imageDefault->folder;
         } else {
             $this->attributes['image'] = null;
             $this->attributes['folder'] = null;

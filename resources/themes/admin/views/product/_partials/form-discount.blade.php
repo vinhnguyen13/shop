@@ -42,7 +42,7 @@
                     </div>
                 </td>
                 <td class="text-left">
-                    <button type="button" onclick="$('#discount-row{{$key}}').remove();" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button>
+                    <button type="button" onclick="removeDiscount({{$key}});" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button>
                 </td>
             </tr>
         @endforeach
@@ -79,6 +79,20 @@
             pickTime: false
          });
         discount_row++;
+    }
+
+    function removeDiscount(key) {
+        if(key) {
+            $('#discount-row' + key).remove();
+            $.ajax({
+                type: "POST",
+                url: '{{ route('admin.product.deleteReference', ['_token' => csrf_token()]) }}',
+                data: {type: 'special', id: key},
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
     }
 </script>
 @endpush
