@@ -168,7 +168,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                             ?>
                             <div class="form-group">
                                 {{ Form::label(null, 'Category') }}
-                                {!! Form::select('category[]', $categories, $categoriesSelected, ['class' => 'form-control category-list', 'multiple'=>'multiple', 'style'=>'width: 100%;']) !!}
+                                {!! Form::select('category[]', $categories, !empty($categoriesSelected) ? $categoriesSelected : [], ['class' => 'form-control category-list', 'multiple'=>'multiple', 'style'=>'width: 100%;']) !!}
                             </div>
 
                             <?php

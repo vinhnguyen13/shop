@@ -37,4 +37,5 @@
 
 @push('styles')
 	<link rel="stylesheet" href="{!! asset('css/jquery.fileupload-ui.css') !!}">
+	<link rel="stylesheet" href="{!! asset('css/upload.css') !!}">
 @endpush
