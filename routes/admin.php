@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/category/store', ['uses' => 'CategoryController@store', 'as'=>'admin.category.store']);
         Route::get('/category/edit/{id}', ['uses' => 'CategoryController@edit', 'as'=>'admin.category.edit']);
         Route::get('/category/show/{id}', ['uses' => 'CategoryController@show', 'as'=>'admin.category.show']);
+        Route::get('/category/delete/{id}', ['uses' => 'CategoryController@delete', 'as'=>'admin.category.delete']);
         Route::get('/category/list', ['uses' => 'CategoryController@getList', 'as'=>'admin.category.getList']);
         /*
          * Products
@@ -53,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/product/create', ['uses' => 'ProductController@create', 'as'=>'admin.product.create']);
         Route::post('/product/store', ['uses' => 'ProductController@store', 'as'=>'admin.product.store']);
         Route::get('/product/edit/{id}', ['uses' => 'ProductController@edit', 'as'=>'admin.product.edit']);
+        Route::get('/product/delete/{id}', ['uses' => 'ProductController@delete', 'as'=>'admin.product.delete']);
         Route::get('/product/show/{id}', ['uses' => 'ProductController@show', 'as'=>'admin.product.show']);
         Route::post('/product/delete-reference', ['uses' => 'ProductController@deleteReference', 'as'=>'admin.product.deleteReference']);
         /*
@@ -63,6 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/manufacturer/store', ['uses' => 'ManufacturerController@store', 'as'=>'admin.manufacturer.store']);
         Route::get('/manufacturer/edit/{id}', ['uses' => 'ManufacturerController@edit', 'as'=>'admin.manufacturer.edit']);
         Route::get('/manufacturer/show/{id}', ['uses' => 'ManufacturerController@show', 'as'=>'admin.manufacturer.show']);
+        Route::get('/manufacturer/delete/{id}', ['uses' => 'ManufacturerController@delete', 'as'=>'admin.manufacturer.delete']);
         /*
          * Shipper
          */
@@ -71,6 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/shipper/store', ['uses' => 'ShipperController@store', 'as'=>'admin.shipper.store']);
         Route::get('/shipper/edit/{id}', ['uses' => 'ShipperController@edit', 'as'=>'admin.shipper.edit']);
         Route::get('/shipper/show/{id}', ['uses' => 'ShipperController@show', 'as'=>'admin.shipper.show']);
+        Route::get('/shipper/delete/{id}', ['uses' => 'ShipperController@delete', 'as'=>'admin.shipper.delete']);
         Route::get('/shipper/transport', ['uses' => 'ShipperController@transport', 'as'=>'admin.shipper.transport']);
         /*
          * Supplier
@@ -80,6 +84,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/supplier/store', ['uses' => 'SupplierController@store', 'as'=>'admin.supplier.store']);
         Route::get('/supplier/edit/{id}', ['uses' => 'SupplierController@edit', 'as'=>'admin.supplier.edit']);
         Route::get('/supplier/show/{id}', ['uses' => 'SupplierController@show', 'as'=>'admin.supplier.show']);
+        Route::get('/supplier/delete/{id}', ['uses' => 'SupplierController@delete', 'as'=>'admin.supplier.delete']);
         /*
          * Customer
          */
@@ -88,6 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/customer/store', ['uses' => 'CustomerController@store', 'as'=>'admin.customer.store']);
         Route::get('/customer/edit/{id}', ['uses' => 'CustomerController@edit', 'as'=>'admin.customer.edit']);
         Route::get('/customer/show/{id}', ['uses' => 'CustomerController@show', 'as'=>'admin.customer.show']);
+        Route::get('/customer/delete/{id}', ['uses' => 'CustomerController@delete', 'as'=>'admin.customer.delete']);
         /*
          * Order
          */
@@ -96,7 +102,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/order/store', ['uses' => 'OrderController@store', 'as'=>'admin.order.store']);
         Route::get('/order/edit/{id}', ['uses' => 'OrderController@edit', 'as'=>'admin.order.edit']);
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
-        /* Coupon Event routing*/
+        Route::get('/order/delete/{id}', ['uses' => 'OrderController@delete', 'as'=>'admin.order.delete']);
+        /*
+         * Coupon Event routing
+         */
         Route::get('/coupon-event', ['uses' => 'CouponEventController@index', 'as' => 'admin.cpevent.index']);
         Route::get('/coupon-event/create', ['uses' => 'CouponEventController@create', 'as' => 'admin.cpevent.create']);
         Route::get('/coupon-event/edit/{id}', ['uses' => 'CouponEventController@edit', 'as' => 'admin.cpevent.edit']);
@@ -105,7 +114,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/coupon-event/create', ['uses' => 'CouponEventController@store', 'as' => 'admin.cpevent.store']);
         Route::patch('/coupon-event/edit/{id}', ['uses' => 'CouponEventController@update', 'as' => 'admin.cpevent.update']);
 
-        /* Coupon Code routing*/
+        /*
+         * Coupon Code routing
+         */
         Route::get('/coupon-code', ['uses' => 'CouponCodeController@index', 'as' => 'admin.cpcode.index']);
         Route::get('/coupon-code/create', ['uses' => 'CouponCodeController@create', 'as' => 'admin.cpcode.create']);
         Route::get('/coupon-code/create-random', ['uses' => 'CouponCodeController@createRandom', 'as' => 'admin.cpcode.create-random']);

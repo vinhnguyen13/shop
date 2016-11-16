@@ -55,4 +55,13 @@ class ShipperController extends Controller
         }
     }
 
+    public function delete(Request $request, $id)
+    {
+        $model = ShopShipper::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.shipper.index');
+    }
+
 }

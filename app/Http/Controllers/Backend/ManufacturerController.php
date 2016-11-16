@@ -49,4 +49,13 @@ class ManufacturerController extends Controller
             return Redirect::back();
         }
     }
+
+    public function delete(Request $request, $id)
+    {
+        $model = ShopManufacturer::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.manufacturer.index');
+    }
 }

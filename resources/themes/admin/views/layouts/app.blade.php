@@ -20,6 +20,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/themes/admin/dist/css/skins/_all-skins.min.css">
     @stack('styles')
+    <link rel="stylesheet" href="/themes/admin/dist/css/main.css">
 </head>
 <body class="hold-transition skin-green-light sidebar-mini {{!empty($_COOKIE['sidebar']) ? '' : 'sidebar-collapse'}}">
 <div class="wrapper">

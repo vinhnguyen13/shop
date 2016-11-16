@@ -50,4 +50,13 @@ class SupplierController extends Controller
         }
     }
 
+    public function delete(Request $request, $id)
+    {
+        $model = ShopSupplier::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.supplier.index');
+    }
+
 }

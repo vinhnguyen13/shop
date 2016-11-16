@@ -66,6 +66,15 @@ class CategoryController extends Controller
         }
     }
 
+    public function delete(Request $request, $id)
+    {
+        $model = ShopCategory::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.category.index');
+    }
+
     public function getList(Request $request){
 
         $cancha = $request->input('term');

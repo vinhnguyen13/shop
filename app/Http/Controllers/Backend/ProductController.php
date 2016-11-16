@@ -54,6 +54,15 @@ class ProductController extends Controller
         }
     }
 
+    public function delete(Request $request, $id)
+    {
+        $model = ShopProduct::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.product.index');
+    }
+
     public function deleteReference(Request $request)
     {
         $type = $request->get('type');

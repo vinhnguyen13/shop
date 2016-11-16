@@ -37,4 +37,22 @@ class AppHelper
 			return $data;
 		}
 	}
+
+	/**
+	 * @param null $id
+	 * @return array
+	 */
+	public static function yesNoLabel($id = null)
+	{
+		$data = [
+			self::STATUS_ENABLE => 'Yes',
+			self::STATUS_DISABLE => 'No',
+		];
+
+		if ($id !== null && isset($data[$id])) {
+			return $data[$id];
+		} else {
+			return $data;
+		}
+	}
 }

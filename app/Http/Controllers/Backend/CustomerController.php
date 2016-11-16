@@ -49,4 +49,13 @@ class CustomerController extends Controller
             return Redirect::back();
         }
     }
+
+    public function delete(Request $request, $id)
+    {
+        $model = ShopCustomer::find($id);
+        if(!empty($model)) {
+            $model->delete();
+        }
+        return Redirect::route('admin.customer.index');
+    }
 }

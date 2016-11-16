@@ -40,12 +40,12 @@ $isNewRecord = !empty($model->id) ? false : true;
                                 {{ Form::text('sku', $model->sku,['class' => 'form-control'])}}
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 {{ Form::label(null, 'Name') }}
                                 {{ Form::text('name', $model->name,['class' => 'form-control'])}}
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 {{ Form::label(null, 'Description') }}
                                 {{ Form::textarea('description', $model->description,['id'=>'content', 'class' => 'form-control'])}}
                             </div>
@@ -56,7 +56,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                                 {{ Form::text('location', $model->location,['class' => 'form-control'])}}
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 {{ Form::label(null, 'Quantity') }}
                                 {{ Form::text('quantity', $model->quantity,['class' => 'form-control'])}}
                             </div>
@@ -65,7 +65,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                             $stock_status = \App\Models\ShopStockStatus::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
                             ?>
                             <div class="form-group">
-                                {{ Form::label(null, 'Out Of Stock Status') }}
+                                {{ Form::label(null, 'Out Of Stock Status') }} <span class="fa fa-question-circle" data-toggle="tooltip" title="" data-original-title="Status shown when a product is out of stock"></span>
                                 {!! Form::select('stock_status_id', $stock_status, $model->stock_status_id, ['class' => 'form-control']) !!}
                             </div>
 
@@ -75,7 +75,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                                 {{ Form::radio('shipping', '0', empty($model->shipping) ? true : false) }} No
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 {{ Form::label(null, 'Price') }}
                                 {{ Form::text('price', $model->price,['class' => 'form-control'])}}
                             </div>
@@ -135,12 +135,12 @@ $isNewRecord = !empty($model->id) ? false : true;
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label(null, 'Subtract') }}
-                                {{ Form::text('subtract', $model->subtract,['class' => 'form-control'])}}
+                                {{ Form::label(null, 'Subtract Stock') }}
+                                {{ Form::select('subtract', \App\Helpers\AppHelper::yesNoLabel(), $model->subtract,['class' => 'form-control'])}}
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label(null, 'Minimum') }}
+                                {{ Form::label(null, 'Minimum order amount') }} <span class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Minimum order amount"></span>
                                 {{ Form::text('minimum', $model->minimum,['class' => 'form-control'])}}
                             </div>
 
