@@ -57,7 +57,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label(null, 'Quantity') }}
+                                {{ Form::label(null, 'Quantity') }} (*)
                                 {{ Form::text('quantity', $model->quantity,['class' => 'form-control'])}}
                             </div>
 
@@ -75,7 +75,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                                 {{ Form::radio('shipping', '0', empty($model->shipping) ? true : false) }} No
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 {{ Form::label(null, 'Price') }}
                                 {{ Form::text('price', $model->price,['class' => 'form-control'])}}
                             </div>
