@@ -25,8 +25,8 @@
 <script type="text/javascript" src="/themes/v1/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="/themes/v1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/themes/v1/js/jquery.slimscroll.min.js"></script>
-<script type="text/javascript" src="/themes/v1/js/common.js"></script>
 @stack('scripts')
+<script type="text/javascript" src="/themes/v1/js/common.js"></script>
 @include('layouts.partials.ga')
 </body>
 </html>
