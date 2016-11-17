@@ -17,8 +17,14 @@ class ShopProductSize extends Model
         return [
             'product_id' => 'required',
             'size' => 'required',
-            'price' => 'required',
             'new_status' => 'required|numeric',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'size.required' => 'Size is required',
         ];
     }
 }

@@ -15,8 +15,8 @@ trait HasValidator
      * @param $data
      * @return bool|\Illuminate\Support\MessageBag
      */
-    public function validate($data, $rules)
+    public function validate($data, $rules, $messages = array())
     {
-        return \Validator::make($data, $rules);
+        return \Validator::make($data, $rules, $messages);
     }
 }

@@ -20,6 +20,8 @@ class ShopProduct extends Model
     const TYPE_SPECIAL = 'special';
     const TYPE_SIZE = 'size';
 
+    private $errors = [];
+
     /**
      * The "booting" method of the model.
      *
@@ -70,10 +72,18 @@ class ShopProduct extends Model
             $instance->processingSpecial($values);
             $instance->processingSize($values);
             $instance->processingCategory($values);
-            return $instance;
         } else {
             return $validate->getMessageBag();
         }
+
+        if(!empty($instance->errors)){
+//                $messageBag = new \Illuminate\Support\MessageBag();
+            foreach($instance->errors as $error){
+                $validate->getMessageBag()->merge($error->getMessages());
+            }
+            return $validate->getMessageBag();
+        }
+        return $instance;
     }
 
     public function processingProduct($values)
@@ -152,11 +162,12 @@ class ShopProduct extends Model
                 if ($validate->passes()) {
                     $productDiscount->save();
                 } else {
-                    $err[] = $validate->getMessageBag();
+                    $this->errors[] = $validate->getMessageBag();
                 }
 
             }
         }
+        return true;
     }
 
     public function processingSpecial($values)
@@ -181,10 +192,11 @@ class ShopProduct extends Model
                 if ($validate->passes()) {
                     $productSpecial->save();
                 } else {
-                    $err[] = $validate->getMessageBag();
+                    $this->errors[] = $validate->getMessageBag();
                 }
             }
         }
+        return true;
     }
 
     public function processingSize($values)
@@ -201,11 +213,12 @@ class ShopProduct extends Model
                     'price'=>$value['price'],
                     'new_status'=>$value['new_status']/100,
                 ]);
-                $validate = $productSize->validate($productSize->attributes, $productSize->rules());
+                $validate = $productSize->validate($productSize->attributes, $productSize->rules(), $productSize->messages());
                 if ($validate->passes()) {
                     $productSize->save();
                 } else {
-                    $err[] = $validate->getMessageBag();
+                    $this->errors[] = $validate->getMessageBag();
+//                    $this->errors[] = $validate->messages()->toArray();
                 }
             }
         }
