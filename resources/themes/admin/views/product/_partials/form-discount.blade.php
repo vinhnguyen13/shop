@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    @if (!empty($discounts)))
+    @if (!empty($discounts))
         @foreach($discounts as $discount)
             @php
             $key = $discount->id;
