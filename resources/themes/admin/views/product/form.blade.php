@@ -28,10 +28,10 @@ $isNewRecord = !empty($model->id) ? false : true;
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">General</a></li>
                         <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Data</a></li>
+                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Size</a></li>
                         <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Links</a></li>
                         <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Discount</a></li>
                         <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Special</a></li>
-                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Size</a></li>
                         <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Image</a></li>
                     </ul>
                     <div class="tab-content">
@@ -155,6 +155,9 @@ $isNewRecord = !empty($model->id) ? false : true;
                                 {{ Form::select('status', \App\Helpers\AppHelper::statusLabel(), $model->status,['class' => 'form-control'])}}
                             </div>
                         </div>
+                        <div class="tab-pane" id="tab_6">
+                            @include('product._partials.form-size')
+                        </div>
                         <div class="tab-pane" id="tab_3">
                             <?php
                             $manufacturers = \App\Models\ShopManufacturer::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
@@ -185,9 +188,6 @@ $isNewRecord = !empty($model->id) ? false : true;
                         </div>
                         <div class="tab-pane" id="tab_5">
                             @include('product._partials.form-special')
-                        </div>
-                        <div class="tab-pane" id="tab_6">
-                            @include('product._partials.form-size')
                         </div>
                         <div class="tab-pane" id="tab_7">
                             <div class="form-group">
