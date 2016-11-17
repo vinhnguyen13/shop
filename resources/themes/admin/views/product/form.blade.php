@@ -31,7 +31,8 @@ $isNewRecord = !empty($model->id) ? false : true;
                         <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Links</a></li>
                         <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Discount</a></li>
                         <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Special</a></li>
-                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Image</a></li>
+                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Size</a></li>
+                        <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Image</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
@@ -186,6 +187,9 @@ $isNewRecord = !empty($model->id) ? false : true;
                             @include('product._partials.form-special')
                         </div>
                         <div class="tab-pane" id="tab_6">
+                            @include('product._partials.form-size')
+                        </div>
+                        <div class="tab-pane" id="tab_7">
                             <div class="form-group">
                                 {{ Form::label(null, 'Image') }}
                                 {{ Form::file('image', ['url' => route('admin.upload', ['type'=>\App\Services\UploadMedia::UPLOAD_PRODUCT]), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}

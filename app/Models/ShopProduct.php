@@ -18,6 +18,7 @@ class ShopProduct extends Model
     const TYPE_IMAGE = 'image';
     const TYPE_DISCOUNT = 'discount';
     const TYPE_SPECIAL = 'special';
+    const TYPE_SIZE = 'size';
 
     /**
      * The "booting" method of the model.
@@ -67,6 +68,7 @@ class ShopProduct extends Model
             $instance->processingImages($values);
             $instance->processingDiscount($values);
             $instance->processingSpecial($values);
+            $instance->processingSize($values);
             $instance->processingCategory($values);
             return $instance;
         } else {
@@ -124,6 +126,7 @@ class ShopProduct extends Model
             $this->attributes['image'] = null;
             $this->attributes['folder'] = null;
         }
+        return true;
     }
 
     public function processingDiscount($values)
@@ -182,6 +185,31 @@ class ShopProduct extends Model
                 }
             }
         }
+    }
+
+    public function processingSize($values)
+    {
+        if (!empty($values['product_size'])) {
+            foreach ($values['product_size'] as $key => $value) {
+                $productSize = ShopProductSize::query()->where(['id'=>$key])->first();
+                if(empty($productSize)){
+                    $productSize = new ShopProductSize();
+                }
+                $productSize->fill([
+                    'product_id'=>$this->id,
+                    'size'=>$value['size'],
+                    'price'=>$value['price'],
+                    'new_status'=>$value['new_status']/100,
+                ]);
+                $validate = $productSize->validate($productSize->attributes, $productSize->rules());
+                if ($validate->passes()) {
+                    $productSize->save();
+                } else {
+                    $err[] = $validate->getMessageBag();
+                }
+            }
+        }
+        return true;
     }
 
     public function processingCategory($values){

@@ -7,6 +7,7 @@ use App\Models\ShopProduct as MainShopProduct;
 use App\Models\ShopProductCategory;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
+use App\Models\ShopProductSize;
 use App\Models\ShopProductSpecial;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
@@ -62,6 +63,11 @@ class ShopProduct extends MainShopProduct
 
     public function getSpecialToForm(){
         $specials = ShopProductSpecial::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
+        return $specials;
+    }
+
+    public function getSizeToForm(){
+        $specials = ShopProductSize::query()->where(['product_id'=>$this->id])->get();
         return $specials;
     }
 
