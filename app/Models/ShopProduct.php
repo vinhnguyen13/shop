@@ -62,12 +62,12 @@ class ShopProduct extends Model
         $instance->fill($values);
         $validate = $instance->validate($instance->attributes, $instance->rules());
         $instance->processingProduct($values);
-        $instance->processingImages($values);
-        $instance->processingDiscount($values);
-        $instance->processingSpecial($values);
-        $instance->processingCategory($values);
         if ($validate->passes()) {
             $instance->save();
+            $instance->processingImages($values);
+            $instance->processingDiscount($values);
+            $instance->processingSpecial($values);
+            $instance->processingCategory($values);
             return $instance;
         } else {
             return $validate->getMessageBag();
