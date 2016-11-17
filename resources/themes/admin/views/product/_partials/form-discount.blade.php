@@ -76,7 +76,8 @@
 
         $('#discount tbody').append(html);
         $('.date').datepicker({
-            pickTime: false
+            autoclose: true,
+            format: "dd/mm/yyyy"
          });
         discount_row++;
     }

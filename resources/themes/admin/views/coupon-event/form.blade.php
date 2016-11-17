@@ -82,14 +82,14 @@
 	        todayBtn: "linked",
 	        autoclose: true,
 	        todayHighlight: true,
-	        format: 'dd-mm-yyyy'
+            format: "dd/mm/yyyy"
 	    });
 	
 	    $('#end_date').datepicker({
 	        todayBtn: "linked",
 	        autoclose: true,
 	        todayHighlight: true,
-	        format: 'dd-mm-yyyy'
+            format: "dd/mm/yyyy"
 	    });
 	</script>
 @endpush

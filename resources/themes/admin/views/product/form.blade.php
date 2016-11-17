@@ -95,7 +95,7 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                             <div class="form-group">
                                 {{ Form::label(null, 'Date Available') }}
-                                {{ Form::text('date_available', $model->date_available,['class' => 'form-control'])}}
+                                {{ Form::text('date_available', Carbon\Carbon::parse($model->date_available)->format('d/m/Y'),['class' => 'form-control date'])}}
                             </div>
 
                             <div class="form-group">
@@ -219,8 +219,11 @@ $isNewRecord = !empty($model->id) ? false : true;
         CKEDITOR.replace( 'content' );
         CKEDITOR.config.height = 500;
 
-        $('.date').datepicker({
-            pickTime: false
+        $(function() {
+            $('.date').datepicker({
+                autoclose: true,
+                format: "dd/mm/yyyy"
+            });
         });
 
         $( ".category-list" ).select2();

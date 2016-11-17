@@ -74,7 +74,7 @@
         $('#special tbody').append(html);
         $('.date').datepicker({
             autoclose: true,
-            todayHighlight: true
+            format: "dd/mm/yyyy"
         });
         special_row++;
     }

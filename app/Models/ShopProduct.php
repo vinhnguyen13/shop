@@ -61,6 +61,7 @@ class ShopProduct extends Model
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
         $validate = $instance->validate($instance->attributes, $instance->rules());
+        $instance->processingProduct($values);
         $instance->processingImages($values);
         $instance->processingDiscount($values);
         $instance->processingSpecial($values);
@@ -73,6 +74,12 @@ class ShopProduct extends Model
         }
     }
 
+    public function processingProduct($values)
+    {
+        if (!empty($values['date_available'])) {
+            $this->attributes['date_available'] = Carbon::createFromFormat('d/m/Y', $values['date_available'])->format('Y-m-d');
+        }
+    }
     /**
      * @param $images
      */
