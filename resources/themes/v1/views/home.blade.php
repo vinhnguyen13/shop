@@ -64,342 +64,38 @@
 </div>
 <div class="container">
     <div class="row products">
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
+        @if (!empty($products))
+            @foreach($products as $product)
+            <div class="col-lg-3 col-xs-6 col-md-4">
+                <div class="product__item">
+                    <div class="product__item--pic">
+                        <a href=""><img data-original="{{$product->url()}}" alt="" class="lazy" /></a>
                     </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
+                    <div class="product__item--infor">
+                        <div class="text-center mgB-40">
+                            <div class="size-item">
+                                <a href="" class="size">6</a>
+                                <a href="" class="size">7</a>
+                                <a href="" class="size">7.5</a>
+                                <a href="" class="size">8</a>
+                                <a href="" class="size">8.5</a>
+                                <a href="" class="size">9</a>
+                                <a href="" class="size">10</a>
+                                <a href="" class="size">11</a>
+                                <a href="" class="size">12</a>
+                            </div>
+                            <p class="text-uper">available size</p>
+                        </div>
+                        <div class="clearfix">
+                            <p><a href="" class="product-name text-uper">{{$product->name}}</a></p>
+                            <p class="fs-18 fontSFUBold pull-right">$ {{$product->price}}</p>
+                            <p class="product-type text-uper">space gray</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6 col-md-4">
-            <div class="product__item">
-                <div class="product__item--pic">
-                    <a href=""><img data-original="/themes/v1/images/315x321.jpg" alt="" class="lazy" /></a>
-                </div>
-                <div class="product__item--infor">
-                    <div class="text-center mgB-40">
-                        <div class="size-item">
-                            <a href="" class="size">6</a>
-                            <a href="" class="size">7</a>
-                            <a href="" class="size">7.5</a>
-                            <a href="" class="size">8</a>
-                            <a href="" class="size">8.5</a>
-                            <a href="" class="size">9</a>
-                            <a href="" class="size">10</a>
-                            <a href="" class="size">11</a>
-                            <a href="" class="size">12</a>
-                        </div>
-                        <p class="text-uper">available size</p>
-                    </div>
-                    <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                        <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
-                        <p class="product-type text-uper">space gray</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            @endforeach
+        @endif
     </div>
     <div class="text-center">
         <a href="" class="btn-see-more text-uper">see more</a>
