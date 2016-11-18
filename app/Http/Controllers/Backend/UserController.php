@@ -7,7 +7,7 @@
  */
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Profile;
+use App\Models\UserProfile;
 use App\Models\Backend\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -37,22 +37,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $profile = $user->profile()->first();
-        if($profile->avatar)
-            $avatar[] = [
-                'name' => $profile->avatar,
-                'url' => Storage::url(Profile::uploadAvatarFolder. "/" . $profile->avatar),
-                'deleteUrl' => route('user.deleteFile', ['_token' => csrf_token(), 'name' => $profile->avatar]),
-                'thumbnailUrl' => Storage::url(Profile::uploadAvatarFolder . "/thumb_" . $profile->avatar),
-                'deleteType' => 'DELETE',
-                'input' => [
-                    'name' => 'avatar[]',
-                    'value' => $profile->avatar
-                ]
-            ];
-        else
-            $avatar = null;
+        $image = $user->getImagesToForm();
         if(!empty($user))
-            return view('user.form', compact('user', 'profile', 'avatar'));
+            return view('user.form', compact('user', 'profile', 'image'));
         else
             return abort(404, 'Not Found');
     }
@@ -60,14 +47,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        $data = [
-            'email'=> $request->input('email'),
-            'password'=> $request->input('email'),
-            'name'=> $request->input('name'),
-        ];
-        $return = app(User::class)->updateData($data);
+        $return = app(User::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
-            return Redirect::route('user.index');
+            return Redirect::route('admin.user.index');
         }else{
             return Redirect::back();
         }

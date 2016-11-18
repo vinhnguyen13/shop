@@ -12,36 +12,14 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label(null, 'Username') }}
-                <div>{{ $user->username }}</div>
+                {{ Form::label(null, 'Name') }}
+                <div>{{ $user->name }}</div>
             </div>
 
             <div class="form-group">
                 {{ Form::label(null, 'Email') }}
                 <div>{{ $user->email }}</div>
             </div>
-
-            <div class="form-group">
-                {{ Form::label(null, 'Confirmed time') }}
-                <div>{!! date('M d, Y H:i', $user->confirmed_at) !!}</div>
-            </div>
-
-            <div class="form-group">
-                {{ Form::label(null, 'Registration Time') }}
-                <div>{!! date('M d, Y H:i', $user->created_at) !!}</div>
-            </div>
-
-            <div class="form-group">
-                {{ Form::label(null, 'Registration Ip') }}
-                <div>{!! $user->registration_ip !!}</div>
-            </div>
-
-            <div class="form-group">
-                {{ Form::label(null, 'Last Activity') }}
-                <div>{!! date('M d, Y H:i', $user->updated_at) !!}</div>
-            </div>
-
-            @include('user.view-profile', compact('profile'))
 
         </div>
         <div class="box-footer clearfix">

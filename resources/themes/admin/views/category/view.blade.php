@@ -12,17 +12,17 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('name', 'Name') }}
+                {{ Form::label(null, 'Name') }}
                 <div>{{ $model->name }}</div>
             </div>
 
             <div class="form-group">
-                {{ Form::label('description', 'Description') }}
+                {{ Form::label(null, 'Description') }}
                 <div>{!! $model->description !!}</div>
             </div>
 
             <div class="form-group">
-                {{ Form::label('status', 'Status') }}
+                {{ Form::label(null, 'Status') }}
                 <div>{{ \App\Helpers\AppHelper::statusLabel($model->status) }}</div>
             </div>
 

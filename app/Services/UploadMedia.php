@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Models\ShopCategory;
 use App\Models\ShopProduct;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Input;
 use Storage;
 
@@ -18,6 +19,8 @@ class UploadMedia
 {
     const UPLOAD_PRODUCT = 'product';
     const UPLOAD_CATEGORY = 'category';
+    const UPLOAD_AVATAR = 'avatar';
+
     const DELETE_TMP = 'tmp';
     const DELETE_REAL = 'real';
     const TEMP_FOLDER = 'temp';
@@ -47,6 +50,9 @@ class UploadMedia
                 break;
             case self::UPLOAD_CATEGORY:
                 $propertyMedia = app(ShopCategory::class)->propertyMedias($folder);
+                break;
+            case self::UPLOAD_AVATAR:
+                $propertyMedia = app(UserProfile::class)->propertyMedias($folder);
                 break;
         }
         return $propertyMedia;

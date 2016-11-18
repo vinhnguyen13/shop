@@ -12,12 +12,12 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('company_name', 'Company Name') }}
+                {{ Form::label(null, 'Company Name') }}
                 <div>{{ $model->company_name }}</div>
             </div>
 
             <div class="form-group">
-                {{ Form::label('contact_name', 'Contact Name') }}
+                {{ Form::label(null, 'Contact Name') }}
                 <div>{{ $model->contact_name }}</div>
             </div>
         </div>

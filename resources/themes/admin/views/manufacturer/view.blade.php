@@ -12,7 +12,7 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('name', 'Name') }}
+                {{ Form::label(null, 'Name') }}
                 <div>{{ $model->name }}</div>
             </div>
         </div>

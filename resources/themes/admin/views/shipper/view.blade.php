@@ -12,12 +12,12 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('firstname', 'Firstname') }}
+                {{ Form::label(null, 'Firstname') }}
                 <div>{{ $model->firstname }}</div>
             </div>
 
             <div class="form-group">
-                {{ Form::label('lastname', 'Lastname') }}
+                {{ Form::label(null, 'Lastname') }}
                 <div>{{ $model->lastname }}</div>
             </div>
 

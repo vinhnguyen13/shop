@@ -87,6 +87,9 @@ class ShopProduct extends Model
         return $instance;
     }
 
+    /**
+     * @param $values
+     */
     public function processingProduct($values)
     {
         if (!empty($values['date_available'])) {
@@ -118,8 +121,6 @@ class ShopProduct extends Model
                     ])->save();
                 }
             }
-        } else {
-
         }
         if (!empty($values['orderImage'])) {
             foreach ($values['orderImage'] as $key => $value) {
@@ -141,6 +142,10 @@ class ShopProduct extends Model
         return true;
     }
 
+    /**
+     * @param $values
+     * @return bool
+     */
     public function processingDiscount($values)
     {
         if (!empty($values['product_discount'])) {
@@ -172,6 +177,10 @@ class ShopProduct extends Model
         return true;
     }
 
+    /**
+     * @param $values
+     * @return bool
+     */
     public function processingSpecial($values)
     {
         if (!empty($values['product_special'])) {
@@ -201,6 +210,10 @@ class ShopProduct extends Model
         return true;
     }
 
+    /**
+     * @param $values
+     * @return bool
+     */
     public function processingSize($values)
     {
         if (!empty($values['product_size'])) {
@@ -230,6 +243,9 @@ class ShopProduct extends Model
         return true;
     }
 
+    /**
+     * @param $values
+     */
     public function processingCategory($values){
         if (!empty($values['category'])) {
             ShopProductCategory::query()->where(['product_id' => $this->id])->delete();
@@ -243,6 +259,12 @@ class ShopProduct extends Model
         }
     }
 
+    /**
+     * @param $type
+     * @param $id
+     * @return bool|mixed|null
+     * @throws \Exception
+     */
     public function deleteReference($type, $id)
     {
         if(!empty($type)){
