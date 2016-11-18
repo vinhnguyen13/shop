@@ -28,7 +28,7 @@
         @include('product.partials.item')
     </div>
     <div class="text-center">
-        <a href="" class="btn-see-more text-uper">see more</a>
+        <a href="{{route('product.index')}}" class="btn-see-more text-uper">see more</a>
     </div>
 </div>
 <div class="container">
@@ -36,7 +36,7 @@
         @include('product.partials.item')
     </div>
     <div class="text-center">
-        <a href="" class="btn-see-more text-uper">see more</a>
+        <a href="{{route('product.index')}}" class="btn-see-more text-uper">see more</a>
     </div>
 </div>
 <div class="swiper-container slidehomepage">
@@ -134,7 +134,7 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="/themes/v1/css/swiper.min.css">
+    <link rel="stylesheet" href="/themes/v1/css/swiper.min.css">
 @endpush
 
 @push('scripts')

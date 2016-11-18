@@ -43,19 +43,7 @@ class CategoryController extends Controller
     {
         $model = ShopCategory::find($id);
         if(!empty($model)) {
-            if($model->image && app(ImageService::class)->exists($model->folder .DS. $model->image)) {
-                $image[] = app(UploadMedia::class)->loadImages(
-                    $model->image,
-                    Storage::url($model->folder .DS. $model->image),
-                    route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $model->image, 'type' => UploadMedia::UPLOAD_CATEGORY, 'delete'=>UploadMedia::DELETE_REAL]),
-                    Storage::url($model->folder .DS. app(ImageService::class)->folder('thumb') . DS . $model->image),
-                    'DELETE',
-                    'imagesReal[]',
-                    $model->folder .DS. $model->image
-                );
-            }else{
-                $image = null;
-            }
+            $image = $model->getImagesToForm();
             return view('category.form', compact('model', 'image'));
         }else
             return abort(404, 'Not Found');

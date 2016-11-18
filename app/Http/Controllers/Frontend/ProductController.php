@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $category=null)
     {
-        $products = app(ShopProduct::class)->getList();
+        $products = app(ShopProduct::class)->getList(['status'=>1], 12);
         return view('product.index', compact('products'));
     }
 }

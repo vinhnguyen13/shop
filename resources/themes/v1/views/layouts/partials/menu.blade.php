@@ -2,18 +2,19 @@
     <div class="inner-menu">
         <button id="menu-close"><span></span></button>
         <ul>
-            <li class="active"><a href="">home</a></li>
+            <li class="active"><a href="{{url('/')}}">home</a></li>
             <li><a href="">store</a></li>
             <li class="has-sub">
-                <a href="">brands <span class="icon-chevron-thin-right"></span></a>
+                <a href="">brands @if (!empty($categories))<span class="icon-chevron-thin-right"></span>@endif</a>
+                @if (!empty($categories))
                 <div class="menu__sub">
                     <ul>
-                        <li><a href="">foootwear</a></li>
-                        <li><a href="">apparel</a></li>
-                        <li><a href="">assesorie</a></li>
-                        <li><a href="">sale</a></li>
+                        @foreach($categories as $category)
+                        <li><a href="{{route('product.category', ['category'=>str_slug($category->slug)])}}">{{$category->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
+                @endif
             </li>
             <li><a href="">consigment</a></li>
             <li><a href="">location</a></li>

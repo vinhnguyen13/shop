@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShopCategory extends Model
 {
     protected $table = 'shop_category';
-    protected $fillable = ['parent_id', 'name', 'description', 'image', 'status', 'order'];
+    protected $fillable = ['parent_id', 'name', 'slug', 'description', 'image', 'status', 'order'];
 
     const uploadFolder = 'categories';
 
@@ -30,29 +30,6 @@ class ShopCategory extends Model
             }
 
         });
-    }
-
-    /**
-     * Create or update a related record matching the attributes, and fill it with values.
-     *
-     * @param  array $attributes
-     * @param  array $values
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function updateOrCreate(array $attributes, array $values = [])
-    {
-        $instance = $this->firstOrNew($attributes);
-        $instance->fill($values);
-        if (!empty($values['images'])) {
-            $instance->saveImages($values['images']);
-        }else{
-            if (empty($values['imagesReal'])) {
-                $instance->attributes['image'] = null;
-                $instance->attributes['folder'] = null;
-            }
-        }
-        $instance->save();
-        return $instance;
     }
 
     /**
@@ -78,22 +55,5 @@ class ShopCategory extends Model
         ];
     }
 
-    /**
-     * @param $images
-     */
-    public function saveImages($images)
-    {
-        if ($images) {
-            $image = $images[0];
-            if (app(ImageService::class)->exists($image)) {
-                $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
-                $path = pathinfo($image);
-                $this->attributes['image'] = $path['basename'];
-                $this->attributes['folder'] = $newPath;
-                app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
-                $folders = explode(DS, $path['dirname']);
-                app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
-            }
-        }
-    }
+
 }
