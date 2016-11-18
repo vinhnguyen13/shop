@@ -7,10 +7,13 @@
  */
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Frontend\ShopProduct;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home', ['content'=> PHP_EOL.\Illuminate\Foundation\Inspiring::quote().PHP_EOL]);
+        $products = app(ShopProduct::class)->getList(['status'=>1], 12);
+        return view('home', compact('products'));
     }
 }

@@ -9,9 +9,9 @@
 namespace App\Services;
 
 
-use App\Models\ShopCategory;
-use App\Models\ShopProduct;
-use App\Models\UserProfile;
+use App\Models\Backend\ShopCategory;
+use App\Models\Backend\ShopProduct;
+use App\Models\Backend\UserProfile;
 use Illuminate\Support\Facades\Input;
 use Storage;
 

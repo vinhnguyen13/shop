@@ -170,6 +170,7 @@ class ShopProduct extends MainShopProduct
             $this->attributes['image'] = null;
             $this->attributes['folder'] = null;
         }
+        $this->update();
         return true;
     }
 
@@ -315,28 +316,5 @@ class ShopProduct extends MainShopProduct
             }
         }
         return false;
-    }
-
-    /**
-     * @param null $folder
-     * @return array
-     */
-    public function propertyMedias($folder = null)
-    {
-        $sizes = [
-            'large' => [960, 720, 'resize'],
-            'medium' => [480, 360, 'crop'],
-            'thumb' => [240, 180, 'crop'],
-        ];
-        if (empty($folder)) {
-            $folder = uniqid();
-        }
-        return [
-            'sizes' => $sizes,
-            'folderTmp' => $folder,
-            'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
-            'pathTmpNotDay' => self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS,
-            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS),
-        ];
     }
 }
