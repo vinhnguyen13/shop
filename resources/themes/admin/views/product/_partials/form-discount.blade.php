@@ -12,12 +12,12 @@
     </thead>
     <tbody>
     @if (!empty($discounts))
-        @foreach($discounts as $discount)
+        @foreach($discounts as $key=>$discount)
             @php
-            $key = $discount->id;
             @endphp
             <tr id="discount-row{{$key}}">
                 <td class="text-left">
+                    <input type="hidden" name="product_discount[{{$key}}][id]" value="{{$discount->id}}">
                     <select name="product_discount[{{$key}}][customer_group_id]" class="form-control">
                         <option value="1" selected="selected">Default</option>
                     </select>

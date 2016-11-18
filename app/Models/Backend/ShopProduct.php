@@ -186,8 +186,9 @@ class ShopProduct extends MainShopProduct
             foreach ($values['product_discount'] as $key => $value) {
                 $date_start = !empty($value['date_start']) ? $value['date_start'] : date('d/m/Y');
                 $date_end = !empty($value['date_end']) ? $value['date_end'] : date('d/m/Y');
-                $productDiscount = ShopProductDiscount::query()->where(['id'=>$key])->first();
-                if(empty($productDiscount)){
+                if(!empty($value['id'])) {
+                    $productDiscount = ShopProductDiscount::query()->where(['id' => $value['id']])->first();
+                }else{
                     $productDiscount = new ShopProductDiscount();
                 }
                 $productDiscount->fill([
@@ -221,8 +222,9 @@ class ShopProduct extends MainShopProduct
             foreach ($values['product_special'] as $key => $value) {
                 $date_start = !empty($value['date_start']) ? $value['date_start'] : date('d/m/Y');
                 $date_end = !empty($value['date_end']) ? $value['date_end'] : date('d/m/Y');
-                $productSpecial = ShopProductSpecial::query()->where(['id'=>$key])->first();
-                if(empty($productSpecial)){
+                if(!empty($value['id'])){
+                    $productSpecial = ShopProductSpecial::query()->where(['id'=>$value['id']])->first();
+                }else{
                     $productSpecial = new ShopProductSpecial();
                 }
                 $productSpecial->fill([
