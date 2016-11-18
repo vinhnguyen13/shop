@@ -9,7 +9,7 @@ class ShopProductSize extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_size';
-    protected $fillable = ['product_id', 'size', 'price', 'new_status'];
+    protected $fillable = ['product_id', 'size', 'quantity', 'price', 'new_status'];
     public $timestamps = false;
 
     public function rules()
@@ -17,6 +17,7 @@ class ShopProductSize extends Model
         return [
             'product_id' => 'required',
             'size' => 'required',
+            'quantity' => 'digits_between:1,5',
             'new_status' => 'required|numeric',
         ];
     }
@@ -24,7 +25,8 @@ class ShopProductSize extends Model
     public function messages()
     {
         return [
-            'size.required' => 'Size is required',
+            'size.required' => 'Size tab >> Size is required',
+            'quantity.numeric' => 'Size tab >> Quantity must be between 1 and 5 digits.',
         ];
     }
 }

@@ -16,16 +16,20 @@ class SocialAccount extends Model
     use HasValidator;
     protected $table = 'social_account';
     protected $fillable =  ['id', 'user_id', 'provider', 'client_id', 'data', 'code', 'created_at', 'email', 'username'];
-    private $rules = [
-        'user_id' => 'required',
-        'provider' => 'required',
-        'client_id' => 'required',
-    ];
     protected $primaryKey = 'id';
     public $timestamps = false;
 
     const PROVIDER_FACEBOOK = 'facebook';
     const PROVIDER_GOOGLE = 'google';
+
+    public function rules()
+    {
+        return [
+            'user_id' => 'required',
+            'provider' => 'required',
+            'client_id' => 'required',
+        ];
+    }
 
     public function user()
     {
@@ -49,7 +53,7 @@ class SocialAccount extends Model
             ], $input]);
         }
         $socialAccount->fill($attributes);
-        $validate = $socialAccount->validate($socialAccount->attributes, $this->rules);
+        $validate = $socialAccount->validate($socialAccount->attributes);
         if($validate->passes()){
             $socialAccount->save();
             return $socialAccount;

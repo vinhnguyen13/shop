@@ -63,7 +63,7 @@ class ShopProduct extends Model
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
-        $validate = $instance->validate($instance->attributes, $instance->rules());
+        $validate = $instance->validate($instance->attributes);
         $instance->processingProduct($values);
         if ($validate->passes()) {
             $instance->save();
@@ -78,8 +78,9 @@ class ShopProduct extends Model
 
         if(!empty($instance->errors)){
 //                $messageBag = new \Illuminate\Support\MessageBag();
+            $messageBag = $validate->getMessageBag();
             foreach($instance->errors as $error){
-                $validate->getMessageBag()->merge($error->getMessages());
+                $messageBag->merge($error->getMessages());
             }
             return $validate->getMessageBag();
         }
@@ -158,7 +159,7 @@ class ShopProduct extends Model
                     'date_start'=>Carbon::createFromFormat('d/m/Y', $date_start)->format('Y-m-d'),
                     'date_end'=>Carbon::createFromFormat('d/m/Y', $date_end)->format('Y-m-d'),
                 ]);
-                $validate = $productDiscount->validate($productDiscount->attributes, $productDiscount->rules());
+                $validate = $productDiscount->validate($productDiscount->attributes);
                 if ($validate->passes()) {
                     $productDiscount->save();
                 } else {
@@ -188,7 +189,7 @@ class ShopProduct extends Model
                     'date_start'=>Carbon::createFromFormat('d/m/Y', $date_start)->format('Y-m-d'),
                     'date_end'=>Carbon::createFromFormat('d/m/Y', $date_end)->format('Y-m-d'),
                 ]);
-                $validate = $productSpecial->validate($productSpecial->attributes, $productSpecial->rules());
+                $validate = $productSpecial->validate($productSpecial->attributes);
                 if ($validate->passes()) {
                     $productSpecial->save();
                 } else {
@@ -210,10 +211,11 @@ class ShopProduct extends Model
                 $productSize->fill([
                     'product_id'=>$this->id,
                     'size'=>$value['size'],
+                    'quantity'=>$value['quantity'],
                     'price'=>$value['price'],
                     'new_status'=>$value['new_status']/100,
                 ]);
-                $validate = $productSize->validate($productSize->attributes, $productSize->rules(), $productSize->messages());
+                $validate = $productSize->validate($productSize->attributes);
                 if ($validate->passes()) {
                     $productSize->save();
                 } else {

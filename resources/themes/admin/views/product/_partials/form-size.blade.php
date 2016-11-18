@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <td class="text-left">Size</td>
+        <td class="text-left">Quantity</td>
         <td class="text-right">Price</td>
         <td class="text-left">New Status</td>
         <td style="width: 10%;"></td>
@@ -16,6 +17,9 @@
             <tr id="size-row{{$key}}">
                 <td class="text-right">
                     <input type="text" name="product_size[{{$key}}][size]" value="{{$size->size}}" placeholder="Size" class="form-control">
+                </td>
+                <td class="text-right">
+                    <input type="text" name="product_size[{{$key}}][quantity]" value="{{$size->quantity}}" placeholder="Quantity" class="form-control">
                 </td>
                 <td class="text-right">
                     <input type="text" name="product_size[{{$key}}][price]" value="{{$size->price}}" placeholder="Price" class="form-control">
@@ -42,6 +46,7 @@
     function addSize() {
         html  = '<tr id="size-row' + size_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_size[' + size_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
+        html += '  <td class="text-right"><input type="text" name="product_size[' + size_row + '][quantity]" value="" placeholder="Quantity" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_size[' + size_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_size[' + size_row + '][new_status]" value="" placeholder="New Status" class="form-control" /></td>';
         html += '  <td class="text-left"><button type="button" onclick="$(\'#size-row' + size_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
