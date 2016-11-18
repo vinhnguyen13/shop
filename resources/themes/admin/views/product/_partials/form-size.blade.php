@@ -10,12 +10,12 @@
     </thead>
     <tbody>
     @if (!empty($sizes))
-        @foreach($sizes as $size)
+        @foreach($sizes as $key=>$size)
             @php
-            $key = $size->id;
             @endphp
             <tr id="size-row{{$key}}">
                 <td class="text-right">
+                    <input type="hidden" name="product_size[{{$key}}][id]" value="{{$size->id}}">
                     <input type="text" name="product_size[{{$key}}][size]" value="{{$size->size}}" placeholder="Size" class="form-control">
                 </td>
                 <td class="text-right">

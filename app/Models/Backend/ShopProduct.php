@@ -252,8 +252,9 @@ class ShopProduct extends MainShopProduct
     {
         if (!empty($values['product_size'])) {
             foreach ($values['product_size'] as $key => $value) {
-                $productSize = ShopProductSize::query()->where(['id'=>$key])->first();
-                if(empty($productSize)){
+                if(!empty($value['id'])){
+                    $productSize = ShopProductSize::query()->where(['id'=>$value['id']])->first();
+                }else{
                     $productSize = new ShopProductSize();
                 }
                 $productSize->fill([
