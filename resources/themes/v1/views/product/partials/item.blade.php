@@ -19,13 +19,13 @@
                             <p class="text-uper">available size</p>
                         @else
                             <div class="size-item">&nbsp;</div>
-                            <p class="text-uper">no size</p>
+                            <p class="text-uper">out of stock</p>
                         @endif
                     </div>
                     <div class="clearfix">
-                        <p><a href="" class="product-name text-uper">{{$product->name}}</a></p>
+                        <p><a href="{{$product->id}}" class="product-name text-uper">{{$product->name}}</a></p>
                         <p class="fs-18 fontSFUBold pull-right">$ {{number_format($product->price, 0)}}</p>
-                        <p class="product-type text-uper">space gray</p>
+                        <p class="product-type text-uper">{{$product->color}}</p>
                     </div>
                 </div>
             </div>

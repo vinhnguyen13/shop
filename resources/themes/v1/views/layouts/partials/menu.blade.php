@@ -8,10 +8,10 @@
                 <a href="">brands <span class="icon-chevron-thin-right"></span></a>
                 <div class="menu__sub">
                     <ul>
-                        <li><a href="">brands 1</a></li>
-                        <li><a href="">brands 2</a></li>
-                        <li><a href="">brands 3</a></li>
-                        <li><a href="">brands 4</a></li>
+                        <li><a href="">foootwear</a></li>
+                        <li><a href="">apparel</a></li>
+                        <li><a href="">assesorie</a></li>
+                        <li><a href="">sale</a></li>
                     </ul>
                 </div>
             </li>

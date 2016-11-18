@@ -28,6 +28,11 @@ $stock_status = \App\Models\ShopStockStatus::query()->orderBy('id')->pluck('name
 </div>
 
 <div class="form-group">
+    {{ Form::label(null, 'Color') }}
+    {{ Form::text('color', $model->color,['class' => 'form-control'])}}
+</div>
+
+<div class="form-group">
     {{ Form::label(null, 'Points') }}
     {{ Form::text('points', $model->points,['class' => 'form-control'])}}
 </div>
