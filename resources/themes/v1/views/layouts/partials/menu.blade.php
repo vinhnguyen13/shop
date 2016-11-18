@@ -3,7 +3,7 @@
         <button id="menu-close"><span></span></button>
         <ul>
             <li class="active"><a href="{{url('/')}}">home</a></li>
-            <li><a href="">store</a></li>
+            <li><a href="{{route('product.index')}}">store</a></li>
             <li class="has-sub">
                 <a href="">brands @if (!empty($categories))<span class="icon-chevron-thin-right"></span>@endif</a>
                 @if (!empty($categories))

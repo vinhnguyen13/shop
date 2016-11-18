@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = app(ShopProduct::class)->getList(['status'=>1], 12);
+        $products = app(ShopProduct::class)->getList(['limit'=>30]);
         return view('home', compact('products'));
     }
 }

@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function index(Request $request, $category=null)
     {
-        $products = app(ShopProduct::class)->getList(['status'=>1], 12);
+        $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>30]);
         return view('product.index', compact('products'));
     }
 }
