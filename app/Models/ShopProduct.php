@@ -92,6 +92,7 @@ class ShopProduct extends Model
         if (!empty($values['date_available'])) {
             $this->attributes['date_available'] = Carbon::createFromFormat('d/m/Y', $values['date_available'])->format('Y-m-d');
         }
+        $this->attributes['quantity'] = 0;
     }
     /**
      * @param $images
@@ -217,6 +218,7 @@ class ShopProduct extends Model
                 ]);
                 $validate = $productSize->validate($productSize->attributes);
                 if ($validate->passes()) {
+                    $this->attributes['quantity'] += $value['quantity'];
                     $productSize->save();
                 } else {
                     $this->errors[] = $validate->getMessageBag();
@@ -224,6 +226,7 @@ class ShopProduct extends Model
                 }
             }
         }
+        $this->update();
         return true;
     }
 

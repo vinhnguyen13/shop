@@ -5,7 +5,7 @@
 
 <div class="form-group required">
     {{ Form::label(null, 'Quantity') }}
-    {{ Form::text('quantity', $model->quantity,['class' => 'form-control'])}}
+    {{ Form::text('quantity', $model->quantity,['class' => 'form-control', 'readonly'=>true])}}
 </div>
 
 <?php
