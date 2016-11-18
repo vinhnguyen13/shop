@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Category', 'h1_href'=>route('admin.category.index'), 'h1_small'=>'Category Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Product', 'h1_href'=>route('admin.product.index'), 'h1_small'=>'Product Management']])
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">View Detail</h3>
-            <a href="{{ route('admin.category.edit', ['id' => $model->id]) }}" class="btn btn-sm btn-info pull-right">Edit</a>
+            <a href="{{ route('admin.product.edit', ['id' => $model->id]) }}" class="btn btn-sm btn-info pull-right">Edit</a>
         </div>
         <div class="box-body">
             <div class="form-group">

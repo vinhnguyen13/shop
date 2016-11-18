@@ -35,6 +35,12 @@ class ShipperController extends Controller
         return view('shipper.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopShipper::find($id);
+        return view('shipper.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopShipper::find($id);

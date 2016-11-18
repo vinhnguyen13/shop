@@ -30,6 +30,12 @@ class ManufacturerController extends Controller
         return view('manufacturer.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopManufacturer::find($id);
+        return view('manufacturer.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopManufacturer::find($id);

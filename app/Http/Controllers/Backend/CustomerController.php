@@ -30,6 +30,12 @@ class CustomerController extends Controller
         return view('customer.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopCustomer::find($id);
+        return view('customer.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopCustomer::find($id);

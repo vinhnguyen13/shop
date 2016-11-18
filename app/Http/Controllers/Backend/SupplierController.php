@@ -30,6 +30,12 @@ class SupplierController extends Controller
         return view('supplier.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopSupplier::find($id);
+        return view('supplier.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopSupplier::find($id);

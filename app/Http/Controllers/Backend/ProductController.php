@@ -30,6 +30,12 @@ class ProductController extends Controller
         return view('product.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopProduct::find($id);
+        return view('product.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopProduct::find($id);

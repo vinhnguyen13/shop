@@ -33,6 +33,12 @@ class CategoryController extends Controller
         return view('category.form', compact('model', 'image'));
     }
 
+    public function show(Request $request, $id)
+    {
+        $model = ShopCategory::find($id);
+        return view('category.view', compact('model'));
+    }
+
     public function edit(Request $request, $id)
     {
         $model = ShopCategory::find($id);
