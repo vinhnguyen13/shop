@@ -48,8 +48,8 @@
                             <p class="text-uper">available size</p>
                         </div>
                         <div class="clearfix">
-                            <p><a href="" class="product-name text-uper">nike kobe lontrau</a></p>
-                            <p class="fs-18 fontSFUBold pull-right">? 3.800.000</p>
+                            <p><a href="" class="product-name text-uper">{{$product->name}}</a></p>
+                            <p class="fs-18 fontSFUBold pull-right">$ {{$product->price}}</p>
                             <p class="product-type text-uper">space gray</p>
                         </div>
                     </div>
