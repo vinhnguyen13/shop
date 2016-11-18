@@ -20,8 +20,6 @@ class ShopProduct extends Model
     const TYPE_SPECIAL = 'special';
     const TYPE_SIZE = 'size';
 
-    private $errors = [];
-
     /**
      * The "booting" method of the model.
      *
@@ -50,6 +48,14 @@ class ShopProduct extends Model
             'price' => 'required|numeric|min:2',
             'points' => 'numeric|min:0',
         ];
+    }
+
+    public function images(){
+        return $this->hasMany(ShopProductImage::class, 'product_id')->orderBy('order');
+    }
+
+    public function sizes(){
+        return $this->hasMany(ShopProductSize::class, 'product_id');
     }
 
     /**

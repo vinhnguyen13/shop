@@ -27,6 +27,9 @@
     <div class="row products">
         @if (!empty($products))
             @foreach($products as $product)
+            @php
+                $sizes = $product->sizes;
+            @endphp
             <div class="col-lg-3 col-xs-6 col-md-4">
                 <div class="product__item">
                     <div class="product__item--pic">
@@ -34,22 +37,21 @@
                     </div>
                     <div class="product__item--infor">
                         <div class="text-center mgB-40">
-                            <div class="size-item">
-                                <a href="" class="size">6</a>
-                                <a href="" class="size">7</a>
-                                <a href="" class="size">7.5</a>
-                                <a href="" class="size">8</a>
-                                <a href="" class="size">8.5</a>
-                                <a href="" class="size">9</a>
-                                <a href="" class="size">10</a>
-                                <a href="" class="size">11</a>
-                                <a href="" class="size">12</a>
-                            </div>
-                            <p class="text-uper">available size</p>
+                            @if (!empty($sizes) && count($sizes) > 0)
+                                <div class="size-item">
+                                    @foreach($sizes as $size)
+                                        <a href="" class="size">{{$size->size}}</a>
+                                    @endforeach
+                                </div>
+                                <p class="text-uper">available size</p>
+                            @else
+                                <div class="size-item">&nbsp;</div>
+                                <p class="text-uper">no size</p>
+                            @endif
                         </div>
                         <div class="clearfix">
                             <p><a href="" class="product-name text-uper">{{$product->name}}</a></p>
-                            <p class="fs-18 fontSFUBold pull-right">$ {{$product->price}}</p>
+                            <p class="fs-18 fontSFUBold pull-right">$ {{number_format($product->price, 0)}}</p>
                             <p class="product-type text-uper">space gray</p>
                         </div>
                     </div>
@@ -207,13 +209,13 @@
                 effect : "fadeIn"
             });
 
-            var swiper = new Swiper('.slidehomepage', {
+            /*var swiper = new Swiper('.slidehomepage', {
                 pagination: '.swiper-pagination',
                 paginationClickable: true,
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
                 autoplay: 4000
-            });
+            });*/
         });
     </script>
 @endpush

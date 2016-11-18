@@ -17,6 +17,8 @@ use Carbon\Carbon;
 
 class ShopProduct extends MainShopProduct
 {
+    private $errors = [];
+
     public function gridIndex(){
         $query = DB::table('shop_product AS a');
         $grid = new Grid($query, [
