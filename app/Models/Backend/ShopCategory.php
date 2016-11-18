@@ -56,7 +56,15 @@ class ShopCategory extends MainShopCategory
     public function processingCategory($values)
     {
         if (!empty($values['name'])) {
-            $this->attributes['slug'] = str_slug($values['name']);
+            $slug = str_slug($values['name']);
+            $checkSlug = $this->query()->where(['slug'=>$slug])->where('id', '!=', $this->id)->get()->count();
+            $i = 1;
+            while ($checkSlug > 0) {
+                $slug = $slug . $i;
+                $checkSlug = $this->query()->where(['slug'=>$slug])->where('id', '!=', $this->id)->get()->count();
+                $i++;
+            }
+            $this->attributes['slug'] = $slug;
         }
     }
 
