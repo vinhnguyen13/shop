@@ -44,7 +44,6 @@ class ShopProduct extends Model
         return [
             'name' => 'required',
             'description' => 'required',
-            'quantity' => 'required',
             'price' => 'required|numeric|min:2',
             'points' => 'numeric|min:0',
         ];
