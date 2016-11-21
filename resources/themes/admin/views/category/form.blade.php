@@ -14,6 +14,16 @@ $isNewRecord = !empty($model->id) ? false : true;
         <div class="box-body">
             {{ Form::open(['route' => 'admin.category.store', 'files' => true]) }}
                 {{ Form::hidden('id', $model->id) }}
+
+                <?php
+                $categories = \App\Models\ShopCategory::where(['status'=>true, 'parent_id'=>0])->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+                $categoriesSelected = app(\App\Models\Backend\ShopCategory::class)->getCategoriesToForm();
+                ?>
+                <div class="form-group">
+                    {{ Form::label(null, 'Parent') }}
+                    {!! Form::select('parent[]', $categories, $categoriesSelected, ['class' => 'form-control category-list', 'multiple'=>'multiple', 'style'=>'width: 100%;']) !!}
+                </div>
+
                 <div class="form-group">
                     {{ Form::label(null, 'Name') }}
                     {{ Form::text('name', $model->name,['class' => 'form-control'])}}
@@ -49,3 +59,16 @@ $isNewRecord = !empty($model->id) ? false : true;
         </div>
     </div>
 @endsection
+
+
+@push('styles')
+<link rel="stylesheet" href="/themes/admin/plugins/select2/select2.min.css">
+@endpush
+
+
+@push('scripts')
+    <script src="/themes/admin/plugins/select2/select2.js"></script>
+    <script type="text/javascript">
+        $( ".category-list" ).select2();
+    </script>
+@endpush

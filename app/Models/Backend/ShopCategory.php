@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopCategory as MainShopCategory;
+use App\Models\ShopCategoryParent;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
 use DB;
@@ -46,6 +47,7 @@ class ShopCategory extends MainShopCategory
         $instance->fill($values);
         $instance->processingCategory($values);
         $instance->save();
+        $instance->processingCategoryParent($values);
         $instance->processingImages($values);
         return $instance;
     }
@@ -65,6 +67,23 @@ class ShopCategory extends MainShopCategory
                 $i++;
             }
             $this->attributes['slug'] = $slug;
+        }
+    }
+
+    /**
+     * @param $values
+     */
+    public function processingCategoryParent($values)
+    {
+        if (!empty($values['parent'])) {
+            ShopCategoryParent::query()->where(['category_id' => $this->id])->delete();
+            foreach($values['parent'] as $parent_id){
+                $productCategory = new ShopCategoryParent();
+                $productCategory->fill([
+                    'category_id' => $this->id,
+                    'parent_id' => $parent_id
+                ])->save();
+            }
         }
     }
 
@@ -107,5 +126,17 @@ class ShopCategory extends MainShopCategory
             );
         }
         return $imageList;
+    }
+
+    public function getCategoriesToForm(){
+        $categories = ShopCategoryParent::query()->where(['category_id'=>$this->id])->get();
+        $return = [];
+        if(!empty($categories)){
+            foreach ($categories as $category)
+            {
+                $return[] = $category->parent_id;
+            }
+        }
+        return $return;
     }
 }
