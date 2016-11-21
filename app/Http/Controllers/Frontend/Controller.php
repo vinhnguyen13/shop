@@ -16,9 +16,13 @@ class Controller extends BaseController
     public function __construct()
     {
         $minutes = 10;
-        $categories = Cache::remember('users', $minutes, function() {
+        $categories = Cache::remember('categories', $minutes, function() {
             return DB::table('shop_category')->get();
         });
+        $manufacturers = Cache::remember('manufacturers', $minutes, function() {
+            return DB::table('shop_manufacturer')->get();
+        });
         \View::share('categories', $categories);
+        \View::share('manufacturers', $manufacturers);
     }
 }

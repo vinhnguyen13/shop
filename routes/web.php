@@ -37,5 +37,6 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
      * Product
      */
     Route::get('/product', ['uses' => 'ProductController@index'])->name('product.index');
-    Route::get('/product/{category}', ['uses' => 'ProductController@index'])->name('product.category');
+    Route::get('/product/store/{category}', ['uses' => 'ProductController@store'])->name('product.category');
+    Route::get('/product/brand/{brand}', ['uses' => 'ProductController@brand'])->name('product.brand');
 });

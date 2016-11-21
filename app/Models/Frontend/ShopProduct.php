@@ -3,7 +3,8 @@
 namespace App\Models\Frontend;
 
 use App\Helpers\Grid;
-use App\Models\ShopCategory;
+use App\Models\Backend\ShopManufacturer;
+use App\Models\Backend\ShopCategory;
 use App\Models\ShopProduct as MainShopProduct;
 use DB;
 
@@ -18,6 +19,12 @@ class ShopProduct extends MainShopProduct
                 $query->join('shop_product_category AS b', function ($join) use ($category){
                     $join->on('a.id', '=', 'b.product_id')->where(['b.category_id'=>$category->id]);
                 });
+            }
+        }
+        if(!empty($params['brand'])){
+            $manufacturer = ShopManufacturer::query()->where(['slug'=>$params['brand']])->first();
+            if(!empty($manufacturer)){
+                $query->where(['manufacturer_id'=>$manufacturer->id]);
             }
         }
         $products = $query->limit($params['limit'])->orderBy('updated_at', 'DESC')->get();

@@ -3,9 +3,8 @@
         <button id="menu-close"><span></span></button>
         <ul>
             <li class="active"><a href="{{url('/')}}">home</a></li>
-            <li><a href="{{route('product.index')}}">store</a></li>
             <li class="has-sub">
-                <a href="">brands @if (!empty($categories))<span class="icon-chevron-thin-right"></span>@endif</a>
+                <a href="">store @if (!empty($categories))<span class="icon-chevron-thin-right"></span>@endif</a>
                 @if (!empty($categories))
                 <div class="menu__sub">
                     <ul>
@@ -14,6 +13,18 @@
                         @endforeach
                     </ul>
                 </div>
+                @endif
+            </li>
+            <li class="has-sub">
+                <a href="">brands @if (!empty($manufacturers))<span class="icon-chevron-thin-right"></span>@endif</a>
+                @if (!empty($manufacturers))
+                    <div class="menu__sub">
+                        <ul>
+                            @foreach($manufacturers as $manufacturer)
+                                <li><a href="{{route('product.brand', ['brand'=>str_slug($manufacturer->slug)])}}">{{$manufacturer->name}}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             </li>
             <li><a href="">consigment</a></li>

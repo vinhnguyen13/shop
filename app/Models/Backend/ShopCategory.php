@@ -45,7 +45,7 @@ class ShopCategory extends MainShopCategory
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
-        $instance->processingCategory($values);
+        $instance->processingSave($values);
         $instance->save();
         $instance->processingCategoryParent($values);
         $instance->processingImages($values);
@@ -55,7 +55,7 @@ class ShopCategory extends MainShopCategory
     /**
      * @param $values
      */
-    public function processingCategory($values)
+    public function processingSave($values)
     {
         if (!empty($values['name'])) {
             $slug = str_slug($values['name']);

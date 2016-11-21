@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ShopManufacturer extends Model
 {
     protected $table = 'shop_manufacturer';
+    protected $fillable = ['name', 'slug', 'image', 'order'];
+
     /**
      * The "booting" method of the model.
      *
@@ -23,19 +25,5 @@ class ShopManufacturer extends Model
             }
 
         });
-    }
-    /**
-     * Create or update a related record matching the attributes, and fill it with values.
-     *
-     * @param  array  $attributes
-     * @param  array  $values
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function updateOrCreate(array $attributes, array $values = [])
-    {
-        $instance = $this->firstOrNew($attributes);
-        $instance->fill($values);
-        $instance->save();
-        return $instance;
     }
 }
