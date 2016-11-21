@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\AppHelper;
+use App\Models\Backend\ShopManufacturer;
 use App\Models\Frontend\ShopProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -31,5 +32,12 @@ class ProductController extends Controller
     {
         $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>30]);
         return view('product.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $product = ShopProduct::find($id);
+        $products = app(ShopProduct::class)->getList(['limit'=>30]);
+        return view('product.detail', compact('product', 'products'));
     }
 }

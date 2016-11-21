@@ -1,13 +1,14 @@
 @if (!empty($products) && $products->count())
     <div class="row products">
     @foreach($products as $product)
-        @php
+        <?php
+        $url = route('product.detail', ['id'=>$product->id, 'slug'=>str_slug($product->name)]);
         $sizes = $product->sizes;
-        @endphp
+        ?>
         <div class="col-lg-3 col-xs-6 col-md-4">
             <div class="product__item">
                 <div class="product__item--pic">
-                    <a href=""><img data-original="{{$product->url()}}" alt="" class="lazy" /></a>
+                    <a href="{{$url}}"><img data-original="{{$product->url()}}" alt="" class="lazy" /></a>
                 </div>
                 <div class="product__item--infor">
                     <div class="text-center mgB-40">
