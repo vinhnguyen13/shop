@@ -3,18 +3,9 @@
 @section('content')
     <div class="container">
         <div class="text-center">
-            <ul class="breakcum">
-                <li><a href="">home</a></li>
-                <li><span>/</span></li>
-                <li class="active"><a href="">foot wear</a></li>
-            </ul>
+            @include('layouts.partials.breadcrumb')
         </div>
-        <div class="row products">
-            @include('product.partials.item')
-        </div>
-        <div class="text-center">
-            <a href="" class="btn-see-more text-uper">see more</a>
-        </div>
+        @include('product.partials.item')
     </div>
 @endsection
 

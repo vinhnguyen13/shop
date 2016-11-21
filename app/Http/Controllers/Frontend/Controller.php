@@ -22,7 +22,9 @@ class Controller extends BaseController
         $manufacturers = Cache::remember('manufacturers', $minutes, function() {
             return DB::table('shop_manufacturer')->get();
         });
-        \View::share('categories', $categories);
-        \View::share('manufacturers', $manufacturers);
+        \View::share([
+            'categories'=> $categories,
+            'manufacturers' => $manufacturers
+        ]);
     }
 }

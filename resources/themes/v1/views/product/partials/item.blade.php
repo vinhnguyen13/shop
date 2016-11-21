@@ -1,4 +1,5 @@
-@if (!empty($products))
+@if (!empty($products) && $products->count())
+    <div class="row products">
     @foreach($products as $product)
         @php
         $sizes = $product->sizes;
@@ -31,4 +32,12 @@
             </div>
         </div>
     @endforeach
+    </div>
+    <div class="text-center">
+        <a href="{{route('product.index')}}" class="btn-see-more text-uper">see more</a>
+    </div>
+@else
+    <div class="row products">
+        No products
+    </div>
 @endif

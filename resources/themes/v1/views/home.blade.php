@@ -24,20 +24,10 @@
     <div class="swiper-button-prev"></div>
 </div>
 <div class="container">
-    <div class="row products">
-        @include('product.partials.item')
-    </div>
-    <div class="text-center">
-        <a href="{{route('product.index')}}" class="btn-see-more text-uper">see more</a>
-    </div>
+    @include('product.partials.item')
 </div>
 <div class="container">
-    <div class="row products">
-        @include('product.partials.item')
-    </div>
-    <div class="text-center">
-        <a href="{{route('product.index')}}" class="btn-see-more text-uper">see more</a>
-    </div>
+    @include('product.partials.item')
 </div>
 <div class="swiper-container slidehomepage">
     <div class="swiper-wrapper">
