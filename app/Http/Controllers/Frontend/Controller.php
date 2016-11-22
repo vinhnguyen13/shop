@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Helpers\Meta;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -22,7 +23,10 @@ class Controller extends BaseController
         $manufacturers = Cache::remember('manufacturers', $minutes, function() {
             return DB::table('shop_manufacturer')->get();
         });
+        $aliasUrl = \Route::getCurrentRoute()->getName();
+        $metaHTML = app()->make(Meta::class)->addMeta($aliasUrl);
         \View::share([
+            'metaHTML'=> $metaHTML,
             'categories'=> $categories,
             'manufacturers' => $manufacturers
         ]);

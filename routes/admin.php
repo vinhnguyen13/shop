@@ -128,5 +128,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::patch('/coupon-code/edit/{id}', ['uses' => 'CouponCodeController@update', 'as' => 'admin.cpcode.update']);
         Route::get('/coupon-code/donate', ['uses' => 'CouponCodeController@donate', 'as' => 'admin.cpcode.donate']);
         Route::post('/coupon-code/donate', ['uses' => 'CouponCodeController@donate', 'as' => 'admin.cpcode.donate']);
+        /*
+         * Systems
+         */
+        Route::get('/cache', ['uses' => 'HomeController@cache', 'as' => 'admin.cache.index']);
+        Route::get('/cache/clear/{key}', ['uses' => 'HomeController@cacheClear', 'as' => 'admin.cache.clear']);
     });
 });

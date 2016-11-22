@@ -9,6 +9,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Services\UploadMedia;
 use Illuminate\Http\Request;
+use Cache;
+use Redirect;
 
 class HomeController extends Controller
 {
@@ -43,6 +45,17 @@ class HomeController extends Controller
             return $response;
         }
         return [];
+    }
+
+    public function cache(Request $request)
+    {
+        return view('home.cache');
+    }
+
+    public function cacheClear(Request $request, $key)
+    {
+        Cache::forget($key);
+        return Redirect::route('admin.cache.index');
     }
 
 }
