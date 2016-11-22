@@ -84,7 +84,7 @@ class ShopProduct extends Model
     {
         $url = '/images/default-shoes.jpg';
         $imageService = app(ImageService::class);
-        $propertyMedia = app(UserProfile::class)->propertyMedias();
+        $propertyMedia = app(ShopProduct::class)->propertyMedias();
         $imageService->setSize($propertyMedia['sizes']);
         $folder = $imageService->folder($size);
         if(app(ImageService::class)->exists($this->folder.DS.$folder.DS.$this->image)){
