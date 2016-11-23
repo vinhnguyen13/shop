@@ -24,13 +24,13 @@ class Meta
             $metaHtml = $this->defaultMeta();
             $data = trans("meta.$aliasUrl");
             if(!empty($data) && is_array($data)) {
-                $metaParse = Cache::remember('meta', 30, function() use ($data) {
+                $metaParse = Cache::remember('meta_'.$aliasUrl, 30, function() use ($data) {
                     return $this->parseMeta($data);
                 });
                 $metaHtml .= $metaParse;
             }else{
                 $data = trans("meta.*");
-                $metaParse = Cache::remember('meta', 30, function() use ($data) {
+                $metaParse = Cache::remember('meta_'.$aliasUrl, 30, function() use ($data) {
                     return $this->parseMeta($data);
                 });
                 $metaHtml .= $metaParse;
