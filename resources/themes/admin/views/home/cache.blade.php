@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'User', 'h1_href'=>route('admin.user.index'), 'h1_small'=>'User Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'User', 'h1_href'=>route('admin.cache.index'), 'h1_small'=>'User Management']])
 @endsection
 
 @section('content')
@@ -25,6 +25,16 @@
                 </td>
                 <td>
                     <a href="{{route('admin.cache.clear', ['key'=>'meta'])}}" class="glyphicon glyphicon-trash glyphicon-last-child" data-toggle="tooltip" data-original-title="Delete"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>All</td>
+                <td>
+                    Cache All
+                </td>
+                <td>
+                    <a href="{{route('admin.cache.clear')}}" class="glyphicon glyphicon-trash glyphicon-last-child" data-toggle="tooltip" data-original-title="Delete"></a>
                 </td>
             </tr>
             </tbody>

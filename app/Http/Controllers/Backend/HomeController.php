@@ -52,9 +52,14 @@ class HomeController extends Controller
         return view('home.cache');
     }
 
-    public function cacheClear(Request $request, $key)
+    public function cacheClear(Request $request)
     {
-        Cache::forget($key);
+        $key = $request->get('key');
+        if(!empty($key)){
+            Cache::forget($key);
+        }else{
+            Cache::flush();
+        }
         return Redirect::route('admin.cache.index');
     }
 
