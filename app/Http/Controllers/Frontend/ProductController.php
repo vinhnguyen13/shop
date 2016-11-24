@@ -28,6 +28,9 @@ class ProductController extends Controller
     public function store(Request $request, $category=null)
     {
         $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>30]);
+        if($request->ajax()) {
+            return $this->loadMore($request, $products);
+        }
         return view('product.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
     }
 
