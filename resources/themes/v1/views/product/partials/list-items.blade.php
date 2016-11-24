@@ -5,7 +5,9 @@
     <div class="text-center">
 {{--        {!! $products->render() !!}--}}
 {{--        {{ $products->links() }}--}}
-        <a href="{{$products->nextPageUrl()}}" class="btn-see-more text-uper">see more</a>
+        @if($products->hasMorePages())
+            <a href="{{$products->nextPageUrl()}}" class="btn-see-more text-uper">see more</a>
+        @endif
     </div>
 @else
     <div class="row products">
