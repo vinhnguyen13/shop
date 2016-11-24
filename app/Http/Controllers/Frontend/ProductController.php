@@ -36,7 +36,7 @@ class ProductController extends Controller
 
     public function brand(Request $request, $brand=null)
     {
-        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>3]);
+        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>30]);
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
