@@ -31,7 +31,7 @@ class ShopProduct extends MainShopProduct
                 app(AppHelper::class)->setBreadcrumb([route('product.brand', ['brand'=>str_slug($manufacturer->slug)])=>$manufacturer->name]);
             }
         }
-        $products = $query->limit($params['limit'])->orderBy('updated_at', 'DESC')->get();
+        $products = $query->orderBy('updated_at', 'DESC')->paginate($params['limit'], ['*'], 'page');
         return $products;
     }
 }

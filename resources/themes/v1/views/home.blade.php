@@ -24,10 +24,10 @@
     <div class="swiper-button-prev"></div>
 </div>
 <div class="container">
-    @include('product.partials.item')
+    @include('product.partials.list-items')
 </div>
 <div class="container">
-    @include('product.partials.item')
+    @include('product.partials.list-items')
 </div>
 <div class="swiper-container slidehomepage">
     <div class="swiper-wrapper">

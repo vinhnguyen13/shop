@@ -19,6 +19,9 @@ class ProductController extends Controller
     public function index(Request $request, $category=null)
     {
         $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>30]);
+        if($request->ajax()) {
+            return $this->loadMore($request, $products);
+        }
         return view('product.index', compact('products'));
     }
 
@@ -30,8 +33,24 @@ class ProductController extends Controller
 
     public function brand(Request $request, $brand=null)
     {
-        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>30]);
+        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>3]);
+        if($request->ajax()) {
+            return $this->loadMore($request, $products);
+        }
         return view('product.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
+    }
+
+    private function loadMore($request, $products){
+        if($request->ajax()) {
+            $next_page = false;
+            if($products->hasMorePages()){
+                $next_page = $products->nextPageUrl();
+            }
+            return [
+                'html' => view('product.partials.items')->with(compact('products'))->render(),
+                'next_page' => $next_page,
+            ];
+        }
     }
 
     public function detail(Request $request, $id)
