@@ -51,6 +51,7 @@ class ShopManufacturer extends MainShopManufacturer
                 $i++;
             }
             $this->attributes['slug'] = $slug;
+            $this->attributes['order'] = !empty($this->attributes['order']) ? $this->attributes['order'] : 0;
         }
     }
 }
