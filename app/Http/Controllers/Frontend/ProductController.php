@@ -72,4 +72,9 @@ class ProductController extends Controller
         exit;
 
     }
+
+    public function checkout(Request $request)
+    {
+        return view('product.checkout', compact('product', 'products'));
+    }
 }
