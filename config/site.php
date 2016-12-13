@@ -6,5 +6,8 @@
  * Time: 10:47 AM
  */
 return [
+    'main' => [
+        'version_deploy' => env('VERSION_DEPLOY', 3)
+    ],
     'theme' => ['backend'=>'admin', 'frontend'=>'v1'],
 ];

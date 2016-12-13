@@ -62,4 +62,14 @@ class ProductController extends Controller
         $products = app(ShopProduct::class)->getList(['limit'=>30]);
         return view('product.detail', compact('product', 'products'));
     }
+
+    public function addCart(Request $request)
+    {
+
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+        exit;
+
+    }
 }

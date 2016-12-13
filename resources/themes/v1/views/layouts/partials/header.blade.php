@@ -2,7 +2,7 @@
     <div class="container">
         <div class="pull-left lh-50 header__left">
             <button id="menu-open" class=""><span></span></button>
-            <a href=""><span class="icon-697822"></span></a>
+            <a href="{{route('login')}}"><span class="icon-697822"></span></a>
         </div>
         <div class="pull-right lh-50 header__right">
             <form id="search">

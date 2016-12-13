@@ -6,6 +6,8 @@
             <div class="detail__img col-sm-6">
                 <?php
                 $images = $product->images;
+                $sizes = $product->sizes;
+                $quantities = [1,2,3,4,5,6,7,8,9,10];
                 ?>
                 @if (!empty($images) && count($images) > 0)
                 <div class="swiper-container slidedetailpage">
@@ -35,27 +37,31 @@
                 <p class="text-uper fontSFUL fs-20 mgB-5">white/gum (sku: {{$product->sku}})</p>
                 <p class="fontSFUBold fs-20 mgB-15">vnđ {{number_format($product->price, 0)}}</p>
                 <div class="row mgB-25">
+                    <form id="frmAddCart" method="POST">
+                    @if (!empty($sizes))
                     <div class="col-xs-12 col-sm-5 mgB-10">
                         <p class="text-uper fontSFUMeBold mgB-5">size us</p>
-                        <select name="" id="" class="w-100">
-                            <option value="">8 US</option>
-                            <option value="">8 US</option>
-                            <option value="">8 US</option>
-                            <option value="">8 US</option>
+                        <select name="size" id="size" class="w-100">
+                            @foreach($sizes as $size)
+                                <option value="{{$size->id}}">{{$size->size}}</option>
+                            @endforeach
                         </select>
                     </div>
+                    @endif
                     <div class="col-xs-6 col-sm-3">
                         <p class="text-uper fontSFUMeBold mgB-5">Số lượng</p>
-                        <select name="" id="" class="w-100">
-                            <option value="">1</option>
-                            <option value="">1</option>
-                            <option value="">1</option>
-                            <option value="">1</option>
+                        @if (!empty($quantities))
+                        <select name="quantity" id="quantity" class="w-100">
+                            @foreach($quantities as $quantity)
+                                <option value="{{$quantity}}">{{$quantity}}</option>
+                            @endforeach
                         </select>
+                        @endif
                     </div>
                     <div class="col-xs-6 col-sm-4">
                         <button type="submit" class="btn-buy text-uper">buy now</button>
                     </div>
+                    </form>
                 </div>
                 <div class="detail__desc--intro">
                     {!! $product->description !!}
@@ -81,30 +87,9 @@
 @push('scripts')
     <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var swiper = new Swiper('.slidedetailpage', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true,
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                onSlideChangeStart: function (swiper) {
-                    $('.detail__img--thumb li').removeClass('active');
-                    $('.detail__img--thumb li').eq(swiper.activeIndex).addClass('active');
-                }
-            });
-            $('.detail__img--thumb li').eq(0).addClass('active');
-            $('.detail__img--thumb li a').on('click', function (e) {
-                e.preventDefault();
-                var i = $(this).parent().index();
-                $('.detail__img--thumb li').removeClass('active');
-                $(this).parent().addClass('active');
-                swiper.slideTo(i);
-            });
-
-            $("img.lazy").lazyload({
-                effect : "fadeIn"
-            });
-        });
+    <script>
+        var urlAddCart = "{{route('product.addCart')}}";
+        var dataRequest = "{{encrypt([$product->id])}}";
     </script>
+    <script type="text/javascript" src="/themes/v1/js/product.js"></script>
 @endpush
