@@ -24,9 +24,9 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@showRegistrationForm', 'as' => 'register']);
     Route::post('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@register', 'as' => 'register.store']);
     Route::get('/password/forgot', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm', 'as' => 'password.form']);
-    Route::post('/password/email', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail', 'as' => 'password.reset']);
-    Route::get('/password/reset/{token}', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@showResetForm', 'as' => 'password.form']);
-    Route::post('/password/reset', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@reset', 'as' => 'password.form']);
+    Route::post('/password/email', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail', 'as' => 'password.sendResetLinkEmail']);
+    Route::get('/password/reset/{token}', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@showResetForm', 'as' => 'password.showResetForm']);
+    Route::post('/password/reset', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@reset', 'as' => 'password.reset']);
     Route::get('/user/confirm-login/{id}/{code}', ['uses' => 'UserController@confirmLogin', 'as' => 'user.confirmLogin']);
     /*
      *  Socialite authencation
