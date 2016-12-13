@@ -89,7 +89,7 @@
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
     <script>
         var urlAddCart = "{{route('product.addCart')}}";
-        var dataRequest = "{{encrypt([$product->id])}}";
+        var dataRequest = "{{encrypt($product->id)}}";
     </script>
     <script type="text/javascript" src="/themes/v1/js/product.js"></script>
 @endpush

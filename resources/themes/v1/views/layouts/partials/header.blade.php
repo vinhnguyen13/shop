@@ -71,7 +71,7 @@
                         </div>
                         <div class="text-center">
                             <p class="fontSFURe fs-15 mgB-15">Shipping &amp; taxes calculated at checkout</p>
-                            <a href="" class="text-uper btn-checkout fontSFUL">check out</a>
+                            <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">check out</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
         </div>
         <div class="text-center lh-50 header__logo">
             <span>logo</span>
-            <a href=""><img src="/themes/v1/icons/logo-header.png" alt=""/></a>
+            <a href="{{url('/')}}"><img src="/themes/v1/icons/logo-header.png" alt=""/></a>
         </div>
     </div>
 </header>

@@ -65,11 +65,19 @@ class ProductController extends Controller
 
     public function addCart(Request $request)
     {
+        $data = $request->get('data');
+        $pid = decrypt($data);
+        $quantity = $request->get('quantity');
+        $size = $request->get('size');
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-        exit;
+        $products = app(ShopProduct::class)->addCart($pid, $size, $quantity);
+        dump($products);
 
+    }
+
+    public function checkout(Request $request)
+    {
+        $cart = app(ShopProduct::class)->getCart();
+        return view('product.checkout', compact('cart'));
     }
 }
