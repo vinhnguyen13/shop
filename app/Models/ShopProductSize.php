@@ -29,4 +29,16 @@ class ShopProductSize extends Model
             'quantity.numeric' => 'Size tab >> Quantity must be between 1 and 5 digits.',
         ];
     }
+
+    public function product()
+    {
+        return $this->hasOne('App\Models\ShopProduct', 'id', 'product_id');
+    }
+
+    public function price(){
+        if(!empty($this->price)){
+            return $this->price;
+        }
+        return $this->product->price();
+    }
 }

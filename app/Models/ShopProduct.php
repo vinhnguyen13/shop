@@ -57,6 +57,10 @@ class ShopProduct extends Model
         return $this->hasMany(ShopProductSize::class, 'product_id');
     }
 
+    public function price(){
+        return $this->price;
+    }
+
     /**
      * @param null $folder
      * @return array
