@@ -50,10 +50,11 @@
                         @foreach($cart as $item)
                             <?php
                             $product = App\Models\Frontend\ShopProduct::find($item['product_id']);
-                            $size = App\Models\Frontend\ShopProductSize::find($item['size']);
-                            $price = $size->price();
+                            $size = $product->size($item['size']);
+                            $price = $product->priceWithSize();
                             $subtotalProduct = $price * $item['quantity'];
                             $subtotal += $subtotalProduct;
+                            $tax += $product->taxWithPrice($price);
                             ?>
                             <tr>
                                 <td class="col-md-9"><em>{{$product->name}}</em></td>
@@ -80,7 +81,7 @@
                                 <strong>{{number_format($subtotal)}}</strong>
                             </p>
                             <p>
-                                <strong>{{$tax}}</strong>
+                                <strong>{{number_format($tax)}}</strong>
                             </p>
                         </td>
                     </tr>

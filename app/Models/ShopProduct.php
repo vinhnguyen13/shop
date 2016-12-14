@@ -57,8 +57,46 @@ class ShopProduct extends Model
         return $this->hasMany(ShopProductSize::class, 'product_id');
     }
 
+    public function tax(){
+        return $this->hasOne(ShopTaxClass::class, 'id', 'tax_class_id');
+    }
+
+    public function size($sizeID){
+        return $this->size = ShopProductSize::find($sizeID);
+    }
+
+    public function taxWithPrice($price){
+        if(!empty($this->tax)){
+            if($this->tax->type == ShopTaxClass::TYPE_FLAT){
+                return $this->tax->rate;
+            }elseif($this->tax->type == ShopTaxClass::TYPE_PERCEN){
+                return ($this->tax->rate / 100) * $price;
+            }
+        }
+        return 0;
+    }
+
     public function price(){
         return $this->price;
+    }
+
+    public function priceSpecial(){
+        return $this->price;
+    }
+
+    public function priceWithSize($sizeID = null){
+        if(!empty($sizeID)){
+            $size = $this->size($sizeID);
+        }
+        if(!empty($this->size)){
+            $size = $this->size;
+        }
+        if(!empty($size)) {
+            $price = $size->price();
+        }else{
+            $price = $this->price();
+        }
+        return $price;
     }
 
     /**
