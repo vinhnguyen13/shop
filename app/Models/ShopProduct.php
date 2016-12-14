@@ -61,8 +61,13 @@ class ShopProduct extends Model
         return $this->hasOne(ShopTaxClass::class, 'id', 'tax_class_id');
     }
 
-    public function size($sizeID){
-        return $this->size = ShopProductSize::find($sizeID);
+    public function setCart($sizeID, $quantity){
+        $this->size = ShopProductSize::find($sizeID);
+        $this->quantity = $quantity;
+    }
+
+    public function size(){
+        return !empty($this->size) ? $this->size->size : '';
     }
 
     public function taxWithPrice($price){

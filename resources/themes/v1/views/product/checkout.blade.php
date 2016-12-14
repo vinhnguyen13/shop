@@ -50,7 +50,7 @@
                         @foreach($cart as $item)
                             <?php
                             $product = App\Models\Frontend\ShopProduct::find($item['product_id']);
-                            $size = $product->size($item['size']);
+                            $product->setCart($item['size'], $item['quantity']);
                             $price = $product->priceWithSize();
                             $subtotalProduct = $price * $item['quantity'];
                             $subtotal += $subtotalProduct;
@@ -58,7 +58,7 @@
                             ?>
                             <tr>
                                 <td class="col-md-9"><em>{{$product->name}}</em></td>
-                                <td class="col-md-1" style="text-align: center"> {{$size->size}} </td>
+                                <td class="col-md-1" style="text-align: center"> {{$product->size()}} </td>
                                 <td class="col-md-1" style="text-align: center"> {{$item['quantity']}} </td>
                                 <td class="col-md-1 text-center">{{number_format($price)}}</td>
                                 <td class="col-md-1 text-center">{{number_format($subtotalProduct)}}</td>
