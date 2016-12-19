@@ -39,6 +39,7 @@ class ShopProduct extends MainShopProduct
     public function getImagesToForm(){
         $images = ShopProductImage::query()->where(['product_id'=>$this->id])->orderBy('order', 'asc')->get();
         $imageList = [];
+        $imageService = $this->getImageService();
         if(!empty($images)){
             foreach($images as $image){
                 $name = $image->image;
@@ -49,7 +50,7 @@ class ShopProduct extends MainShopProduct
                     route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_PRODUCT, 'delete'=>UploadMedia::DELETE_REAL]),
                     'DELETE',
                     $image->id,
-                    Storage::url($folder .DS. app(ImageService::class)->folder('thumb') . DS . $name),
+                    Storage::url($folder .DS. $imageService->folder('thumb') . DS . $name),
                     ['name'=>'imagesReal['.$image->id.'][]', 'value'=>$folder .DS. $name],
                     ['name'=>'orderImage['.$image->id.'][]', 'value'=>$image->order]
                 );
@@ -136,14 +137,15 @@ class ShopProduct extends MainShopProduct
     public function processingImages($values)
     {
         if (!empty($values['images'])) {
+            $imageService = $this->getImageService();
             foreach ($values['images'] as $key => $image) {
                 $image = $image[0];
-                if (app(ImageService::class)->exists($image)) {
+                if ($imageService->exists($image)) {
                     $newPath = app(UploadMedia::class)->getPathDay(self::uploadFolder . DS);
                     $path = pathinfo($image);
-                    app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
+                    $imageService->moveWithSize($path['dirname'], $newPath, $path['basename']);
                     $folders = explode(DS, $path['dirname']);
-                    app(ImageService::class)->deleteDirectory(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
+                    $imageService->deleteDirectory(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
                     $productImage = new ShopProductImage();
                     $productImage->fill([
                         'product_id' => $this->id,

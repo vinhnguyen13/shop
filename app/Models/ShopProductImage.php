@@ -15,11 +15,9 @@ class ShopProductImage extends Model
     public function url($size = 'medium')
     {
         $url = '/images/default-shoes.jpg';
-        $imageService = app(ImageService::class);
-        $propertyMedia = app(ShopProduct::class)->propertyMedias();
-        $imageService->setSize($propertyMedia['sizes']);
+        $imageService = app(ShopProduct::class)->getImageService();
         $folder = $imageService->folder($size);
-        if(app(ImageService::class)->exists($this->folder.DS.$folder.DS.$this->image)){
+        if($imageService->exists($this->folder.DS.$folder.DS.$this->image)){
             $url = Storage::url($this->folder.DS.$folder.DS.$this->image);
         }
         return $url;

@@ -127,6 +127,16 @@ class ShopProduct extends Model
         ];
     }
 
+    /**
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    public function getImageService(){
+        $imageService = app(ImageService::class);
+        $propertyMedia = $this->propertyMedias();
+        $imageService->setSize($propertyMedia['sizes']);
+        return $imageService;
+    }
+
     public function url($size = 'medium')
     {
         $url = '/images/default-shoes.jpg';
