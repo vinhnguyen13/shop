@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Frontend\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Contracts\Factory as Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -37,8 +39,9 @@ class AuthController extends Controller
      * @return void
      */
 
-    public function __construct(){
+    public function __construct(Socialite $socialite){
         $this->middleware('guest', ['except' => ['logout']]);
+        $this->socialite = $socialite;
     }
 
     /**
@@ -64,4 +67,25 @@ class AuthController extends Controller
         return Redirect::back();
     }
 
+    public function getSocialAuth(Request $request, $provider=null){
+        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+
+        return $this->socialite->with($provider)->redirect();
+    }
+
+    public function getSocialAuthCallback(Request $request, $provider=null){
+        if($userSocial = $this->socialite->with($provider)->user()){
+            $user = app()->make(User::class)->loginBySocial($userSocial, $provider);
+            if(!empty($user)){
+                $return = \Auth::loginUsingId($user->id);
+                if(!empty($return)){
+                    return Redirect::to('/');
+                }else{
+                    return view('auth.login')->withErrors($return['message']);
+                }
+            }
+        }else{
+            return 'something went wrong';
+        }
+    }
 }

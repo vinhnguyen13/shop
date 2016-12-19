@@ -2,7 +2,24 @@
     <div class="container">
         <div class="pull-left lh-50 header__left">
             <button id="menu-open" class=""><span></span></button>
-            <a href="{{route('login')}}"><span class="icon-697822"></span></a>
+            <div class="dropdown">
+                <a href="" class="val-selected"><span class="icon-697822"></span></a>
+                <div class="dropdown-up-style hide">
+                    <div class="dropdown__inner">
+                        <ul>
+                            @if (Auth::guard('web')->guest())
+                                <li><a href="{{route('login')}}"><span class="icon-login"></span>Đăng nhập</a></li>
+                                <li><a href="{{route('register')}}"><span class="icon-add-user"></span>Đăng ký</a></li>
+                                {{--<li class="btn-auth-go"><a href="{{route('auth.getSocialAuth', ['provider'=>\App\Models\SocialAccount::PROVIDER_FACEBOOK])}}"><span class="icon-google-plus"></span>Google</a></li>--}}
+                                {{--<li class="btn-auth-face"><a href="{{route('auth.getSocialAuth', ['provider'=>\App\Models\SocialAccount::PROVIDER_FACEBOOK])}}"><span class="icon-facebook"></span>Facebook</a></li>--}}
+                            @else
+                                <li> <a href="javascript:;">{{auth()->user()->name}}</a></li>
+                                <li> <a href="{{route('logout')}}">Đăng xuất</a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="pull-right lh-50 header__right">
             <form id="search">

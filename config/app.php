@@ -189,6 +189,10 @@ return [
          * Image
          */
         Intervention\Image\ImageServiceProvider::class,
+        /*
+         * Socialite
+         */
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -240,6 +244,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

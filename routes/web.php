@@ -31,8 +31,8 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     /*
      *  Socialite authencation
      */
-    Route::get('/login/redirect/{provider}', ['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
-    Route::get('/login/callback/{provider}', ['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+    Route::get('/login/redirect/{provider}', ['uses' => '\App\Http\Controllers\Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+    Route::get('/login/callback/{provider}', ['uses' => '\App\Http\Controllers\Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
     /*
      * Product
      */
