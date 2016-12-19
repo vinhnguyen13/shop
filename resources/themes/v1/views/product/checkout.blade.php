@@ -3,7 +3,8 @@
 @section('content')
     <div class="container detail">
         <div class="row">
-            <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+            @if(!empty($cart))
+            <div class="well col-md-10 col-md-offset-1">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <address>
@@ -24,24 +25,29 @@
                 </div>
 
                 <div class="row">
-                    @if(!empty($cart))
-                        <form method="post" action="" class="form-horizontal">
-                            {{ csrf_field() }}
-                            @include('product.partials.cart-products')
-                            @include('product.partials.cart-shipping')
-                            @include('product.partials.cart-billing')
-                            @include('product.partials.cart-payment')
-                            <div class="form-group">
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-primary btn-lg">Pay Now</button>
-                                </div>
+                    <form method="post" action="" class="form-horizontal">
+                        {{ csrf_field() }}
+                        @include('product.partials.cart-products')
+                        @include('product.partials.cart-shipping')
+                        @include('product.partials.cart-billing')
+                        @include('product.partials.cart-payment')
+                        <div class="form-group">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary btn-lg">Đặt hàng</button>
                             </div>
-                        </form>
-                    @endif
+                        </div>
+                    </form>
                 </div>
-
-
             </div>
+            @else
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="alert alert-info fade in alert-dismissable">
+                        <h4><i class="icon fa fa-warning"></i> Thông báo!</h4>
+                        Không có sản phẩm nào trong giỏ hàng.
+                    </div>
+                    <a href="{{url('/')}}" class="btn btn-block btn-success">Tiếp tục mua hàng</a>
+                </div>
+            @endif
         </div>
     </div>
 

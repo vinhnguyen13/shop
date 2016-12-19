@@ -16,6 +16,7 @@ $total = 0;
             <th>Số lượng</th>
             <th class="text-center">Giá</th>
             <th class="text-center">Tổng</th>
+            <th class="text-center">&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -34,19 +35,17 @@ $total = 0;
                 <td class="col-md-1" style="text-align: center"> {{$item['quantity']}} </td>
                 <td class="col-md-1 text-center">{{number_format($price)}}</td>
                 <td class="col-md-1 text-center">{{number_format($subtotalProduct)}}</td>
+                <td class="col-md-1 text-center"><a href="javascript:;" class="removeCart"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
             </tr>
         @endforeach
         <tr>
-            <td>  </td>
-            <td>  </td>
-            <td>  </td>
-            <td class="text-right">
+            <td colspan="4" class="text-right">
                 <p>
-                    <strong>Subtotal: </strong>
+                    <strong>Tạm tính: </strong>
                 </p>
 
                 <p>
-                    <strong>Tax: </strong>
+                    <strong>Thuế: </strong>
                 </p>
             </td>
             <td class="text-center">
@@ -58,13 +57,12 @@ $total = 0;
                     <strong>{{number_format($tax)}}</strong>
                 </p>
             </td>
+            <td>  </td>
         </tr>
         <tr>
-            <td>  </td>
-            <td>  </td>
-            <td>  </td>
-            <td class="text-right"><h4><strong>Total: </strong></h4></td>
+            <td colspan="4" class="text-right"><h4><strong>Thành tiền (Tổng số tiền thanh toán): </strong></h4></td>
             <td class="text-center text-danger"><h4><strong>{{number_format($subtotal-$tax)}}</strong></h4></td>
+            <td>  </td>
         </tr>
         </tbody>
     </table>

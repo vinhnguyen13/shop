@@ -31,7 +31,7 @@
                 </div>
             </form>
             <div class="header__cart dropdown">
-                <a href="" class="val-selected"><span class="icon-cart"></span><span class="header__cart--num">{{count($cart)}}</span></a>
+                <a href="" class="val-selected"><span class="icon-cart"></span>{!! !empty($cart) ? '<span class="header__cart--num">'.count($cart).'</span>' : '' !!}</a>
 
                 <div class="dropdown-up-style hide">
                     <div class="dropdown__inner">
@@ -62,21 +62,21 @@
 
                                         <p class="product-type text-uper fontSFURe fs-13 mgB-10">{{$product->color}}</p>
 
-                                        <p class="pull-right fontSFUBold fs-15">đ {{number_format($subtotalProduct)}}</p>
+                                        <p class="pull-right fontSFUBold fs-12">đ {{number_format($subtotalProduct)}}</p>
 
-                                        <p class="text-uper fontSFUBold fs-14">Size: {{$product->size()}} - Quantity: {{$item['quantity']}}</p>
+                                        <p class="text-uper fontSFUBold fs-12">Size: {{$product->size()}} - Quantity: {{$item['quantity']}}</p>
                                     </div>
                                 </a>
                                 @endforeach
                             </div>
                             <div class="clearfix mgB-20">
-                                <span class="text-uper fs-14 fontSFUMeBold">subtotal</span>
+                                <span class="text-uper fs-14 fontSFUMeBold">Tạm tính</span>
 
                                 <p class="pull-right product-price">đ {{number_format($subtotal)}}</p>
                             </div>
                             <div class="text-center">
-                                <p class="fontSFURe fs-15 mgB-15">Shipping &amp; taxes calculated at checkout</p>
-                                <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">check out</a>
+                                <p class="fontSFURe fs-15 mgB-15">Phí vận chuyển và thuế sẽ tính lúc thanh toán</p>
+                                <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">Thanh toán</a>
                             </div>
                         @else
                             <div class="text-center">
