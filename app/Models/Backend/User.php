@@ -70,14 +70,15 @@ class User extends MainUser
     public function processingProfile($values)
     {
         if (!empty($values['images'])) {
+            $imageService = $this->getImageService();
             foreach ($values['images'] as $key => $image) {
                 $image = $image[0];
-                if (app(ImageService::class)->exists($image)) {
+                if ($imageService->exists($image)) {
                     $newPath = app(UploadMedia::class)->getPathDay(UserProfile::uploadFolder . DS);
                     $path = pathinfo($image);
-                    app(ImageService::class)->moveWithSize($path['dirname'], $newPath, $path['basename']);
+                    $imageService->moveWithSize($path['dirname'], $newPath, $path['basename']);
                     $folders = explode(DS, $path['dirname']);
-                    app(ImageService::class)->deleteDirectory(UserProfile::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
+                    $imageService->deleteDirectory(UserProfile::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
                     $profile = app(UserProfile::class)->firstOrNew(['user_id' => $this->id]);
                     $profile->fill([
                         'avatar' => $path['basename'],
@@ -95,6 +96,7 @@ class User extends MainUser
     public function getImagesToForm(){
         $profile = UserProfile::query()->where(['user_id'=>$this->id])->first();
         $imageList = [];
+        $imageService = $this->getImageService();
         if(!empty($profile)){
             $name = $profile->avatar;
             $folder = $profile->folder;
@@ -104,7 +106,7 @@ class User extends MainUser
                 route('admin.deleteFile', ['_token' => csrf_token(), 'name' => $name, 'type' => UploadMedia::UPLOAD_PRODUCT, 'delete'=>UploadMedia::DELETE_REAL]),
                 'DELETE',
                 $this->id,
-                Storage::url($folder .DS. app(ImageService::class)->folder('thumb') . DS . $name),
+                Storage::url($folder .DS. $imageService->folder('thumb') . DS . $name),
                 ['name'=>'imagesReal['.$this->id.'][]', 'value'=>$folder .DS. $name],
                 null
             );

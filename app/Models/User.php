@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasValidator;
+use App\Services\ImageService;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -41,6 +42,16 @@ class User extends Authenticatable
      */
     public function profile(){
         return $this->hasOne('App\Models\UserProfile', 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    public function getImageService(){
+        $imageService = app(ImageService::class);
+//        $propertyMedia = $this->propertyMedias();
+//        $imageService->setSize($propertyMedia['sizes']);
+        return $imageService;
     }
 
 }

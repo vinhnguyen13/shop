@@ -63,4 +63,8 @@ class ShopProduct extends MainShopProduct
         }
         return false;
     }
+
+    public function checkout(){
+
+    }
 }
