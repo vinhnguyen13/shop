@@ -757,3 +757,58 @@ footer {
   color: #fff;
   font-size: 20px;
 }
+
+.header__left .dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 100%;
+}
+.header__left .dropdown ul {
+  padding: 10px 0;
+}
+.header__left .dropdown li {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.header__left .dropdown a {
+  margin: 0;
+  padding: 10px 0;
+  height: inherit;
+  line-height: 100%;
+  text-align: center;
+  display: block;
+}
+.header__left .dropdown a span {
+  display: inline-block;
+  margin-right: 15px;
+}
+.header__left .dropdown .btn-auth-go a {
+  color: #fff;
+  background: #dd5044;
+  border-radius: 3px;
+}
+.header__left .dropdown .btn-auth-go a span {
+  font-size: 18px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  margin-right: 15px;
+}
+.header__left .dropdown .btn-auth-face a {
+  color: #fff;
+  background: #3b579d;
+  border-radius: 3px;
+}
+.header__left .dropdown .btn-auth-face a span {
+  position: relative;
+  margin-right: 15px;
+}
+.header__left .dropdown__inner {
+  right: inherit;
+  left: 0;
+  top: 54px;
+}
+.header__left .dropdown .btn-auth-face a:hover,
+.header__left .dropdown .btn-auth-go a:hover {
+  opacity: .7;
+}
