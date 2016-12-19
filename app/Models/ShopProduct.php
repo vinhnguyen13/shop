@@ -111,9 +111,9 @@ class ShopProduct extends Model
     public function propertyMedias($folder = null)
     {
         $sizes = [
-            'large' => [960, 720, 'resize'],
-            'medium' => [480, 360, 'crop'],
-            'thumb' => [240, 180, 'crop'],
+            'large' => [900, 900, 'resize'],
+            'medium' => [480, 480, 'crop'],
+            'thumb' => [240, 240, 'crop'],
         ];
         if (empty($folder)) {
             $folder = uniqid();
