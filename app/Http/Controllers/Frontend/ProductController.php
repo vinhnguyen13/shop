@@ -78,6 +78,11 @@ class ProductController extends Controller
     public function checkout(Request $request)
     {
         $cart = app(ShopProduct::class)->getCart();
+        if($request->isMethod('post')) {
+            $invID = 1;
+            $invID = str_pad($invID, 4, '0', STR_PAD_LEFT);
+            dump($invID);
+        }
         return view('product.checkout', compact('cart'));
     }
 }

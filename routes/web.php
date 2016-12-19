@@ -41,5 +41,5 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::get('/product/brand/{brand}', ['uses' => 'ProductController@brand'])->name('product.brand');
     Route::get('/product/detail/{id}-{slug}', ['uses' => 'ProductController@detail'])->name('product.detail');
     Route::post('/product/add-cart', ['uses' => 'ProductController@addCart'])->name('product.addCart');
-    Route::get('/product/checkout', ['uses' => 'ProductController@checkout'])->name('product.checkout');
+    Route::any('/product/checkout', ['uses' => 'ProductController@checkout'])->name('product.checkout');
 });

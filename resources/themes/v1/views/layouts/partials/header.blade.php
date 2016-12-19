@@ -31,65 +31,58 @@
                 </div>
             </form>
             <div class="header__cart dropdown">
-                <a href="" class="val-selected"><span class="icon-cart"></span><span class="header__cart--num">10</span></a>
+                <a href="" class="val-selected"><span class="icon-cart"></span><span class="header__cart--num">{{count($cart)}}</span></a>
 
                 <div class="dropdown-up-style hide">
                     <div class="dropdown__inner">
                         <h2 class="text-uper fontSFUBold fs-16">your cart</h2>
 
-                        <div class="header__cart--items">
-                            <a href="" class="header__cart--item clearfix">
-                                <div class="pull-left wrap-img">
-                                    <img src="/themes/v1/images/310x177.jpg" alt="">
-                                </div>
-                                <div class="overflow-all">
-                                    <p class="text-uper fs-15 fontSFUBold">nike kobe 11 dovailon</p>
+                        @if(!empty($cart))
+                            <div class="header__cart--items">
+                                    <?php
+                                    $subtotal = 0;
+                                    $tax = 0;
+                                    $total = 0;
+                                    ?>
+                                    @foreach($cart as $item)
+                                        <?php
+                                        $product = App\Models\Frontend\ShopProduct::find($item['product_id']);
+                                        $product->setCart($item['size'], $item['quantity']);
+                                        $price = $product->priceWithSize();
+                                        $subtotalProduct = $price * $item['quantity'];
+                                        $subtotal += $subtotalProduct;
+                                        $tax += $product->taxWithPrice($price);
+                                        ?>
+                                <a href="" class="header__cart--item clearfix">
+                                    <div class="pull-left wrap-img">
+                                        <img src="/themes/v1/images/310x177.jpg" alt="">
+                                    </div>
+                                    <div class="overflow-all">
+                                        <p class="text-uper fs-15 fontSFUBold">{{$product->name}}</p>
 
-                                    <p class="product-type text-uper fontSFURe fs-13 mgB-10">space gray</p>
+                                        <p class="product-type text-uper fontSFURe fs-13 mgB-10">{{$product->color}}</p>
 
-                                    <p class="pull-right fontSFUBold fs-15">đ 3.000.000</p>
+                                        <p class="pull-right fontSFUBold fs-15">đ {{number_format($subtotalProduct)}}</p>
 
-                                    <p class="text-uper fontSFUBold fs-14">9 us</p>
-                                </div>
-                            </a>
-                            <a href="" class="header__cart--item clearfix">
-                                <div class="pull-left wrap-img">
-                                    <img src="/themes/v1/images/310x177.jpg" alt="">
-                                </div>
-                                <div class="overflow-all">
-                                    <p class="text-uper fs-15 fontSFUBold">nike kobe 11 dovailon</p>
+                                        <p class="text-uper fontSFUBold fs-14">Size: {{$product->size()}} - Quantity: {{$item['quantity']}}</p>
+                                    </div>
+                                </a>
+                                @endforeach
+                            </div>
+                            <div class="clearfix mgB-20">
+                                <span class="text-uper fs-14 fontSFUMeBold">subtotal</span>
 
-                                    <p class="product-type text-uper fontSFURe fs-13 mgB-10">space gray</p>
-
-                                    <p class="pull-right fontSFUBold fs-15">đ 3.000.000</p>
-
-                                    <p class="text-uper fontSFUBold fs-14">9 us</p>
-                                </div>
-                            </a>
-                            <a href="" class="header__cart--item clearfix">
-                                <div class="pull-left wrap-img">
-                                    <img src="/themes/v1/images/310x177.jpg" alt="">
-                                </div>
-                                <div class="overflow-all">
-                                    <p class="text-uper fs-15 fontSFUBold">nike kobe 11 dovailon</p>
-
-                                    <p class="product-type text-uper fontSFURe fs-13 mgB-10">space gray</p>
-
-                                    <p class="pull-right fontSFUBold fs-15">đ 3.000.000</p>
-
-                                    <p class="text-uper fontSFUBold fs-14">9 us</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="clearfix mgB-20">
-                            <span class="text-uper fs-14 fontSFUMeBold">subtotal</span>
-
-                            <p class="pull-right product-price">đ 9.000.000</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="fontSFURe fs-15 mgB-15">Shipping &amp; taxes calculated at checkout</p>
-                            <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">check out</a>
-                        </div>
+                                <p class="pull-right product-price">đ {{number_format($subtotal)}}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="fontSFURe fs-15 mgB-15">Shipping &amp; taxes calculated at checkout</p>
+                                <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">check out</a>
+                            </div>
+                        @else
+                            <div class="text-center">
+                                <p class="fontSFURe fs-15 mgB-15">Không có sản phẩm nào !</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

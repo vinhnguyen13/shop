@@ -7,6 +7,7 @@
  */
 namespace App\Http\Middleware;
 
+use App\Models\Frontend\ShopProduct;
 use Closure;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
@@ -33,6 +34,9 @@ class App
          */
         $version_deploy = !empty(config('site.main.version_deploy')) ? config('site.main.version_deploy') : 1;
         \View::share('version_deploy', $version_deploy);
+
+        $cart = app(ShopProduct::class)->getCart();
+        \View::share('cart', $cart);
         return $next($request);
     }
 
