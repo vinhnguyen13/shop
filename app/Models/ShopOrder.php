@@ -9,7 +9,8 @@ class ShopOrder extends Model
 {
     use HasValidator;
     protected $table = 'shop_order';
-    protected $fillable = ['supplier_id', 'sku', 'name', 'description', 'location', 'quantity', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'color', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'subtract', 'minimum', 'order', 'status'];
+    protected $fillable = ['store_id', 'store_name', 'store_url', 'customer_id', 'customer_group_id',
+    'firstname', 'lastname', 'email', 'telephone', 'fax', 'custom_field'];
 
     /**
      * The "booting" method of the model.
