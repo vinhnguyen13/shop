@@ -12,6 +12,11 @@ use Session;
 
 class ShopProduct extends MainShopProduct
 {
+    const CHECKOUT_PRODUCTS = 'products';
+    const CHECKOUT_SHIPPING = 'shipping';
+    const CHECKOUT_BILLING = 'billing';
+    const CHECKOUT_PAYMENT = 'payment';
+
     public function getList($params = array()){
         $query = ShopProduct::from('shop_product AS a');
         $query->where(['status'=>1]);
@@ -62,6 +67,18 @@ class ShopProduct extends MainShopProduct
             return $cart;
         }
         return false;
+    }
+
+    public function removeCart($pid){
+        if (Session::has('cart')) {
+            $cart = Session::get('cart');
+            if(!empty($cart[$pid])){
+                unset($cart[$pid]);
+                Session::put('cart', $cart);
+                return $cart;
+            }
+        }
+       return false;
     }
 
     public function checkout(){

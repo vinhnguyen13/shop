@@ -76,7 +76,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="fontSFURe fs-15 mgB-15">Phí vận chuyển và thuế sẽ tính lúc thanh toán</p>
-                                <a href="{{route('product.checkout')}}" class="text-uper btn-checkout fontSFUL">Thanh toán</a>
+                                <a href="{{route('product.checkout', ['step'=>\App\Models\Frontend\ShopProduct::CHECKOUT_PRODUCTS])}}" class="text-uper btn-checkout fontSFUL">Thanh toán</a>
                             </div>
                         @else
                             <div class="text-center">

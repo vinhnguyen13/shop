@@ -88,8 +88,8 @@
     <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
     <script>
-        var urlAddCart = "{{route('product.addCart')}}";
+        var urlAddCart = "{{route('product.cart.add')}}";
         var dataRequest = "{{encrypt($product->id)}}";
     </script>
-    <script type="text/javascript" src="/themes/v1/js/product.js"></script>
+    <script type="text/javascript" src="{!! asset('js/front/product.js')  !!}"></script>
 @endpush

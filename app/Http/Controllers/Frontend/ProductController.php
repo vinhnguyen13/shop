@@ -63,24 +63,32 @@ class ProductController extends Controller
         return view('product.detail', compact('product', 'products'));
     }
 
-    public function addCart(Request $request)
+    public function cartAdd(Request $request)
     {
         $data = $request->get('data');
         $pid = decrypt($data);
         $quantity = $request->get('quantity');
         $size = $request->get('size');
 
-        $products = app(ShopProduct::class)->addCart($pid, $size, $quantity);
-        dump($products);
+        $cart = app(ShopProduct::class)->addCart($pid, $size, $quantity);
+        dump($cart);
+    }
+
+    public function cartRemove(Request $request)
+    {
+        $data = $request->get('data');
+        $pid = decrypt($data);
+        $cart = app(ShopProduct::class)->removeCart($pid);
+        dump($cart);
 
     }
 
-    public function checkout(Request $request)
+    public function checkout(Request $request, $step)
     {
         $cart = app(ShopProduct::class)->getCart();
         if($request->isMethod('post')) {
 
         }
-        return view('product.checkout', compact('cart'));
+        return view('product.checkout', compact('cart', 'step'));
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container detail">
+    <div class="container detail wrap-checkout">
         <div class="row">
             @if(!empty($cart))
             <div class="well col-md-10 col-md-offset-1">
@@ -33,7 +33,8 @@
                         @include('product.partials.cart-payment')
                         <div class="form-group">
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary btn-lg">Đặt hàng</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-back hide">Trở lại</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-order">Đặt hàng</button>
                             </div>
                         </div>
                     </form>
@@ -54,9 +55,12 @@
 @endsection
 
 @push('styles')
-
+    <link href="{!! asset('css/front/checkout.css') !!}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-
+    <script>
+        var urlRemoveCart = "{{route('product.cart.remove')}}";
+    </script>
+    <script src="{!! asset('js/front/checkout.js')  !!}"></script>
 @endpush

@@ -1,4 +1,4 @@
-<div class="wrap-shipping hide">
+<div class="step-checkout hide" id="wrap-shipping">
     <div class="text-center">
         <h2>Địa chỉ giao hàng của quý khách</h2>
     </div>

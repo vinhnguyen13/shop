@@ -3,7 +3,7 @@ $subtotal = 0;
 $tax = 0;
 $total = 0;
 ?>
-<div class="wrap-products">
+<div class="step-checkout" id="wrap-products">
     <div class="text-center">
         <h2>Đơn hàng</h2>
     </div>
@@ -29,7 +29,7 @@ $total = 0;
             $subtotal += $subtotalProduct;
             $tax += $product->taxWithPrice($price);
             ?>
-            <tr>
+            <tr data-product-id="{{encrypt($product->id)}}">
                 <td class="col-md-9"><em>{{$product->name}}</em></td>
                 <td class="col-md-1" style="text-align: center"> {{$product->size()}} </td>
                 <td class="col-md-1" style="text-align: center"> {{$item['quantity']}} </td>

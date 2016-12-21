@@ -1,4 +1,4 @@
-<div class="wrap-payment hide">
+<div class="step-checkout hide" id="wrap-payment">
     <div class="text-center">
         <h2>Chọn phương thức thanh toán</h2>
     </div>

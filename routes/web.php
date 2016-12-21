@@ -40,6 +40,7 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::get('/product/store/{category}', ['uses' => 'ProductController@store'])->name('product.category');
     Route::get('/product/brand/{brand}', ['uses' => 'ProductController@brand'])->name('product.brand');
     Route::get('/product/detail/{id}-{slug}', ['uses' => 'ProductController@detail'])->name('product.detail');
-    Route::post('/product/add-cart', ['uses' => 'ProductController@addCart'])->name('product.addCart');
-    Route::any('/product/checkout', ['uses' => 'ProductController@checkout'])->name('product.checkout');
+    Route::post('/product/cart/add', ['uses' => 'ProductController@cartAdd'])->name('product.cart.add');
+    Route::post('/product/cart/remove', ['uses' => 'ProductController@cartRemove'])->name('product.cart.remove');
+    Route::any('/product/checkout/{step}', ['uses' => 'ProductController@checkout'])->name('product.checkout');
 });
