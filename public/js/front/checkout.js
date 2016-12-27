@@ -1,6 +1,5 @@
 $(document).ready(function(){
     var textButtonStep = ['Đặt hàng', 'Tiếp tục', 'Tiếp tục', 'Thanh toán'];
-    var wrapClassStep = ['wrap-products', 'wrap-shipping', 'wrap-billing', 'wrap-payment'];
 
     var wrapMainCheckout = 'wrap-checkout';
     var stepCheckout = 'step-checkout';
@@ -18,8 +17,6 @@ $(document).ready(function(){
             var stepFuture = stepActive.next();
             var _index = stepFuture.index();
         }
-        console.log(_index);
-
 
         if(_index > stepTotal){
             console.log('Pay');
@@ -33,8 +30,6 @@ $(document).ready(function(){
             }else{
                 $('.'+btnBack).removeClass('hide');
             }
-
-            console.log('total step: '+stepTotal);
         }
         return false;
     });

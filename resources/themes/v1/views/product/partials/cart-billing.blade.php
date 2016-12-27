@@ -1,6 +1,6 @@
 <div class="step-checkout hide" id="wrap-billing">
     <div class="text-center">
-        <h2>Thông tin thanh toán khác địa chỉ giao hàng</h2>
+        <h2>Thông tin thanh toán của quý khách</h2>
     </div>
     <div class="form-group">
         <div class="col-md-12">

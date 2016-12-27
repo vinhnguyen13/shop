@@ -5,7 +5,7 @@ $total = 0;
 ?>
 <div class="step-checkout" id="wrap-products">
     <div class="text-center">
-        <h2>Đơn hàng</h2>
+        <h2>Đơn hàng của quý khách</h2>
     </div>
 
     <table class="table table-hover">
