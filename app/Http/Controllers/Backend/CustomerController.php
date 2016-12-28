@@ -58,6 +58,7 @@ class CustomerController extends Controller
 
     public function delete(Request $request, $id)
     {
+        return Redirect::route('admin.customer.index');
         $model = ShopCustomer::find($id);
         if(!empty($model)) {
             $model->delete();

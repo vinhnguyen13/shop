@@ -20,13 +20,8 @@ $isNewRecord = !empty($model->id) ? false : true;
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Firstname') }}
-                    {{ Form::text('firstname', $model->firstname,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Lastname') }}
-                    {{ Form::text('lastname', $model->lastname,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Name') }}
+                    {{ Form::text('name', $model->name,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">

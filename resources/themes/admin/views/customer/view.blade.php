@@ -12,13 +12,8 @@
         </div>
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label(null, 'Firstname') }}
-                <div>{{ $model->firstname }}</div>
-            </div>
-
-            <div class="form-group">
-                {{ Form::label(null, 'Lastname') }}
-                <div>{{ $model->lastname }}</div>
+                {{ Form::label(null, 'Name') }}
+                <div>{{ $model->name }}</div>
             </div>
 
         </div>
