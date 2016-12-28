@@ -256,6 +256,7 @@ CREATE TABLE `shop_order` (
   `store_url` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
   `email` varchar(96) NOT NULL,
   `billing_name` varchar(255) DEFAULT NULL,
   `billing_address` varchar(255) DEFAULT NULL,
@@ -273,12 +274,13 @@ CREATE TABLE `shop_order` (
   `shipping_ward_id` int(11) DEFAULT NULL,
   `shipping_phone` varchar(32) DEFAULT NULL,
   `payment_method` varchar(128) DEFAULT NULL,
+  `payment_method_id` int(11) DEFAULT NULL,
   `payment_code` varchar(128) DEFAULT NULL,
   `shipper_id` int(11) DEFAULT NULL,
   `comment` text,
-  `totalPrice` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `totalTax` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `totalShipping` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `total_price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `total_tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `total_shipping` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `order_status_id` int(11) NOT NULL DEFAULT '0',
   `affiliate_id` int(11) DEFAULT NULL,
@@ -300,7 +302,7 @@ CREATE TABLE `shop_order` (
 
 /*Data for the table `shop_order` */
 
-insert  into `shop_order`(`id`,`invoice_no`,`invoice_prefix`,`store_id`,`store_name`,`store_url`,`customer_id`,`customer_group_id`,`email`,`billing_name`,`billing_address`,`billing_country_id`,`billing_city_id`,`billing_district_id`,`billing_ward_id`,`billing_phone`,`billing_tax_code`,`shipping_name`,`shipping_address`,`shipping_country_id`,`shipping_city_id`,`shipping_district_id`,`shipping_ward_id`,`shipping_phone`,`payment_method`,`payment_code`,`shipper_id`,`comment`,`totalPrice`,`totalTax`,`totalShipping`,`total`,`order_status_id`,`affiliate_id`,`commission`,`marketing_id`,`tracking`,`language_id`,`currency_id`,`currency_code`,`currency_value`,`ip`,`forwarded_ip`,`user_agent`,`accept_language`,`created_at`,`updated_at`) values (1,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'vinh@abc.com','Vinh','1321',230,0,0,3754,'','[]',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Cash On Delivery','cod',0,'',402.0000,0.0000,5.0000,407.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 11:24:20','2015-11-11 11:30:21'),(2,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,'lenh@abc.com','Lenh','1321',230,0,0,3754,'','[]',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Cash On Delivery','cod',0,'',202.0000,0.0000,5.0000,207.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 16:57:05','2016-11-03 11:40:15');
+insert  into `shop_order`(`id`,`invoice_no`,`invoice_prefix`,`store_id`,`store_name`,`store_url`,`customer_id`,`customer_group_id`,`name`,`email`,`billing_name`,`billing_address`,`billing_country_id`,`billing_city_id`,`billing_district_id`,`billing_ward_id`,`billing_phone`,`billing_tax_code`,`shipping_name`,`shipping_address`,`shipping_country_id`,`shipping_city_id`,`shipping_district_id`,`shipping_ward_id`,`shipping_phone`,`payment_method`,`payment_method_id`,`payment_code`,`shipper_id`,`comment`,`total_price`,`total_tax`,`total_shipping`,`total`,`order_status_id`,`affiliate_id`,`commission`,`marketing_id`,`tracking`,`language_id`,`currency_id`,`currency_code`,`currency_value`,`ip`,`forwarded_ip`,`user_agent`,`accept_language`,`created_at`,`updated_at`) values (1,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,NULL,'vinh@abc.com','Vinh','1321',230,0,0,3754,'','[]',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Cash On Delivery',NULL,'cod',0,'',402.0000,0.0000,5.0000,407.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 11:24:20','2015-11-11 11:30:21'),(2,0,'INV-2013-00',0,'Your Store','http://local.opencart/',0,1,NULL,'lenh@abc.com','Lenh','1321',230,0,0,3754,'','[]',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Cash On Delivery',NULL,'cod',0,'',202.0000,0.0000,5.0000,207.0000,1,0,0.0000,0,'',2,2,'USD',1.00000000,'127.0.0.1','','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0','en-US,en;q=0.5','2015-11-11 16:57:05','2016-11-03 11:40:15');
 
 /*Table structure for table `shop_order_product` */
 
