@@ -105,43 +105,5 @@
                 </div>
             </td>
         </tr>
-        <tr class="payAmount">
-            <td>Số tiền:</td>
-            <td>
-                <div class="box-dropdown dropdown-common">
-                    <div class="val-selected style-click">
-                        <span class="selected" data-placeholder="Chọn số tiền">Chọn số tiền</span>
-                        <span class="arrowDownFillFull"></span>
-                    </div>
-                    <div class="dropdown-up-style hide"><div class="item-dropdown hide-dropdown wrap-effect">
-                            <ul class="clearfix">
-                                <li><a href="#" data-value="500000">500,000</a></li>
-                                <li><a href="#" data-value="200000">200,000</a></li>
-                                <li><a href="#" data-value="100000">100,000</a></li>
-                                <li><a href="#" data-value="50000">50,000</a></li>
-                            </ul>
-                        </div></div>
-                    <input type="hidden" name="total_amount" id="" value="">
-                </div>
-            </td>
-        </tr>
-        <tr class="payFullname">
-            <td>Họ Tên:</td>
-            <td>
-                <input type="text" id="fullname" name="buyer_fullname" class="field-check form-control" value="Demo">
-            </td>
-        </tr>
-        <tr class="payEmail">
-            <td>Email:</td>
-            <td>
-                <input type="text" id="fullname" name="buyer_email" class="field-check form-control" value="vinh@dwm.vn">
-            </td>
-        </tr>
-        <tr class="payPhone">
-            <td>Số Điện thoại:</td>
-            <td>
-                <input type="text" id="fullname" name="buyer_mobile" class="field-check form-control" value="0919968857">
-            </td>
-        </tr>
         </tbody></table>
 </div>

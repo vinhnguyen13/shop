@@ -8,6 +8,7 @@
 
 namespace App\Services;
 
+use App\Models\EcTransactionHistory;
 use DB;
 use Auth;
 
