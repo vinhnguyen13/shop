@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="row">
-                    <form method="post" action="" class="form-horizontal">
+                    <form method="post" action="" class="form-horizontal" id="orderForm">
                         {{ csrf_field() }}
                         @include('product.partials.cart-products')
                         @include('product.partials.cart-shipping')
@@ -61,6 +61,7 @@
 @push('scripts')
     <script>
         var urlRemoveCart = "{{route('product.cart.remove')}}";
+        var urlOrder = "{{route('product.order')}}";
     </script>
     <script src="{!! asset('js/front/checkout.js')  !!}"></script>
 @endpush

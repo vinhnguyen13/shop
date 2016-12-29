@@ -9,9 +9,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\AppHelper;
 use App\Models\Backend\ShopManufacturer;
+use App\Models\Frontend\ShopOrder;
 use App\Models\Frontend\ShopProduct;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Input;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
@@ -69,7 +70,6 @@ class ProductController extends Controller
         $pid = decrypt($data);
         $quantity = $request->get('quantity');
         $size = $request->get('size');
-
         $cart = app(ShopProduct::class)->addCart($pid, $size, $quantity);
         dump($cart);
     }
@@ -86,9 +86,14 @@ class ProductController extends Controller
     public function checkout(Request $request, $step)
     {
         $cart = app(ShopProduct::class)->getCart();
-        if($request->isMethod('post')) {
-
-        }
         return view('product.checkout', compact('cart', 'step'));
+    }
+
+    public function order(Request $request)
+    {
+        if($request->isMethod('post')) {
+            $return = app(ShopOrder::class)->updateOrCreate([]);
+            dump($return);
+        }
     }
 }

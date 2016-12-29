@@ -20,6 +20,8 @@ $(document).ready(function(){
 
         if(_index > stepTotal){
             console.log('Pay');
+            var form = $('#orderForm').serialize();
+            $('.'+wrapMainCheckout).trigger('checkout/func/order', [form]);
         }else{
             $('.'+wrapMainCheckout).trigger('checkout/ui/step');
             stepFuture.removeClass('hide');
@@ -55,5 +57,21 @@ $(document).ready(function(){
 
     $('.'+wrapMainCheckout).bind('checkout/ui/step', function (event, data) {
 
+    });
+
+    $('.'+wrapMainCheckout).bind('checkout/func/order', function (event, form) {
+        console.log(form);
+        $(this).loading({inside_right: true});
+        var timer = 0;
+        timer = setTimeout(function () {
+            $.ajax({
+                type: "post",
+                url: urlOrder,
+                data: form,
+                success: function (data) {
+                    $('body').loading({remove: true});
+                }
+            });
+        }, 500);
     });
 });
