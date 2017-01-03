@@ -34,9 +34,8 @@ class ShopOrder extends Model
     public function rules()
     {
         return [
-            'shipping_name' => 'required',
-            'shipping_address' => 'required',
-            'shipping_phone' => 'required',
+            'total_price' => 'required',
+            'total' => 'required',
         ];
     }
 
