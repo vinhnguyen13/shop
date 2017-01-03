@@ -33,8 +33,8 @@
                         @include('product.partials.cart-payment')
                         <div class="form-group">
                             <div class="col-md-12 text-right">
-                                <button type="button" class="btn btn-primary btn-lg btn-back hide">Trở lại</button>
-                                <button type="submit" class="btn btn-primary btn-lg btn-order">Đặt hàng</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-checkout btn-back hide">Trở lại</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-checkout btn-order">Đặt hàng</button>
                             </div>
                         </div>
                     </form>

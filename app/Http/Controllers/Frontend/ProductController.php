@@ -92,7 +92,9 @@ class ProductController extends Controller
     public function order(Request $request)
     {
         if($request->isMethod('post')) {
-            $return = app(ShopOrder::class)->updateOrCreate([]);
+            $input = \Input::all();
+            unset($input['_token']);
+            $return = app(ShopOrder::class)->updateOrCreate([], $input);
             dump($return);
         }
     }

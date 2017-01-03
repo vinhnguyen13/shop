@@ -6,7 +6,7 @@ $(document).ready(function(){
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
 
-    $('.'+wrapMainCheckout).on('click', '.btn', function(){
+    $('.'+wrapMainCheckout).on('click', '.btn-checkout', function(){
         var button = $(this);
         var stepActive = $('.'+wrapMainCheckout).find('.'+stepCheckout + ':not(.hide)');
         var stepTotal = $('.'+wrapMainCheckout).find('.'+stepCheckout).length;
