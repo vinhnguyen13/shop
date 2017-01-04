@@ -137,7 +137,14 @@ class ShopProduct extends Model
         return $imageService;
     }
 
-    public function url($size = 'medium')
+    public function url()
+    {
+        $url = route('product.detail', ['id'=>$this->id, 'slug'=>str_slug($this->name)]);
+        return $url;
+
+    }
+
+    public function thumb($size = 'medium')
     {
         $url = '/images/default-shoes.jpg';
         $imageService = app(ImageService::class);

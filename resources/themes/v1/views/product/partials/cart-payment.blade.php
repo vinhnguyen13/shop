@@ -1,4 +1,4 @@
-<div class="step-checkout" id="wrap-payment">
+<div class="step-checkout hide" id="wrap-payment">
     <div class="text-center mgB-20">
         <h2>Chọn phương thức thanh toán</h2>
     </div>
@@ -36,15 +36,16 @@
             </li>
         </ul>
     </div>
-    <p class="font-bold fs-14 mgB-10">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</p>
-    <p class="mgB-10">Chọn ngân hàng của bạn</p>
-    @php
-    $optionDefault = [''=>'Vui lòng chọn ngân hàng'];
-    @endphp
-    {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
-    {!! Form::select('payment_bank', array_collapse([trans('payment.IB_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
-    {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
-    {!! Form::select('payment_bank', array_collapse([trans('payment.NH_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
-    {!! Form::select('payment_bank', array_collapse([trans('payment.VISA'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+    <div class="checkout__slect--payment-bank hide">
+        <p class="font-bold fs-14 mgB-10">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</p>
+        <p class="mgB-10">Chọn ngân hàng của bạn</p>
+        @php
+        $optionDefault = [''=>'Vui lòng chọn ngân hàng'];
+        @endphp
+        {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_bank', array_collapse([trans('payment.IB_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_bank', array_collapse([trans('payment.NH_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_bank', array_collapse([trans('payment.VISA'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
 
+    </div>
 </div>

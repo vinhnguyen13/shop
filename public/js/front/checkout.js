@@ -1,8 +1,10 @@
 $(document).ready(function(){
-    var textButtonStep = ['Đặt hàng', 'Tiếp tục', 'Tiếp tục', 'Thanh toán'];
+    var textButtonStep = ['Đặt hàng', 'Tiếp tục', 'Thanh toán'];
 
     var wrapMainCheckout = 'wrap-checkout';
     var stepCheckout = 'step-checkout';
+    var paymentWrapBank = 'checkout__slect--payment-bank';
+    var paymentDropdownBank = 'checkout__bank';
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
 
@@ -53,6 +55,22 @@ $(document).ready(function(){
             });
         }, 500);
         return false;
+    });
+
+    $('.'+wrapMainCheckout).on('click', '.checkout__slect--payment ul li input', function(){
+        if($(this).is(':checked')) {
+            var _index = $(this).closest('li').index();
+            if(_index !== 0){
+                $('.'+paymentWrapBank).removeClass('hide');
+                $('.'+paymentDropdownBank).addClass('hide');
+                $('.'+paymentDropdownBank+':eq('+(_index-1)+')').removeClass('hide');
+            }else{
+                $('.'+paymentWrapBank).addClass('hide');
+                $('.'+paymentDropdownBank).addClass('hide');
+            }
+        } else {
+            console.log(9);
+        }
     });
 
     $('.'+wrapMainCheckout).bind('checkout/ui/step', function (event, data) {

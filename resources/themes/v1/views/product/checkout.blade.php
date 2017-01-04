@@ -16,7 +16,7 @@
                     <div class="col-md-7">
                         <form method="post" action="" class="form-horizontal" id="orderForm">
                             {{ csrf_field() }}
-                            @include('product.partials.cart-products')
+                            {{--@include('product.partials.cart-products')--}}
                             @include('product.partials.cart-shipping')
                             @include('product.partials.cart-billing')
                             @include('product.partials.cart-payment')
@@ -29,47 +29,7 @@
                         </form>
                     </div>
                     <div class="col-md-5">
-                        <div class="checkout__infor">
-                            <p class="font-bold mgB-10">Địa chỉ giao hàng/Thanh toán</p>
-                            <p>Trương Hoàng Điển</p>
-                            <p>21 Nguyễn Trung Ngạn</p>
-                            <p>Hồ Chí Minh-Quận 1</p>
-                            <p>Điện thoại di động: 0905296128</p>
-                            <p class="mgT-20 font-bold mgB-10">Thông tin đơn hàng</p>
-                            <table class="table fs-12">
-                                <tbody><tr>
-                                    <th class="w-45">SẢN PHẨM</th>
-                                    <th>SỐ LƯỢNG</th>
-                                    <th>GIÁ</th>
-                                </tr>
-                                <tr>
-                                    <td>Apple iPhone 7 32GB (Vàng Hồng) - Hàng nhập khẩu</td>
-                                    <td>
-                                        <select name="" id="" class="w-100">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                        <p class="text-center mgT-5"><a href="" class="text-decor fs-12">xóa</a></p>
-                                    </td>
-                                    <td>15.490.000</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="font-bold">Tạm tính</td>
-                                    <td>15.490.000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="font-bold">Phí vận chuyển</td>
-                                    <td>Miễn phí</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="font-bold">
-                                        Thành tiền
-                                        <p>(Tổng số tiền thanh toán)</p>
-                                    </td>
-                                    <td class="text-danger font-bold fs-13">15.490.000 VND</td>
-                                </tr>
-                                </tbody></table>
-                        </div>
+                        @include('product.partials.cart-order')
                     </div>
                 </div>
             @else

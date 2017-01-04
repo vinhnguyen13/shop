@@ -6,7 +6,7 @@
     <div class="col-lg-3 col-xs-6 col-md-4">
         <div class="product__item">
             <div class="product__item--pic">
-                <a href="{{$url}}"><img data-original="{{$product->url()}}" alt="" class="lazy" /></a>
+                <a href="{{$url}}"><img data-original="{{$product->thumb()}}" alt="" class="lazy" /></a>
             </div>
             <div class="product__item--infor">
                 <div class="text-center mgB-40">

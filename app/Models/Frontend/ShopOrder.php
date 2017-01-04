@@ -31,8 +31,8 @@ class ShopOrder extends Model
 //            exit;
             $instance->save();
             $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
-            $record = $this->find
-            $instance->update(['invoice_prefix'=>$invID]);
+            $record = $this->find($instance->id);
+            $record->update(['invoice_prefix'=>$invID]);
             return $instance;
         }else{
             return $validate->getMessageBag();
@@ -79,7 +79,7 @@ class ShopOrder extends Model
         $attributesSet['payment_method_id'] = '1';
         $attributesSet['payment_code'] = 'ACB';
         $attributesSet['shipper_id'] = '5';
-        $attributesSet['comment'] = 'Nh? ?úng gi? nha anh';
+        $attributesSet['comment'] = 'Nh? ?ï¿½ng gi? nha anh';
         $attributesSet['total_price'] = '30000000';
         $attributesSet['total_tax'] = '1000000';
         $attributesSet['total_shipping'] = '500000';
