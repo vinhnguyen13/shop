@@ -30,6 +30,9 @@ body.active:before {
 .fontGlab {
   font-family: "glab-icon-pack-finalregular";
 }
+.font-bold {
+  font-weight: bold;
+}
 .btn-see-more {
   display: inline-block;
   border: 2px solid #777777;
@@ -157,6 +160,7 @@ body.active:before {
 .frm-item {
   margin-bottom: 15px;
 }
+.frm-item textarea,
 .frm-item input {
   border: 1px solid #656565;
   height: 45px;
@@ -552,13 +556,15 @@ footer {
   display: block;
   height: 100%;
   text-align: center;
+  position: relative;
+  color: #000;
 }
 .product__item--pic a:before {
   content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
-  margin-left: -0.25em;
+  margin-right: -5px;
 }
 .product__item--pic a img {
   display: inline-block;
@@ -592,12 +598,12 @@ footer {
 .size-item {
   margin-bottom: 10px;
 }
-.size-item a {
+.size-item .size {
   border: 1px solid #262626;
   display: inline-block;
   line-height: 100%;
   font-size: 13px;
-  width: 20px;
+  min-width: 25px;
   height: 20px;
   line-height: 20px;
   text-align: center;
@@ -658,7 +664,7 @@ footer {
 }
 .detail__img .slidedetailpage {
   height: 500px;
-  border: 1px solid #e8e8e8;
+  /* border: 1px solid #e8e8e8; */
 }
 .detail__img .slidedetailpage .swiper-slide {text-align: center;}
 .detail__img .slidedetailpage .swiper-slide:before {
@@ -806,9 +812,156 @@ footer {
 .header__left .dropdown__inner {
   right: inherit;
   left: 0;
-  top: 54px;
+  top: 60px;
 }
 .header__left .dropdown .btn-auth-face a:hover,
 .header__left .dropdown .btn-auth-go a:hover {
   opacity: .7;
+}
+.checkout__inner {
+  background: #eee;
+  border-radius: 4px;
+  padding: 20px;
+  width: 90%;
+  margin: 0 auto 0;
+  -webkit-box-shadow: 1px 1px 1px #a7a7a7;
+  box-shadow: 1px 1px 1px #a7a7a7;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+.table-customize {
+    margin: 0 0 20px 0;
+    /* border-radius: 4px; */
+    overflow: hidden;
+    /* box-shadow: 0 0 0 1px #ccc inset; */
+    border: inherit;
+}
+.table-customize > thead > tr {
+    /* background-color: #535353; */
+    /* border-radius: 3px 3px 0 0; */
+}
+.table-customize > thead > tr > th {
+    color: #a7a7a7;
+    border-bottom: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+    border: inherit;
+    border-bottom: 2px solid #ddd;
+}
+.table-customize tr:nth-child(2n+1) {
+    /* background-color: #fff; */
+}
+.table-customize thead tr {
+    background-color: inherit !important;
+}
+.table-customize > thead > tr > th:first-child {
+    /* border-radius: 3px 0 0 0; */
+    /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
+}
+.table-customize > thead > tr > th:last-child {
+    border-radius: 0 3px 0 0; 
+}
+.table-customize tr th {
+  border-bottom: 2px solid #ddd;
+}
+.table-customize > tbody > tr > td {
+    vertical-align: middle;
+    padding: 15px 14px;
+    /* color: #ccc; */
+    font-size: 14px;
+    color: #000;
+    /* border: 1px solid #ccc; */
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+.table-customize > tbody > tr > td.off-process {
+    color: #c5c5c5 !important;
+}
+.table-customize > tbody > tr > td[data-title="STATUS"] {
+    color: #64ef04;
+}
+.table-customize > tbody > tr > td[data-title="STATUS"]:before {
+    color: #000;
+}
+.table-customize > tbody > tr > td a {
+    text-decoration: none; 
+}
+
+.table-order > tbody > tr:nth-child(-n + 3) > td:first-child {
+    position: relative;
+    font-size: 10px;
+    font-weight: 700; 
+}
+.table-order > tbody > tr:nth-child(-n + 3) > td:first-child span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 14px; 
+}
+.table-order > tbody > tr:nth-child(1) > td:first-child {
+    background: url(../img/bg-order-1.png) no-repeat center center; 
+}
+.table-order > tbody > tr:nth-child(2) > td:first-child {
+    background: url(../img/bg-order-2.png) no-repeat center center; 
+}
+.table-order > tbody > tr:nth-child(3) > td:first-child {
+    background: url(../img/bg-order-3.png) no-repeat center center; 
+}
+.table-order > tbody > tr td:first-child, .table-order > tbody > tr th:first-child {
+    text-align: center; 
+}
+#wrap-shipping .frm-item textarea,
+#wrap-shipping .frm-item input {
+  border: 1px solid #ddd;
+  box-shadow: none;
+  border-radius: 3px;
+  height: 40px;
+  font-family: "Arial";
+}
+#wrap-shipping .frm-item textarea {
+  height: 90px;
+}
+.checkout__bank {
+  border-radius: 3px;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+.checkout__infor {
+  border: 1px solid #949494;
+  padding: 10px 12px;
+  border-radius: 3px;
+}
+.checkout__slect--payment {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.checkout__slect--payment li {
+  display: inline-block;
+  margin: 0 20px;
+  width: 125px;
+  vertical-align: middle;
+}
+.checkout__slect--payment li label {
+  cursor: pointer;
+  height: 100px;
+  border: 1px solid #a5a5a5;
+  border-radius: 3px;
+  padding: 20px 10px 0;
+  width: 100%;
+}
+.checkout__slect--payment li label:hover {
+  opacity: .8;
+}
+.checkout__slect--payment li span {
+  display: block;
+  font-weight: normal;
+}
+#orderForm button {
+  font-family: "Arial";
 }

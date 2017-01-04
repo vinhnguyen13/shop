@@ -3,7 +3,7 @@ $subtotal = 0;
 $tax = 0;
 $total = 0;
 ?>
-<div class="step-checkout" id="wrap-products">
+<div class="step-checkout hide" id="wrap-products">
     <div class="text-center">
         <h2>Đơn hàng của quý khách</h2>
     </div>

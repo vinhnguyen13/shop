@@ -1,109 +1,50 @@
-<div class="step-checkout hide" id="wrap-payment">
-    <div class="text-center">
+<div class="step-checkout" id="wrap-payment">
+    <div class="text-center mgB-20">
         <h2>Chọn phương thức thanh toán</h2>
     </div>
-    <table class="mgB-15 w-100 payFrm">
-        <tbody><tr class="payMethod">
-            <td class="w-35">Phương thức:</td>
-            <td>
-                <div class="box-dropdown dropdown-common">
-                    <div class="val-selected style-click">
-                        <span class="selected" data-placeholder="Chọn Phương thức thanh toán">Chọn Phương thức thanh toán</span>
-                        <span class="arrowDownFillFull"></span>
-                    </div>
-                    <div class="dropdown-up-style hide"><div class="item-dropdown hide-dropdown wrap-effect">
-                            <ul class="clearfix">
-                                <li><a href="#" data-value="ATM_ONLINE">Thanh toán online bằng THẺ NGÂN HÀNG NỘI ĐỊA</a></li>
-                                <li><a href="#" data-value="IB_ONLINE">Thanh toán bằng INTERNET BANKING</a></li>
-                                <li><a href="#" data-value="ATM_OFFLINE">Thanh toán ATM OFFLINE</a></li>
-                                <li><a href="#" data-value="NH_OFFLINE">Thanh toán tại VĂN PHÒNG NGÂN HÀNG</a></li>
-                                <li><a href="#" data-value="VISA">Thanh toán bằng THẺ VISA Hoặc MASTERCARD</a></li>
-                            </ul>
-                        </div></div>
-                    <input type="hidden" name="option_payment" id="" value="">
-                </div>
-            </td>
-        </tr>
-        <tr class="payBank">
-            <td>Ngân hàng:</td>
-            <td>
-                <div class="box-dropdown dropdown-common">
-                    <div class="val-selected style-click">
-                        <span class="selected" data-placeholder="Chọn ngân hàng">Chọn ngân hàng</span>
-                        <span class="arrowDownFillFull"></span>
-                    </div>
-                    <div class="dropdown-up-style hide"><div class="item-dropdown hide-dropdown wrap-effect">
-                            <ul class="clearfix" data-group="ATM_ONLINE">
-                                <li><a href="#" data-value="BIDV"><span class="d-ib mgR-10 ver-c"><i class="BIDV"></i></span>Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</a></li>
-                                <li><a href="#" data-value="VCB"><span class="d-ib mgR-10 ver-c"><i class="VCB"></i></span>Ngân hàng TMCP Ngoại Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="DAB"><span class="d-ib mgR-10 ver-c"><i class="DAB"></i></span>Ngân hàng Đông Á</a></li>
-                                <li><a href="#" data-value="TCB"><span class="d-ib mgR-10 ver-c"><i class="TCB"></i></span>Ngân hàng Kỹ Thương</a></li>
-                                <li><a href="#" data-value="MB"><span class="d-ib mgR-10 ver-c"><i class="MB"></i></span>Ngân hàng Quân Đội</a></li>
-                                <li><a href="#" data-value="VIB"><span class="d-ib mgR-10 ver-c"><i class="VIB"></i></span>Ngân hàng Quốc tế</a></li>
-                                <li><a href="#" data-value="ICB"><span class="d-ib mgR-10 ver-c"><i class="ICB"></i></span>Ngân hàng Công Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="EXB"><span class="d-ib mgR-10 ver-c"><i class="EXB"></i></span>Ngân hàng Xuất Nhập Khẩu</a></li>
-                                <li><a href="#" data-value="ACB"><span class="d-ib mgR-10 ver-c"><i class="ACB"></i></span>Ngân hàng Á Châu</a></li>
-                                <li><a href="#" data-value="HDB"><span class="d-ib mgR-10 ver-c"><i class="HDB"></i></span>Ngân hàng Phát triển Nhà TPHCM</a></li>
-                                <li><a href="#" data-value="MSB"><span class="d-ib mgR-10 ver-c"><i class="MSB"></i></span>Ngân hàng Hàng Hải</a></li>
-                                <li><a href="#" data-value="NVB"><span class="d-ib mgR-10 ver-c"><i class="NVB"></i></span>Ngân hàng Nam Việt</a></li>
-                                <li><a href="#" data-value="VAB"><span class="d-ib mgR-10 ver-c"><i class="VAB"></i></span>Ngân hàng Việt Á</a></li>
-                                <li><a href="#" data-value="VPB"><span class="d-ib mgR-10 ver-c"><i class="VPB"></i></span>Ngân Hàng Việt Nam Thịnh Vượng</a></li>
-                                <li><a href="#" data-value="SCB"><span class="d-ib mgR-10 ver-c"><i class="SCB"></i></span>Ngân hàng Sài Gòn Thương tín</a></li>
-                                <li><a href="#" data-value="PGB"><span class="d-ib mgR-10 ver-c"><i class="PGB"></i></span>Ngân hàng Xăng dầu Petrolimex</a></li>
-                                <li><a href="#" data-value="GPB"><span class="d-ib mgR-10 ver-c"><i class="GPB"></i></span>Ngân hàng TMCP Dầu khí Toàn Cầu</a></li>
-                                <li><a href="#" data-value="AGB"><span class="d-ib mgR-10 ver-c"><i class="AGB"></i></span>Ngân hàng Nông nghiệp &amp; Phát triển nông thôn</a></li>
-                                <li><a href="#" data-value="SGB"><span class="d-ib mgR-10 ver-c"><i class="SGB"></i></span>Ngân hàng Sài Gòn Công Thương</a></li>
-                                <li><a href="#" data-value="BAB"><span class="d-ib mgR-10 ver-c"><i class="BAB"></i></span>Ngân hàng Bắc Á</a></li>
-                                <li><a href="#" data-value="TPB"><span class="d-ib mgR-10 ver-c"><i class="TPB"></i></span>Tền phong bank</a></li>
-                                <li><a href="#" data-value="NAB"><span class="d-ib mgR-10 ver-c"><i class="NAB"></i></span>Ngân hàng Nam Á</a></li>
-                                <li><a href="#" data-value="SHB"><span class="d-ib mgR-10 ver-c"><i class="SHB"></i></span>Ngân hàng TMCP Sài Gòn - Hà Nội (SHB)</a></li>
-                                <li><a href="#" data-value="OJB"><span class="d-ib mgR-10 ver-c"><i class="OJB"></i></span>Ngân hàng TMCP Đại Dương (OceanBank)</a></li>
-                                <li><a href="#" data-value="VISA">VISA</a></li>
-                                <li><a href="#" data-value="MASTER">MASTER</a></li>
-                            </ul>
-                            <ul class="clearfix" data-group="IB_ONLINE" style="display:none;">
-                                <li><a href="#" data-value="BIDV"><span class="d-ib mgR-10 ver-c"><i class="BIDV"></i></span>Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</a></li>
-                                <li><a href="#" data-value="VCB"><span class="d-ib mgR-10 ver-c"><i class="VCB"></i></span>Ngân hàng TMCP Ngoại Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="DAB"><span class="d-ib mgR-10 ver-c"><i class="DAB"></i></span>Ngân hàng Đông Á</a></li>
-                                <li><a href="#" data-value="TCB"><span class="d-ib mgR-10 ver-c"><i class="TCB"></i></span>Ngân hàng Kỹ Thương</a></li>
-                            </ul>
-                            <ul class="clearfix" data-group="ATM_OFFLINE" style="display:none;">
-                                <li><a href="#" data-value="BIDV"><span class="d-ib mgR-10 ver-c"><i class="BIDV"></i></span>Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</a></li>
-                                <li><a href="#" data-value="VCB"><span class="d-ib mgR-10 ver-c"><i class="VCB"></i></span>Ngân hàng TMCP Ngoại Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="DAB"><span class="d-ib mgR-10 ver-c"><i class="DAB"></i></span>Ngân hàng Đông Á</a></li>
-                                <li><a href="#" data-value="TCB"><span class="d-ib mgR-10 ver-c"><i class="TCB"></i></span>Ngân hàng Kỹ Thương</a></li>
-                                <li><a href="#" data-value="MB"><span class="d-ib mgR-10 ver-c"><i class="MB"></i></span>Ngân hàng Quân Đội</a></li>
-                                <li><a href="#" data-value="ICB"><span class="d-ib mgR-10 ver-c"><i class="ICB"></i></span>Ngân hàng Công Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="ACB"><span class="d-ib mgR-10 ver-c"><i class="ACB"></i></span>Ngân hàng Á Châu</a></li>
-                                <li><a href="#" data-value="MSB"><span class="d-ib mgR-10 ver-c"><i class="MSB"></i></span>Ngân hàng Hàng Hải</a></li>
-                                <li><a href="#" data-value="SCB"><span class="d-ib mgR-10 ver-c"><i class="SCB"></i></span>Ngân hàng Sài Gòn Thương tín</a></li>
-                                <li><a href="#" data-value="PGB"><span class="d-ib mgR-10 ver-c"><i class="PGB"></i></span>Ngân hàng Xăng dầu Petrolimex</a></li>
-                                <li><a href="#" data-value="AGB"><span class="d-ib mgR-10 ver-c"><i class="AGB"></i></span>Ngân hàng Nông nghiệp &amp; Phát triển nông thôn</a></li>
-                                <li><a href="#" data-value="SHB"><span class="d-ib mgR-10 ver-c"><i class="SHB"></i></span>Ngân hàng TMCP Sài Gòn - Hà Nội (SHB)</a></li>
-                            </ul>
-                            <ul class="clearfix" data-group="NH_OFFLINE" style="display:none;">
-                                <li><a href="#" data-value="BIDV"><span class="d-ib mgR-10 ver-c"><i class="BIDV"></i></span>Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</a></li>
-                                <li><a href="#" data-value="VCB"><span class="d-ib mgR-10 ver-c"><i class="VCB"></i></span>Ngân hàng TMCP Ngoại Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="DAB"><span class="d-ib mgR-10 ver-c"><i class="DAB"></i></span>Ngân hàng Đông Á</a></li>
-                                <li><a href="#" data-value="TCB"><span class="d-ib mgR-10 ver-c"><i class="TCB"></i></span>Ngân hàng Kỹ Thương</a></li>
-                                <li><a href="#" data-value="MB"><span class="d-ib mgR-10 ver-c"><i class="MB"></i></span>Ngân hàng Quân Đội</a></li>
-                                <li><a href="#" data-value="VIB"><span class="d-ib mgR-10 ver-c"><i class="VIB"></i></span>Ngân hàng Quốc tế</a></li>
-                                <li><a href="#" data-value="ICB"><span class="d-ib mgR-10 ver-c"><i class="ICB"></i></span>Ngân hàng Công Thương Việt Nam</a></li>
-                                <li><a href="#" data-value="ACB"><span class="d-ib mgR-10 ver-c"><i class="ACB"></i></span>Ngân hàng Á Châu</a></li>
-                                <li><a href="#" data-value="MSB"><span class="d-ib mgR-10 ver-c"><i class="MSB"></i></span>Ngân hàng Hàng Hải</a></li>
-                                <li><a href="#" data-value="SCB"><span class="d-ib mgR-10 ver-c"><i class="SCB"></i></span>Ngân hàng Sài Gòn Thương tín</a></li>
-                                <li><a href="#" data-value="PGB"><span class="d-ib mgR-10 ver-c"><i class="PGB"></i></span>Ngân hàng Xăng dầu Petrolimex</a></li>
-                                <li><a href="#" data-value="AGB"><span class="d-ib mgR-10 ver-c"><i class="AGB"></i></span>Ngân hàng Nông nghiệp &amp; Phát triển nông thôn</a></li>
-                                <li><a href="#" data-value="TPB"><span class="d-ib mgR-10 ver-c"><i class="TPB"></i></span>Tền phong bank</a></li>
-                            </ul>
-                            <ul class="clearfix" data-group="VISA" style="display:none;">
-                                <li><a href="#" data-value="VISA">VISA</a></li>
-                                <li><a href="#" data-value="MASTER">MASTER</a></li>
-                            </ul>
-                        </div></div>
-                    <input type="hidden" name="bankcode" id="" value="">
-                </div>
-            </td>
-        </tr>
-        </tbody></table>
+    <div class="checkout__slect--payment">
+        <ul>
+            <li>
+                <label for="CashOnDelivery">
+                    <span>Thanh toán <br> khi nhận hàng</span>
+                    <input type="radio" name="option_payment" value="CashOnDelivery" id="CashOnDelivery" checked>
+                </label>
+            </li>
+            <li>
+                <label for="ATM_ONLINE">
+                    <span>Thẻ ATM <br> nội địa</span>
+                    <input type="radio" name="option_payment" value="ATM_ONLINE" id="ATM_ONLINE">
+                </label>
+            </li>
+            <li>
+                <label for="IB_ONLINE">
+                    <span>INTERNET BANKING</span>
+                    <input type="radio" name="option_payment" value="IB_ONLINE" id="IB_ONLINE">
+                </label>
+            </li>
+            <li>
+                <label for="ATM_OFFLINE">
+                    <span>Thẻ ATM <br> OFFLINE</span>
+                    <input type="radio" name="option_payment" value="ATM_OFFLINE" id="ATM_OFFLINE">
+                </label>
+            </li>
+            <li>
+                <label for="VISA">
+                    <span>VISA /<br> MASTERCARD</span>
+                    <input type="radio" name="option_payment" value="VISA" id="VISA">
+                </label>
+            </li>
+        </ul>
+    </div>
+    <p class="font-bold fs-14 mgB-10">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</p>
+    <p class="mgB-10">Chọn ngân hàng của bạn</p>
+    @php
+    $optionDefault = [''=>'Vui lòng chọn ngân hàng'];
+    @endphp
+    {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+    {!! Form::select('payment_bank', array_collapse([trans('payment.IB_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+    {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+    {!! Form::select('payment_bank', array_collapse([trans('payment.NH_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+    {!! Form::select('payment_bank', array_collapse([trans('payment.VISA'), $optionDefault]), null, ['class' => 'checkout__bank']) !!}
+
 </div>
