@@ -7,31 +7,31 @@
             <li>
                 <label for="CashOnDelivery">
                     <span>Thanh toán <br> khi nhận hàng</span>
-                    <input type="radio" name="option_payment" value="CashOnDelivery" id="CashOnDelivery" checked>
+                    <input type="radio" name="payment_method" value="CashOnDelivery" id="CashOnDelivery" checked>
                 </label>
             </li>
             <li>
                 <label for="ATM_ONLINE">
                     <span>Thẻ ATM <br> nội địa</span>
-                    <input type="radio" name="option_payment" value="ATM_ONLINE" id="ATM_ONLINE">
+                    <input type="radio" name="payment_method" value="ATM_ONLINE" id="ATM_ONLINE">
                 </label>
             </li>
             <li>
                 <label for="IB_ONLINE">
                     <span>INTERNET BANKING</span>
-                    <input type="radio" name="option_payment" value="IB_ONLINE" id="IB_ONLINE">
+                    <input type="radio" name="payment_method" value="IB_ONLINE" id="IB_ONLINE">
                 </label>
             </li>
             <li>
                 <label for="ATM_OFFLINE">
                     <span>Thẻ ATM <br> OFFLINE</span>
-                    <input type="radio" name="option_payment" value="ATM_OFFLINE" id="ATM_OFFLINE">
+                    <input type="radio" name="payment_method" value="ATM_OFFLINE" id="ATM_OFFLINE">
                 </label>
             </li>
             <li>
                 <label for="VISA">
                     <span>VISA /<br> MASTERCARD</span>
-                    <input type="radio" name="option_payment" value="VISA" id="VISA">
+                    <input type="radio" name="payment_method" value="VISA" id="VISA">
                 </label>
             </li>
         </ul>
@@ -42,10 +42,10 @@
         @php
         $optionDefault = [''=>'Vui lòng chọn ngân hàng'];
         @endphp
-        {!! Form::select('payment_bank', array_collapse([trans('payment.ATM_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
-        {!! Form::select('payment_bank', array_collapse([trans('payment.IB_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
-        {!! Form::select('payment_bank', array_collapse([trans('payment.NH_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
-        {!! Form::select('payment_bank', array_collapse([trans('payment.VISA'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_code', array_collapse([trans('payment.ATM_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_code', array_collapse([trans('payment.IB_ONLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_code', array_collapse([trans('payment.NH_OFFLINE'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
+        {!! Form::select('payment_code', array_collapse([trans('payment.VISA'), $optionDefault]), null, ['class' => 'checkout__bank hide']) !!}
 
     </div>
 </div>

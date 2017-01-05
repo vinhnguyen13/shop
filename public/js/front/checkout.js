@@ -74,6 +74,32 @@ $(document).ready(function(){
         }
     });
 
+    $('.'+wrapMainCheckout).on('change', '.select-location', function(){
+        $(this).loading({inside_right: true});
+        var timer = 0;
+        var child = $(this).attr('data-child');
+        var id = $(this).val();
+        timer = setTimeout(function () {
+            $.ajax({
+                type: "post",
+                url: urlLocation,
+                data: {id: id, child: child},
+                success: function (data) {
+                    var html = '';
+                    $.each(data, function(key, value) {
+                        html +=
+                            '<option value="'+key+'">'
+                            + value +
+                            '</option>';
+                    });
+                    $('.select-'+child).html(html);
+                    $('body').loading({remove: true});
+                }
+            });
+        }, 500);
+        return false;
+    });
+
     $('.'+wrapMainCheckout).bind('checkout/ui/step', function (event, data) {
 
     });

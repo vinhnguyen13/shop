@@ -7,6 +7,7 @@ use App\Models\ShopOrder as Model;
 class ShopOrder extends Model
 {
     const INVOICE_PREFIX = 'GLAB-';
+    const COUNTRY_VN = 230;
     /**
      * Create or update a related record matching the attributes, and fill it with values.
      *
@@ -21,8 +22,8 @@ class ShopOrder extends Model
         }else{
             $instance = $this;
         }
-        $instance->fill($values);
         $instance->processingSave($values);
+        $instance->fill($values);
         $validate = $instance->validate($instance->attributes);
         if ($validate->passes()) {
 //            echo "<pre>";
@@ -50,54 +51,36 @@ class ShopOrder extends Model
 
     public function processingSave($values)
     {
-        $attributesSet['invoice_no'] = '';
-        $attributesSet['invoice_prefix'] = $this->generateInvoicePrefix();
-        $attributesSet['store_id'] = '1';
-        $attributesSet['store_name'] = 'GLABVN';
-        $attributesSet['store_url'] = 'http://glab.vn';
-        $attributesSet['user_id'] = '90';
-        $attributesSet['customer_id'] = '2';
-        $attributesSet['customer_group_id'] = '2';
-        $attributesSet['name'] = 'Vinh Nguy?n';
-        $attributesSet['email'] = 'vinh@dwm.vn';
-        $attributesSet['billing_name'] = 'Vinh Nguy?n';
-        $attributesSet['billing_address'] = '27 Le Thi Hong';
-        $attributesSet['billing_country_id'] = '1';
-        $attributesSet['billing_city_id'] = '2';
-        $attributesSet['billing_district_id'] = '3';
-        $attributesSet['billing_ward_id'] = '4';
-        $attributesSet['billing_phone'] = '090812223254';
-        $attributesSet['billing_tax_code'] = '230';
-        $attributesSet['shipping_name'] = 'Vinh Nguy?n';
-        $attributesSet['shipping_address'] = '27 Le Thi Hong';
-        $attributesSet['shipping_country_id'] = '1';
-        $attributesSet['shipping_city_id'] = '2';
-        $attributesSet['shipping_district_id'] = '3';
-        $attributesSet['shipping_ward_id'] = '4';
-        $attributesSet['shipping_phone'] = '090810020';
-        $attributesSet['payment_method'] = 'Cash On Delivery';
-        $attributesSet['payment_method_id'] = '1';
-        $attributesSet['payment_code'] = 'ACB';
-        $attributesSet['shipper_id'] = '5';
-        $attributesSet['comment'] = 'Nh? ?�ng gi? nha anh';
-        $attributesSet['total_price'] = '30000000';
-        $attributesSet['total_tax'] = '1000000';
-        $attributesSet['total_shipping'] = '500000';
-        $attributesSet['total'] = '31500000';
-        $attributesSet['order_status_id'] = '1';
-        $attributesSet['affiliate_id'] = '1';
-        $attributesSet['commission'] = '0';
-        $attributesSet['marketing_id'] = '1';
-        $attributesSet['tracking'] = '';
-        $attributesSet['language_id'] = '1';
-        $attributesSet['currency_id'] = '1';
-        $attributesSet['currency_code'] = 'USD';
-        $attributesSet['currency_value'] = '1.00000000';
-        $attributesSet['ip'] = '';
-        $attributesSet['forwarded_ip'] = '';
-        $attributesSet['user_agent'] = '';
-        $attributesSet['accept_language'] = '';
-        $attributes = array_collapse([$attributesSet, $values]);
-        $this->setRawAttributes($attributes);
+        $this->attributes['invoice_no'] = '';
+        $this->attributes['invoice_prefix'] = $this->generateInvoicePrefix();
+        $this->attributes['store_id'] = '1';
+        $this->attributes['store_name'] = 'GLABVN';
+        $this->attributes['store_url'] = 'http://glab.vn';
+        $this->attributes['user_id'] = null;
+        $this->attributes['customer_id'] = null;
+        $this->attributes['customer_group_id'] = null;
+        $this->attributes['billing_country_id'] = self::COUNTRY_VN;
+        $this->attributes['shipping_country_id'] = self::COUNTRY_VN;
+//        $this->attributes['payment_method'] = 'Cash On Delivery';
+//        $this->attributes['payment_method_id'] = '1';
+//        $this->attributes['payment_code'] = 'ACB';
+        $this->attributes['shipper_id'] = '5';
+        $this->attributes['total_price'] = '30000000';
+        $this->attributes['total_tax'] = '1000000';
+        $this->attributes['total_shipping'] = '500000';
+        $this->attributes['total'] = '31500000';
+        $this->attributes['order_status_id'] = '1';
+        $this->attributes['affiliate_id'] = '1';
+        $this->attributes['commission'] = '0';
+        $this->attributes['marketing_id'] = '1';
+        $this->attributes['tracking'] = '';
+        $this->attributes['language_id'] = '1';
+        $this->attributes['currency_id'] = '1';
+        $this->attributes['currency_code'] = 'USD';
+        $this->attributes['currency_value'] = '1.00000000';
+        $this->attributes['ip'] = '';
+        $this->attributes['forwarded_ip'] = '';
+        $this->attributes['user_agent'] = '';
+        $this->attributes['accept_language'] = '';
     }
 }

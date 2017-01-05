@@ -22,7 +22,10 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="billing_country_id" placeholder="Quốc gia" class="form-control" type="text">
+                <?php
+                $cities = \App\Models\SysCity::query()->orderBy('id')->pluck('name', 'id')->prepend('Tỉnh/Thành phố', 0);
+                ?>
+                {!! Form::select('billing_city_id', $cities, null, ['class' => 'form-control select-location select-city', 'data-child'=>'district']) !!}
             </div>
         </div>
     </div>
@@ -30,7 +33,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="billing_city_id" placeholder="Tỉnh/Thành phố" class="form-control" type="text">
+                {!! Form::select('billing_district_id', ['Quận/Huyện'], null, ['class' => 'form-control select-location select-district', 'data-child'=>'ward']) !!}
             </div>
         </div>
     </div>
@@ -38,15 +41,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="billing_district_id" placeholder="Quận/Huyện" class="form-control" type="text">
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="billing_ward_id" placeholder="Phường/Xã" class="form-control" type="text">
+                {!! Form::select('billing_ward_id', ['Phường/Xã'], null, ['class' => 'form-control select-ward']) !!}
             </div>
         </div>
     </div>

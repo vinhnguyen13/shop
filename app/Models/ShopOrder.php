@@ -9,8 +9,7 @@ class ShopOrder extends Model
 {
     use HasValidator;
     protected $table = 'shop_order';
-    protected $fillable = ['store_id', 'store_name', 'store_url', 'customer_id', 'customer_group_id',
-    'firstname', 'lastname', 'email', 'telephone', 'fax', 'custom_field'];
+    protected $fillable = ['invoice_prefix', 'name', 'email', 'billing_name', 'billing_address', 'billing_country_id', 'billing_city_id', 'billing_district_id', 'billing_ward_id', 'billing_phone', 'billing_tax_code', 'shipping_name', 'shipping_address', 'shipping_country_id', 'shipping_city_id', 'shipping_district_id', 'shipping_ward_id', 'shipping_phone', 'payment_method', 'payment_method_id', 'payment_code', 'shipper_id', ''];
 
     /**
      * The "booting" method of the model.
