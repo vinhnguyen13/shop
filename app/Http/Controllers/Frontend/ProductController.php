@@ -71,7 +71,7 @@ class ProductController extends Controller
         $quantity = $request->get('quantity');
         $size = $request->get('size');
         $cart = app(ShopProduct::class)->addCart($pid, $size, $quantity);
-        dump($cart);
+        return view('product.partials.cart-header', compact('cart'));
     }
 
     public function cartRemove(Request $request)
@@ -79,8 +79,7 @@ class ProductController extends Controller
         $data = $request->get('data');
         $pid = decrypt($data);
         $cart = app(ShopProduct::class)->removeCart($pid);
-        dump($cart);
-
+        return true;
     }
 
     public function checkout(Request $request, $step)

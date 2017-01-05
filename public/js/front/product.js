@@ -36,6 +36,7 @@ $(document).ready(function () {
                 url: urlAddCart,
                 data: $.param(data),
                 success: function (data) {
+                    $('.header__cart').html(data);
                     $('body').loading({remove: true});
                 },
                 error: function (error) {
