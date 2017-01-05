@@ -56,7 +56,7 @@ class ShopOrder extends Model
         $this->attributes['store_id'] = '1';
         $this->attributes['store_name'] = 'GLABVN';
         $this->attributes['store_url'] = 'http://glab.vn';
-        $this->attributes['user_id'] = null;
+        $this->attributes['user_id'] = auth()->id();
         $this->attributes['customer_id'] = null;
         $this->attributes['customer_group_id'] = null;
         $this->attributes['billing_country_id'] = self::COUNTRY_VN;

@@ -11,7 +11,6 @@
             <th>SỐ LƯỢNG</th>
             <th>GIÁ</th>
         </tr>
-        <tr>
         <?php
         $subtotal = 0;
         $tax = 0;
@@ -36,7 +35,6 @@
                 <td class="col-md-1 text-center">{{number_format($subtotalProduct)}}</td>
             </tr>
         @endforeach
-        </tr>
         <tr>
             <td colspan="2" class="font-bold">Tạm tính</td>
             <td>{{number_format($subtotal)}} VND</td>
