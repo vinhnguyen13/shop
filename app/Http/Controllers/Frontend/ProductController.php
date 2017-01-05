@@ -79,7 +79,7 @@ class ProductController extends Controller
         $data = $request->get('data');
         $pid = decrypt($data);
         $cart = app(ShopProduct::class)->removeCart($pid);
-        return true;
+        return $cart;
     }
 
     public function checkout(Request $request, $step)

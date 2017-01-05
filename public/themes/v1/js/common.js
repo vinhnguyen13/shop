@@ -111,7 +111,7 @@ $.fn.dropdown = function (options) {
 
         sc.settings = $.extend({}, defaults, options);
 
-        $(el).on('click', itemClick, toggleView);
+        $(el).on('click', '.val-selected', toggleView);
 
         showSortLoad();
 

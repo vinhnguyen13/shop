@@ -51,7 +51,7 @@ $(document).ready(function(){
                 data: {data: pid},
                 success: function (data) {
                     $('body').loading({remove: true});
-                    window.location.reload();
+                    location.reload(true);
                 }
             });
         }, 500);
