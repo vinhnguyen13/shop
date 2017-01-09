@@ -35,10 +35,10 @@ class ShopProductSize extends Model
         return $this->hasOne('App\Models\ShopProduct', 'id', 'product_id');
     }
 
-    public function price(){
+    public function getPrice(){
         if(!empty($this->price)){
             return $this->price;
         }
-        return $this->product->price();
+        return $this->product->getPrice();
     }
 }

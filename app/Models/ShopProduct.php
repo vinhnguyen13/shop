@@ -81,7 +81,7 @@ class ShopProduct extends Model
         return 0;
     }
 
-    public function price(){
+    public function getPrice(){
         return $this->price;
     }
 
@@ -97,9 +97,9 @@ class ShopProduct extends Model
             $size = $this->size;
         }
         if(!empty($size)) {
-            $price = $size->price();
+            $price = $size->getPrice();
         }else{
-            $price = $this->price();
+            $price = $this->getPrice();
         }
         return $price;
     }
