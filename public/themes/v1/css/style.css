@@ -82,14 +82,29 @@ body.active:before {
   width: 230px;
   box-shadow: 0px 0px 1px rgba(60, 60, 60, 0.37);
 }
-
+#search .frm-icon input {
+  border: none;
+  box-shadow: none;
+}
+#search .frm-icon input:focus {
+  box-shadow: 0px 0px 1px rgba(60, 60, 60, 0.37);
+}
 .frm-icon .icon-frm {
   position: absolute;
   top: 0;
   right: 0;
   border: none;
   background: none;
-  padding: 8px 10px;
+  padding: 3px 10px;
+}
+.icon-slice9 {
+  font-size: 20px;
+}
+.icon-slice8 {
+  font-size: 22px;
+}
+.icon-slice6 {
+  font-size: 27px;
 }
 .swiper-button-prev,
 .swiper-button-next {
@@ -298,8 +313,13 @@ header.active {
   transition: left .3s ease-out;
 }
 .inner-menu {
-  padding: 60px 20px 50px 20px;
+  padding: 60px 20px 0px 20px;
+  /* position: relative; */
+}
+.inner-menu > div {
   position: relative;
+  padding-bottom: 200px;
+  min-height: 100%;
 }
 #menu li a {
   display: block;
@@ -332,7 +352,10 @@ header.active {
 }
 .menu__footer {
   text-align: center;
-  padding: 60px 0 0;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  left: 0;
 }
 #menu-close {
   background: transparent;
@@ -442,12 +465,12 @@ header.active {
     background-color: #221f20;
 }
 header #menu-open span:before {
-    -webkit-transform: translateY(-10px) rotate(0deg);
-    transform: translateY(-10px) rotate(0deg);
+    -webkit-transform: translateY(-8px) rotate(0deg);
+    transform: translateY(-8px) rotate(0deg);
 }
 header #menu-open span:after {
-    -webkit-transform: translateY(10px) rotate(0deg);
-    transform: translateY(10px) rotate(0deg);
+    -webkit-transform: translateY(8px) rotate(0deg);
+    transform: translateY(8px) rotate(0deg);
 }
 #menu-open:hover span:before {
     -webkit-transform: translateY(0) rotate(90deg);
@@ -581,16 +604,22 @@ footer {
 }
 .product__item--infor {
   position: absolute;
-  top: 70%;
+  bottom: -50px;
   left: 50%;
   margin-left: -200px;
   width: 400px;
-  background: #f2f2f2;
+  background: rgba(242, 242, 242, 0.50);
   padding: 20px 20px 5px;
   font-family: "sfu_daxcondensedregular";
   z-index: 10;
   display: none;
   /* height: 200px; */
+}
+.product__item--infor div.clearfix p {
+  text-align: left;
+}
+.product__item--infor div.clearfix .pull-right {
+  line-height: 45px;
 }
 .product__item:hover .product__item--infor {
   display: block;
@@ -613,6 +642,12 @@ footer {
 .product-name {
   font-family: "sfu_daxcondensedextrabold";
   font-size: 18px;
+}
+.product__item--infor .product-name {
+  white-space: nowrap;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .connect__items--item {
   float: left;
@@ -812,7 +847,7 @@ footer {
 .header__left .dropdown__inner {
   right: inherit;
   left: 0;
-  top: 60px;
+  top: 55px;
 }
 .header__left .dropdown .btn-auth-face a:hover,
 .header__left .dropdown .btn-auth-go a:hover {
