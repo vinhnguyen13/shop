@@ -12,8 +12,7 @@ class ShopOrder extends MainShopOrder
         $query = DB::table('shop_order AS a');
         $grid = new Grid($query, [
             'id',
-            'invoice_no',
-            'invoice_prefix',
+            'invoice_code',
             'customer_id' => [
                 'label'=>'Customer',
                 'filter' => 'like',

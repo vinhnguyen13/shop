@@ -26,14 +26,10 @@ class ShopOrder extends Model
         $instance->fill($values);
         $validate = $instance->validate($instance->attributes);
         if ($validate->passes()) {
-//            echo "<pre>";
-//            print_r($instance->getAttributes());
-//            echo "</pre>";
-//            exit;
             $instance->save();
             $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
             $record = $this->find($instance->id);
-            $record->update(['invoice_prefix'=>$invID]);
+            $record->update(['invoice_code'=>$invID]);
             return $instance;
         }else{
             return $validate->getMessageBag();
@@ -42,17 +38,13 @@ class ShopOrder extends Model
 
     public function generateInvoicePrefix()
     {
-        $maxID = $this->query()->max('id');
-//        $invID = str_pad(($maxID+1), 4, '0', STR_PAD_LEFT);
-        $invID = ($maxID+1);
         $invID = self::INVOICE_PREFIX.date('Ymd');
         return $invID;
     }
 
     public function processingSave($values)
     {
-        $this->attributes['invoice_no'] = '';
-        $this->attributes['invoice_prefix'] = $this->generateInvoicePrefix();
+        $this->attributes['invoice_code'] = $this->generateInvoicePrefix();
         $this->attributes['store_id'] = '1';
         $this->attributes['store_name'] = 'GLABVN';
         $this->attributes['store_url'] = 'http://glab.vn';
@@ -82,5 +74,8 @@ class ShopOrder extends Model
         $this->attributes['forwarded_ip'] = '';
         $this->attributes['user_agent'] = '';
         $this->attributes['accept_language'] = '';
+        /*
+         * Save infomation custommer
+         */
     }
 }
