@@ -75,7 +75,13 @@ class ShopOrder extends Model
         $this->attributes['user_agent'] = '';
         $this->attributes['accept_language'] = '';
         /*
+         * Save seller
+         */
+        /*
          * Save infomation custommer
+         */
+        /*
+         * Save shop_order_product
          */
     }
 }

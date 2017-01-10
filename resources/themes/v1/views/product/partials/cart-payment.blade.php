@@ -37,6 +37,10 @@
         </ul>
     </div>
     <div class="checkout__slect--payment-bank hide">
+        <p class="font-bold fs-14 mgB-10">Hien tai tinh nang nay chung toi dang nang cap, vui long chon hinh thuc Thanh Toan Khi Nhan Hang. Xin chan thanh cam on.</p>
+    </div>
+
+    <div class="checkout__slect--payment-bank_BK hide">
         <p class="font-bold fs-14 mgB-10">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</p>
         <p class="mgB-10">Chọn ngân hàng của bạn</p>
         @php

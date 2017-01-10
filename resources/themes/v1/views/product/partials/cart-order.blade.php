@@ -36,6 +36,11 @@
             </tr>
         @endforeach
         <tr>
+            <td colspan="3" class="font-bold">
+                {{ Form::text('coupon_code', null, ['class' => 'form-control', 'placeholder'=>'Coupon Code'])}}
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" class="font-bold">Tạm tính</td>
             <td>{{number_format($subtotal)}} VND</td>
         </tr>
