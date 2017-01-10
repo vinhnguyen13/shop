@@ -29,6 +29,7 @@
 <script type="text/javascript" src="{{ asset('/themes/v1/js/bootstrap.min.js?v='.$version_deploy) }}"></script>
 <script type="text/javascript" src="{{ asset('/themes/v1/js/jquery.slimscroll.min.js?v='.$version_deploy) }}"></script>
 <script type="text/javascript" src="{{ asset('/themes/v1/js/common.js?v='.$version_deploy) }}"></script>
+<script type="text/javascript" src="{{ asset('/themes/v1/js/common-dev.js?v='.$version_deploy) }}"></script>
 @stack('scripts')
 </body>
 </html>
