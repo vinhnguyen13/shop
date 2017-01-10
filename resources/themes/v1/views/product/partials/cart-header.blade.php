@@ -1,4 +1,4 @@
-    <a href="" class="val-selected"><span class="icon-cart"></span>{!! !empty($cart) ? '<span class="header__cart--num">'.count($cart).'</span>' : '' !!}</a>
+    <a href="" class="val-selected"><span class="icon-slice8"></span>{!! !empty($cart) ? '<span class="header__cart--num">'.count($cart).'</span>' : '' !!}</a>
 
     <div class="dropdown-up-style hide">
         <div class="dropdown__inner">

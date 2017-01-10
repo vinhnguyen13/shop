@@ -3,7 +3,7 @@
         <div class="pull-left lh-50 header__left">
             <button id="menu-open" class=""><span></span></button>
             <div class="dropdown">
-                <a href="" class="val-selected"><span class="icon-697822"></span></a>
+                <a href="" class="val-selected"><span class="icon-slice6"></span></a>
                 <div class="dropdown-up-style hide">
                     <div class="dropdown__inner">
                         <ul>
