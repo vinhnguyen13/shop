@@ -6,6 +6,7 @@ use App\Models\ShopOrder as Model;
 use App\Models\ShopOrderProduct;
 use App\Models\ShopOrderStatus;
 use App\Models\ShopPayment;
+use App\Models\Frontend\ShopProduct;
 
 class ShopOrder extends Model
 {
@@ -18,8 +19,14 @@ class ShopOrder extends Model
      * @param  array $values
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function updateOrCreate(array $attributes = [], array $values = [])
+    public function processingSaveOrder(array $attributes = [], array $values = [])
     {
+        $carts = app(ShopProduct::class)->getCart();
+        if(empty($carts)){
+            $messageBag = new \Illuminate\Support\MessageBag();
+            $messageBag->add('cart', 'Empty cart');
+            return $messageBag;
+        }
         if(!empty($attributes)){
             $instance = $this->firstOrNew($attributes);
         }else{
@@ -36,11 +43,30 @@ class ShopOrder extends Model
             /*
              * Save shop_order_product
              */
-            $orderProducts = ShopOrderProduct::where(['order_id']);
-            if(!empty($orderProducts)){
-
-            }else{
-                
+            if(!empty($carts)){
+                $subtotal = 0;
+                $tax = 0;
+                $total = 0;
+                foreach($carts as $product_id=>$item){
+                    $product = ShopProduct::find($product_id);
+                    $product->setCart($item['size'], $item['quantity']);
+                    $price = $product->priceWithSize();
+                    $subtotalProduct = $price * $item['quantity'];
+                    $tax = $product->taxWithPrice($price);
+                    $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product_id]);
+                    if(empty($orderProduct->id)){
+                        $orderProduct = new ShopOrderProduct();
+                        $orderProduct->order_id = $record->id;
+                        $orderProduct->product_id = $product_id;
+                    }
+                    $orderProduct->name = $product->name;
+                    $orderProduct->model = $product->name;
+                    $orderProduct->quantity = $item['quantity'];
+                    $orderProduct->price = $subtotalProduct;
+                    $orderProduct->tax = $tax;
+                    $orderProduct->reward = 0;
+                    $orderProduct->save();
+                }
             }
             return $instance;
         }else{
