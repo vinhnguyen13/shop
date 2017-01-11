@@ -3,6 +3,9 @@
 namespace App\Models\Frontend;
 
 use App\Models\ShopOrder as Model;
+use App\Models\ShopOrderProduct;
+use App\Models\ShopOrderStatus;
+use App\Models\ShopPayment;
 
 class ShopOrder extends Model
 {
@@ -30,6 +33,15 @@ class ShopOrder extends Model
             $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
             $record = $this->find($instance->id);
             $record->update(['invoice_code'=>$invID]);
+            /*
+             * Save shop_order_product
+             */
+            $orderProducts = ShopOrderProduct::where(['order_id']);
+            if(!empty($orderProducts)){
+
+            }else{
+                
+            }
             return $instance;
         }else{
             return $validate->getMessageBag();
@@ -44,44 +56,61 @@ class ShopOrder extends Model
 
     public function processingSave($values)
     {
+        $paymentOption = ShopPayment::where(['key'=>$values['payment_method']])->first();
+        $user = auth()->user();
+        /*
+         * Save infomation custommer
+         */
+        $customer = ShopCustomer::query()->where(['email'=>$values['email']])->orWhere(['phone'=>$values['shipping_phone']])->toSql();
+        if(empty($customer->id)){
+            $customer = new ShopCustomer();
+            $customer->fill([
+                'customer_group_id'=>1,
+                'user_id'=>auth()->id(),
+                'name'=>$values['shipping_name'],
+                'email'=>$values['email'],
+                'address'=>$values['shipping_address'],
+                'country_id'=>self::COUNTRY_VN,
+                'city_id'=>$values['shipping_city_id'],
+                'district_id'=>$values['shipping_district_id'],
+                'ward_id'=>$values['shipping_ward_id'],
+                'tax_code'=>$values['billing_tax_code'],
+                'phone'=>$values['shipping_phone'],
+                'ip'=>request()->ip(),
+            ]);
+            $customer->save();
+        }
+        /*
+         *  Save Order
+         */
         $this->attributes['invoice_code'] = $this->generateInvoicePrefix();
         $this->attributes['store_id'] = '1';
         $this->attributes['store_name'] = 'GLABVN';
         $this->attributes['store_url'] = 'http://glab.vn';
-        $this->attributes['user_id'] = auth()->id();
-        $this->attributes['customer_id'] = null;
-        $this->attributes['customer_group_id'] = null;
+        if(!empty($user->is_seller)) {
+            $this->attributes['seller_id'] = auth()->id();
+        }
+        if(!empty($customer->id)) {
+            $this->attributes['customer_id'] = $customer->id;
+            $this->attributes['customer_group_id'] = $customer->customer_group_id;
+        }
         $this->attributes['billing_country_id'] = self::COUNTRY_VN;
         $this->attributes['shipping_country_id'] = self::COUNTRY_VN;
-//        $this->attributes['payment_method'] = 'Cash On Delivery';
-//        $this->attributes['payment_method_id'] = '1';
-//        $this->attributes['payment_code'] = 'ACB';
-        $this->attributes['shipper_id'] = '5';
+        if(!empty($paymentOption->id)){
+            $this->attributes['payment_method_id'] = $paymentOption->id;
+        }
+        $this->attributes['shipper_id'] = null;
         $this->attributes['total_price'] = '30000000';
         $this->attributes['total_tax'] = '1000000';
         $this->attributes['total_shipping'] = '500000';
         $this->attributes['total'] = '31500000';
-        $this->attributes['order_status_id'] = '1';
-        $this->attributes['affiliate_id'] = '1';
+        $this->attributes['order_status_id'] = ShopOrderStatus::STT_PENDING;
         $this->attributes['commission'] = '0';
-        $this->attributes['marketing_id'] = '1';
-        $this->attributes['tracking'] = '';
-        $this->attributes['language_id'] = '1';
-        $this->attributes['currency_id'] = '1';
-        $this->attributes['currency_code'] = 'USD';
-        $this->attributes['currency_value'] = '1.00000000';
-        $this->attributes['ip'] = '';
-        $this->attributes['forwarded_ip'] = '';
-        $this->attributes['user_agent'] = '';
-        $this->attributes['accept_language'] = '';
-        /*
-         * Save seller
-         */
-        /*
-         * Save infomation custommer
-         */
-        /*
-         * Save shop_order_product
-         */
+        $this->attributes['coupon_id'] = null;
+        $this->attributes['tracking'] = uniqid();
+        $this->attributes['ip'] = request()->ip();
+        $this->attributes['forwarded_ip'] = request()->getClientIp();
+        $this->attributes['user_agent'] = request()->header('User-Agent');
+        $this->attributes['accept_language'] = app()->getLocale();
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShopCustomer extends Model
 {
     protected $table = 'shop_customer';
-    protected $fillable = ['customer_group_id','user_id', 'name', 'phone', 'fax', 'email', 'card', 'company', 'address_1', 'address_2', 'country_id', 'city_id', 'district_id'];
+    protected $fillable = ['customer_group_id','user_id', 'name', 'email', 'address', 'country_id', 'city_id', 'district_id', 'ward_id', 'street_id', 'tax_code', 'phone', 'company', 'card'];
     /**
      * The "booting" method of the model.
      *

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="shipping_name" placeholder="Họ Tên" class="form-control" type="text">
+                <input name="shipping_name" placeholder="Họ Tên (*)" class="form-control" type="text">
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="shipping_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'." class="form-control" type="text">
+                <input name="shipping_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="shipping_phone" placeholder="Điện thoại" class="form-control" type="text">
+                <input name="shipping_phone" placeholder="Điện thoại  (*)" class="form-control" type="text">
             </div>
         </div>
     </div>
