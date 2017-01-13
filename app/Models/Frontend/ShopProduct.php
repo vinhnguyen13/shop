@@ -81,6 +81,13 @@ class ShopProduct extends MainShopProduct
        return false;
     }
 
+    public function removeCartAll(){
+        if (Session::has('cart')) {
+            Session::remove('cart');
+        }
+        return false;
+    }
+
     public function checkout(){
 
     }

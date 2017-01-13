@@ -94,7 +94,24 @@ class ProductController extends Controller
             $input = \Input::all();
             unset($input['_token']);
             $return = app(ShopOrder::class)->processingSaveOrder([], $input);
-            dump($return);
+            if(!empty($return)){
+                app(ShopProduct::class)->removeCartAll();
+                return ['code'=>0, 'message'=>'', 'return'=>$return];
+            }
         }
+        return ['code'=>2, 'message'=>''];
+    }
+
+    public function paySuccess(Request $request)
+    {
+        $order = $request->get('order');
+        if(!empty($order)){
+        }
+        return view('product.payment-success');
+    }
+
+    public function payFail(Request $request)
+    {
+        return view('product.payment-fail');
     }
 }

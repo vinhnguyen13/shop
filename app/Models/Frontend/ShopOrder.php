@@ -62,7 +62,8 @@ class ShopOrder extends Model
                     $orderProduct->name = $product->name;
                     $orderProduct->model = $product->name;
                     $orderProduct->quantity = $item['quantity'];
-                    $orderProduct->price = $subtotalProduct;
+                    $orderProduct->price = $price;
+                    $orderProduct->total = $subtotalProduct;
                     $orderProduct->tax = $tax;
                     $orderProduct->reward = 0;
                     $orderProduct->save();

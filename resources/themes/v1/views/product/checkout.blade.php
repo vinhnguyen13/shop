@@ -53,6 +53,8 @@
         var urlRemoveCart = "{{route('product.cart.remove')}}";
         var urlOrder = "{{route('product.order')}}";
         var urlLocation = "{{route('home.location')}}";
+        var urlPaymentSuccess = "{{route('product.payment.success')}}";
+        var urlPaymentFail = "{{route('product.payment.fail')}}";
     </script>
     <script src="{!! asset('js/front/checkout.js')  !!}"></script>
 @endpush

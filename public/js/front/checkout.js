@@ -114,7 +114,13 @@ $(document).ready(function(){
                 url: urlOrder,
                 data: form,
                 success: function (data) {
-                    $('body').loading({remove: true});
+                    if(data.code == 0) {
+                        $('body').loading({remove: true});
+                        var redirect = urlPaymentSuccess+'?order=';
+                    }else{
+                        var redirect = urlPaymentFail;
+                    }
+                    window.location.href = redirect;
                 }
             });
         }, 500);
