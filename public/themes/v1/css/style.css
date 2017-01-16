@@ -582,14 +582,19 @@ footer {
   position: relative;
   color: #000;
 }
-.product__item--pic a:before {
+.product__item--pic a .product__img {
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+}
+.product__item--pic a .product__img:before {
   content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   margin-right: -5px;
 }
-.product__item--pic a img {
+.product__item--pic a .product__img img {
   display: inline-block;
   vertical-align: middle;
 }
@@ -597,17 +602,17 @@ footer {
   margin: 0 -15px;
 }
 .products > div {
-  padding: 0 4%;
+  /* padding: 0 4%; */
 }
 .products > div.text-center {
   padding: 0;
 }
 .product__item--infor {
   position: absolute;
-  bottom: -50px;
-  left: 50%;
-  margin-left: -200px;
-  width: 400px;
+  bottom: 0;
+  left: 0;
+  margin-left: 0;
+  width: 100%;
   background: rgba(242, 242, 242, 0.50);
   padding: 20px 20px 5px;
   font-family: "sfu_daxcondensedregular";
@@ -698,8 +703,9 @@ footer {
   padding-top: 100px;
 }
 .detail__img .slidedetailpage {
-  height: 500px;
+  /* height: 500px; */
   /* border: 1px solid #e8e8e8; */
+  padding-left: 25px;
 }
 .detail__img .slidedetailpage .swiper-slide {text-align: center;}
 .detail__img .slidedetailpage .swiper-slide:before {
@@ -752,9 +758,10 @@ footer {
   border: none;
   font-family: "sfu_daxcondensedmedium";
   color: #fff;
-  padding: 5px 20px 4px;
+  padding: 10px 20px 9px;
   display: block;
-  margin-top: 25px;
+  margin-top: 20px;
+  width: 100%;
 }
 .detail__desc .btn-buy:hover {
   opacity: .7;
@@ -765,8 +772,12 @@ footer {
 .detail__desc--param p,
 .detail__desc--intro p {
   margin-bottom: 10px;
-  font-family: "sfu_daxcondensedmedium";
+  font-family: "sfu_daxcondensedregular";
   font-size: 16px;
+}
+.detail__desc--intro .title__detailproduct {
+  font-family: "sfu_daxcondensedmedium";
+  font-size: 18px;
 }
 .detail__related {
   padding-top: 50px;
@@ -999,4 +1010,107 @@ footer {
 }
 #orderForm button {
   font-family: "Arial";
+}
+.slidedetail__item {
+  text-align: center;
+  padding-top: 80px;
+}
+.slidedetail__item img {
+  max-width: 100%;
+}
+.slidedetail__pagi {
+  position: fixed;
+  top: 40%;
+  z-index: 10;
+}
+.slidedetail__pagi li {
+  margin-bottom: 10px;
+}
+.slidedetail__pagi li a {
+  display: block;
+  padding: 0 10px;
+}
+.slidedetail__pagi li a span {
+  display: block;
+  width: 4px;
+  height: 40px;
+  background: #dadada;
+}
+.slidedetail__pagi li a:hover span {
+  background: #868686;
+}
+.breakgum {
+  margin-bottom: 40px;
+}
+.breakgum li {
+  float: left;
+  color: #d6d6d6;
+  text-transform: uppercase;
+  font-family: "sfu_daxcondensedregular";
+  font-size: 15px;
+  padding: 0 5px;
+}
+.breakgum li span {
+  color: #333;
+}
+.breakgum li a {
+  font-family: "sfu_daxcondensedmedium"
+}
+.detail__desc .dropdown .val-selected {
+  background-color: #eee;
+  width: 100%;
+  display: block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  font-family: "sfu_daxcondensedregular";
+  color: #333;
+}
+.detail__desc .dropdown .val-selected span {
+  float: right;
+  margin-top: 3px;
+}
+.detail__desc .dropdown .val-selected .detail__size {
+  float: left;
+}
+.detail__desc .dropdown .val-selected .detail__price {
+  margin-right: 10px;
+}
+.detail__desc .dropdown .val-selected .detail__size span {
+  float: none;
+  margin: 0 5px 0 0;
+}
+.detail__desc .dropdown .dropdown__inner {
+  right: inherit;
+  left: 0;
+  width: 100%;
+  top: 40px;
+  box-shadow: none;
+  background-color: #eee;
+  position: static;
+  -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
+.detail__desc .dropdown .dropdown__inner a {
+  display: block;
+  padding: 10px 30px;
+  font-family: "sfu_daxcondensedregular";
+}
+.detail__desc .dropdown .dropdown__inner a:hover {
+  background-color: #ddd;
+  color: red;
+}
+.detail__desc .dropdown .dropdown-up-style {
+  position: static;
+  opacity: 1;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+}
+.detail__desc .dropdown .dropdown-up-style.active {
+  max-height: 300px;
+}
+.slimScrollBar {
+  background: black !important;
 }

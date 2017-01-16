@@ -99,7 +99,8 @@ $.fn.dropdown = function (options) {
             hideWhenSelected: true,
             load: function() {},
             beforeOpen: function() {},
-            closeCallBack: function() {}
+            closeCallBack: function() {},
+            closeWhenSelectVal: function () {}
         },
         sc = {},
         el = $(this),
@@ -111,20 +112,29 @@ $.fn.dropdown = function (options) {
 
         sc.settings = $.extend({}, defaults, options);
 
+        itemClick.unbind('click');
         itemClick.on('click', toggleView);
 
         showSortLoad();
-
-        //sc.settings.load(el);
 
         if ( sc.settings.selectedValue ) {
             selectItem();
         }
 
+        //itemDropClick.unbind('click');
         itemDropClick.on('click', function (e) {
-            //e.preventDefault();
+            if ( validateURL($(this).attr('href')) ) {
+                window.location = $(this).attr('href');
+            }
+            e.preventDefault();
+            sc.settings.closeWhenSelectVal($(this), el);
             itemClick.trigger('click');
         });
+
+        function validateURL(textval) {
+            var urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+            return urlregex.test(textval);
+        }
         
         // set value input when reload page
         function showSortLoad () {
@@ -132,18 +142,20 @@ $.fn.dropdown = function (options) {
                 renderPriceArea.updateHidden(el);
                 return;
             }
-            if ( el.find('input[type=hidden]').val() != '' ) {
+            if ( el.find('input[type=hidden]').val() !== undefined ) {
                 var valInputHidden = el.find('input[type=hidden]').val();
                 itemDropClick.each(function () {
                     var _this = $(this),
                         dataValue = _this.data('value'),
                         txtItem = _this.text();
 
-                    if ( valInputHidden == dataValue ) {
-                        if ( txtItemClick.find('.get-val').length ) {
-                            txtItemClick.find('.get-val').text(txtItem);
+                    dataValue = typeof dataValue === "number" ? ""+dataValue+"" : dataValue ;
+
+                    if ( valInputHidden === dataValue ) {
+                        if ( itemClick.find('.get-val').length ) {
+                            itemClick.find('.get-val').text(txtItem);
                         }else {
-                            txtItemClick.text(txtItem);
+                            itemClick.text(txtItem);
                         }
                     }
                 });
@@ -174,7 +186,7 @@ $.fn.dropdown = function (options) {
 
         // show item when click in dropdown
         function selectItem () {
-            itemDropClick.unbind('click');
+            //itemDropClick.unbind('click');
             itemDropClick.on('click', function (e) {
                 e.preventDefault();
                 var _this = $(this),
@@ -189,7 +201,7 @@ $.fn.dropdown = function (options) {
                     txtItemClick.text(txtClick);
                 }
                 el.find('input[type=hidden]').val(valSelected);
-                itemClick.trigger('click');
+                //itemClick.trigger('click');
             });
         }
 

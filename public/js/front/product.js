@@ -36,7 +36,15 @@ $(document).ready(function () {
                 url: urlAddCart,
                 data: $.param(data),
                 success: function (data) {
-                    $('.header__cart').html(data);
+                    if(data.total > 0){
+                        if($('.header__cart .val-selected .header__cart--num').length > 0) {
+                            $('.header__cart .val-selected .header__cart--num').html(data.total);
+                            $('.header__cart .val-selected .header__cart--num').removeClass('hide');
+                        }
+                    }
+                    if(data.html){
+                        $('.header__cart .dropdown__inner').html(data.html);
+                    }
                     $('body').loading({remove: true});
                 },
                 error: function (error) {

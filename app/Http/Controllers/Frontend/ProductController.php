@@ -71,7 +71,9 @@ class ProductController extends Controller
         $quantity = $request->get('quantity');
         $size = $request->get('size');
         $cart = app(ShopProduct::class)->addCart($pid, $size, $quantity);
-        return view('product.partials.cart-header', compact('cart'));
+        $total = !empty($cart) ? count($cart) : 0;
+        $html = view('product.partials.cart-header', compact('cart'))->render();
+        return ['total'=>$total, 'html'=>$html];
     }
 
     public function cartRemove(Request $request)

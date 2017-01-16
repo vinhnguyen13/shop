@@ -27,11 +27,16 @@
 
                 <div class="frm-icon">
                     <input type="text" placeholder="Search"/>
-                    <button type="submit" class="icon-frm"><span class="icon-search"></span></button>
+                    <button type="submit" class="icon-frm"><span class="icon-slice9"></span></button>
                 </div>
             </form>
             <div class="header__cart dropdown">
-                @include('product.partials.cart-header')
+                <a href="" class="val-selected"><span class="icon-slice8"></span><span class="header__cart--num {!! (!empty($cart)) ? '' :'hide' !!}">{!! (!empty($cart)) ? count($cart) :'' !!}</span></a>
+                <div class="dropdown-up-style hide">
+                    <div class="dropdown__inner">
+                        @include('product.partials.cart-header')
+                    </div>
+                </div>
             </div>
         </div>
         <div class="text-center lh-50 header__logo">
