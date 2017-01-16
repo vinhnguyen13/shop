@@ -54,7 +54,7 @@
                 </div>
                 <div class="detail__desc--intro">
                     <p class="title__detailproduct">Detail</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
         </div>
