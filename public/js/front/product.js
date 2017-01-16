@@ -51,7 +51,7 @@ $(document).ready(function () {
             $(window).on('scroll', function () {
                 var val = $(this).scrollTop();
                 console.log(val, $('.detail__related').outerHeight(), hWrapSlide);
-                if ( val + $('.detail__related').outerHeight() > hWrapSlide ) {
+                if ( val + hWrapSlide > $('.detail__related').outerHeight() ) {
                     $('.slidedetail__pagi').hide();
                 }else {
                     $('.slidedetail__pagi').show();
