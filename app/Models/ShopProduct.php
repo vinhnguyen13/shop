@@ -53,6 +53,10 @@ class ShopProduct extends Model
         return $this->hasMany(ShopProductImage::class, 'product_id')->orderBy('order');
     }
 
+    public function manufacturer(){
+        return $this->hasOne(ShopManufacturer::class, 'id', 'manufacturer_id');
+    }
+
     public function sizes(){
         return $this->hasMany(ShopProductSize::class, 'product_id');
     }
@@ -102,6 +106,10 @@ class ShopProduct extends Model
             $price = $this->getPrice();
         }
         return $price;
+    }
+
+    public function categoriesName(){
+        return '';
     }
 
     /**
