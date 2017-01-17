@@ -15,7 +15,7 @@
                             @if (!empty($sizes) && count($sizes) > 0)
                                 <div class="size-item">
                                     @foreach($sizes as $size)
-                                        <a href="" class="size">{{$size->size}}</a>
+                                        <span class="size">{{$size->size}}</span>
                                     @endforeach
                                 </div>
                                 <p class="text-uper">available size</p>
