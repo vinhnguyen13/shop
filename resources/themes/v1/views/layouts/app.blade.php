@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/reset.min.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/font.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/style.css?v='.$version_deploy) }}">
-    <link rel="stylesheet" href="{{ asset('/themes/v1/css/common.css?v='.$version_deploy) }}">
     @stack('styles')
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/responsive.css?v='.$version_deploy) }}">
 </head>
@@ -28,8 +27,8 @@
 <script type="text/javascript" src="{{ asset('/themes/v1/js/jquery-1.11.1.js?v='.$version_deploy) }}"></script>
 <script type="text/javascript" src="{{ asset('/themes/v1/js/bootstrap.min.js?v='.$version_deploy) }}"></script>
 <script type="text/javascript" src="{{ asset('/themes/v1/js/jquery.slimscroll.min.js?v='.$version_deploy) }}"></script>
+@stack('scripts')
 <script type="text/javascript" src="{{ asset('/themes/v1/js/common.js?v='.$version_deploy) }}"></script>
 <script type="text/javascript" src="{{ asset('/themes/v1/js/common-dev.js?v='.$version_deploy) }}"></script>
-@stack('scripts')
 </body>
 </html>

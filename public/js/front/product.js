@@ -50,7 +50,6 @@ $(document).ready(function () {
             var hWrapSlide = $('.slidedetailpage').outerHeight() + $('.slidedetailpage').offset().top;
             $(window).on('scroll', function () {
                 var val = $(this).scrollTop();
-                console.log(val, $('.detail__related').outerHeight(), hWrapSlide);
                 if ( val + hWrapSlide + 100 > $('.detail__related').outerHeight() ) {
                     $('.slidedetail__pagi').hide();
                 }else {
@@ -61,7 +60,7 @@ $(document).ready(function () {
 
 
 
-    $('.detail__img--thumb li').eq(0).addClass('active');
+    /*$('.detail__img--thumb li').eq(0).addClass('active');
     $('.detail__img--thumb li a').on('click', function (e) {
         e.preventDefault();
         var i = $(this).parent().index();
@@ -72,7 +71,7 @@ $(document).ready(function () {
 
     $("img.lazy").lazyload({
         effect : "fadeIn"
-    });
+    });*/
 
     /**
      * Buy button
