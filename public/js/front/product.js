@@ -47,15 +47,19 @@ $(document).ready(function () {
 
     $('.slidedetailpage').imagesLoaded()
         .done( function( instance ) {
-            var hWrapSlide = $('.slidedetailpage').outerHeight() + $('.slidedetailpage').offset().top;
+            var hWrapSlide = $('.slidedetailpage').outerHeight() + $('.slidedetailpage').offset().top,
+                hPagi = $('.slidedetail__pagi').outerHeight(),
+                offsetPagi = $('.slidedetail__pagi').position().top;
+
             $(window).on('scroll', function () {
                 var val = $(this).scrollTop();
-                if ( val + hWrapSlide + 100 > $('.detail__related').outerHeight() ) {
+
+                if ( offsetPagi + hPagi + val > hWrapSlide ) {
                     $('.slidedetail__pagi').hide();
                 }else {
                     $('.slidedetail__pagi').show();
                 }
-            });
+            }).trigger('scroll');
         });
 
 

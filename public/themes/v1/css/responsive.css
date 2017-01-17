@@ -173,7 +173,7 @@
     margin-right: 20px;
   } 
   .detail__img .slidedetailpage {
-    height: 280px;
+    /* height: 280px; */
   }
   .detail {
     padding-top: 50px;
@@ -190,6 +190,9 @@
   .checkout__slect--payment li {
   	width: 100%;
   	margin: 0 0 10px 0;
+  }
+  .breakgum li, .breakgum li a {
+  	font-size: 14px;
   }
 }
 @media (max-width: 320px) {

@@ -104,7 +104,7 @@ body.active:before {
   font-size: 22px;
 }
 .icon-slice6 {
-  font-size: 27px;
+  font-size: 22px;
 }
 .swiper-button-prev,
 .swiper-button-next {
@@ -422,7 +422,7 @@ header.active {
 }
 #menu-open {
   position: relative;
-  width: 30px;
+  width: 22px;
   height: 30px;
   padding: 0;
   cursor: pointer;
@@ -433,6 +433,7 @@ header.active {
   border: none;
   background: none;
   margin-right: 15px;
+  margin-top: 3px;
 }
 #menu-open span {
   position: absolute;
@@ -442,7 +443,7 @@ header.active {
   height: 2px;
   font-size: 0px;
   margin-top: -2px;
-  margin-left: -15px;
+  margin-left: -11px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -465,12 +466,12 @@ header.active {
     background-color: #221f20;
 }
 header #menu-open span:before {
-    -webkit-transform: translateY(-8px) rotate(0deg);
-    transform: translateY(-8px) rotate(0deg);
+    -webkit-transform: translateY(-6px) rotate(0deg);
+    transform: translateY(-6px) rotate(0deg);
 }
 header #menu-open span:after {
-    -webkit-transform: translateY(8px) rotate(0deg);
-    transform: translateY(8px) rotate(0deg);
+    -webkit-transform: translateY(6px) rotate(0deg);
+    transform: translateY(6px) rotate(0deg);
 }
 #menu-open:hover span:before {
     -webkit-transform: translateY(0) rotate(90deg);
@@ -858,7 +859,7 @@ footer {
 .header__left .dropdown__inner {
   right: inherit;
   left: 0;
-  top: 55px;
+  top: 49px;
 }
 .header__left .dropdown .btn-auth-face a:hover,
 .header__left .dropdown .btn-auth-go a:hover {
