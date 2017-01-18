@@ -16,8 +16,8 @@ class ImageService
     public $disk;
     public $sizes = [
         'large' => [960, 960, 'resize'],
-        'medium' => [480, 480, 'resize'],
-        'thumb' => [240, 240, 'resize'],
+        'medium' => [480, 480, 'crop'],
+        'thumb' => [240, 240, 'crop'],
     ];
 
     /**
