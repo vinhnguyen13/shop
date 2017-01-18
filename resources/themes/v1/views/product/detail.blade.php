@@ -13,7 +13,7 @@
                 <div class="slidedetailpage">
                     @foreach($images as $image)
                         <div class="slidedetail__item">
-                            <img src="{{$image->url('large')}}" alt="" />
+                            <img src="{{$image->url('original')}}" alt="" />
                         </div>
                     @endforeach
                 </div>
