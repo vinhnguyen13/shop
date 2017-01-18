@@ -56,7 +56,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                         <div class="tab-pane" id="tab_7">
                             <div class="form-group">
                                 {{ Form::label(null, 'Image') }}
-                                {{ Form::file('image', ['url' => route('admin.upload', ['type'=>\App\Services\UploadMedia::UPLOAD_PRODUCT]), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 1] ]) }}
+                                {{ Form::file('image', ['url' => route('admin.upload', ['type'=>\App\Services\UploadMedia::UPLOAD_PRODUCT]), 'files' => !empty($image) ? $image : null, 'clientOptions' => ['singleFileUploads' => 1, 'limitMultiFileUploadSize' => 1, 'maxNumberOfFiles' => 10] ]) }}
                             </div>
                         </div>
                     </div>
