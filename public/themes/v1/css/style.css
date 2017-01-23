@@ -768,7 +768,7 @@ footer {
   opacity: .7;
 }
 .detail__desc--intro {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 .detail__desc--param p,
 .detail__desc--intro p {
@@ -1111,7 +1111,24 @@ footer {
 }
 .detail__desc .dropdown .dropdown-up-style.active {
   max-height: 300px;
+  /* height: 300px; */
 }
 .slimScrollBar {
   background: black !important;
+}
+.detail__desc .dropdown .slimScrollDiv {
+  height: 100%;
+}
+.detail__desc--inner {
+  position: relative;
+}
+.detail__desc--fix {
+  /* transition: all .2s ease-out; */
+}
+.detail__desc--fix.fixed {
+  position: absolute;
+  width: 100%;
+}
+#frm-email .icon-frm {
+  padding: 8px 10px;
 }

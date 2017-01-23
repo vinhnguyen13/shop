@@ -32,7 +32,7 @@ $(document).ready(function () {
 	$(window).on('scroll', function () {
 		var valScroll = $(this).scrollTop();
 		
-		if (valScroll > hHeader+50) {
+        if (valScroll > hHeader+50) {
 			if (flagCheck) return;
 			$('header').addClass('active-before');
 			timeoutRemove = setTimeout(function () {
@@ -44,10 +44,10 @@ $(document).ready(function () {
 			clearTimeout(timeoutRemove);
 			$('header').removeClass('active');
 			$('header').removeClass('active-before');
-		}
+		}        
 	});
 
-	$('#menu .inner-menu').slimScroll({
+    $('#menu .inner-menu').slimScroll({
 	    height: '100%',
 	    alwaysVisible: true
 	});
