@@ -46,7 +46,7 @@
         </tr>
         <tr>
             <td colspan="2" class="font-bold">Phí vận chuyển</td>
-            <td>Miễn phí</td>
+            <td>Sẽ tính tùy vào khu vực</td>
         </tr>
         <tr>
             <td colspan="2" class="font-bold">
