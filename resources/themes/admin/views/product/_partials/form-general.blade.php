@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group required">
     {{ Form::label(null, 'Sku') }}
     {{ Form::text('sku', $model->sku,['class' => 'form-control'])}}
 </div>
