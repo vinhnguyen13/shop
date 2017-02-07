@@ -70,5 +70,13 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-12 inputGroupContainer">
+            <div class="input-group">
+                <input type="checkbox" class="chk" id="chkShippingDiffBilling"> <label for="chkShippingDiffBilling"> Thông tin thanh toán khác địa chỉ giao hàng</label>
+            </div>
+        </div>
+    </div>
+    @include('product.partials.cart-billing')
 </div>
 

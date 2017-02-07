@@ -69,6 +69,7 @@ class ShopOrder extends Model
                     $orderProduct->save();
                 }
             }
+            app(ShopProduct::class)->removeCartAll();
             return $instance;
         }else{
             return $validate->getMessageBag();
@@ -110,6 +111,23 @@ class ShopOrder extends Model
         /*
          *  Save Order
          */
+        $total_price = 0;
+        $total_tax = 0;
+        $total_shipping = 0;
+        $total = 0;
+        $carts = app(ShopProduct::class)->getCart();
+        if(!empty($carts)){
+            foreach($carts as $product_id=>$item){
+                $product = ShopProduct::find($product_id);
+                $product->setCart($item['size'], $item['quantity']);
+                $price = $product->priceWithSize();
+                $total_price += $price * $item['quantity'];
+                $total_tax += $product->taxWithPrice($price);
+
+            }
+            $total = $total_price + $total_shipping + $total_tax;
+        }
+
         $this->attributes['invoice_code'] = $this->generateInvoicePrefix();
         $this->attributes['store_id'] = '1';
         $this->attributes['store_name'] = 'GLABVN';
@@ -127,10 +145,10 @@ class ShopOrder extends Model
             $this->attributes['payment_method_id'] = $paymentOption->id;
         }
         $this->attributes['shipper_id'] = null;
-        $this->attributes['total_price'] = '30000000';
-        $this->attributes['total_tax'] = '1000000';
-        $this->attributes['total_shipping'] = '500000';
-        $this->attributes['total'] = '31500000';
+        $this->attributes['total_price'] = $total_price;
+        $this->attributes['total_tax'] = $total_tax;
+        $this->attributes['total_shipping'] = $total_shipping;
+        $this->attributes['total'] = $total;
         $this->attributes['order_status_id'] = ShopOrderStatus::STT_PENDING;
         $this->attributes['commission'] = '0';
         $this->attributes['coupon_id'] = null;

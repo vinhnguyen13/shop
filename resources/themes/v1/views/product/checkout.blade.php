@@ -18,7 +18,7 @@
                             {{ csrf_field() }}
                             {{--@include('product.partials.cart-products')--}}
                             @include('product.partials.cart-shipping')
-                            @include('product.partials.cart-billing')
+
                             @include('product.partials.cart-payment')
                             <div class="form-group">
                                 <div class="col-md-12 text-right">

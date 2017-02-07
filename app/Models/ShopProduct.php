@@ -94,10 +94,7 @@ class ShopProduct extends Model
         return $this->price;
     }
 
-    public function priceWithSize($sizeID = null){
-        if(!empty($sizeID)){
-            $size = $this->size($sizeID);
-        }
+    public function priceWithSize(){
         if(!empty($this->size)){
             $size = $this->size;
         }

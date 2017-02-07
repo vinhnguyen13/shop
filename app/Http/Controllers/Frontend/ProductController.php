@@ -80,7 +80,8 @@ class ProductController extends Controller
     {
         $data = $request->get('data');
         $pid = decrypt($data);
-        $cart = app(ShopProduct::class)->removeCart($pid);
+        $size = $request->get('size');
+        $cart = app(ShopProduct::class)->removeCart($pid, $size);
         return $cart;
     }
 
@@ -97,7 +98,6 @@ class ProductController extends Controller
             unset($input['_token']);
             $return = app(ShopOrder::class)->processingSaveOrder([], $input);
             if(!empty($return)){
-                app(ShopProduct::class)->removeCartAll();
                 return ['code'=>0, 'message'=>'', 'return'=>$return];
             }
         }

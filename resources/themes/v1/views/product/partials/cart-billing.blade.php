@@ -1,4 +1,4 @@
-<div class="step-checkout hide" id="wrap-billing">
+<div class="hide" id="wrap-billing">
     <div class="text-center">
         <h2>Thông tin thanh toán của quý khách</h2>
     </div>

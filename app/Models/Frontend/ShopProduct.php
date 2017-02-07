@@ -16,6 +16,7 @@ class ShopProduct extends MainShopProduct
     const CHECKOUT_SHIPPING = 'shipping';
     const CHECKOUT_BILLING = 'billing';
     const CHECKOUT_PAYMENT = 'payment';
+    const SPLIT_PRODUCT_SIZE = '_GLAB_';
 
     public function getList($params = array()){
         $query = ShopProduct::from('shop_product AS a');
@@ -51,10 +52,11 @@ class ShopProduct extends MainShopProduct
         if (Session::has('cart')) {
             $cart = Session::get('cart');
         }
-        if(!empty($cart[$pid]) && $cart[$pid]['size'] == $size){
-            $cart[$pid]['quantity'] += $quantity;
+        $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
+        if(!empty($cart[$key]) && $cart[$key]['size'] == $size){
+            $cart[$key]['quantity'] += $quantity;
         }else{
-            $cart[$pid] = $item;
+            $cart[$key] = $item;
         }
         Session::put('cart', $cart);
         return $cart;
@@ -69,11 +71,12 @@ class ShopProduct extends MainShopProduct
         return false;
     }
 
-    public function removeCart($pid){
+    public function removeCart($pid, $size){
         if (Session::has('cart')) {
             $cart = Session::get('cart');
-            if(!empty($cart[$pid])){
-                unset($cart[$pid]);
+            $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
+            if(!empty($cart[$key])){
+                unset($cart[$key]);
                 Session::put('cart', $cart);
                 return $cart;
             }

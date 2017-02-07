@@ -1,9 +1,9 @@
 <div class="checkout__infor">
-    <p class="font-bold mgB-10">Địa chỉ giao hàng/Thanh toán</p>
-    <p>Trương Hoàng Điển</p>
-    <p>21 Nguyễn Trung Ngạn</p>
-    <p>Hồ Chí Minh-Quận 1</p>
-    <p>Điện thoại di động: 0905296128</p>
+    {{--<p class="font-bold mgB-10">Địa chỉ giao hàng/Thanh toán</p>--}}
+    {{--<p>Trương Hoàng Điển</p>--}}
+    {{--<p>21 Nguyễn Trung Ngạn</p>--}}
+    {{--<p>Hồ Chí Minh-Quận 1</p>--}}
+    {{--<p>Điện thoại di động: 0905296128</p>--}}
     <p class="mgT-20 font-bold mgB-10">Thông tin đơn hàng</p>
     <table class="table fs-12">
         <tbody><tr>
@@ -15,7 +15,7 @@
         $subtotal = 0;
         $tax = 0;
         $total = 0;
-        $quantities =[1=>1,2,3,4,5,6,7,8,9,10];
+        $quantities =[1=>1,2,3,4,5];
         ?>
         @foreach($cart as $item)
             <?php
@@ -26,10 +26,10 @@
             $subtotal += $subtotalProduct;
             $tax += $product->taxWithPrice($price);
             ?>
-            <tr data-product-id="{{encrypt($product->id)}}">
-                <td class="col-md-9"><a href="{{$product->url()}}"><em>{{$product->name}}</em></a></td>
+            <tr data-product-id="{{encrypt($product->id)}}" data-product-size="{{$item['size']}}">
+                <td class="col-md-9"><a href="{{$product->url()}}"><em>{{$product->name}} (Size: {{$product->size()}})</em></a></td>
                 <td class="col-md-1" style="text-align: center">
-                    {!! Form::select('payment_bank', $quantities, $item['quantity'], ['class' => 'w-100']) !!}
+                    {!! Form::select('quantity_select', $quantities, $item['quantity'], ['class' => 'w-100 quantity_select']) !!}
                     <p class="text-center mgT-5"><a href="" class="text-decor fs-12 removeCart">xóa</a></p>
                 </td>
                 <td class="col-md-1 text-center">{{number_format($subtotalProduct)}}</td>
@@ -53,7 +53,7 @@
                 Thành tiền
                 <p>(Tổng số tiền thanh toán)</p>
             </td>
-            <td class="text-danger font-bold fs-13">{{number_format($subtotal-$tax)}} VND</td>
+            <td class="text-danger font-bold fs-13">{{number_format($subtotal+$tax)}} VND</td>
         </tr>
         </tbody></table>
 </div>
