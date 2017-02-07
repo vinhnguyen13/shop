@@ -6,7 +6,7 @@ use App\Models\ShopOrder as Model;
 use App\Models\ShopOrderProduct;
 use App\Models\ShopOrderStatus;
 use App\Models\ShopPayment;
-use App\Models\Frontend\ShopProduct;
+use DB;
 
 class ShopOrder extends Model
 {
@@ -32,47 +32,56 @@ class ShopOrder extends Model
         }else{
             $instance = $this;
         }
-        $instance->processingSave($values);
-        $instance->fill($values);
-        $validate = $instance->validate($instance->attributes);
-        if ($validate->passes()) {
-            $instance->save();
-            $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
-            $record = $this->find($instance->id);
-            $record->update(['invoice_code'=>$invID]);
-            /*
-             * Save shop_order_product
-             */
-            if(!empty($carts)){
-                $subtotal = 0;
-                $tax = 0;
-                $total = 0;
-                foreach($carts as $product_id=>$item){
-                    $product = ShopProduct::find($product_id);
-                    $product->setCart($item['size'], $item['quantity']);
-                    $price = $product->priceWithSize();
-                    $subtotalProduct = $price * $item['quantity'];
-                    $tax = $product->taxWithPrice($price);
-                    $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product_id]);
-                    if(empty($orderProduct->id)){
-                        $orderProduct = new ShopOrderProduct();
-                        $orderProduct->order_id = $record->id;
-                        $orderProduct->product_id = $product_id;
+        DB::beginTransaction();
+        try {
+            $instance->processingSave($values);
+            $instance->fill($values);
+            $validate = $instance->validate($instance->attributes);
+            if ($validate->passes()) {
+                $instance->save();
+                $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
+                $record = $this->find($instance->id);
+                $record->update(['invoice_code'=>$invID]);
+                /*
+                 * Save shop_order_product
+                 */
+                if(!empty($carts)){
+                    $subtotal = 0;
+                    $tax = 0;
+                    $total = 0;
+                    foreach($carts as $product_size=>$item){
+                        $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $product_size);
+                        $product_id = $product_size[0];
+                        $product = ShopProduct::find($product_id);
+                        $product->setCart($item['size'], $item['quantity']);
+                        $price = $product->priceWithSize();
+                        $subtotalProduct = $price * $item['quantity'];
+                        $tax = $product->taxWithPrice($price);
+                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product_id]);
+                        if(empty($orderProduct->id)){
+                            $orderProduct = new ShopOrderProduct();
+                            $orderProduct->order_id = $record->id;
+                            $orderProduct->product_id = $product_id;
+                        }
+                        $orderProduct->name = $product->name;
+                        $orderProduct->sku = $product->sku;
+                        $orderProduct->quantity = $item['quantity'];
+                        $orderProduct->price = $price;
+                        $orderProduct->total = $subtotalProduct;
+                        $orderProduct->tax = $tax;
+                        $orderProduct->reward = 0;
+                        $orderProduct->save();
                     }
-                    $orderProduct->name = $product->name;
-                    $orderProduct->sku = $product->sku;
-                    $orderProduct->quantity = $item['quantity'];
-                    $orderProduct->price = $price;
-                    $orderProduct->total = $subtotalProduct;
-                    $orderProduct->tax = $tax;
-                    $orderProduct->reward = 0;
-                    $orderProduct->save();
                 }
+                app(ShopProduct::class)->removeCartAll();
+                DB::commit();
+                return $instance;
+            }else{
+                return $validate->getMessageBag();
             }
-            app(ShopProduct::class)->removeCartAll();
-            return $instance;
-        }else{
-            return $validate->getMessageBag();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
     }
 
@@ -117,7 +126,9 @@ class ShopOrder extends Model
         $total = 0;
         $carts = app(ShopProduct::class)->getCart();
         if(!empty($carts)){
-            foreach($carts as $product_id=>$item){
+            foreach($carts as $product_size=>$item){
+                $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $product_size);
+                $product_id = $product_size[0];
                 $product = ShopProduct::find($product_id);
                 $product->setCart($item['size'], $item['quantity']);
                 $price = $product->priceWithSize();

@@ -184,7 +184,7 @@ $(document).ready(function(){
                     if(data.html){
                         $('.header__cart .dropdown__inner').html(data.html);
                     }
-                    $('body').loading({remove: true});
+
                     $.ajax({
                         type: "get",
                         url: urlUpdateCart,
@@ -195,6 +195,7 @@ $(document).ready(function(){
                             }
                         }
                     });
+                    $('body').loading({remove: true});
                 },
                 error: function (error) {
                 }
