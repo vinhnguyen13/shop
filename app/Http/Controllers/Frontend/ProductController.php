@@ -85,6 +85,13 @@ class ProductController extends Controller
         return $cart;
     }
 
+    public function cartUpdate(Request $request)
+    {
+        $cart = app(ShopProduct::class)->getCart();
+        $html = view('product.partials.cart-order', compact('cart'))->render();
+        return ['html'=>$html];
+    }
+
     public function checkout(Request $request, $step)
     {
         $cart = app(ShopProduct::class)->getCart();

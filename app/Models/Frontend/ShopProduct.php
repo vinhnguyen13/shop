@@ -54,7 +54,7 @@ class ShopProduct extends MainShopProduct
         }
         $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
         if(!empty($cart[$key]) && $cart[$key]['size'] == $size){
-            $cart[$key]['quantity'] += $quantity;
+            $cart[$key]['quantity'] = $quantity;
         }else{
             $cart[$key] = $item;
         }

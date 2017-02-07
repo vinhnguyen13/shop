@@ -160,27 +160,46 @@ $(document).ready(function(){
     });
 
     $('.'+wrapCheckoutInfo).on('change', '.quantity_select', function(){
-
+        var data = $(this).closest('tr').attr('data-product-id');
+        var size = $(this).closest('tr').attr('data-product-size');
+        var quantity = $(this).val();
+        $('.'+wrapMainCheckout).trigger('checkout/func/updateCart', [data, size, quantity]);
     });
 
-    $('.'+wrapMainCheckout).bind('checkout/func/order', function (event, form) {
+    $('.'+wrapMainCheckout).bind('checkout/func/updateCart', function (event, data, size, quantity) {
         $(this).loading({inside_right: true});
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
-                url: urlOrder,
-                data: form,
+                url: urlAddCart,
+                data: {data: data, size: size, quantity: quantity},
                 success: function (data) {
-                    if(data.code == 0) {
-                        $('body').loading({remove: true});
-                        var redirect = urlPaymentSuccess+'?order=';
-                    }else{
-                        var redirect = urlPaymentFail;
+                    if(data.total > 0){
+                        if($('.header__cart .val-selected .header__cart--num').length > 0) {
+                            $('.header__cart .val-selected .header__cart--num').html(data.total);
+                            $('.header__cart .val-selected .header__cart--num').removeClass('hide');
+                        }
                     }
-                    window.location.href = redirect;
+                    if(data.html){
+                        $('.header__cart .dropdown__inner').html(data.html);
+                    }
+                    $('body').loading({remove: true});
+                    $.ajax({
+                        type: "get",
+                        url: urlUpdateCart,
+                        success: function (data) {
+                            console.log(data);
+                            if(data.html) {
+                                $('.' + wrapCheckoutInfo).html(data.html);
+                            }
+                        }
+                    });
+                },
+                error: function (error) {
                 }
             });
+
         }, 500);
     });
 

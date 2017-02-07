@@ -29,7 +29,9 @@
                         </form>
                     </div>
                     <div class="col-md-5">
-                        @include('product.partials.cart-order')
+                        <div class="checkout__infor">
+                            @include('product.partials.cart-order')
+                        </div>
                     </div>
                 </div>
             @else
@@ -51,6 +53,8 @@
 @push('scripts')
     <script>
         var urlRemoveCart = "{{route('product.cart.remove')}}";
+        var urlUpdateCart = "{{route('product.cart.update')}}";
+        var urlAddCart = "{{route('product.cart.add')}}";
         var urlOrder = "{{route('product.order')}}";
         var urlLocation = "{{route('home.location')}}";
         var urlPaymentSuccess = "{{route('product.payment.success')}}";
