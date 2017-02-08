@@ -2,6 +2,7 @@
 
 namespace App\Models\Frontend;
 
+use App\Models\CpCode;
 use App\Models\ShopOrder as Model;
 use App\Models\ShopOrderProduct;
 use App\Models\ShopOrderStatus;
@@ -131,6 +132,21 @@ class ShopOrder extends Model
             }
         }
         /*
+         * Coupon
+         */
+        if(!empty($values['coupon_code'])){
+            $code = CpCode::query()->where(['code'=>$values['coupon_code']]);
+            if(!empty($code)){
+                switch($code->amount_type){
+                    case CpCode::AMOUNT_TYPE_PERCENT:
+                        break;
+                    case CpCode::AMOUNT_TYPE_PRICE:
+                        break;
+                }
+
+            }
+        }
+        /*
          *  Save Order
          */
         $total_price = 0;
@@ -181,5 +197,6 @@ class ShopOrder extends Model
         $this->attributes['forwarded_ip'] = request()->getClientIp();
         $this->attributes['user_agent'] = request()->header('User-Agent');
         $this->attributes['accept_language'] = app()->getLocale();
+
     }
 }
