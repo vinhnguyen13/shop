@@ -18,8 +18,12 @@
                             {{ csrf_field() }}
                             {{--@include('product.partials.cart-products')--}}
                             @include('product.partials.cart-shipping')
-
                             @include('product.partials.cart-payment')
+                            <div class="alert alert-danger alert-dismissable hide">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Lỗi!</h4>
+                                <p></p>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-12 text-right">
                                     <button type="button" class="btn btn-primary btn-lg btn-checkout btn-back hide">Trở lại</button>

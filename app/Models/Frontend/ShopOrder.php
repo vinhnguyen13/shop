@@ -12,6 +12,8 @@ class ShopOrder extends Model
 {
     const INVOICE_PREFIX = 'GLAB-';
     const COUNTRY_VN = 230;
+
+    private $errors = [];
     /**
      * Create or update a related record matching the attributes, and fill it with values.
      *
@@ -37,7 +39,7 @@ class ShopOrder extends Model
             $instance->processingSave($values);
             $instance->fill($values);
             $validate = $instance->validate($instance->attributes);
-            if ($validate->passes()) {
+            if ($validate->passes() && empty($instance->errors)) {
                 $instance->save();
                 $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
                 $record = $this->find($instance->id);
@@ -77,6 +79,12 @@ class ShopOrder extends Model
                 DB::commit();
                 return $instance;
             }else{
+                $messageBag = $validate->getMessageBag();
+                if(!empty($instance->errors)){
+                    foreach($instance->errors as $error){
+                        $messageBag->merge($error->getMessages());
+                    }
+                }
                 return $validate->getMessageBag();
             }
         } catch (\Exception $e) {
@@ -115,7 +123,12 @@ class ShopOrder extends Model
                 'phone'=>$values['shipping_phone'],
                 'ip'=>request()->ip(),
             ]);
-            $customer->save();
+            $validate = $customer->validate($customer->attributes);
+            if ($validate->passes()) {
+                $customer->save();
+            } else {
+                $this->errors[] = $validate->getMessageBag();
+            }
         }
         /*
          *  Save Order

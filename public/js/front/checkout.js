@@ -135,7 +135,7 @@ $(document).ready(function(){
     $('.'+wrapMainCheckout).trigger('checkout/ui/autoFillBillingForm');
 
     $('.'+wrapMainCheckout).bind('checkout/ui/step', function (event, data) {
-
+        $('#orderForm .alert-dismissable').addClass('hide');
     });
 
     $('.'+wrapMainCheckout).bind('checkout/func/order', function (event, form) {
@@ -150,10 +150,16 @@ $(document).ready(function(){
                     if(data.code == 0) {
                         $('body').loading({remove: true});
                         var redirect = urlPaymentSuccess+'?order=';
+                        window.location.href = redirect;
                     }else{
-                        var redirect = urlPaymentFail;
+                        console.log(data.message);
+                        var html = '';
+                        $.each(data.message, function (index, value) {
+                            html += value[0]+'<br/>';
+                        });
+                        $('#orderForm .alert-dismissable p').html(html);
+                        $('#orderForm .alert-dismissable').removeClass('hide');
                     }
-                    window.location.href = redirect;
                 }
             });
         }, 500);

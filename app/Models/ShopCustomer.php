@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasValidator;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopCustomer extends Model
 {
+    use HasValidator;
     protected $table = 'shop_customer';
     protected $fillable = ['customer_group_id','user_id', 'name', 'email', 'address', 'country_id', 'city_id', 'district_id', 'ward_id', 'street_id', 'tax_code', 'phone', 'company', 'card', 'ip'];
     /**
@@ -24,6 +26,15 @@ class ShopCustomer extends Model
             }
 
         });
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ];
     }
     /**
      * Create or update a related record matching the attributes, and fill it with values.

@@ -104,8 +104,10 @@ class ProductController extends Controller
             $input = \Input::all();
             unset($input['_token']);
             $return = app(ShopOrder::class)->processingSaveOrder([], $input);
-            if(!empty($return)){
+            if(!empty($return->id)){
                 return ['code'=>0, 'message'=>'', 'return'=>$return];
+            }else{
+                return ['code'=>400, 'message'=>$return];
             }
         }
         return ['code'=>2, 'message'=>''];
