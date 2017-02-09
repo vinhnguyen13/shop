@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/product', ['uses' => 'ProductController@index', 'as'=>'admin.product.index']);
         Route::get('/product/create', ['uses' => 'ProductController@create', 'as'=>'admin.product.create']);
+        Route::any('/product/import', ['uses' => 'ProductController@import', 'as'=>'admin.product.import']);
         Route::post('/product/store', ['uses' => 'ProductController@store', 'as'=>'admin.product.store']);
         Route::get('/product/edit/{id}', ['uses' => 'ProductController@edit', 'as'=>'admin.product.edit']);
         Route::get('/product/delete/{id}', ['uses' => 'ProductController@delete', 'as'=>'admin.product.delete']);

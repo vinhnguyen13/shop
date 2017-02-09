@@ -9,7 +9,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Backend\ShopProduct;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Input;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
@@ -27,7 +27,27 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $model = new ShopProduct();
-        return view('product.form', compact('model', 'image'));
+        $sku = $request->get('sku');
+        $model->sku = $sku;
+        return view('product.form', compact('model', 'sku'));
+    }
+
+    public function import(Request $request)
+    {
+        $model = new ShopProduct();
+        if($request->isMethod('post')) {
+            $sku = Input::get('sku');
+            if(!empty($sku)){
+                $sku = trim($sku);
+                $model = ShopProduct::where(['sku'=>$sku])->first();
+                if(!empty($model)){
+                    return redirect(route('admin.product.edit', ['id'=>$model->id]));
+                }else{
+                    return redirect(route('admin.product.create', ['sku'=>$sku]));
+                }
+            }
+        }
+        return view('product.import', compact('model', 'image'));
     }
 
     public function show(Request $request, $id)

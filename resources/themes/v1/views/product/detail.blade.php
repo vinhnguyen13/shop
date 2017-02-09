@@ -8,18 +8,18 @@
     ?>
     <div class="container detail">
         <div class="row">
-            @if (!empty($images) && count($images) > 0)
             <div class="detail__img col-sm-8">
                 <div class="slidedetailpage">
-                    @foreach($images as $image)
-                        <div class="slidedetail__item">
-                            <img src="{{$image->url('original')}}" alt="" />
-                        </div>
-                    @endforeach
+                    @if (!empty($images) && count($images) > 0)
+                        @foreach($images as $image)
+                            <div class="slidedetail__item">
+                                <img src="{{$image->url('original')}}" alt="" />
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="slidedetail__pagi"></div>
             </div>
-            @endif
             <div class="col-sm-4 detail__desc">
                 <ul class="breakgum clearfix">
                     <li><a href="{{url('/')}}">home</a></li>
@@ -28,18 +28,20 @@
                     <li><span>/</span></li>
                     <li>{{$product->name}}</li>
                 </ul>
-                <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name}}</p>
+                <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
                 <p class="text-uper fontSFUMeBold fs-40 mgB-0">{{$product->name}}</p>
+                @if (!empty($sizes) && $sizes->count() > 0)
                 <div class="mgB-20">
                     <div class="dropdown">
                         <form id="frmAddCart" method="POST">
-                            @if (!empty($sizes))
                             <a href="" class="val-selected clearfix"><span class="icon-chevron-thin-down"></span><div class="get-val">choose your size</div></a>
                             <div class="dropdown-up-style hide">
                                 <div class="dropdown__inner">
                                     <ul>
                                         @foreach($sizes as $size)
-                                            <li><a href=""><span class="pull-right detail__price" data-value="{{$size->getPrice()}}">{{number_format($size->getPrice())}} đ</span><span class="detail__size" data-value="{{$size->id}}">{{$size->size}}</span></a></li>
+                                            @if (!empty($size->quantity))
+                                                <li><a href=""><span class="pull-right detail__price" data-value="{{$size->getPrice()}}">{{number_format($size->getPrice())}} đ</span><span class="detail__size" data-value="{{$size->id}}">{{$size->size}}</span></a></li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                     <input type="hidden" name="size" id="val-size" value="">
@@ -47,11 +49,11 @@
                                     <input type="hidden" name="quantity" value="1">
                                 </div>
                             </div>
-                            @endif
                         </form>
                     </div>
                     <button type="submit" class="btn-buy text-uper">add to cart</button>
                 </div>
+                @endif
                 <div class="detail__desc--intro">
                     <p class="title__detailproduct">Detail</p>
                     <p>{!! $product->description !!}</p>
