@@ -45,7 +45,7 @@ class ShopProduct extends MainShopProduct
     public function addCart($pid, $size, $quantity){
         $item = [
             'product_id'=>$pid,
-            'size'=>$size,
+            'sizeID'=>$size,
             'quantity'=>$quantity,
         ];
         $cart = [];
@@ -53,7 +53,7 @@ class ShopProduct extends MainShopProduct
             $cart = Session::get('cart');
         }
         $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
-        if(!empty($cart[$key]) && $cart[$key]['size'] == $size){
+        if(!empty($cart[$key]) && $cart[$key]['sizeID'] == $size){
             $cart[$key]['quantity'] = $quantity;
         }else{
             $cart[$key] = $item;

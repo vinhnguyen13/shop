@@ -52,11 +52,11 @@ class ShopOrder extends Model
                     $subtotal = 0;
                     $tax = 0;
                     $total = 0;
-                    foreach($carts as $product_size=>$item){
-                        $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $product_size);
+                    foreach($carts as $productID_sizeID=>$item){
+                        $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_sizeID);
                         $product_id = $product_size[0];
                         $product = ShopProduct::find($product_id);
-                        $product->setCart($item['size'], $item['quantity']);
+                        $product->setCart($item['sizeID'], $item['quantity']);
                         $price = $product->priceWithSize();
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
@@ -78,6 +78,10 @@ class ShopOrder extends Model
                 }
                 app(ShopProduct::class)->removeCartAll();
                 DB::commit();
+                /**
+                 * Remove quantity
+                 */
+
                 return $instance;
             }else{
                 $messageBag = $validate->getMessageBag();
@@ -155,11 +159,11 @@ class ShopOrder extends Model
         $total = 0;
         $carts = app(ShopProduct::class)->getCart();
         if(!empty($carts)){
-            foreach($carts as $product_size=>$item){
-                $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $product_size);
+            foreach($carts as $productID_sizeID=>$item){
+                $product_size = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_sizeID);
                 $product_id = $product_size[0];
                 $product = ShopProduct::find($product_id);
-                $product->setCart($item['size'], $item['quantity']);
+                $product->setCart($item['sizeID'], $item['quantity']);
                 $price = $product->priceWithSize();
                 $total_price += $price * $item['quantity'];
                 $total_tax += $product->taxWithPrice($price);
