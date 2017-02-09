@@ -105,6 +105,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
         Route::get('/order/delete/{id}', ['uses' => 'OrderController@delete', 'as'=>'admin.order.delete']);
         /*
+         * Revenue
+         */
+        Route::get('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);
+        /*
          * Coupon Event routing
          */
         Route::get('/coupon-event', ['uses' => 'CouponEventController@index', 'as' => 'admin.cpevent.index']);
