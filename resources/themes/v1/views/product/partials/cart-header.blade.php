@@ -18,7 +18,7 @@
             ?>
             <a href="" class="header__cart--item clearfix">
                 <div class="pull-left wrap-img">
-                    <img src="/themes/v1/images/310x177.jpg" alt="">
+                    <img src="{{$product->thumb()}}" alt="">
                 </div>
                 <div class="overflow-all">
                     <p class="text-uper fs-15 fontSFUBold">{{$product->name}}</p>
