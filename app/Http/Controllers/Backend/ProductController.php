@@ -63,9 +63,9 @@ class ProductController extends Controller
             $image = $model->getImagesToForm();
             $discounts = $model->getDiscountToForm();
             $specials = $model->getSpecialToForm();
-            $sizes = $model->getSizeToForm();
+            $details = $model->getDetailsToForm();
             $categoriesSelected = $model->getCategoriesToForm();
-            return view('product.form', compact('model', 'image', 'discounts', 'specials', 'sizes', 'categoriesSelected'));
+            return view('product.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
         }else
             return abort(404, 'Not Found');
     }

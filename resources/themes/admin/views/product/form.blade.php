@@ -28,7 +28,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">General</a></li>
                         <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Data</a></li>
-                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Size</a></li>
+                        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Detail</a></li>
                         <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Links</a></li>
                         <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Discount</a></li>
                         <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Special</a></li>
@@ -42,7 +42,7 @@ $isNewRecord = !empty($model->id) ? false : true;
                             @include('product._partials.form-data')
                         </div>
                         <div class="tab-pane" id="tab_6">
-                            @include('product._partials.form-size')
+                            @include('product._partials.form-detail')
                         </div>
                         <div class="tab-pane" id="tab_3">
                             @include('product._partials.form-link')

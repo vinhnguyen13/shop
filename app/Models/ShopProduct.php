@@ -59,7 +59,7 @@ class ShopProduct extends Model
     }
 
     public function sizes(){
-        return $this->hasMany(ShopProductSize::class, 'product_id');
+        return $this->hasMany(ShopProductDetail::class, 'product_id');
     }
 
     public function tax(){
@@ -67,7 +67,7 @@ class ShopProduct extends Model
     }
 
     public function setCart($sizeID, $quantity){
-        $this->size = ShopProductSize::find($sizeID);
+        $this->size = ShopProductDetail::find($sizeID);
         $this->quantity = $quantity;
     }
 

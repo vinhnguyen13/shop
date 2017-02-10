@@ -7,7 +7,7 @@ use App\Models\ShopProduct as MainShopProduct;
 use App\Models\ShopProductCategory;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
-use App\Models\ShopProductSize;
+use App\Models\ShopProductDetail;
 use App\Models\ShopProductSpecial;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
@@ -69,8 +69,8 @@ class ShopProduct extends MainShopProduct
         return $specials;
     }
 
-    public function getSizeToForm(){
-        $specials = ShopProductSize::query()->where(['product_id'=>$this->id])->get();
+    public function getDetailsToForm(){
+        $specials = ShopProductDetail::query()->where(['product_id'=>$this->id])->get();
         return $specials;
     }
 
@@ -254,12 +254,12 @@ class ShopProduct extends MainShopProduct
      */
     public function processingSize($values)
     {
-        if (!empty($values['product_size'])) {
-            foreach ($values['product_size'] as $key => $value) {
+        if (!empty($values['product_detail'])) {
+            foreach ($values['product_detail'] as $key => $value) {
                 if(!empty($value['id'])){
-                    $productSize = ShopProductSize::query()->where(['id'=>$value['id']])->first();
+                    $productSize = ShopProductDetail::query()->where(['id'=>$value['id']])->first();
                 }else{
-                    $productSize = new ShopProductSize();
+                    $productSize = new ShopProductDetail();
                 }
                 $productSize->fill([
                     'product_id'=>$this->id,
