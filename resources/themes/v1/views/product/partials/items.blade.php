@@ -1,7 +1,7 @@
 @foreach($products as $product)
     <?php
     $url = route('product.detail', ['id'=>$product->id, 'slug'=>str_slug($product->name)]);
-    $sizes = $product->sizes;
+    $details = $product->details;
     ?>
     <div class="col-lg-3 col-xs-6 col-md-4">
         <div class="product__item">
@@ -13,10 +13,10 @@
                 </a>
                 <div class="product__item--infor">
                     <div class="text-center mgB-20">
-                        @if (!empty($sizes) && count($sizes) > 0)
+                        @if (!empty($details) && count($details) > 0)
                             <div class="size-item">
-                                @foreach($sizes as $size)
-                                    <a href="" class="size">{{$size->size}}</a>
+                                @foreach($details as $detail)
+                                    <a href="" class="size">{{$detail->size}}</a>
                                 @endforeach
                             </div>
                             <p class="text-uper">available size</p>

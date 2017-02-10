@@ -43,13 +43,13 @@ $(document).ready(function(){
         $(this).loading({inside_right: true});
         $(this).closest('tr').remove();
         var pid = $(this).closest('tr').attr('data-product-id');
-        var size = $(this).closest('tr').attr('data-product-size');
+        var detail = $(this).closest('tr').attr('data-product-size');
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
                 url: urlRemoveCart,
-                data: {data: pid, size: size},
+                data: {data: pid, detail: detail},
                 success: function (data) {
                     $('body').loading({remove: true});
                     location.reload(true);

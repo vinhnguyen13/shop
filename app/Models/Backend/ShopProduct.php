@@ -104,7 +104,7 @@ class ShopProduct extends MainShopProduct
             $instance->processingImages($values);
             $instance->processingDiscount($values);
             $instance->processingSpecial($values);
-            $instance->processingSize($values);
+            $instance->processingDetail($values);
             $instance->processingCategory($values);
         } else {
             return $validate->getMessageBag();
@@ -252,7 +252,7 @@ class ShopProduct extends MainShopProduct
      * @param $values
      * @return bool
      */
-    public function processingSize($values)
+    public function processingDetail($values)
     {
         if (!empty($values['product_detail'])) {
             foreach ($values['product_detail'] as $key => $value) {

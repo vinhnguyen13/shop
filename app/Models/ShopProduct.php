@@ -58,7 +58,7 @@ class ShopProduct extends Model
         return $this->hasOne(ShopManufacturer::class, 'id', 'manufacturer_id');
     }
 
-    public function sizes(){
+    public function details(){
         return $this->hasMany(ShopProductDetail::class, 'product_id');
     }
 
@@ -66,13 +66,13 @@ class ShopProduct extends Model
         return $this->hasOne(ShopTaxClass::class, 'id', 'tax_class_id');
     }
 
-    public function setCart($sizeID, $quantity){
-        $this->size = ShopProductDetail::find($sizeID);
+    public function setCart($detailID, $quantity){
+        $this->detail = ShopProductDetail::find($detailID);
         $this->quantity = $quantity;
     }
 
     public function size(){
-        return !empty($this->size) ? $this->size->size : '';
+        return !empty($this->detail) ? $this->detail->size : '';
     }
 
     public function taxWithPrice($price){
@@ -95,11 +95,11 @@ class ShopProduct extends Model
     }
 
     public function priceWithSize(){
-        if(!empty($this->size)){
-            $size = $this->size;
+        if(!empty($this->detail)){
+            $detail = $this->detail;
         }
-        if(!empty($size)) {
-            $price = $size->getPrice();
+        if(!empty($detail)) {
+            $price = $detail->getPrice();
         }else{
             $price = $this->getPrice();
         }

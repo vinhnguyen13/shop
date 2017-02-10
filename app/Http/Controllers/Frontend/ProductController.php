@@ -69,8 +69,8 @@ class ProductController extends Controller
         $data = $request->get('data');
         $pid = decrypt($data);
         $quantity = $request->get('quantity');
-        $size = $request->get('size');
-        $cart = app(ShopProduct::class)->addCart($pid, $size, $quantity);
+        $detailID = $request->get('detail');
+        $cart = app(ShopProduct::class)->addCart($pid, $detailID, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];
@@ -80,8 +80,8 @@ class ProductController extends Controller
     {
         $data = $request->get('data');
         $pid = decrypt($data);
-        $size = $request->get('size');
-        $cart = app(ShopProduct::class)->removeCart($pid, $size);
+        $detailID = $request->get('detail');
+        $cart = app(ShopProduct::class)->removeCart($pid, $detailID);
         return $cart;
     }
 

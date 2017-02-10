@@ -42,18 +42,18 @@ class ShopProduct extends MainShopProduct
         return $products;
     }
 
-    public function addCart($pid, $size, $quantity){
+    public function addCart($pid, $detailID, $quantity){
         $item = [
             'product_id'=>$pid,
-            'sizeID'=>$size,
+            'sizeID'=>$detailID,
             'quantity'=>$quantity,
         ];
         $cart = [];
         if (Session::has('cart')) {
             $cart = Session::get('cart');
         }
-        $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
-        if(!empty($cart[$key]) && $cart[$key]['sizeID'] == $size){
+        $key = $pid.self::SPLIT_PRODUCT_SIZE.$detailID;
+        if(!empty($cart[$key]) && $cart[$key]['sizeID'] == $detailID){
             $cart[$key]['quantity'] = $quantity;
         }else{
             $cart[$key] = $item;
@@ -71,10 +71,10 @@ class ShopProduct extends MainShopProduct
         return false;
     }
 
-    public function removeCart($pid, $size){
+    public function removeCart($pid, $detailID){
         if (Session::has('cart')) {
             $cart = Session::get('cart');
-            $key = $pid.self::SPLIT_PRODUCT_SIZE.$size;
+            $key = $pid.self::SPLIT_PRODUCT_SIZE.$detailID;
             if(!empty($cart[$key])){
                 unset($cart[$key]);
                 Session::put('cart', $cart);

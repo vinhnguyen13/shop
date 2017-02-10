@@ -3,7 +3,7 @@
 @section('content')
     <?php
     $images = $product->images;
-    $sizes = $product->sizes;
+    $details = $product->details;
     $quantities = [1,2,3,4,5];
     ?>
     <div class="container detail">
@@ -30,7 +30,7 @@
                 </ul>
                 <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
                 <p class="text-uper fontSFUMeBold fs-40 mgB-0">{{$product->name}}</p>
-                @if (!empty($sizes) && $sizes->count() > 0)
+                @if (!empty($details) && $details->count() > 0)
                 <div class="mgB-20">
                     <div class="dropdown">
                         <form id="frmAddCart" method="POST">
@@ -38,13 +38,13 @@
                             <div class="dropdown-up-style hide">
                                 <div class="dropdown__inner">
                                     <ul>
-                                        @foreach($sizes as $size)
-                                            @if (!empty($size->quantity))
-                                                <li><a href=""><span class="pull-right detail__price" data-value="{{$size->getPrice()}}">{{number_format($size->getPrice())}} đ</span><span class="detail__size" data-value="{{$size->id}}">{{$size->size}}</span></a></li>
+                                        @foreach($details as $detail)
+                                            @if (!empty($detail->quantity))
+                                                <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{$detail->id}}">{{$detail->size}}</span></a></li>
                                             @endif
                                         @endforeach
                                     </ul>
-                                    <input type="hidden" name="size" id="val-size" value="">
+                                    <input type="hidden" name="detail" id="val-size" value="">
                                     <input type="hidden" name="price" id="val-price" value="">
                                     <input type="hidden" name="quantity" value="1">
                                 </div>
