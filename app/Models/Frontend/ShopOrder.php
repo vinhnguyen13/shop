@@ -67,7 +67,7 @@ class ShopOrder extends Model
                             $orderProduct->product_id = $product_id;
                         }
                         $orderProduct->name = $product->name;
-                        $orderProduct->sku = $product->sku;
+                        $orderProduct->sku = $product->sku_producer;
                         $orderProduct->quantity = $item['quantity'];
                         $orderProduct->price = $price;
                         $orderProduct->total = $subtotalProduct;

@@ -21,7 +21,7 @@
             @endif
             {{ Form::open(['route' => 'admin.product.import']) }}
             <div class="form-group">
-                <input class="form-control" id="sku" type="text" placeholder="Find product by SKU" name="sku" />
+                <input class="form-control" id="sku_producer" type="text" placeholder="Find product by SKU Producer" name="sku_producer" />
                 {{ Form::submit('Save', array('class' => 'btn btn-primary btn-flat')) }}
             </div>
             {{ Form::close() }}

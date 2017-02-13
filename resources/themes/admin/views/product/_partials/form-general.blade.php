@@ -1,6 +1,6 @@
 <div class="form-group required">
-    {{ Form::label(null, 'Sku') }}
-    {{ Form::text('sku', $model->sku,['class' => 'form-control'])}}
+    {{ Form::label(null, 'Sku Producer') }}
+    {{ Form::text('sku_producer', $model->sku_producer,['class' => 'form-control'])}}
 </div>
 
 <div class="form-group required">

@@ -27,7 +27,7 @@ class ShopProduct extends MainShopProduct
                 'label' => 'Name',
                 'filter' => 'like',
             ],
-            'sku',
+            'sku_producer',
             'price',
             'quantity',
             'status',

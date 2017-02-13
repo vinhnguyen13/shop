@@ -27,23 +27,23 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $model = new ShopProduct();
-        $sku = $request->get('sku');
-        $model->sku = $sku;
-        return view('product.form', compact('model', 'sku'));
+        $sku_producer = $request->get('sku_producer');
+        $model->sku_producer = $sku_producer;
+        return view('product.form', compact('model', 'sku_producer'));
     }
 
     public function import(Request $request)
     {
         $model = new ShopProduct();
         if($request->isMethod('post')) {
-            $sku = Input::get('sku');
-            if(!empty($sku)){
-                $sku = trim($sku);
-                $model = ShopProduct::where(['sku'=>$sku])->first();
+            $sku_producer = Input::get('sku_producer');
+            if(!empty($sku_producer)){
+                $sku_producer = trim($sku_producer);
+                $model = ShopProduct::where(['sku_producer'=>$sku_producer])->first();
                 if(!empty($model)){
                     return redirect(route('admin.product.edit', ['id'=>$model->id]));
                 }else{
-                    return redirect(route('admin.product.create', ['sku'=>$sku]));
+                    return redirect(route('admin.product.create', ['sku_producer'=>$sku_producer]));
                 }
             }
         }
