@@ -58,4 +58,13 @@ class ShopProductDetail extends Model
         }
         return $this->product->getPrice();
     }
+
+    public function generateSKU(){
+        $time = date('dmYH');
+        $supplier = 'thu';
+        $sku_producer = '801006002';
+        $size = '8';
+        $index = '01';
+        return $time.$supplier.$sku_producer.$size.$index;
+    }
 }
