@@ -28,8 +28,8 @@ class ShopProduct extends MainShopProduct
                 'filter' => 'like',
             ],
             'sku_producer',
-            'price',
-            'quantity',
+            'stock_in',
+            'stock_out',
             'status',
             'created_at',
         ]);
@@ -129,7 +129,7 @@ class ShopProduct extends MainShopProduct
         if (!empty($values['date_available'])) {
             $this->attributes['date_available'] = Carbon::createFromFormat('d/m/Y', $values['date_available'])->format('Y-m-d');
         }
-        $this->attributes['quantity'] = 0;
+        $this->attributes['stock_in'] = 0;
     }
     /**
      * @param $images
@@ -264,13 +264,14 @@ class ShopProduct extends MainShopProduct
                 $productSize->fill([
                     'product_id'=>$this->id,
                     'size'=>$value['size'],
-                    'quantity'=>$value['quantity'],
+                    'supplier_id'=>$value['supplier_id'],
+                    'price_in'=>$value['price_in'],
                     'price'=>$value['price'],
                     'new_status'=>$value['new_status']/100,
                 ]);
                 $validate = $productSize->validate($productSize->attributes);
                 if ($validate->passes()) {
-                    $this->attributes['quantity'] += $value['quantity'];
+                    $this->attributes['stock_in'] += 1;
                     $productSize->save();
                 } else {
                     $this->errors[] = $validate->getMessageBag();

@@ -4,8 +4,13 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label(null, 'Quantity Total') }}
-    {{ Form::text('quantity', $model->quantity,['class' => 'form-control', 'readonly'=>true])}}
+    {{ Form::label(null, 'Stock In') }}
+    {{ Form::text('stock_in', $model->stock_in,['class' => 'form-control', 'readonly'=>true])}}
+</div>
+
+<div class="form-group">
+    {{ Form::label(null, 'Stock Out') }}
+    {{ Form::text('stock_out', $model->stock_out,['class' => 'form-control', 'readonly'=>true])}}
 </div>
 
 <?php
@@ -20,11 +25,6 @@ $stock_status = \App\Models\ShopStockStatus::query()->orderBy('id')->pluck('name
     {{ Form::label(null, 'Requires Shipping') }} :
     {{ Form::radio('shipping', '1', !empty($model->shipping) ? true : false) }} Yes
     {{ Form::radio('shipping', '0', empty($model->shipping) ? true : false) }} No
-</div>
-
-<div class="form-group required">
-    {{ Form::label(null, 'Price') }}
-    {{ Form::text('price', $model->price,['class' => 'form-control'])}}
 </div>
 
 <div class="form-group">
@@ -84,16 +84,6 @@ $lengths = \App\Models\ShopLengthClass::query()->orderBy('id')->pluck('title', '
 <div class="form-group">
     {{ Form::label(null, 'Length Class') }}
     {!! Form::select('length_class_id', $lengths, $model->length_class_id, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
-    {{ Form::label(null, 'Subtract Stock') }}
-    {{ Form::select('subtract', \App\Helpers\AppHelper::yesNoLabel(), $model->subtract,['class' => 'form-control'])}}
-</div>
-
-<div class="form-group">
-    {{ Form::label(null, 'Minimum order amount') }} <span class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Minimum order amount"></span>
-    {{ Form::text('minimum', $model->minimum,['class' => 'form-control'])}}
 </div>
 
 <div class="form-group">

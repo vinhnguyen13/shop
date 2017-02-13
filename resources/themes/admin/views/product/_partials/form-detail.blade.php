@@ -1,8 +1,11 @@
+<?php
+$suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+?>
 <table id="size" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
         <td class="text-left">Size</td>
-        <td class="text-left">Quantity</td>
+        <td class="text-left">Supplier</td>
         <td class="text-right">Price</td>
         <td class="text-left">New Status</td>
         <td style="width: 10%;"></td>
@@ -19,7 +22,10 @@
                     <input type="text" name="product_detail[{{$key}}][size]" value="{{$detail->size}}" placeholder="Size" class="form-control">
                 </td>
                 <td class="text-right">
-                    <input type="text" name="product_detail[{{$key}}][quantity]" value="{{$detail->quantity}}" placeholder="Quantity" class="form-control">
+                    {!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control']) !!}
+                </td>
+                <td class="text-right">
+                    <input type="text" name="product_detail[{{$key}}][price_in]" value="{{$detail->price_in}}" placeholder="Price In" class="form-control">
                 </td>
                 <td class="text-right">
                     <input type="text" name="product_detail[{{$key}}][price]" value="{{$detail->price}}" placeholder="Price" class="form-control">
@@ -44,9 +50,11 @@
 <script type="text/javascript">
     var size_row = 1;
     function addSize() {
+        var dropdownSipplier = '{!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control']) !!}';
         html  = '<tr id="size-row' + size_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][quantity]" value="" placeholder="Quantity" class="form-control" /></td>';
+        html += '  <td class="text-right"><select class="form-control" name="product_detail[' + size_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][price_in]" value="" placeholder="Price In" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][new_status]" value="" placeholder="New Status" class="form-control" /></td>';
         html += '  <td class="text-left"><button type="button" onclick="$(\'#size-row' + size_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';

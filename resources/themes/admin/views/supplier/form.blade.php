@@ -15,18 +15,8 @@ $isNewRecord = !empty($model->id) ? false : true;
             {{ Form::open(['route' => 'admin.supplier.store', 'files' => true]) }}
                 {{ Form::hidden('id', $model->id) }}
                 <div class="form-group">
-                    {{ Form::label(null, 'Company Name') }}
-                    {{ Form::text('company_name', $model->company_name,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Contact Name') }}
-                    {{ Form::text('contact_name', $model->contact_name,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Contact Title') }}
-                    {{ Form::text('contact_title', $model->contact_title,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Name') }}
+                    {{ Form::text('name', $model->name,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">

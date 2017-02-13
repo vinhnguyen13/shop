@@ -12,7 +12,7 @@ class ShopProduct extends Model
 {
     use HasValidator;
     protected $table = 'shop_product';
-    protected $fillable = ['supplier_id', 'sku_producer', 'name', 'description', 'location', 'quantity', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'color', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'subtract', 'minimum', 'order', 'status'];
+    protected $fillable = ['supplier_id', 'sku_producer', 'name', 'description', 'location', 'stock_in', 'stock_out', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'color', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'order', 'status'];
 
     const uploadFolder = 'products';
     const TYPE_IMAGE = 'image';
@@ -45,7 +45,6 @@ class ShopProduct extends Model
             'name' => 'required',
             'sku_producer' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric|min:2',
             'points' => 'numeric|min:0',
         ];
     }
