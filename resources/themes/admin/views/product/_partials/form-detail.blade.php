@@ -6,13 +6,14 @@ $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id
     <tr>
         <td class="text-left">Size</td>
         <td class="text-left">Supplier</td>
+        <td class="text-right">Price In</td>
         <td class="text-right">Price</td>
         <td class="text-left">New Status</td>
         <td style="width: 10%;"></td>
     </tr>
     </thead>
     <tbody>
-    @if (!empty($details) && count($details) > 0)
+    @if (!empty($details))
         @foreach($details as $key=>$detail)
             @php
             @endphp
@@ -40,7 +41,7 @@ $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="3"></td>
+        <td colspan="5"></td>
         <td class="text-left"><button type="button" onclick="addSize();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add Size"><i class="fa fa-plus-circle"></i></button></td>
     </tr>
     </tfoot>
@@ -50,7 +51,7 @@ $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id
 <script type="text/javascript">
     var size_row = 1;
     function addSize() {
-        var dropdownSipplier = '{!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control']) !!}';
+        var dropdownSipplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
         html  = '<tr id="size-row' + size_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + size_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
         html += '  <td class="text-right"><select class="form-control" name="product_detail[' + size_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
