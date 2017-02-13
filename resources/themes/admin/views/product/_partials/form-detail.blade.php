@@ -12,7 +12,7 @@ $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id
     </tr>
     </thead>
     <tbody>
-    @if (!empty($details))
+    @if (!empty($details) && count($details) > 0)
         @foreach($details as $key=>$detail)
             @php
             @endphp

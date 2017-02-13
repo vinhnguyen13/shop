@@ -30,7 +30,7 @@ class ShopProductDetail extends Model
 
         });
     }
-    
+
     public function rules()
     {
         return [
