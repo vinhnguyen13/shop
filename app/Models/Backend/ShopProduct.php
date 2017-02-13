@@ -267,7 +267,7 @@ class ShopProduct extends MainShopProduct
                     'supplier_id'=>$value['supplier_id'],
                     'price_in'=>$value['price_in'],
                     'price'=>$value['price'],
-                    'new_status'=>$value['new_status']/100,
+                    'new_status'=>$value['new_status'],
                 ]);
                 $validate = $productSize->validate($productSize->attributes);
                 if ($validate->passes()) {
