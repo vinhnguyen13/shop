@@ -18,7 +18,7 @@ class ShopProduct extends Model
     const TYPE_IMAGE = 'image';
     const TYPE_DISCOUNT = 'discount';
     const TYPE_SPECIAL = 'special';
-    const TYPE_SIZE = 'size';
+    const TYPE_DETAIL = 'detail';
 
     /**
      * The "booting" method of the model.

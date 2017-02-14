@@ -70,7 +70,17 @@ class ShopProduct extends MainShopProduct
     }
 
     public function getDetailsToForm(){
-        $specials = ShopProductDetail::query()->where(['product_id'=>$this->id])->get();
+        $specials = ShopProductDetail::query()->select([
+                DB::raw('count(*) AS total'),
+                DB::raw('CONCAT(supplier_id, "-", size, "-", new_status) AS `group_name`'),
+                'id',
+                'size',
+                'supplier_id',
+                'price_in',
+                'price',
+                'new_status',
+            ])
+            ->where(['product_id'=>$this->id])->groupBy(DB::raw("group_name"))->get();
         return $specials;
     }
 
@@ -263,12 +273,13 @@ class ShopProduct extends MainShopProduct
                 }
                 $productSize->fill([
                     'product_id'=>$this->id,
-                    'size'=>$value['size'],
+                    'size'=>trim($value['size']),
                     'supplier_id'=>$value['supplier_id'],
                     'price_in'=>$value['price_in'],
                     'price'=>$value['price'],
                     'new_status'=>$value['new_status'],
                 ]);
+                $productSize->generateSKU();
                 $validate = $productSize->validate($productSize->attributes);
                 if ($validate->passes()) {
                     $this->attributes['stock_in'] += 1;
@@ -317,6 +328,9 @@ class ShopProduct extends MainShopProduct
                     break;
                 case self::TYPE_IMAGE:
                     $model = ShopProductImage::query()->where(['id'=>$id])->first();
+                    break;
+                case self::TYPE_DETAIL:
+                    $model = ShopProductDetail::query()->where(['id'=>$id])->first();
                     break;
             }
             if(!empty($model)){
