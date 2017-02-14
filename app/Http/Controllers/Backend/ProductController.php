@@ -98,4 +98,12 @@ class ProductController extends Controller
         return ['return' => $return];
     }
 
+    public function addProductDetail(Request $request)
+    {
+        $type = $request->get('type');
+        $id = $request->get('id');
+//        $return = app(ShopProduct::class)->deleteReference($type, $id);
+//        return ['return' => $return];
+    }
+
 }

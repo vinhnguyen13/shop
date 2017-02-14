@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/product/delete/{id}', ['uses' => 'ProductController@delete', 'as'=>'admin.product.delete']);
         Route::get('/product/show/{id}', ['uses' => 'ProductController@show', 'as'=>'admin.product.show']);
         Route::post('/product/delete-reference', ['uses' => 'ProductController@deleteReference', 'as'=>'admin.product.deleteReference']);
+        Route::post('/product/add-product-detail', ['uses' => 'ProductController@addProductDetail', 'as'=>'admin.product.addProductDetail']);
         /*
          * Manufacturers
          */

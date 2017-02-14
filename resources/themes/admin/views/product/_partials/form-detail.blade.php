@@ -20,7 +20,7 @@ $total = 0;
         $total = $details->count();
         @endphp
         @foreach($details as $key=>$detail)
-            <tr id="detail-row{{$key}}">
+            <tr id="detail-row{{$key}}" data-product-detail="{{$detail->id}}">
                 <td class="text-right">
                     <input type="hidden" name="product_detail[{{$key}}][id]" value="{{$detail->id}}">
                     <input type="text" name="product_detail[{{$key}}][size]" value="{{$detail->size}}" placeholder="Size" class="form-control"/>
@@ -83,10 +83,11 @@ $total = 0;
     function removeProductDetail(key) {
         if(key) {
             $('#detail-row' + key).remove();
+            var pid = $('#detail-row' + key).attr('data-product-detail');
             $.ajax({
                 type: "POST",
                 url: '{{ route('admin.product.deleteReference', ['_token' => csrf_token()]) }}',
-                data: {type: '{{\App\Models\Backend\ShopProduct::TYPE_DETAIL}}', id: key},
+                data: {type: '{{\App\Models\Backend\ShopProduct::TYPE_DETAIL}}', id: pid},
                 success: function (data) {
                 }
             });
@@ -94,7 +95,17 @@ $total = 0;
     }
 
     function addMoreProductDetailWithSupplier(key) {
-
+        if(key) {
+            $('#detail-row' + key).remove();
+            var pid = $('#detail-row' + key).attr('data-product-detail');
+            $.ajax({
+                type: "POST",
+                url: '{{ route('admin.product.addProductDetail', ['_token' => csrf_token()]) }}',
+                data: {id: key},
+                success: function (data) {
+                }
+            });
+        }
     }
 </script>
 @endpush
