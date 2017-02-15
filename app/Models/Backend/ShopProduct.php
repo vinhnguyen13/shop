@@ -9,7 +9,6 @@ use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
 use App\Models\ShopProductDetail;
 use App\Models\ShopProductSpecial;
-use App\Services\ImageService;
 use App\Services\UploadMedia;
 use Storage;
 use DB;
@@ -70,7 +69,7 @@ class ShopProduct extends MainShopProduct
     }
 
     public function getDetailsToForm(){
-        $specials = ShopProductDetail::query()->select([
+        $details = ShopProductDetail::query()->select([
                 DB::raw('count(*) AS total'),
                 DB::raw('CONCAT(supplier_id, "-", size, "-", new_status) AS `group_name`'),
                 'id',
@@ -81,7 +80,7 @@ class ShopProduct extends MainShopProduct
                 'new_status',
             ])
             ->where(['product_id'=>$this->id])->groupBy(DB::raw("group_name"))->get();
-        return $specials;
+        return $details;
     }
 
     public function getCategoriesToForm(){
@@ -105,30 +104,38 @@ class ShopProduct extends MainShopProduct
      */
     public function updateOrCreate(array $attributes, array $values = [])
     {
-        $instance = $this->firstOrNew($attributes);
-        $instance->fill($values);
-        $validate = $instance->validate($instance->attributes);
-        $instance->processingSave($values);
-        if ($validate->passes()) {
-            $instance->save();
-            $instance->processingImages($values);
-            $instance->processingDiscount($values);
-            $instance->processingSpecial($values);
-            $instance->processingDetail($values);
-            $instance->processingCategory($values);
-        } else {
-            return $validate->getMessageBag();
-        }
-
-        if(!empty($instance->errors)){
-//                $messageBag = new \Illuminate\Support\MessageBag();
-            $messageBag = $validate->getMessageBag();
-            foreach($instance->errors as $error){
-                $messageBag->merge($error->getMessages());
+        DB::beginTransaction();
+        try {
+            $instance = $this->firstOrNew($attributes);
+            $instance->fill($values);
+            $validate = $instance->validate($instance->attributes);
+            $instance->processingSave($values);
+            if ($validate->passes()) {
+                $instance->save();
+                $instance->processingImages($values);
+                $instance->processingDiscount($values);
+                $instance->processingSpecial($values);
+                $instance->processingDetail($values);
+                $instance->processingCategory($values);
+                $instance->updateAfterSave($values);
+            } else {
+                return $validate->getMessageBag();
             }
-            return $validate->getMessageBag();
+
+            if(!empty($instance->errors)){
+    //                $messageBag = new \Illuminate\Support\MessageBag();
+                $messageBag = $validate->getMessageBag();
+                foreach($instance->errors as $error){
+                    $messageBag->merge($error->getMessages());
+                }
+                return $validate->getMessageBag();
+            }
+            DB::commit();
+            return $instance;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-        return $instance;
     }
 
     /**
@@ -266,31 +273,10 @@ class ShopProduct extends MainShopProduct
     {
         if (!empty($values['product_detail'])) {
             foreach ($values['product_detail'] as $key => $value) {
-                if(!empty($value['id'])){
-                    $productSize = ShopProductDetail::query()->where(['id'=>$value['id']])->first();
-                }else{
-                    $productSize = new ShopProductDetail();
-                }
-                $productSize->fill([
-                    'product_id'=>$this->id,
-                    'size'=>trim($value['size']),
-                    'supplier_id'=>$value['supplier_id'],
-                    'price_in'=>$value['price_in'],
-                    'price'=>$value['price'],
-                    'new_status'=>$value['new_status'],
-                ]);
-                $productSize->generateSKU();
-                $validate = $productSize->validate($productSize->attributes);
-                if ($validate->passes()) {
-                    $this->attributes['stock_in'] += 1;
-                    $productSize->save();
-                } else {
-                    $this->errors[] = $validate->getMessageBag();
-//                    $this->errors[] = $validate->messages()->toArray();
-                }
+                $productDetailID = !empty($value['id']) ? $value['id'] : null;
+                $this->saveProductDetail($productDetailID, $value);
             }
         }
-        $this->update();
         return true;
     }
 
@@ -311,6 +297,19 @@ class ShopProduct extends MainShopProduct
     }
 
     /**
+     * @param $values
+     */
+    public function updateAfterSave($values){
+        $total = 0;
+        $stock_in = ShopProductDetail::query()->where(['product_id'=>$this->id])->count();
+        if(!empty($stock_in)){
+            $total = $stock_in;
+        }
+        $this->attributes['stock_in'] = $total;
+        $this->update();
+    }
+
+    /**
      * @param $type
      * @param $id
      * @return bool|mixed|null
@@ -321,16 +320,19 @@ class ShopProduct extends MainShopProduct
         if(!empty($type)){
             switch($type){
                 case self::TYPE_DISCOUNT:
-                    $model = ShopProductDiscount::query()->where(['id'=>$id])->first();
+                    $model = ShopProductDiscount::query()->where(['id'=>$id]);
                     break;
                 case self::TYPE_SPECIAL:
-                    $model = ShopProductSpecial::query()->where(['id'=>$id])->first();
+                    $model = ShopProductSpecial::query()->where(['id'=>$id]);
                     break;
                 case self::TYPE_IMAGE:
-                    $model = ShopProductImage::query()->where(['id'=>$id])->first();
+                    $model = ShopProductImage::query()->where(['id'=>$id]);
                     break;
                 case self::TYPE_DETAIL:
-                    $model = ShopProductDetail::query()->where(['id'=>$id])->first();
+                    $productDetail = ShopProductDetail::query()->where(['id'=>$id])->first();
+                    if(!empty($productDetail->attributes)){
+                        $model = ShopProductDetail::query()->where(['product_id'=>$productDetail->product_id, 'supplier_id'=>$productDetail->supplier_id, 'size'=>$productDetail->size, 'new_status'=>$productDetail->new_status]);
+                    }
                     break;
             }
             if(!empty($model)){
@@ -338,5 +340,71 @@ class ShopProduct extends MainShopProduct
             }
         }
         return false;
+    }
+
+    /**
+     * @param $data
+     */
+    public function saveProductDetail($productDetailID, $data){
+        $attributes = [
+            'product_id'=>$this->id,
+            'supplier_id'=>$data['supplier_id'],
+            'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
+            'size'=>trim($data['size']),
+            'price_in'=>$data['price_in'],
+            'price'=>$data['price'],
+            'new_status'=>$data['new_status'],
+            'stock_in_date'=>Carbon::now(),
+        ];
+        if(!empty($productDetailID)){
+            $productDetail = ShopProductDetail::query()->where(['id'=>$productDetailID])->first();
+            if(!empty($productDetail->attributes)) {
+                ShopProductDetail::query()->where([
+                    'product_id' => $productDetail->product_id,
+                    'supplier_id' => $productDetail->supplier_id,
+                    'size' => $productDetail->size,
+                    'new_status' => $productDetail->new_status
+                ])->update($attributes);
+            }
+        }else{
+            $productDetail = new ShopProductDetail();
+            $productDetail->fill($attributes);
+            $productDetail->generateSKU();
+            $validate = $productDetail->validate($productDetail->attributes);
+            if ($validate->passes()) {
+                $productDetail->save();
+            } else {
+                $this->errors[] = $validate->getMessageBag();
+//                    $this->errors[] = $validate->messages()->toArray();
+            }
+        }
+    }
+
+    /**
+     * @param $data
+     */
+    public function addMoreProductDetailWithSupplier($productDetailID){
+        if(!empty($productDetailID)) {
+            $productDetail = ShopProductDetail::query()->where(['id' => $productDetailID])->first();
+            if(!empty($productDetail->id)) {
+                $attributes = [
+                    'product_id'=>$productDetail->product_id,
+                    'supplier_id'=>$productDetail->supplier_id,
+                    'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
+                    'size'=>$productDetail->size,
+                    'price_in'=>$productDetail->price_in,
+                    'price'=>$productDetail->price,
+                    'new_status'=>$productDetail->new_status,
+                    'stock_in_date'=>Carbon::now(),
+                ];
+                $productDetailNew = new ShopProductDetail();
+                $productDetailNew->fill($attributes);
+                $productDetailNew->generateSKU();
+                $validate = $productDetailNew->validate($productDetailNew->attributes);
+                if ($validate->passes()) {
+                    $productDetailNew->save();
+                }
+            }
+        }
     }
 }

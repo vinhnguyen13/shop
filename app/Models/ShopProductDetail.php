@@ -9,10 +9,14 @@ class ShopProductDetail extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
-    protected $fillable = ['product_id', 'supplier_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status'];
-    public $timestamps = false;
+    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note'];
 
     const SPLIT_CODE = '-';
+
+    const STOCK_IN_STOCK = 1;
+    const STOCK_PRE_ORDER = 2;
+    const STOCK_OUT_OF_STOCK = 3;
+    const STOCK_SOME_DAYS = 4;
 
     /**
      * The "booting" method of the model.
@@ -37,6 +41,7 @@ class ShopProductDetail extends Model
     {
         return [
             'product_id' => 'required',
+            'sku' => 'required|unique:shop_product_detail,sku',
             'size' => 'required',
             'new_status' => 'required|numeric',
         ];
@@ -67,7 +72,7 @@ class ShopProductDetail extends Model
     }
 
     public function generateSKU(){
-        $count = $this->query()->where(['supplier_id'=>$this->supplier_id, 'size'=>$this->size, 'new_status'=>$this->new_status])->count();
+        $count = $this->query()->where(['product_id'=>$this->product_id, 'supplier_id'=>$this->supplier_id, 'size'=>$this->size, 'new_status'=>$this->new_status])->count();
         if(empty($this->sku)){
             $time = date('dmYH');
             $supplier = $this->supplier->code;

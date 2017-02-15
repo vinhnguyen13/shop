@@ -100,10 +100,24 @@ class ProductController extends Controller
 
     public function addProductDetail(Request $request)
     {
-        $type = $request->get('type');
         $id = $request->get('id');
-//        $return = app(ShopProduct::class)->deleteReference($type, $id);
-//        return ['return' => $return];
+        $return = app(ShopProduct::class)->addMoreProductDetailWithSupplier($id);
+        return ['code'=>0, 'message'=>'', 'return'=>$return];
+    }
+
+    public function productDetailGroup(Request $request)
+    {
+        $pid = $request->get('pid');
+        $model = ShopProduct::find($pid);
+        $html = '';
+        if(!empty($model)) {
+            $details = $model->getDetailsToForm();
+            $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            foreach ($details as $key => $detail) {
+                $html .= view('product._partials.form-detail-item', compact('key', 'detail', 'suppliers'))->render();
+            }
+        }
+        return ['html' => $html];
     }
 
 }
