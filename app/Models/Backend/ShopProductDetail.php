@@ -16,14 +16,14 @@ class ShopProductDetail extends MainShopProductDetail
             'product_id'=>[
                 'label'=>'Product',
                 'format' => function($item){
-                    $model = ShopProduct::find($item->product_id)->first();
-                    return $model->name;
+                    $model = ShopProduct::query()->where(['id'=>$item->product_id])->first();
+                    return \Html::link(route('admin.product.index', ['id'=>$item->product_id]), $model->name);
                 },
             ],
             'supplier_id'=>[
                 'label'=>'Supplier',
                 'format' => function($item){
-                    $model = ShopSupplier::find($item->supplier_id)->first();
+                    $model = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
                     return $model->name;
                 },
             ],

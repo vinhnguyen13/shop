@@ -26,6 +26,13 @@ class ShopProduct extends MainShopProduct
                 'label' => 'Name',
                 'filter' => 'like',
             ],
+            'custom_column' => [
+                'custom' => true,
+                'label' => 'Name',
+                'format' => function($item){
+                    return \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Product Detail', ['target'=>'_blank']);
+                },
+            ],
             'sku_producer',
             'stock_in',
             'stock_out',

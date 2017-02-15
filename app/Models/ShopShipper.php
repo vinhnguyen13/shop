@@ -38,4 +38,9 @@ class ShopShipper extends Model
         $instance->save();
         return $instance;
     }
+
+    public function generateCode()
+    {
+        return 'ch'.$this->id;
+    }
 }

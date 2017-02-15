@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Product', 'h1_href'=>route('admin.product.index'), 'h1_small'=>'Product Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Product', 'h1_href'=>route('admin.product-detail.index'), 'h1_small'=>'Product Detail Management']])
 @endsection
 
 @section('grid')
     <div class="grid-action">
-        <a href="{{ route('admin.product.create') }}" class="btn btn-success">Create</a>
-        <a href="{{ route('admin.product.import') }}" class="btn btn-success">Import</a>
     </div>
 @endsection
 
