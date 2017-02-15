@@ -367,15 +367,19 @@ class ShopProduct extends MainShopProduct
                 ])->update($attributes);
             }
         }else{
-            $productDetail = new ShopProductDetail();
-            $productDetail->fill($attributes);
-            $productDetail->generateSKU();
-            $validate = $productDetail->validate($productDetail->attributes);
-            if ($validate->passes()) {
-                $productDetail->save();
-            } else {
-                $this->errors[] = $validate->getMessageBag();
+            if(!empty($data['total'])){
+                for($i=1;$i<=$data['total'];$i++){
+                    $productDetail = new ShopProductDetail();
+                    $productDetail->fill($attributes);
+                    $productDetail->generateSKU();
+                    $validate = $productDetail->validate($productDetail->attributes);
+                    if ($validate->passes()) {
+                        $productDetail->save();
+                    } else {
+                        $this->errors[] = $validate->getMessageBag();
 //                    $this->errors[] = $validate->messages()->toArray();
+                    }
+                }
             }
         }
     }
