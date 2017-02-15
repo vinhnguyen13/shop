@@ -18,7 +18,7 @@
     </td>
     <td class="text-right">
         {{$detail->total}}
-        <button type="button" onclick="addMoreProductDetailWithSupplier({{$key}});" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add Detail"><i class="fa fa-plus-circle"></i></button>
+        <button type="button" onclick="addMoreProductDetailWithSupplier({{$key}});" data-toggle="tooltip" title="" class="" data-original-title="Add Detail"><i class="fa fa-plus-circle"></i></button>
     </td>
     <td class="text-left">
         <button type="button" onclick="removeProductDetail({{$key}});" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button>
