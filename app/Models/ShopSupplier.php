@@ -41,17 +41,17 @@ class ShopSupplier extends Model
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
-        $instance->generateCode();
         $instance->save();
+        $instance->updateCode();
         return $instance;
     }
 
 
-    public function generateCode()
+    public function updateCode()
     {
-        if(empty($this->code)) {
-            $index = str_pad($this->id, 2, '0', STR_PAD_LEFT);
-            $this->code = self::prefix_code . $index;
+        if(!empty($this->code)) {
+            $code = self::prefix_code . str_pad($this->id, 2, '0', STR_PAD_LEFT);
+            $this->update(['code' => $code]);
         }
     }
 }
