@@ -77,17 +77,7 @@ class ShopProduct extends MainShopProduct
     }
 
     public function getDetailsToForm(){
-        $details = ShopProductDetail::query()->select([
-                DB::raw('count(*) AS total'),
-                DB::raw('CONCAT(supplier_id, "-", size, "-", new_status) AS `group_name`'),
-                'id',
-                'size',
-                'supplier_id',
-                'price_in',
-                'price',
-                'new_status',
-            ])
-            ->where(['product_id'=>$this->id])->groupBy(DB::raw("group_name"))->get();
+        $details = $this->getDetailsGroupBySupplier();
         return $details;
     }
 

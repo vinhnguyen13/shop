@@ -2,9 +2,6 @@
 $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
 $total = 0;
 ?>
-@if (!empty($details))
-    <a href="{{route('admin.product-detail.index')}}" target="_blank">Manage Product Detail</a>
-@endif
 <table id="productDetail" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -34,7 +31,9 @@ $total = 0;
     </tr>
     </tfoot>
 </table>
-
+@if (!empty($details))
+    <a class="btn btn-primary btn-xs" href="{{route('admin.product-detail.index', ['product_id'=>$model->id])}}">Product Detail Management</a>
+@endif
 @push('scripts')
 <script type="text/javascript">
     var detail_row = parseInt({{$total}});

@@ -64,6 +64,22 @@ class ShopProductDetail extends Model
         return $this->hasOne('App\Models\ShopSupplier', 'id', 'supplier_id');
     }
 
+    public function getStockStatus($id = null)
+    {
+        $data = [
+            self::STOCK_IN_STOCK => trans('In Stock'),
+            self::STOCK_PRE_ORDER => trans('Pre Order'),
+            self::STOCK_OUT_OF_STOCK => trans('Out Of Stock'),
+            self::STOCK_SOME_DAYS => trans('Some Days'),
+        ];
+
+        if (isset($data[$id])) {
+            return $data[$id];
+        } else {
+            return $data;
+        }
+    }
+
     public function getPrice(){
         if(!empty($this->price)){
             return $this->price;
@@ -75,8 +91,8 @@ class ShopProductDetail extends Model
         $count = $this->query()->where(['product_id'=>$this->product_id, 'supplier_id'=>$this->supplier_id, 'size'=>$this->size, 'new_status'=>$this->new_status])->count();
         if(empty($this->sku)){
             $time = date('dmYH');
-            $supplier = $this->supplier->code;
-            $sku_producer = $this->product->sku_producer;
+            $supplier = !empty($this->supplier->code) ? $this->supplier->code : null;
+            $sku_producer = !empty($this->product->sku_producer) ? $this->product->sku_producer : null;
             $size = $this->size;
             $index = str_pad($count + 1, 2, '0', STR_PAD_LEFT);
             $splitCode = self::SPLIT_CODE;

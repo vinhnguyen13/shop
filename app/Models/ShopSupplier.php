@@ -49,7 +49,7 @@ class ShopSupplier extends Model
 
     public function updateCode()
     {
-        if(!empty($this->code)) {
+        if(empty($this->code)) {
             $code = self::prefix_code . str_pad($this->id, 2, '0', STR_PAD_LEFT);
             $this->update(['code' => $code]);
         }

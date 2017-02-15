@@ -7,6 +7,7 @@ use App\Services\ImageService;
 use App\Services\UploadMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 class ShopProduct extends Model
 {
@@ -160,6 +161,21 @@ class ShopProduct extends Model
             $url = Storage::url($this->folder.DS.$folder.DS.$this->image);
         }
         return $url;
+    }
+
+    public function getDetailsGroupBySupplier(){
+        $details = ShopProductDetail::query()->select([
+            DB::raw('count(*) AS total'),
+            DB::raw('CONCAT(supplier_id, "-", size, "-", new_status) AS `group_name`'),
+            'id',
+            'size',
+            'supplier_id',
+            'price_in',
+            'price',
+            'new_status',
+        ])
+            ->where(['product_id'=>$this->id])->groupBy(DB::raw("group_name"))->orderBy('size')->get();
+        return $details;
     }
 
 }

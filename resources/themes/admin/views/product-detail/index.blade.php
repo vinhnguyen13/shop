@@ -12,7 +12,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Product Management</h3>
+            <h3 class="box-title">Product Detail Management</h3>
         </div>
         {!! $grid->table() !!}
     </div>

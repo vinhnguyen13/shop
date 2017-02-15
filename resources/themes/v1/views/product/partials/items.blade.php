@@ -1,7 +1,7 @@
 @foreach($products as $product)
     <?php
     $url = route('product.detail', ['id'=>$product->id, 'slug'=>str_slug($product->name)]);
-    $details = $product->details;
+    $details = $product->getDetailsGroupBySupplier();
     ?>
     <div class="col-lg-3 col-xs-6 col-md-4">
         <div class="product__item">
