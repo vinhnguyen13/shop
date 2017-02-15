@@ -7,7 +7,7 @@ use App\Models\ShopProduct as MainShopProduct;
 use App\Models\ShopProductCategory;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
-use App\Models\ShopProductDetail;
+use App\Models\Backend\ShopProductDetail;
 use App\Models\ShopProductSpecial;
 use App\Services\UploadMedia;
 use Storage;

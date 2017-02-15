@@ -61,6 +61,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::post('/product/add-product-detail', ['uses' => 'ProductController@addProductDetail', 'as'=>'admin.product.addProductDetail']);
         Route::post('/product/product-detail-group', ['uses' => 'ProductController@productDetailGroup', 'as'=>'admin.product.productDetailGroup']);
         /*
+         * Product Detail
+         */
+        Route::get('/product-detail', ['uses' => 'ProductDetailController@index', 'as'=>'admin.product-detail.index']);
+        /*
          * Manufacturers
          */
         Route::get('/manufacturer', ['uses' => 'ManufacturerController@index', 'as'=>'admin.manufacturer.index']);

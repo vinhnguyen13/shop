@@ -3,7 +3,7 @@ $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id
 $total = 0;
 ?>
 @if (!empty($details))
-    <a href="#" target="_blank">Manage Product Detail</a>
+    <a href="{{route('admin.product-detail.index')}}" target="_blank">Manage Product Detail</a>
 @endif
 <table id="productDetail" class="table table-striped table-bordered table-hover">
     <thead>
