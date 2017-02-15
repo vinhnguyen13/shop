@@ -28,9 +28,10 @@ class ShopProduct extends MainShopProduct
             ],
             'custom_column' => [
                 'custom' => true,
-                'label' => 'Name',
+                'label' => 'Product Detail',
                 'format' => function($item){
-                    return \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Product Detail', ['target'=>'_blank']);
+                    $count = ShopProductDetail::query()->where(['product_id'=>$item->id])->count();
+                    return \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Total: '.$count, ['target'=>'_blank']);
                 },
             ],
             'sku_producer',

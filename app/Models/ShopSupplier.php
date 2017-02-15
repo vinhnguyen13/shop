@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasValidator;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopSupplier extends Model
 {
+    use HasValidator;
     protected $table = 'shop_supplier';
+    protected $fillable = ['name', 'code', 'address', 'country_id', 'city_id', 'district_id',
+        'phone', 'fax', 'email', 'payment_method', 'discount_type', 'discount_available', 'type_goods', 'notes', 'order', 'url', 'logo'];
+
+    const prefix_code = 'ch';
     /**
      * The "booting" method of the model.
      *
@@ -35,7 +41,17 @@ class ShopSupplier extends Model
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
+        $instance->generateCode();
         $instance->save();
         return $instance;
+    }
+
+
+    public function generateCode()
+    {
+        if(empty($this->code)) {
+            $index = str_pad($this->id, 2, '0', STR_PAD_LEFT);
+            $this->code = self::prefix_code . $index;
+        }
     }
 }
