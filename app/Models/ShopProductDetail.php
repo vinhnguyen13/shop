@@ -44,7 +44,6 @@ class ShopProductDetail extends Model
             'supplier_id' => 'required',
             'sku' => 'required|unique:shop_product_detail,sku',
             'size' => 'required',
-            'price_in' => 'required',
             'price' => 'required',
             'new_status' => 'required|numeric',
         ];
@@ -55,7 +54,6 @@ class ShopProductDetail extends Model
         return [
             'supplier_id.required' => 'Detail >> Supplier is required',
             'size.required' => 'Detail >> Size is required',
-            'price_in.required' => 'Detail >> Price_in is required',
             'price.required' => 'Detail >> Price is required',
         ];
     }
