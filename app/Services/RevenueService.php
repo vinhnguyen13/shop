@@ -30,11 +30,9 @@ class RevenueService
                 },
             ],
             'size',
-            'product_detail_id'=>[
-                'label'=>'Price In',
+            'price_in'=>[
                 'format' => function($item){
-                    $model = ShopProductDetail::query()->where(['id'=>$item->product_detail_id])->first();
-                    return number_format($model->price_in);
+                    return number_format($item->price_in);
                 },
             ],
             'price'=>[
