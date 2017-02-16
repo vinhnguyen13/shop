@@ -178,4 +178,18 @@ class ShopProduct extends Model
         return $details;
     }
 
+    public function getDetailsGroupBySize(){
+        $details = ShopProductDetail::query()->select([
+            DB::raw('count(*) AS total'),
+            'id',
+            'size',
+            'supplier_id',
+            'price_in',
+            'price',
+            'new_status',
+        ])
+            ->where(['product_id'=>$this->id])->groupBy(DB::raw("size"))->orderBy('size')->get();
+        return $details;
+    }
+
 }
