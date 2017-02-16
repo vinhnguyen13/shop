@@ -18,6 +18,8 @@ class ShopSupplier extends MainShopSupplier
             'code' => [
                 'filter' => 'like',
             ],
+            'discount_type',
+            'discount_available',
         ]);
         return $grid;
     }

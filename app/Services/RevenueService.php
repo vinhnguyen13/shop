@@ -9,24 +9,58 @@
 namespace App\Services;
 
 use App\Helpers\Grid;
+use App\Models\Backend\ShopProduct;
+use App\Models\Backend\ShopProductDetail;
+use App\Models\Backend\ShopSupplier;
 use DB;
 
 class RevenueService
 {
     public function gridIndex(){
-        $query = DB::table('shop_order AS a');
+        $query = DB::table('shop_order_product AS a');
         $grid = new Grid($query, [
             'id',
-            'invoice_code',
-            'customer_id' => [
-                'label'=>'Customer',
-                'filter' => 'like',
+            'product_name',
+            'supplier_id'=>[
+                'label'=>'Supplier',
+                'format' => function($item){
+                    $model = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
+                    $title = $model->name.' - Discount: '.number_format($model->discount_available).' %';
+                    return \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $title);
+                },
             ],
-            'order_status_id',
-            'total',
-            'created_at',
-            'updated_at',
+            'size',
+            'product_detail_id'=>[
+                'label'=>'Price In',
+                'format' => function($item){
+                    $model = ShopProductDetail::query()->where(['id'=>$item->product_detail_id])->first();
+                    return number_format($model->price_in);
+                },
+            ],
+            'price'=>[
+                'format' => function($item){
+                    return number_format($item->price);
+                },
+            ],
+            'quantity'=>[
+                'filter'=>false
+            ],
+            'total'=>[
+                'format' => function($item){
+                    return number_format($item->total);
+                },
+            ],
+            'custom_column' => [
+                'custom' => true,
+                'label' => 'Revenue',
+                'format' => function($item){
+                    $supplier = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
+                    $revenue = $item->total * $supplier->discount_available / 100;
+                    return number_format($revenue);
+                }
+            ]
         ]);
+        $grid->removeActionColumn();
         return $grid;
     }
 }

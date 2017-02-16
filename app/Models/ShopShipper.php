@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasValidator;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopShipper extends Model
 {
+    use HasValidator;
     protected $table = 'shop_shipper';
+    protected $fillable = ['firstname', 'lastname', 'phone', 'fax', 'email', 'company', 'address_1', 'address_2', 'country_id', 'city_id', 'district_id'];
+
     /**
      * The "booting" method of the model.
      *
