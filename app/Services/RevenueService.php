@@ -20,7 +20,7 @@ class RevenueService
         $query = DB::table('shop_order_product AS a');
         $grid = new Grid($query, [
             'id',
-            'product_name',
+            'sku',
             'supplier_id'=>[
                 'label'=>'Supplier',
                 'format' => function($item){
@@ -29,26 +29,26 @@ class RevenueService
                     return \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $title);
                 },
             ],
+            'product_name',
             'size',
-            'price_in'=>[
-                'format' => function($item){
-                    return number_format($item->price_in);
-                },
-            ],
-            'price'=>[
-                'format' => function($item){
-                    return number_format($item->price);
-                },
-            ],
             'quantity'=>[
                 'filter'=>false
             ],
+//            'price_in',
+            'price'=>[
+                'format' => function($item){
+                    $priceHtml = number_format($item->price).'<br/>';
+                    $priceHtml .= '<p class="help-block small">Price In: '.number_format($item->price_in).'</p>';
+                    return $priceHtml;
+                },
+            ],
             'total'=>[
+                'label' => 'Payment',
                 'format' => function($item){
                     return number_format($item->total);
                 },
             ],
-            'custom_column' => [
+            'revenue' => [
                 'custom' => true,
                 'label' => 'Revenue',
                 'format' => function($item){
@@ -56,9 +56,22 @@ class RevenueService
                     $revenue = $item->total * $supplier->discount_available / 100;
                     return number_format($revenue);
                 }
+            ],
+            'consignment_payment' => [
+                'custom' => true,
+                'label' => 'Consignment Payment',
+                'format' => function($item){
+                    $supplier = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
+                    $revenue = $item->total - ($item->total * $supplier->discount_available / 100);
+                    $consignmentPaymentHtml = number_format($revenue);
+                    $consignmentPaymentHtml .= '<p class="help-block small">Payment Date: '.date('d-m-Y').'</p>';
+                    return $consignmentPaymentHtml;
+                }
             ]
+
         ]);
         $grid->removeActionColumn();
+        $grid->setHiddenColumn(['price_in']);
         return $grid;
     }
 }
