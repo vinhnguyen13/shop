@@ -7,6 +7,7 @@ use App\Models\ShopOrder as Model;
 use App\Models\ShopOrderProduct;
 use App\Models\ShopOrderStatus;
 use App\Models\ShopPayment;
+use App\Models\ShopProductDetail;
 use DB;
 
 class ShopOrder extends Model
@@ -54,22 +55,28 @@ class ShopOrder extends Model
                     $total = 0;
                     foreach($carts as $productID_sizeID=>$item){
                         $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_sizeID);
-                        $product_id = $product_details[0];
-                        $product = ShopProduct::find($product_id);
+                        $productID = $product_details[0];
+                        $productDetailID = $product_details[1];
+                        $product = ShopProduct::find($productID);
+                        $productDetail = ShopProductDetail::find($productDetailID);
                         $product->setCart($item['sizeID'], $item['quantity']);
-                        $price = $product->priceWithSize();
+                        $price = $productDetail->price;
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product_id]);
+                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$productID]);
                         if(empty($orderProduct->id)){
                             $orderProduct = new ShopOrderProduct();
                             $orderProduct->order_id = $record->id;
-                            $orderProduct->product_id = $product_id;
+                            $orderProduct->product_id = $productID;
                         }
+                        $orderProduct->supplier_id = $productDetail->supplier_id;
+                        $orderProduct->product_detail_id = $productDetail->id;
                         $orderProduct->name = $product->name;
-                        $orderProduct->sku = $product->sku_producer;
+                        $orderProduct->sku = $productDetail->sku;
+                        $orderProduct->size = $productDetail->size;
                         $orderProduct->quantity = $item['quantity'];
-                        $orderProduct->price = $price;
+                        $orderProduct->price_in = $productDetail->price_in;
+                        $orderProduct->price = $productDetail->price;
                         $orderProduct->total = $subtotalProduct;
                         $orderProduct->tax = $tax;
                         $orderProduct->reward = 0;

@@ -19,23 +19,34 @@ class RevenueService
     public function gridIndex(){
         $query = DB::table('shop_order_product AS a');
         $grid = new Grid($query, [
-            'id',
+            'id'=>[
+                'filter'=>false
+            ],
             'sku',
             'supplier_id'=>[
                 'label'=>'Supplier',
+                'filter'=>false,
                 'format' => function($item){
                     $model = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
-                    $title = $model->name.' - Discount: '.number_format($model->discount_available).' %';
-                    return \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $title);
+                    $title = '<a href="'.route('admin.supplier.index', ['id'=>$item->supplier_id]).'">'.$model->name.'</a><br>';
+                    $title .= '<p class="help-block small">Discount: '.number_format($model->discount_available).' %</p>';
+                    return $title;
                 },
             ],
-            'product_name',
-            'size',
+            'product_name'=>[
+                'label'=>'Product',
+                'filter'=>false
+            ],
+            'size'=>[
+                'filter'=>false
+            ],
             'quantity'=>[
+                'label'=>'QTY',
                 'filter'=>false
             ],
 //            'price_in',
             'price'=>[
+                'filter'=>false,
                 'format' => function($item){
                     $priceHtml = number_format($item->price).'<br/>';
                     $priceHtml .= '<p class="help-block small">Price In: '.number_format($item->price_in).'</p>';
@@ -44,6 +55,7 @@ class RevenueService
             ],
             'total'=>[
                 'label' => 'Payment',
+                'filter'=>false,
                 'format' => function($item){
                     return number_format($item->total);
                 },

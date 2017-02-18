@@ -3,7 +3,7 @@
 @section('content')
     <?php
     $images = $product->images;
-    $details = $product->details;
+    $details = $product->getDetailsGroupBySize();
     $quantities = [1,2,3,4,5];
     ?>
     <div class="container detail">
@@ -39,7 +39,7 @@
                                 <div class="dropdown__inner">
                                     <ul>
                                         @foreach($details as $detail)
-                                            @if (!empty($detail->quantity))
+                                            @if (!empty($detail->size))
                                                 <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{$detail->id}}">{{$detail->size}}</span></a></li>
                                             @endif
                                         @endforeach

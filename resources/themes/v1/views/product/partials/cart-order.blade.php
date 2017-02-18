@@ -25,7 +25,7 @@
         $subtotal += $subtotalProduct;
         $tax += $product->taxWithPrice($price);
         ?>
-        <tr data-product-id="{{encrypt($product->id)}}" data-product-size="{{$item['sizeID']}}">
+        <tr data-product-id="{{encrypt($product->id)}}" data-product-detail="{{$item['sizeID']}}">
             <td class="col-md-9"><a href="{{$product->url()}}"><em>{{$product->name}} (Size: {{$product->size()}})</em></a></td>
             <td class="col-md-1" style="text-align: center">
                 {!! Form::select('quantity_select', $quantities, $item['quantity'], ['class' => 'w-100 quantity_select']) !!}

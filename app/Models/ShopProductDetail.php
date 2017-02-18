@@ -84,6 +84,10 @@ class ShopProductDetail extends Model
         }
     }
 
+    public function inStock(){
+        return $this->stock_status_id === self::STOCK_IN_STOCK;
+    }
+
     public function getPrice(){
         if(!empty($this->price)){
             return $this->price;

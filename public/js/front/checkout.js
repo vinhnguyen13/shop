@@ -43,7 +43,7 @@ $(document).ready(function(){
         $(this).loading({inside_right: true});
         $(this).closest('tr').remove();
         var pid = $(this).closest('tr').attr('data-product-id');
-        var detail = $(this).closest('tr').attr('data-product-size');
+        var detail = $(this).closest('tr').attr('data-product-detail');
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
@@ -166,20 +166,20 @@ $(document).ready(function(){
     });
 
     $('.'+wrapCheckoutInfo).on('change', '.quantity_select', function(){
-        var data = $(this).closest('tr').attr('data-product-id');
-        var size = $(this).closest('tr').attr('data-product-size');
+        var pid = $(this).closest('tr').attr('data-product-id');
+        var detail = $(this).closest('tr').attr('data-product-detail');
         var quantity = $(this).val();
-        $('.'+wrapMainCheckout).trigger('checkout/func/updateCart', [data, size, quantity]);
+        $('.'+wrapMainCheckout).trigger('checkout/func/updateCart', [pid, detail, quantity]);
     });
 
-    $('.'+wrapMainCheckout).bind('checkout/func/updateCart', function (event, data, size, quantity) {
+    $('.'+wrapMainCheckout).bind('checkout/func/updateCart', function (event, pid, detail, quantity) {
         $(this).loading({inside_right: true});
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
                 url: urlAddCart,
-                data: {data: data, size: size, quantity: quantity},
+                data: {data: pid, detail: detail, quantity: quantity},
                 success: function (data) {
                     if(data.total > 0){
                         if($('.header__cart .val-selected .header__cart--num').length > 0) {
