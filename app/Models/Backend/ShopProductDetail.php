@@ -42,6 +42,20 @@ class ShopProductDetail extends MainShopProductDetail
                 },
             ],
             'sku',
+            'qr'=>[
+                'custom' => true,
+                'label' => 'QR',
+                'format'=>function($item){
+                    $productDetail = ShopProductDetail::find($item->id);
+                    $html = '<img width="100" src="'.route('admin.product-detail.qrcode', ['id'=>$item->id]).'">';
+                    $html = '<a class="glyphicon glyphicon-eye-open" id="view-qrcode" href="javascript:;" ' .
+                        'data-img-src="'.route('admin.product-detail.qrcode', ['id'=>$item->id]).'"' .
+                        'data-sku="'.$item->sku.'"' .
+                        'data-product-url="'.$productDetail->product->url().'"' .
+                        '></a>';
+                    return $html;
+                }
+            ],
             'size',
             'price_in',
             'price',

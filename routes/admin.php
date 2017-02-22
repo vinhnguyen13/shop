@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          * Product Detail
          */
         Route::get('/product-detail', ['uses' => 'ProductDetailController@index', 'as'=>'admin.product-detail.index']);
+        Route::get('/product-detail/qrcode', ['uses' => 'ProductDetailController@qrcode', 'as'=>'admin.product-detail.qrcode']);
         /*
          * Manufacturers
          */

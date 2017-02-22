@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Backend\ShopProductDetail;
 use Illuminate\Http\Request;
 use Input;
+use Response;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductDetailController extends Controller
@@ -22,5 +23,20 @@ class ProductDetailController extends Controller
         }else{
             return view('product-detail.index', compact('grid'));
         }
+    }
+
+    public function qrcode(Request $request){
+        $productDetailID = $request->get('id');
+        $productDetail = ShopProductDetail::find($productDetailID);
+        if(!empty($productDetail)){
+            include(app_path('Libraries/phpqrcode/phpqrcode.php'));
+            $text = 'Url: '.$productDetail->product->url().PHP_EOL;
+            $text .= 'SKU: '.$productDetail->sku.PHP_EOL;
+            $code = \QRcode::png($text); // creates file
+            $response = Response::make( $code, 200);
+            $response->header("Content-Type", 'image/png');
+            return $response;
+        }
+        return false;
     }
 }
