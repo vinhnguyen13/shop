@@ -9,6 +9,8 @@
 namespace App\Services;
 
 use App\Helpers\Grid;
+use App\Models\Backend\ShopOrder;
+use App\Models\Backend\ShopOrderProduct;
 use App\Models\Backend\ShopProduct;
 use App\Models\Backend\ShopProductDetail;
 use App\Models\Backend\ShopSupplier;
@@ -16,11 +18,25 @@ use DB;
 
 class RevenueService
 {
+    public function gridOrders(){
+        $query = ShopOrderProduct::query();
+        $orders = $query->get();
+        return $orders;
+    }
+
     public function gridIndex(){
         $query = DB::table('shop_order_product AS a');
         $grid = new Grid($query, [
             'id'=>[
                 'filter'=>false
+            ],
+            'date' => [
+                'custom' => true,
+                'label' => 'Date',
+                'format' => function($item){
+                    $order = ShopOrder::query()->where(['id'=>$item->order_id])->first();
+                    return $order->created_at;
+                }
             ],
             'sku',
             'supplier_id'=>[
@@ -83,7 +99,7 @@ class RevenueService
 
         ]);
         $grid->removeActionColumn();
-        $grid->setHiddenColumn(['price_in']);
+        $grid->setHiddenColumn(['price_in', 'order_id']);
         return $grid;
     }
 }
