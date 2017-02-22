@@ -27,8 +27,16 @@ class ShopProduct extends MainShopProduct
                 'filter' => 'like',
                 'format' => function($item){
                     $product = self::find($item->id);
-                    $html = $item->name.'<br/>';
-                    $html .= '<img width="100" src="'.$product->thumb('thumb').'">';
+                    $html = $item->name;
+                    return $html;
+                }
+            ],
+            'image' => [
+                'custom' => true,
+                'label' => 'Image',
+                'format' => function($item){
+                    $product = self::find($item->id);
+                    $html = '<img width="100" src="'.$product->thumb('thumb').'">';
                     return $html;
                 }
             ],
