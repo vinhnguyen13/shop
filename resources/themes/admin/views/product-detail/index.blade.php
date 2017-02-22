@@ -27,11 +27,11 @@
                 <div class="modal-body">
                     <p class="SKU">SKU: <span> </span></p>
                     <p class="productUrl">Product Url: <span> </span></p>
-                    <img class="imgQrCode" src="/">
+                    <div id="wrap-img-qr"><img class="imgQrCode" src="/"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                    <button id="btn-delete" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Print</button>
+                    <button id="btn-print" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Print</button>
                 </div>
             </div>
         </div>
@@ -54,6 +54,23 @@
             $('#modal-qrcode').find('.imgQrCode').attr('src', dataImgSrc);
             $('#modal-qrcode').modal('show');
         });
+
+        $('#modal-qrcode').on('click', '#btn-print', function (e) {
+            printDiv('wrap-img-qr');
+        });
+
+        function printDiv(id) {
+            var html = "";
+            $('link').each(function() { // find all <link tags that have
+                if ($(this).attr('rel').indexOf('stylesheet') !=-1) { // rel="stylesheet"
+                    html += '<link rel="stylesheet" href="'+$(this).attr("href")+'" />';
+                }
+            });
+            html += '<body onload="window.focus(); window.print()">'+$("#"+id).html()+'</body>';
+            var w = window.open("","print");
+            if (w) { w.document.write(html); w.document.close() }
+
+        }
     });
 </script>
 @endpush
