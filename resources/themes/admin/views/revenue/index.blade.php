@@ -14,13 +14,13 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-3">
-                            <input type="text" class="form-control" placeholder="FROM">
+                            <input type="text" class="form-control date" placeholder="FROM">
                         </div>
                         <div class="col-xs-3">
-                            <input type="text" class="form-control" placeholder="TO">
+                            <input type="text" class="form-control date" placeholder="TO">
                         </div>
                         <div class="col-xs-3">
-                            <input type="text" class="form-control" placeholder="SUPPLIER">
+                            <input type="text" class="form-control supplier" placeholder="SUPPLIER">
                         </div>
                         <div class="col-xs-3">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -100,7 +100,17 @@
 @endsection
 
 @push('styles')
+<link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
 @endpush
 
 @push('scripts')
+<script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.date').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy"
+        });
+    });
+</script>
 @endpush
