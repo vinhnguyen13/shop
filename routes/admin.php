@@ -114,7 +114,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         /*
          * Revenue
          */
-        Route::get('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);
+        Route::any('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);
         /*
          * Coupon Event routing
          */

@@ -20,7 +20,7 @@ class RevenueService
 {
     public function gridOrders(){
         $query = ShopOrderProduct::query();
-        $orders = $query->get();
+        $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }
 

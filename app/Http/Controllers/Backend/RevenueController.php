@@ -11,7 +11,8 @@ class RevenueController extends Controller
     {
         $orders = app(RevenueService::class)->gridOrders();
         if ($request->ajax()) {
-            return '';
+            $all = \Input::all();
+            return view('revenue.partials.grid', compact('orders'));
         }else{
             return view('revenue.index', compact('orders'));
         }

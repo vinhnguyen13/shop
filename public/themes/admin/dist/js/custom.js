@@ -28,3 +28,36 @@ function getCookie(cname) {
     }
     return "";
 }
+
+
+$.fn.loading = function (options) {
+    var settings = $.extend({
+        display: true,
+        onLoadStart: function (box) {
+            return box;
+        }, //Right after the button has been clicked
+        onLoadDone: function (box) {
+            return box;
+        } //When the source has been loaded
+    }, options);
+
+    var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
+    var box = $(this);
+    if(settings.display == true){
+        start(box);
+    }else{
+        done(box);
+    }
+
+    function start(box) {
+        //Add overlay and loading img
+        box.append(overlay);
+        settings.onLoadStart.call(box);
+    }
+
+    function done(box) {
+        //Remove overlay and loading img
+        box.find('.overlay').remove();
+        settings.onLoadDone.call(box);
+    }
+};
