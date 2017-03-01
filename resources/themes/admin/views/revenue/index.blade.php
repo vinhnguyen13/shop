@@ -10,21 +10,30 @@
             <h3 class="box-title">Order Management</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="box-body">
                     <div class="row">
                         <form id="revenueForm">
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <input type="text" class="form-control date" placeholder="FROM" name="from_date">
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <input type="text" class="form-control date" placeholder="TO" name="to_date">
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <input type="text" class="form-control supplier" placeholder="SUPPLIER" name="supplier">
                             </div>
-                            <div class="col-xs-3">
-                                <button type="submit" class="btn btn-primary btn-filter">Submit</button>
+                            <div class="col-xs-2">
+                                {!! Form::select('', [''], null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
+                            </div>
+                            <div class="col-xs-2">
+                                {!! Form::select('', [''], null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
+                            </div>
+                            <div class="col-xs-1">
+                                <button type="submit" class="btn btn-primary btn-filter">Find</button>
+                            </div>
+                            <div class="col-xs-1">
+                                <button type="submit" class="btn btn-primary btn-filter">Payment for supplier</button>
                             </div>
                         </form>
                     </div>
