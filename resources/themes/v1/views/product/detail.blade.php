@@ -21,42 +21,46 @@
                 <div class="slidedetail__pagi"></div>
             </div>
             <div class="col-sm-4 detail__desc">
-                <ul class="breakgum clearfix">
-                    <li><a href="{{url('/')}}">home</a></li>
-                    <li><span>/</span></li>
-                    <li><a href="{{route('product.category', ['category'=>'footwear'])}}">footwear</a></li>
-                    <li><span>/</span></li>
-                    <li>{{$product->name}}</li>
-                </ul>
-                <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
-                <p class="text-uper fontSFUMeBold fs-40 mgB-0">{{$product->name}}</p>
-                @if (!empty($details) && $details->count() > 0)
-                <div class="mgB-20">
-                    <div class="dropdown">
-                        <form id="frmAddCart" method="POST">
-                            <a href="" class="val-selected clearfix"><span class="icon-chevron-thin-down"></span><div class="get-val">choose your size</div></a>
-                            <div class="dropdown-up-style hide">
-                                <div class="dropdown__inner">
-                                    <ul>
-                                        @foreach($details as $detail)
-                                            @if (!empty($detail->size))
-                                                <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{$detail->id}}">{{$detail->size}}</span></a></li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                    <input type="hidden" name="detail" id="val-size" value="">
-                                    <input type="hidden" name="price" id="val-price" value="">
-                                    <input type="hidden" name="quantity" value="1">
-                                </div>
+                <div class="detail__desc--inner">
+                    <div class="detail__desc--fix">
+                        <ul class="breakgum clearfix">
+                            <li><a href="{{url('/')}}">home</a></li>
+                            <li><span>/</span></li>
+                            <li><a href="{{route('product.category', ['category'=>'footwear'])}}">footwear</a></li>
+                            <li><span>/</span></li>
+                            <li>{{$product->name}}</li>
+                        </ul>
+                        <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
+                        <p class="text-uper fontSFUMeBold fs-40 mgB-0">{{$product->name}}</p>
+                        @if (!empty($details) && $details->count() > 0)
+                        <div class="mgB-20">
+                            <div class="dropdown">
+                                <form id="frmAddCart" method="POST">
+                                    <a href="" class="val-selected clearfix"><span class="icon-chevron-thin-down"></span><div class="get-val">choose your size</div></a>
+                                    <div class="dropdown-up-style hide">
+                                        <div class="dropdown__inner">
+                                            <ul>
+                                                @foreach($details as $detail)
+                                                    @if (!empty($detail->size))
+                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{$detail->id}}">{{$detail->size}}</span></a></li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                            <input type="hidden" name="detail" id="val-size" value="">
+                                            <input type="hidden" name="price" id="val-price" value="">
+                                            <input type="hidden" name="quantity" value="1">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                            <button type="submit" class="btn-buy text-uper">add to cart</button>
+                        </div>
+                        @endif
+                        <div class="detail__desc--intro">
+                            <p class="title__detailproduct">Detail</p>
+                            <p>{!! $product->description !!}</p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn-buy text-uper">add to cart</button>
-                </div>
-                @endif
-                <div class="detail__desc--intro">
-                    <p class="title__detailproduct">Detail</p>
-                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
         </div>

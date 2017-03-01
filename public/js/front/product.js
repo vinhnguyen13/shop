@@ -59,7 +59,34 @@ $(document).ready(function () {
                 }else {
                     $('.slidedetail__pagi').show();
                 }
+                fixColumn(val);
             }).trigger('scroll');
+
+            function fixColumn(val) {
+                //console.log(val);
+                var wrapFix = $('.detail__desc--fix'),
+                    parentFix = $('.detail__desc--inner'),
+                    offsetWrapTop = parentFix.offset().top,
+                    hWrapFix = wrapFix.outerHeight(),
+                    hColLeft = $('.detail__img').outerHeight();
+
+                if ( (val + hWrapFix) >= hColLeft ) {
+                    console.log("bottom");
+                    wrapFix.css({
+                        top: hColLeft - hWrapFix
+                    });
+                }else if ( val + 55 > offsetWrapTop ) {
+                    wrapFix.addClass('fixed');
+                    wrapFix.css({
+                        top: val
+                    });
+                }else {
+                    wrapFix.removeClass('fixed');
+                    wrapFix.css({
+                        top: 0
+                    });
+                }
+            }
         });
 
 
