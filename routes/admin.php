@@ -77,13 +77,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         /*
          * Shipper
          */
-        Route::get('/shipper', ['uses' => 'ShipperController@index', 'as'=>'admin.shipper.index']);
-        Route::get('/shipper/create', ['uses' => 'ShipperController@create', 'as'=>'admin.shipper.create']);
-        Route::post('/shipper/store', ['uses' => 'ShipperController@store', 'as'=>'admin.shipper.store']);
-        Route::get('/shipper/edit/{id}', ['uses' => 'ShipperController@edit', 'as'=>'admin.shipper.edit']);
-        Route::get('/shipper/show/{id}', ['uses' => 'ShipperController@show', 'as'=>'admin.shipper.show']);
-        Route::get('/shipper/delete/{id}', ['uses' => 'ShipperController@delete', 'as'=>'admin.shipper.delete']);
-        Route::get('/shipper/transport', ['uses' => 'ShipperController@transport', 'as'=>'admin.shipper.transport']);
+        Route::get('/ship/shipper', ['uses' => 'ShipperController@index', 'as'=>'admin.shipper.index']);
+        Route::get('/ship/shipper/create', ['uses' => 'ShipperController@create', 'as'=>'admin.shipper.create']);
+        Route::post('/ship/shipper/store', ['uses' => 'ShipperController@store', 'as'=>'admin.shipper.store']);
+        Route::get('/ship/shipper/edit/{id}', ['uses' => 'ShipperController@edit', 'as'=>'admin.shipper.edit']);
+        Route::get('/ship/shipper/show/{id}', ['uses' => 'ShipperController@show', 'as'=>'admin.shipper.show']);
+        Route::get('/ship/shipper/delete/{id}', ['uses' => 'ShipperController@delete', 'as'=>'admin.shipper.delete']);
+        Route::get('/ship/shipper/transport', ['uses' => 'ShipperController@transport', 'as'=>'admin.shipper.transport']);
+        /*
+         * Ship Fee
+         */
+        Route::get('/ship/fee', ['uses' => 'ShipFeeController@index', 'as'=>'admin.shipFee.index']);
+        Route::get('/ship/fee/create', ['uses' => 'ShipFeeController@create', 'as'=>'admin.shipFee.create']);
+        Route::post('/ship/fee/store', ['uses' => 'ShipFeeController@store', 'as'=>'admin.shipFee.store']);
+        Route::get('/ship/fee/edit/{id}', ['uses' => 'ShipFeeController@edit', 'as'=>'admin.shipFee.edit']);
+        Route::get('/ship/fee/show/{id}', ['uses' => 'ShipFeeController@show', 'as'=>'admin.shipFee.show']);
+        Route::get('/ship/fee/delete/{id}', ['uses' => 'ShipFeeController@delete', 'as'=>'admin.shipFee.delete']);
         /*
          * Supplier
          */
