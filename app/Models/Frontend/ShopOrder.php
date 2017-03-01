@@ -53,13 +53,13 @@ class ShopOrder extends Model
                     $subtotal = 0;
                     $tax = 0;
                     $total = 0;
-                    foreach($carts as $productID_sizeID=>$item){
-                        $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_sizeID);
+                    foreach($carts as $productID_detailID=>$item){
+                        $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_detailID);
                         $productID = $product_details[0];
                         $productDetailID = $product_details[1];
                         $product = ShopProduct::find($productID);
                         $productDetail = ShopProductDetail::find($productDetailID);
-                        $product->setCart($item['sizeID'], $item['quantity']);
+                        $product->setCart($item['detailID'], $item['quantity']);
                         $price = $productDetail->price;
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
@@ -166,11 +166,11 @@ class ShopOrder extends Model
         $total = 0;
         $carts = app(ShopProduct::class)->getCart();
         if(!empty($carts)){
-            foreach($carts as $productID_sizeID=>$item){
-                $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_sizeID);
+            foreach($carts as $productID_detailID=>$item){
+                $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_detailID);
                 $product_id = $product_details[0];
                 $product = ShopProduct::find($product_id);
-                $product->setCart($item['sizeID'], $item['quantity']);
+                $product->setCart($item['detailID'], $item['quantity']);
                 $price = $product->priceWithSize();
                 $total_price += $price * $item['quantity'];
                 $total_tax += $product->taxWithPrice($price);

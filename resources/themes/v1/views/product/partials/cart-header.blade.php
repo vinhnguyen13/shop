@@ -10,7 +10,7 @@
         @foreach($cart as $item)
             <?php
             $product = App\Models\Frontend\ShopProduct::find($item['product_id']);
-            $product->setCart($item['sizeID'], $item['quantity']);
+            $product->setCart($item['detailID'], $item['quantity']);
             $price = $product->priceWithSize();
             $subtotalProduct = $price * $item['quantity'];
             $subtotal += $subtotalProduct;
