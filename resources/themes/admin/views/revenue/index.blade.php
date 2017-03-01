@@ -26,14 +26,11 @@
                             <div class="col-xs-2">
                                 {!! Form::select('', [''], null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
                             </div>
-                            <div class="col-xs-2">
-                                {!! Form::select('', [''], null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
-                            </div>
                             <div class="col-xs-1">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>
                             </div>
                             <div class="col-xs-1">
-                                <button type="submit" class="btn btn-primary btn-filter">Payment for supplier</button>
+                                <button type="submit" class="btn btn-primary btn-payment-supplier">Payment for supplier</button>
                             </div>
                         </form>
                     </div>
@@ -66,6 +63,10 @@
         $('.wrapRevenue').on('click', '.btn-filter', function (e) {
             var params = $('#revenueForm').serialize();
             $('.wrapRevenue').trigger('revenue/loadGrid', [params]);
+            return false;
+        });
+
+        $('.wrapRevenue').on('click', '.btn-payment-supplier', function (e) {
             return false;
         });
 
