@@ -17,7 +17,7 @@ $quantities =[1=>1,2,3,4,5];
     $subtotal += $subtotalProduct;
     $tax += $product->taxWithPrice($price);
 ?>
-<div class="clearfix mgB-40 checkout-product-detail" data-product-detail="{{encrypt($item['detailID'])}}">
+<div class="clearfix mgB-40 checkout__inforpro-detail" data-product-detail="{{encrypt($item['detailID'])}}">
     <div class="checkout__inforpro--img pull-left">
         <img src="{{$product->thumb()}}" alt="">
     </div>
@@ -44,7 +44,7 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
         <input type="text" placeholder="PROMO CODE">
     </div>
     <div class="overflow-all">
-        <button class="btn-apply-checkout">APPLY</button>
+        <button class="btn-apply-checkout btn-coupon">APPLY</button>
     </div>
 </div>
 <div class="clearfix mgB-10">
@@ -56,7 +56,7 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
     <p class="pull-right fontSFUBold fs-24">{{number_format($total)}} đ</p>
     <p class="fontSFUBold fs-24">TOTAL</p>
 </div>
-<button class="btn-submit-checkout">SUBMIT</button>
+<button class="btn-submit-checkout btn-complete-checkout">SUBMIT</button>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">REFUND POLICY</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">SHIPPING SERVICE INFORMATION</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">POLICY &amp; TERM</a></p>

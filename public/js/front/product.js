@@ -90,20 +90,6 @@ $(document).ready(function () {
         });
 
 
-
-    /*$('.detail__img--thumb li').eq(0).addClass('active');
-    $('.detail__img--thumb li a').on('click', function (e) {
-        e.preventDefault();
-        var i = $(this).parent().index();
-        $('.detail__img--thumb li').removeClass('active');
-        $(this).parent().addClass('active');
-        swiper.slideTo(i);
-    });
-
-    $("img.lazy").lazyload({
-        effect : "fadeIn"
-    });*/
-
     /**
      * Buy button
      */
