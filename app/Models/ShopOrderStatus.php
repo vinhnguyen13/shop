@@ -22,4 +22,34 @@ class ShopOrderStatus extends Model
     const STT_EXPIRED           = 12;
     const STT_PROCESSED         = 13;
     const STT_VOIDED            = 14;
+
+    /**
+     * @param null $id
+     * @return array
+     */
+    public static function getStatus($id = null)
+    {
+        $data = [
+            self::STT_PENDING => 'Pending',
+            self::STT_PROCESSING => 'Processing',
+            self::STT_SHIPPED => 'Shipped',
+            self::STT_COMPLETE => 'Somplete',
+            self::STT_CANCELED => 'Sanceled',
+            self::STT_DENIED => 'Denied',
+            self::STT_CANCELED_REVERSAL => 'Canceled Reversal',
+            self::STT_FAILED => 'Failed',
+            self::STT_REFUNDED => 'Refunded',
+            self::STT_REVERSED => 'Reversed',
+            self::STT_CHARGEBACK => 'Chargeback',
+            self::STT_EXPIRED => 'Expired',
+            self::STT_PROCESSED => 'Processed',
+            self::STT_VOIDED => 'Voided',
+        ];
+
+        if ($id !== null && isset($data[$id])) {
+            return $data[$id];
+        } else {
+            return $data;
+        }
+    }
 }
