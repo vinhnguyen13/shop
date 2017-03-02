@@ -110,9 +110,10 @@ $(document).ready(function () {
     $(document).on('click', '.btn-buy', function (e) {
         $(this).loading({inside_right: true});
         var form = $('#frmAddCart');
-        if(true){
+        var detail = $('input[name="detail"]').val();
+        if(detail){
             var data = form.serializeArray();
-            data.push({name: "data", value: dataRequest});
+            data.push({name: "data", detail: detail});
             $.ajax({
                 type: "post",
                 url: urlAddCart,

@@ -66,15 +66,6 @@ class ShopProduct extends Model
         return $this->hasOne(ShopTaxClass::class, 'id', 'tax_class_id');
     }
 
-    public function setCart($detailID, $quantity){
-        $this->detail = ShopProductDetail::find($detailID);
-        $this->quantity = $quantity;
-    }
-
-    public function size(){
-        return !empty($this->detail) ? $this->detail->size : '';
-    }
-
     public function taxWithPrice($price){
         if(!empty($this->tax)){
             if($this->tax->type == ShopTaxClass::TYPE_FLAT){
@@ -84,26 +75,6 @@ class ShopProduct extends Model
             }
         }
         return 0;
-    }
-
-    public function getPrice(){
-        return $this->price;
-    }
-
-    public function priceSpecial(){
-        return $this->price;
-    }
-
-    public function priceWithSize(){
-        if(!empty($this->detail)){
-            $detail = $this->detail;
-        }
-        if(!empty($detail)) {
-            $price = $detail->getPrice();
-        }else{
-            $price = $this->getPrice();
-        }
-        return $price;
     }
 
     public function categoriesName(){

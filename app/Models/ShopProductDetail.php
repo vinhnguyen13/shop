@@ -92,7 +92,7 @@ class ShopProductDetail extends Model
         if(!empty($this->price)){
             return $this->price;
         }
-        return $this->product->getPrice();
+        return false;
     }
 
     public function generateSKU(){

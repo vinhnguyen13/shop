@@ -9,12 +9,12 @@
         ?>
         @foreach($cart as $item)
             <?php
-            $product = App\Models\Frontend\ShopProduct::find($item['product_id']);
-            $product->setCart($item['detailID'], $item['quantity']);
-            $price = $product->priceWithSize();
-            $subtotalProduct = $price * $item['quantity'];
-            $subtotal += $subtotalProduct;
-            $tax += $product->taxWithPrice($price);
+                $productDetail = App\Models\Frontend\ShopProductDetail::find($item['detailID']);
+                $product = $productDetail->product;
+                $price = $productDetail->getPrice();
+                $subtotalProduct = $price * $item['quantity'];
+                $subtotal += $subtotalProduct;
+                $tax += $product->taxWithPrice($price);
             ?>
             <a href="" class="header__cart--item clearfix">
                 <div class="pull-left wrap-img">
@@ -27,7 +27,7 @@
 
                     <p class="pull-right fontSFUBold fs-12">đ {{number_format($subtotalProduct)}}</p>
 
-                    <p class="text-uper fontSFUBold fs-12">Size: {{$product->size()}} - Quantity: {{$item['quantity']}}</p>
+                    <p class="text-uper fontSFUBold fs-12">Size: {{$productDetail->size}} - Quantity: {{$item['quantity']}}</p>
                 </div>
             </a>
         @endforeach

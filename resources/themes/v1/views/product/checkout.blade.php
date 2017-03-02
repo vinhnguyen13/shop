@@ -2,6 +2,38 @@
 
 @section('content')
     <div class="container detail wrap-checkout">
+        <div class="checkout__inner clearfix">
+            @if(!empty($cart))
+            <div class="checkout__inforpro">
+                @include('product.partials.checkout-products')
+            </div>
+            <div class="checkout__infor">
+                <div class="clearfix">
+                    <p class="checkout__infor--date">DATE : 22 FEBRUARY , 2017</p>
+                    <div class="checkout__infor--addpress">
+                        <p class="fontSFUBold letter-2">GLAB.VN</p>
+                        <p class="fontSFURe letter-1">135/58 Trần Hưng Đạo , Quận 1<br>
+                            HCM city , Việt Nam .</p>
+                        <p class="fontSFURe">glab.vn@gmail.com</p>
+                        <p class="fontSFURe">094 537 88 09</p>
+                    </div>
+                </div>
+                @include('product.partials.checkout-info')
+                @include('product.partials.checkout-payment')
+            </div>
+            @else
+                <div class="alert alert-info fade in alert-dismissable">
+                    <h4><i class="icon fa fa-warning"></i> Thông báo!</h4>
+                    Không có sản phẩm nào trong giỏ hàng.
+                </div>
+                <a href="{{url('/')}}" class="btn btn-block btn-success">Tiếp tục mua hàng</a>
+            @endif
+        </div>
+    </div>
+
+
+
+    <div class="container detail wrap-checkout" style="display: none">
         <div class="checkout__inner">
             @if(!empty($cart))
                 <div class="clearfix mgB-20">
@@ -16,7 +48,6 @@
                     <div class="col-md-7">
                         <form method="post" action="" class="form-horizontal" id="orderForm">
                             {{ csrf_field() }}
-                            {{--@include('product.partials.cart-products')--}}
                             @include('product.partials.cart-shipping')
                             @include('product.partials.cart-payment')
                             <div class="alert alert-danger alert-dismissable hide">
@@ -34,7 +65,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="checkout__infor">
-                            @include('product.partials.cart-order')
+                            @include('product.partials.checkout-products')
                         </div>
                     </div>
                 </div>

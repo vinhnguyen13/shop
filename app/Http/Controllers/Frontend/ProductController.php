@@ -66,11 +66,10 @@ class ProductController extends Controller
 
     public function cartAdd(Request $request)
     {
-        $data = $request->get('data');
-        $pid = decrypt($data);
         $quantity = $request->get('quantity');
         $detailID = $request->get('detail');
-        $cart = app(ShopProduct::class)->addCart($pid, $detailID, $quantity);
+        $detailID = decrypt($detailID);
+        $cart = app(ShopProduct::class)->addCart($detailID, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];
@@ -78,17 +77,16 @@ class ProductController extends Controller
 
     public function cartRemove(Request $request)
     {
-        $data = $request->get('data');
-        $pid = decrypt($data);
         $detailID = $request->get('detail');
-        $cart = app(ShopProduct::class)->removeCart($pid, $detailID);
+        $detailID = decrypt($detailID);
+        $cart = app(ShopProduct::class)->removeCart($detailID);
         return $cart;
     }
 
     public function cartUpdate(Request $request)
     {
         $cart = app(ShopProduct::class)->getCart();
-        $html = view('product.partials.cart-order', compact('cart'))->render();
+        $html = view('product.partials.checkout-products', compact('cart'))->render();
         return ['html'=>$html];
     }
 

@@ -1,10 +1,8 @@
 $(document).ready(function(){
     var textButtonStep = ['Đặt hàng', 'Thanh toán'];
     var wrapMainCheckout = 'wrap-checkout';
-    var wrapCheckoutInfo = 'checkout__infor';
+    var wrapCheckoutInfo = 'checkout__inforpro';
     var stepCheckout = 'step-checkout';
-    var paymentWrapBank = 'checkout__slect--payment-bank';
-    var paymentDropdownBank = 'checkout__bank';
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
 
@@ -42,37 +40,22 @@ $(document).ready(function(){
     $('.'+wrapMainCheckout).on('click', '.removeCart', function(){
         $(this).loading({inside_right: true});
         $(this).closest('tr').remove();
-        var pid = $(this).closest('tr').attr('data-product-id');
-        var detail = $(this).closest('tr').attr('data-product-detail');
-        var timer = 0;
-        timer = setTimeout(function () {
-            $.ajax({
-                type: "post",
-                url: urlRemoveCart,
-                data: {data: pid, detail: detail},
-                success: function (data) {
-                    $('body').loading({remove: true});
-                    location.reload(true);
-                }
-            });
-        }, 500);
-        return false;
-    });
-
-    $('.'+wrapMainCheckout).on('click', '.checkout__slect--payment ul li input', function(){
-        if($(this).is(':checked')) {
-            var _index = $(this).closest('li').index();
-            if(_index !== 0){
-                $('.'+paymentWrapBank).removeClass('hide');
-                $('.'+paymentDropdownBank).addClass('hide');
-                $('.'+paymentDropdownBank+':eq('+(_index-1)+')').removeClass('hide');
-            }else{
-                $('.'+paymentWrapBank).addClass('hide');
-                $('.'+paymentDropdownBank).addClass('hide');
-            }
-        } else {
-            console.log(9);
+        var detail = $(this).closest('.checkout-product-detail').attr('data-product-detail');
+        if(detail) {
+            var timer = 0;
+            timer = setTimeout(function () {
+                $.ajax({
+                    type: "post",
+                    url: urlRemoveCart,
+                    data: {detail: detail},
+                    success: function (data) {
+                        $('body').loading({remove: true});
+                        location.reload(true);
+                    }
+                });
+            }, 500);
         }
+        return false;
     });
 
     $('.'+wrapMainCheckout).on('change', '.select-location', function(){
@@ -166,20 +149,20 @@ $(document).ready(function(){
     });
 
     $('.'+wrapCheckoutInfo).on('change', '.quantity_select', function(){
-        var pid = $(this).closest('tr').attr('data-product-id');
-        var detail = $(this).closest('tr').attr('data-product-detail');
+        var detail = $(this).closest('.checkout-product-detail').attr('data-product-detail');
         var quantity = $(this).val();
-        $('.'+wrapMainCheckout).trigger('checkout/func/updateCart', [pid, detail, quantity]);
+        console.log(detail);
+        $('.'+wrapMainCheckout).trigger('checkout/func/updateCart', [detail, quantity]);
     });
 
-    $('.'+wrapMainCheckout).bind('checkout/func/updateCart', function (event, pid, detail, quantity) {
+    $('.'+wrapMainCheckout).bind('checkout/func/updateCart', function (event, detail, quantity) {
         $(this).loading({inside_right: true});
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
                 url: urlAddCart,
-                data: {data: pid, detail: detail, quantity: quantity},
+                data: {detail: detail, quantity: quantity},
                 success: function (data) {
                     if(data.total > 0){
                         if($('.header__cart .val-selected .header__cart--num').length > 0) {

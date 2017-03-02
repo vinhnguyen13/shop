@@ -42,7 +42,7 @@
                                             <ul>
                                                 @foreach($details as $detail)
                                                     @if (!empty($detail->size))
-                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{$detail->id}}">{{$detail->size}}</span></a></li>
+                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -81,7 +81,6 @@
     <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
     <script>
         var urlAddCart = "{{route('product.cart.add')}}";
-        var dataRequest = "{{encrypt($product->id)}}";
     </script>
     <script type="text/javascript" src="{!! asset('js/front/product.js')  !!}"></script>
 @endpush
