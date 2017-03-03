@@ -107,4 +107,12 @@ class ShopProductDetail extends Model
             $this->sku = $time.$splitCode.$supplier.$splitCode.$sku_producer.$splitCode.$size.$splitCode.$index;
         }
     }
+
+    public function isOrdered(){
+        $exist = ShopOrderProduct::query()->where(['product_detail_id'=>$this->id])->exists();
+        if(!empty($exist)){
+            return true;
+        }
+        return false;
+    }
 }

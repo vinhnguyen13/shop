@@ -136,8 +136,6 @@ class ShopProduct extends Model
 
     public function getDetailsGroupBySupplier(){
         $details = ShopProductDetail::query()->select([
-            DB::raw('count(*) AS total'),
-            DB::raw('CONCAT(supplier_id, "-", size, "-", new_status) AS `group_name`'),
             'id',
             'size',
             'supplier_id',
@@ -145,21 +143,22 @@ class ShopProduct extends Model
             'price',
             'new_status',
         ])
-            ->where(['product_id'=>$this->id])->groupBy(DB::raw("group_name"))->orderBy('size')->get();
+            ->where(['product_id'=>$this->id, 'stock_status_id'=>1])->orderBy('created_at', 'DESC')->get();
         return $details;
     }
 
     public function getDetailsGroupBySize(){
+        $sub = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>1])->orderBy('created_at', 'ASC');
         $details = ShopProductDetail::query()->select([
-            DB::raw('count(*) AS total'),
             'id',
             'size',
             'supplier_id',
             'price_in',
             'price',
             'new_status',
-        ])
-            ->where(['product_id'=>$this->id])->groupBy(DB::raw("size"))->orderBy('size')->get();
+        ])->from(DB::raw("(".$sub->toSql().") as `sub`"))
+            ->mergeBindings($sub->getQuery())
+            ->groupBy(DB::raw("size"))->orderBy('size')->get();
         return $details;
     }
 

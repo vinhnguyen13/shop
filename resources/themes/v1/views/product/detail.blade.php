@@ -42,7 +42,7 @@
                                             <ul>
                                                 @foreach($details as $detail)
                                                     @if (!empty($detail->size))
-                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
+                                                        <li>{{$detail->id}}<a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>

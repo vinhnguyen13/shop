@@ -17,6 +17,7 @@
             <th>Payment</th>
             <th>Revenue</th>
             <th>Consignment Payment</th>
+            <th>Status Payment</th>
         </tr>
         @foreach($orders as $order)
             <?php
@@ -46,6 +47,7 @@
                 <td>{{number_format($order->total)}}</td>
                 <td>{!! $revenueHtml !!}</td>
                 <td>{!! $consignmentPaymentHtml !!}</td>
+                <td></td>
             </tr>
         @endforeach
         <tr>
@@ -53,6 +55,7 @@
             <td class="text-bold">{{number_format($paymentTotal)}}</td>
             <td class="text-bold">{{number_format($revenueTotal)}}</td>
             <td class="text-bold">{{number_format($consignmentPaymentTotal)}}</td>
+            <td></td>
         </tr>
         </tbody>
     </table>
