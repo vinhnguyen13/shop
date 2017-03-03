@@ -24,7 +24,7 @@
                                 <input type="text" class="form-control supplier" placeholder="SUPPLIER" name="supplier">
                             </div>
                             <div class="col-xs-2">
-                                {!! Form::select('', \App\Models\ShopOrderStatus::getStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
+                                {!! Form::select('', app(\App\Models\ShopProductDetail::class)->getPayToSupplierStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
                             </div>
                             <div class="col-xs-1">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>

@@ -18,6 +18,12 @@ class ShopProductDetail extends Model
     const STOCK_OUT_OF_STOCK = 3;
     const STOCK_SOME_DAYS = 4;
 
+    const PAY_SUPPLIER_START = 0;
+    const PAY_SUPPLIER_PENDING = 1;
+    const PAY_SUPPLIER_PAID = 2;
+    const PAY_SUPPLIER_PROBLEM = 3;
+    const PAY_SUPPLIER_PAYMENT_DUE_DATE = -1;
+
     /**
      * The "booting" method of the model.
      *
@@ -75,6 +81,23 @@ class ShopProductDetail extends Model
             self::STOCK_PRE_ORDER => trans('Pre Order'),
             self::STOCK_OUT_OF_STOCK => trans('Out Of Stock'),
             self::STOCK_SOME_DAYS => trans('Some Days'),
+        ];
+
+        if (isset($data[$id])) {
+            return $data[$id];
+        } else {
+            return $data;
+        }
+    }
+
+    public function getPayToSupplierStatus($id = null)
+    {
+        $data = [
+            self::PAY_SUPPLIER_START => trans('Start'),
+            self::PAY_SUPPLIER_PENDING => trans('Pending'),
+            self::PAY_SUPPLIER_PAYMENT_DUE_DATE => trans('Payment Due Date'),
+            self::PAY_SUPPLIER_PAID => trans('Paid'),
+            self::PAY_SUPPLIER_PROBLEM => trans('Problem'),
         ];
 
         if (isset($data[$id])) {

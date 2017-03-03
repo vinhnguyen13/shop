@@ -11,13 +11,13 @@
             <th>SKU</th>
             <th>Supplier</th>
             <th>Product</th>
-            <th>Size</th>
-            <th>QTY</th>
+            <th width="2%">Size</th>
+            <th width="2%">QTY</th>
             <th>Price</th>
             <th>Payment</th>
             <th>Revenue</th>
             <th>Consignment Payment</th>
-            <th>Status Payment</th>
+            <th width="5%" title="Pay to supplier status">Payment Status</th>
         </tr>
         @foreach($orders as $order)
             <?php
@@ -38,7 +38,7 @@
             <tr>
                 <td>{{$order->id}}</td>
                 <td>{{$date}}</td>
-                <td>{{$order->sku}}</td>
+                <td><a href="{{route('admin.product-detail.index', ['id'=>$order->product_detail_id])}}">{{$order->sku}}</a></td>
                 <td>{!! $supplierHtml !!}</td>
                 <td>{{$order->product_name}}</td>
                 <td>{{$order->size}}</td>
@@ -47,7 +47,7 @@
                 <td>{{number_format($order->total)}}</td>
                 <td>{!! $revenueHtml !!}</td>
                 <td>{!! $consignmentPaymentHtml !!}</td>
-                <td></td>
+                <td>{!! app(\App\Models\ShopProductDetail::class)->getPayToSupplierStatus($order->productDetail->pay_to_supplier_status) !!}</td>
             </tr>
         @endforeach
         <tr>
