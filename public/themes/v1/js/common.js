@@ -12,7 +12,7 @@ $(document).ready(function () {
 		hHeader = $('header').outerHeight();
 		hSlideHome = hWindow - hHeader;
 
-		$('.slidehomepage, .userauth').height(hSlideHome);
+		$('.slidehomepage-1,.slidehomepage-2, .userauth').height(hSlideHome);
 
 	}).trigger('resize');
 	

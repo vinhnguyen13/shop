@@ -371,12 +371,7 @@ class ShopProduct extends MainShopProduct
         if(!empty($productDetailID)){
             $productDetail = ShopProductDetail::query()->where(['id'=>$productDetailID])->first();
             if(!empty($productDetail->attributes)) {
-                ShopProductDetail::query()->where([
-                    'product_id' => $productDetail->product_id,
-                    'supplier_id' => $productDetail->supplier_id,
-                    'size' => $productDetail->size,
-                    'new_status' => $productDetail->new_status
-                ])->update($attributes);
+                $productDetail->update($data);
             }
         }else{
             if(!empty($data['total'])){

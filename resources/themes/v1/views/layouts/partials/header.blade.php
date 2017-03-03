@@ -41,7 +41,7 @@
         </div>
         <div class="text-center lh-50 header__logo">
             <span>logo</span>
-            <a href="{{url('/')}}"><img src="/themes/v1/icons/logo-header.png" alt=""/></a>
+            <a href="{{url('/')}}"><img src="/themes/v1/icons/logo.svg" alt=""/></a>
         </div>
     </div>
 </header>

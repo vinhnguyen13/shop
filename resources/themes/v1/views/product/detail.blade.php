@@ -31,7 +31,7 @@
                             <li>{{$product->name}}</li>
                         </ul>
                         <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
-                        <p class="text-uper fontSFUMeBold fs-40 mgB-0">{{$product->name}}</p>
+                        <p class="text-uper fontSFUMeBold fs-40 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
                         @if (!empty($details) && $details->count() > 0)
                         <div class="mgB-20">
                             <div class="dropdown">
@@ -42,7 +42,7 @@
                                             <ul>
                                                 @foreach($details as $detail)
                                                     @if (!empty($detail->size))
-                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
+                                                        <li>{{$detail->id}}<a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>

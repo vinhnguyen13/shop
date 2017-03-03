@@ -19,6 +19,11 @@ class ShopOrderProduct extends Model
         return $this->hasOne('App\Models\ShopProduct', 'id', 'product_id');
     }
 
+    public function productDetail()
+    {
+        return $this->hasOne('App\Models\ShopProductDetail', 'id', 'product_detail_id');
+    }
+
     public function supplier()
     {
         return $this->hasOne('App\Models\ShopSupplier', 'id', 'supplier_id');

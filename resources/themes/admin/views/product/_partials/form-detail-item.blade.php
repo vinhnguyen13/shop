@@ -17,8 +17,7 @@
         <input type="radio" name="product_detail[{{$key}}][new_status]" value="0" {{($detail->new_status==0) ? 'checked="checked"' : ''}}/> Used
     </td>
     <td class="text-right">
-        {{$detail->total}}
-        <a href="javascript:;" onclick="addMoreProductDetailWithSupplier({{$key}});" data-toggle="tooltip" title="" class="" data-original-title="Add Detail"><i class="fa fa-plus-circle"></i></a>
+        1
     </td>
     <td class="text-left">
         <button type="button" onclick="removeProductDetail({{$key}});" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button>

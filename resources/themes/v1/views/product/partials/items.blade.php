@@ -12,7 +12,7 @@
                     </div>
                 </a>
                 <div class="product__item--infor">
-                    <div class="text-center mgB-20">
+                    <div class="text-center mgB-5">
                         @if (!empty($details) && count($details) > 0)
                             <div class="size-item">
                                 @foreach($details as $detail)
