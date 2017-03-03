@@ -123,7 +123,7 @@ class ShopProduct extends Model
 
     public function thumb($size = 'medium')
     {
-        $url = '/images/default-shoes.png';
+        $url = '/images/default-shoes.jpg';
         $imageService = app(ImageService::class);
         $propertyMedia = app(ShopProduct::class)->propertyMedias();
         $imageService->setSize($propertyMedia['sizes']);
