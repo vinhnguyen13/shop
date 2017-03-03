@@ -231,7 +231,6 @@ body.active:before {
 
 header {
     padding-bottom: 3px;
-    border-bottom: 1px solid #ccc;
     position: absolute;
     transition: all .3s ease-out, transform .3s ease-out;
     top: 0;
