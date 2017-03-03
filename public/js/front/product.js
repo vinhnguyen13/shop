@@ -1,8 +1,19 @@
 $(document).ready(function () {
     $('.detail__desc .dropdown').dropdown({
+        beforeOpen: function () {
+            var hSlim = $('.detail__desc .dropdown ul').outerHeight();
+            if ( hSlim > 300 ) {
+                $('.detail__desc .dropdown .dropdown__inner').slimScroll({
+                    height: '300',
+                    railVisible: true,
+                    alwaysVisible: true
+                });
+            }
+        },
         closeWhenSelectVal: function (item, dropItem) {
             $('#val-size').val( item.find('.detail__size').data('value') );
             $('#val-price').val( item.find('.detail__price').data('value') );
+
             var itemSizeClone = item.find('.detail__size').clone(),
                 itemPriceClone = item.find('.detail__price').clone();
             itemSizeClone.prepend("<span>Size</span>");
@@ -11,12 +22,6 @@ $(document).ready(function () {
             dropItem.find('.get-val').prepend(itemPriceClone);
             dropItem.find('.get-val').append(itemSizeClone);
         }
-    });
-
-    $('.detail__desc .dropdown .dropdown__inner').slimScroll({
-        height: '300px',
-        railVisible: true,
-        alwaysVisible: true
     });
 
     $("img.lazy").lazyload({
