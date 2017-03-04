@@ -1,5 +1,5 @@
 #wrapper {
-    padding-top: 54px;
+    padding-top: 50px;
 }
 
 body.active {
@@ -121,19 +121,19 @@ body.active:before {
     right: 0;
     border: none;
     background: none;
-    padding: 6px 10px;
+    padding: 8px 10px;
 }
 
 .icon-slice9 {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .icon-slice8 {
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .icon-slice6 {
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .swiper-button-prev,
@@ -141,18 +141,30 @@ body.active:before {
     margin: -16px 0 0 0;
     width: 33px;
     height: 33px;
+    z-index: 100;
+    background-image: inherit;
+    color: #000;
+    font-size: 43px;
 }
 
 .swiper-button-prev {
-    background: url(../icons/slice2.png) no-repeat top left;
     left: 12%;
+}
+.swiper-button-prev:before {
+    content: "\e910";
 }
 
 .swiper-button-next {
-    background: url(../icons/slice3.png) no-repeat top left;
     right: 12%;
 }
 
+.swiper-button-next:before {
+    content: "\e911";
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    color: #6c6c6c;
+}
 .swiper-pagination-bullet {
     background: #505050;
     border-radius: 0;
@@ -230,7 +242,6 @@ body.active:before {
 /*---------End Common-------------*/
 
 header {
-    padding-bottom: 3px;
     position: absolute;
     transition: all .3s ease-out, transform .3s ease-out;
     top: 0;
@@ -328,16 +339,14 @@ header.active {
 }
 
 .header__cart--num {
-    position: absolute;
-    top: -9px;
-    right: -10px;
-    font-size: 10px;
-    background: red;
+    font-size: 11px;
+    color: #000;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
     line-height: 100%;
-    padding: 4px 2px 3px;
-    color: #fff;
-    text-shadow: 1px 1px 1px #797979;
-    border-radius: 3px;
+    position: relative;
+    top: -2px;
 }
 
 .header__cart .icon-cart {
@@ -511,8 +520,8 @@ header.active {
 
 #menu-open {
     position: relative;
-    width: 22px;
-    height: 30px;
+    width: 19px;
+    height: 16px;
     padding: 0;
     cursor: pointer;
     overflow: hidden;
@@ -669,6 +678,7 @@ footer {
     width: 100%;
     text-align: center;
     transform: translate(-50%, -50%);
+    z-index: 99;
 }
 
 .slidehomepage .desc h2 {
@@ -693,11 +703,19 @@ footer {
 .product__item {
     margin: 0;
     position: relative;
-    height: 209px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: strectch;
+    align-items: strectch;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
 }
 
 .product__item--pic {
-    height: 100%;
 }
 
 .product__item--pic a {
@@ -1527,4 +1545,18 @@ label.frm input[type=radio] {
 }
 .menu__footer a:last-child {
     border-right: none;
+}
+.products.row {
+    margin: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: left;
+    justify-content: left;
+}
+.products.row > div {
+    float: none;
+    display: -ms-flexbox;
+    display: flex;
 }
