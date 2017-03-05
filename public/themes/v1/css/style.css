@@ -88,10 +88,6 @@ body.active:before {
     position: relative;
 }
 
-.header__right .frm-icon.expand-search {
-    width: 250px;
-}
-
 .frm-icon input {
     border: 1px solid #c3c3c3;
     padding: 5px 35px 5px 10px;
@@ -105,14 +101,14 @@ body.active:before {
     box-shadow: 0px 0px 1px rgba(60, 60, 60, 0.37);
 }
 
-#search .frm-icon input {
+.search .frm-icon input {
     border: none;
     box-shadow: none;
     height: 32px;
 }
 
-#search .frm-icon input:focus {
-    box-shadow: 0px 0px 1px rgba(60, 60, 60, 0.37);
+.search .frm-icon input:focus {
+    border: 1px solid rgba(176, 176, 176, 0.17);
 }
 
 .frm-icon .icon-frm {
@@ -284,11 +280,10 @@ header.active {
     font-size: 30px;
 }
 
-#search {
+.search {
     line-height: 1.4;
     display: inline-block;
     vertical-align: middle;
-    position: relative;
 }
 
 .header__cart {
@@ -302,6 +297,7 @@ header.active {
     border-radius: 3px;
     line-height: 18px;
     width: 500px;
+    top: 35px;
 }
 
 .header__cart .dropdown__inner h2 {
@@ -369,10 +365,9 @@ header.active {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: -1;
 }
 
-.header__right,
 .header__left {
     position: relative;
     z-index: 2;
@@ -1053,9 +1048,9 @@ footer {
 
 .userauth__btn {
     width: 100%;
-    padding: 8px 0;
+    padding: 15px 0;
     border: none;
-    background: #4d4d4d;
+    background: #262626;
     text-transform: uppercase;
     font-family: 'sfu_daxcondensedmedium';
     color: #fff;
@@ -1073,7 +1068,7 @@ footer {
 }
 
 .header__left .dropdown li {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     padding: 0 10px;
 }
 
@@ -1084,6 +1079,8 @@ footer {
     line-height: 100%;
     text-align: center;
     display: block;
+    font-family: "sfu_daxcondensedmedium";
+    font-weight: bold;
 }
 
 .header__left .dropdown a span {
@@ -1622,4 +1619,17 @@ label.frm input[type=radio] {
 .pagination__glab li a .icon-n-e-x-x-t,
 .pagination__glab li a .icon-b-a-c-k {
     font-size: 14px;
+}
+#popup-log-in .modal-dialog {
+    
+}
+button.close span {
+    font-size: 35px;
+}
+button.close {
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
 }
