@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="pull-right lh-50 header__right">
-            <form id="search">
+            <form id="search" class="search">
                 <a href="" class="header__right--mbsearch"><span class="icon-search"></span></a>
 
                 <div class="frm-icon">
