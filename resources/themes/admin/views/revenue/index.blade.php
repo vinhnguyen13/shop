@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-qrcode" data-backdrop="static">
+    <div class="modal fade" id="modal-relogin" data-backdrop="static">
         <div class="modal-dialog" style="width: 350px;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -58,6 +58,27 @@
                     </p>
                     <input type="text" class="form-control date" placeholder="Email" name="to_date">
                     <input type="text" class="form-control date" placeholder="Password" name="to_date">
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-print" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-consignment" data-backdrop="static">
+        <div class="modal-dialog" style="width: 100%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-book"></i> Thanh toán cho CH03 </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="col-xs-12">
+                            @include('revenue.partials.grid')
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button id="btn-print" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Sign In</button>
@@ -89,7 +110,8 @@
         });
 
         $('.wrapRevenue').on('click', '.btn-payment-supplier', function (e) {
-            $('#modal-qrcode').modal('show');
+//            $('#modal-relogin').modal('show');
+            $('#modal-consignment').modal('show');
             return false;
         });
 
