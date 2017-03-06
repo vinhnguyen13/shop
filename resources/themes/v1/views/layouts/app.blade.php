@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/bootstrap.min.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/reset.min.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/font.css?v='.$version_deploy) }}">
-    <link rel="stylesheet" href="{{ asset('/themes/v1/css/style.css?v='.$version_deploy) }}">
     @stack('styles')
+    <link rel="stylesheet" href="{{ asset('/themes/v1/css/style.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/responsive.css?v='.$version_deploy) }}">
 </head>
 <body>

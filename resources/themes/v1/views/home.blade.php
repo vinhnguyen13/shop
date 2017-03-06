@@ -19,7 +19,6 @@
             </div>
         </div>
     </div>
-    <div class="swiper-pagination"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
@@ -43,7 +42,6 @@
             </div>
         </div>
     </div>
-    <div class="swiper-pagination"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
@@ -157,11 +155,8 @@
             });
 
             var swiper = new Swiper('.slidehomepage', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true,
                 nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                autoplay: 4000
+                prevButton: '.swiper-button-prev'
             });
         });
     </script>
