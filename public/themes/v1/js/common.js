@@ -17,15 +17,24 @@ $(document).ready(function () {
 	}).trigger('resize');
 	
 	$('#menu-open').click(function (e) {
-		$('#menu-open, #menu, html, body').addClass('active');
-	});
+        $('#menu').addClass('active');
+        setTimeout(function () {
+            $('body').addClass('menu-left');
+        }, 100);
+    });
 
 	$('#menu-close').click(function () {
-		$('#menu-open, #menu, html, body').removeClass('active');
+		$('body').removeClass('menu-left');
+        setTimeout(function () {
+            $('#menu').removeClass('active');
+        }, 100);
 	});
 
 	hideElOutSite('#menu, #menu-open', function() {
-		$('#menu-open, #menu, html, body').removeClass('active');
+		$('body').removeClass('menu-left');
+        setTimeout(function () {
+            $('#menu').removeClass('active');
+        }, 100);
 	});
 
 	var flagCheck = false, timeoutRemove;

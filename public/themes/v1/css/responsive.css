@@ -18,7 +18,7 @@
 }
 @media (min-width: 1600px) {
     .products.row > div {
-        width: 20%;
+        /* width: 20%; */
     }
     .wrap-checkout {
         width: 70% !important;
@@ -198,6 +198,13 @@
     }
     .header__left .dropdown {
         position: static;
+        display: inline-block;
+    }
+    .auth__desktop {
+        display: none;
+    }
+    #menu-open {
+        margin-top: 3px;
     }
     .header__left {
         position: static;
