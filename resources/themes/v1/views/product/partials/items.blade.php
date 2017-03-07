@@ -26,9 +26,12 @@
                         @endif
                     </div>
                     <div class="clearfix">
-                        <p class="fs-18 fontSFUBold pull-right">{{number_format($product->price, 0)}}</p>
-                        <p class="product-name text-uper">{{$product->name}}</p>
-                        <p class="product-type text-uper">{{$product->color}}</p>
+                        <div class="pull-left w-70">
+                            <p class="product-name text-uper">{{$product->name}}</p>
+                            <p class="product-type text-uper">{{$product->color}}</p>
+                        </div>
+                        <p class="product-price">đ {{number_format($product->price, 0)}}</p>
+
                     </div>
                 </div>
             </div>
