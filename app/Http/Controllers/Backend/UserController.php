@@ -77,8 +77,8 @@ class UserController extends Controller
     public function deleteFile() {
         $name = Input::get('name');
         if($name) {
-            $path = Profile::uploadAvatarFolder. "/" . $name;
-            $thumb_path = Profile::uploadAvatarFolder. "/thumb_" . $name;
+            $path = UserProfile::uploadAvatarFolder. "/" . $name;
+            $thumb_path = UserProfile::uploadAvatarFolder. "/thumb_" . $name;
             $visibility_path = Storage::disk('public')->exists($path);
             $res1 = false;
             if($visibility_path)
@@ -98,18 +98,18 @@ class UserController extends Controller
         if($file = Input::file('avatar')) {
             $name = uniqid() . '.' . $file->getClientOriginalExtension();
             $image = Image::make($file);
-            $path = Profile::uploadAvatarFolder. "/temp/". $name;
+            $path = UserProfile::uploadAvatarFolder. "/temp/". $name;
             Storage::disk('public')->put($path, $image->stream());
 
             $thumb_name = "thumb_". $name;
             $thumb_image = $image->resize(150, 150);
-            $thumb_path = Profile::uploadAvatarFolder. "/temp/". $thumb_name;
+            $thumb_path = UserProfile::uploadAvatarFolder. "/temp/". $thumb_name;
             Storage::disk('public')->put($thumb_path, $thumb_image->stream());
             $response = [
                 'name' => $name,
-                'url' => Storage::url(Profile::uploadAvatarFolder. "/temp/". $name),
+                'url' => Storage::url(UserProfile::uploadAvatarFolder. "/temp/". $name),
                 'deleteUrl' => route('user.deleteTempFile', ['_token' => csrf_token(), 'name' => $name]),
-                'thumbnailUrl' => Storage::url(Profile::uploadAvatarFolder. "/temp/". $thumb_name),
+                'thumbnailUrl' => Storage::url(UserProfile::uploadAvatarFolder. "/temp/". $thumb_name),
                 'deleteType' => 'DELETE',
                 'input' => [
                     'name' => 'avatar[]',
@@ -125,8 +125,8 @@ class UserController extends Controller
     public function deleteTempFile() {
         $name = Input::get('name');
         if($name) {
-            $path = Profile::uploadAvatarFolder. "/temp/" . $name;
-            $thumb_path = Profile::uploadAvatarFolder. "/temp/thumb_" . $name;
+            $path = UserProfile::uploadAvatarFolder. "/temp/" . $name;
+            $thumb_path = UserProfile::uploadAvatarFolder. "/temp/thumb_" . $name;
             $visibility_path = Storage::disk('public')->exists($path);
             $res1 = false;
             if($visibility_path)
@@ -139,6 +139,19 @@ class UserController extends Controller
             return ['delete_file' => $res1, 'delete_thumb_file' => $res2];
         }
         return [];
+    }
+
+    public function verify(Request $request)
+    {
+        $input = Input::all();
+        if ($request->ajax()) {
+            $user = User::query()->where('email', $input['email'])->first();
+            if( !empty($user->id) &&  \Hash::check( $input['password'], $user->getAuthPassword()) !== false) {
+                // Password is matching
+                return ['code'=>0, 'message'=>trans('user.login.success')];
+            }
+        }
+        return ['code'=>1, 'message'=>trans('user.login.not_success')];;
     }
 
 }

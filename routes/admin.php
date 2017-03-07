@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/user/edit/{id}', ['uses' => 'UserController@edit', 'as'=>'admin.user.edit'])/*->middleware('can:update,App\Modules\Backend\Models\User')*/;
         Route::get('/user/delete/{id}', ['uses' => 'UserController@delete', 'as'=>'admin.user.delete']);
         Route::get('/user/show/{id}', ['uses' => 'UserController@show', 'as'=>'admin.user.show']);
+        Route::post('/user/verify', ['uses' => 'UserController@verify', 'as'=>'admin.user.verify']);
         /*
          * Categories
          */

@@ -9,7 +9,7 @@ class ShopProductDetail extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
-    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note'];
+    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note', 'pay_to_supplier_status'];
 
     const SPLIT_CODE = '-';
 
@@ -23,6 +23,8 @@ class ShopProductDetail extends Model
     const PAY_SUPPLIER_PAID = 2;
     const PAY_SUPPLIER_PROBLEM = 3;
     const PAY_SUPPLIER_PAYMENT_DUE_DATE = -1;
+
+    const PAYMENT_DUE_DATE = 4;
 
     /**
      * The "booting" method of the model.

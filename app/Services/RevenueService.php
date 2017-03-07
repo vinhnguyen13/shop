@@ -26,6 +26,10 @@ class RevenueService
 
     public function gridPaymentConsignment(){
         $query = ShopOrderProduct::query();
+        $query->join('shop_product_detail', function($join){
+            $join->on('shop_product_detail.id', '=', 'shop_order_product.product_detail_id')
+                ->where('pay_to_supplier_status', '=', ShopProductDetail::PAY_SUPPLIER_PENDING);
+        });
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }
