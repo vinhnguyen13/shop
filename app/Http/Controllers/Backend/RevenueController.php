@@ -9,22 +9,22 @@ class RevenueController extends Controller
 {
     public function index(Request $request)
     {
-        $orders = app(RevenueService::class)->gridOrders();
+        $orders = app(RevenueService::class)->gridRevenue();
         if ($request->ajax()) {
             $all = \Input::all();
-            return view('revenue.partials.grid', compact('orders'));
+            return view('revenue.partials.grid-revenue', compact('orders'));
         }else{
             return view('revenue.index', compact('orders'));
         }
     }
 
-    public function index2(Request $request)
+    public function getPaymentConsignment(Request $request)
     {
-        $grid = app(RevenueService::class)->gridIndex();
+        $orders = app(RevenueService::class)->gridPaymentConsignment();
         if ($request->ajax()) {
-            return $grid->table();
-        }else{
-            return view('revenue.index', compact('grid'));
+            $all = \Input::all();
+            return view('revenue.partials.grid-payment-consignment', compact('orders'));
         }
     }
+
 }

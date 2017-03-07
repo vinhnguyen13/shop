@@ -37,7 +37,7 @@
                 </div><!-- /.box-body -->
             </div>
             <div class="box-body-grid">
-                @include('revenue.partials.grid')
+                @include('revenue.partials.grid-revenue')
             </div>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix">
@@ -76,7 +76,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="col-xs-12">
-                            @include('revenue.partials.grid')
+                            @include('revenue.partials.grid-payment-consignment')
                         </div>
                     </div>
                 </div>
