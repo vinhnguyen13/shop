@@ -40,10 +40,7 @@ class RevenueService
 
     public function gridPaymentConsignment($params){
         $query = ShopOrderProduct::query();
-        $query->join('shop_product_detail', function($join){
-            $join->on('shop_product_detail.id', '=', 'shop_order_product.product_detail_id')
-                ->where('debt_status', '=', ShopProductDetail::DEBT_PENDING);
-        });
+        $query->where('debt_status', '=', ShopProductDetail::DEBT_PENDING)->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -4 DAY)'));
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }
