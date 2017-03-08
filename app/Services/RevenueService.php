@@ -31,15 +31,15 @@ class RevenueService
         return $orders;
     }
 
-    public function gridPaymentConsignment($params){
+    public function gridDebtPaymentDueDate($params){
         $query = ShopOrderProduct::query();
-        $query->where('debt_status', '=', ShopProductDetail::DEBT_PENDING)->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -4 DAY)'));
+        $query->where('debt_status', '=', ShopProductDetail::DEBT_DUE_DATE);
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }
 
     public function updateDebtDueDate(){
         $query = ShopOrderProduct::query();
-        $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -'.\App\Models\ShopProductDetail::PAYMENT_DUE_DATE.' DAY)'))->update(['debt_status'=>ShopProductDetail::DEBT_DUE_DATE]);
+        $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -'.ShopProductDetail::DUE_DAYS.' DAY)'))->update(['debt_status'=>ShopProductDetail::DEBT_DUE_DATE]);
     }
 }

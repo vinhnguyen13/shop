@@ -20,10 +20,10 @@ class RevenueController extends Controller
         }
     }
 
-    public function getPaymentConsignment(Request $request)
+    public function getDebtPaymentDueDate(Request $request)
     {
         $all = Input::all();
-        $orders = app(RevenueService::class)->gridPaymentConsignment($all);
+        $orders = app(RevenueService::class)->gridDebtPaymentDueDate($all);
         if ($request->ajax()) {
             return view('revenue.partials.grid-payment-consignment', compact('orders'));
         }

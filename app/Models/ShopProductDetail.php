@@ -24,7 +24,7 @@ class ShopProductDetail extends Model
     const DEBT_PAID = 3;
     const DEBT_PROBLEM = 4;
 
-    const PAYMENT_DUE_DATE = 4;
+    const DUE_DAYS = 4;
 
     /**
      * The "booting" method of the model.

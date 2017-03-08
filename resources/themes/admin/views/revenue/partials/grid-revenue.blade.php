@@ -30,7 +30,7 @@
             $revenueHtml = number_format($revenue);
             $consignmentPayment = $order->total - $revenue;
             $consignmentPaymentHtml = number_format($consignmentPayment);
-            $consignmentPaymentHtml .= '<p class="help-block small">Payment Date: '.date('d-m-Y', strtotime('+'.\App\Models\ShopProductDetail::PAYMENT_DUE_DATE.' days', strtotime($order->created_at))).'</p>';
+            $consignmentPaymentHtml .= '<p class="help-block small">Payment Date: '.date('d-m-Y', strtotime('+'.\App\Models\ShopProductDetail::DUE_DAYS.' days', strtotime($order->created_at))).'</p>';
             $paymentTotal += $order->total;
             $revenueTotal += $revenue;
             $consignmentPaymentTotal += $consignmentPayment;

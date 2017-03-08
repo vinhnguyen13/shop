@@ -82,12 +82,12 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="col-xs-12">
-                                @include('revenue.partials.grid-payment-consignment')
+                                {{--@include('revenue.partials.grid-payment-consignment')--}}
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Print</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Print & Update Payment Status</button>
                     </div>
                 </div>
             </div>
@@ -108,6 +108,7 @@
     $(function() {
         var urlLoadGrid = '{{route('admin.revenue.index')}}';
         var urlUserVerify = '{{route('admin.user.verify')}}';
+        var urlDebtPaymentDueDate = '{{route('admin.revenue.debtPaymentDueDate')}}';
 
         $('.date').datepicker({
             autoclose: true,
@@ -138,8 +139,18 @@
                     data: {email: email, password: password},
                     success: function (data) {
                         if(data.code == 0){
-                            $('#modal-relogin').modal('hide');
-                            $('#modal-consignment').modal('show');
+                            $.ajax({
+                                type: "get",
+                                dataType: 'html',
+                                url: urlDebtPaymentDueDate,
+                                success: function (data) {
+                                    $('#modal-relogin').modal('hide');
+                                    $('#modal-consignment .modal-body div div').html(data);
+                                    $('#modal-consignment').modal('show');
+                                },
+                                error: function (error) {
+                                }
+                            });
                         }else{
                             $('#modal-relogin .alert-danger p').html(data.message);
                             $('#modal-relogin .alert-danger').removeClass('hide');

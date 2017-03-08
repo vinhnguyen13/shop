@@ -125,6 +125,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          * Revenue
          */
         Route::any('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);
+        Route::any('/revenue/debt-payment-due-date', ['uses' => 'RevenueController@getDebtPaymentDueDate', 'as'=>'admin.revenue.debtPaymentDueDate']);
         /*
          * Coupon Event routing
          */
