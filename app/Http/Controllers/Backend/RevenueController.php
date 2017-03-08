@@ -10,6 +10,7 @@ class RevenueController extends Controller
 {
     public function index(Request $request)
     {
+        app(RevenueService::class)->updateDebtDueDate();
         $all = Input::all();
         $orders = app(RevenueService::class)->gridRevenue($all);
         if ($request->ajax()) {

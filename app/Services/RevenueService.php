@@ -9,11 +9,8 @@
 namespace App\Services;
 
 use App\Helpers\Grid;
-use App\Models\Backend\ShopOrder;
 use App\Models\Backend\ShopOrderProduct;
-use App\Models\Backend\ShopProduct;
 use App\Models\Backend\ShopProductDetail;
-use App\Models\Backend\ShopSupplier;
 use DB;
 
 class RevenueService
@@ -28,10 +25,6 @@ class RevenueService
         }
         if(isset($params['debt']) && is_numeric($params['debt'])){
             $debtStatus = $params['debt'];
-            if($debtStatus == ShopProductDetail::DEBT_PAYMENT_DUE_DATE){
-                $debtStatus = ShopProductDetail::DEBT_PENDING;
-                $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -'.\App\Models\ShopProductDetail::PAYMENT_DUE_DATE.' DAY)'));
-            }
             $query->where('debt_status', '=', $debtStatus);
         }
         $orders = $query->paginate(30,['*'],'trang');
@@ -43,5 +36,10 @@ class RevenueService
         $query->where('debt_status', '=', ShopProductDetail::DEBT_PENDING)->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -4 DAY)'));
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
+    }
+
+    public function updateDebtDueDate(){
+        $query = ShopOrderProduct::query();
+        $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -'.\App\Models\ShopProductDetail::PAYMENT_DUE_DATE.' DAY)'))->update(['debt_status'=>ShopProductDetail::DEBT_DUE_DATE]);
     }
 }

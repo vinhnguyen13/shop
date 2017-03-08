@@ -20,9 +20,9 @@ class ShopProductDetail extends Model
 
     const DEBT_START = 0;
     const DEBT_PENDING = 1;
-    const DEBT_PAID = 2;
-    const DEBT_PROBLEM = 3;
-    const DEBT_PAYMENT_DUE_DATE = -1;
+    const DEBT_DUE_DATE = 2;
+    const DEBT_PAID = 3;
+    const DEBT_PROBLEM = 4;
 
     const PAYMENT_DUE_DATE = 4;
 
@@ -97,7 +97,7 @@ class ShopProductDetail extends Model
         $data = [
             self::DEBT_START => trans('Start'),
             self::DEBT_PENDING => trans('Pending'),
-            self::DEBT_PAYMENT_DUE_DATE => trans('Payment Due Date'),
+            self::DEBT_DUE_DATE => trans('Payment Due Date'),
             self::DEBT_PAID => trans('Paid'),
             self::DEBT_PROBLEM => trans('Problem'),
         ];
