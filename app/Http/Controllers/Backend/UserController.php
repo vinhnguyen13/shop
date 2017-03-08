@@ -149,6 +149,8 @@ class UserController extends Controller
             if( !empty($user->id) &&  \Hash::check( $input['password'], $user->getAuthPassword()) !== false) {
                 // Password is matching
                 return ['code'=>0, 'message'=>trans('user.login.success')];
+            }else{
+                return ['code'=>1, 'message'=>trans('auth.failed')];
             }
         }
         return ['code'=>1, 'message'=>trans('user.login.not_success')];;

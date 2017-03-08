@@ -58,6 +58,10 @@
                             Đây là phần thanh toán tiền cho supplier.<br/>
                             Vì vậy chúng tôi cần xác thực bạn có phải là nhân viên của chúng tôi không ?
                         </p>
+                        <div class="alert alert-danger alert-dismissable hide">
+                            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                            <p></p>
+                        </div>
                         <input type="text" class="form-control" placeholder="Email" name="email">
                         <input type="password" class="form-control" placeholder="Password" name="password">
                     </div>
@@ -124,6 +128,7 @@
         $('.wrapRevenue').on('click', '.btn-payment-supplier-verified', function (e) {
             var email = $('input[name="email"]').val();
             var password = $('input[name="password"]').val();
+            $('#modal-relogin .alert-danger').addClass('hide');
             if (urlUserVerify) {
                 $('#modal-relogin').loading({display: true});
                 $.ajax({
@@ -136,6 +141,8 @@
                             $('#modal-relogin').modal('hide');
                             $('#modal-consignment').modal('show');
                         }else{
+                            $('#modal-relogin .alert-danger p').html(data.message);
+                            $('#modal-relogin .alert-danger').removeClass('hide');
 
                         }
                         $('#modal-relogin').loading({display: false});
