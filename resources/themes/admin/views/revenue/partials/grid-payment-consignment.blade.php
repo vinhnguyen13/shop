@@ -19,7 +19,7 @@
         </tr>
         @foreach($orders as $order)
             <?php
-            $date = date('d-m-Y', strtotime($order->order->created_at));
+            $date = date('d-m-Y', strtotime($order->created_at));
             $supplierHtml = '<a href="'.route('admin.supplier.index', ['id'=>$order->supplier_id]).'">'.$order->supplier->name.'</a><br>';
             $supplierHtml .= '<p class="help-block small">Discount: '.number_format($order->supplier->discount_available).' %</p>';
             $priceHtml = number_format($order->price).'<br/>';
@@ -28,7 +28,7 @@
             $revenueHtml = number_format($revenue);
             $consignmentPayment = $order->total - $revenue;
             $consignmentPaymentHtml = number_format($consignmentPayment);
-            $consignmentPaymentHtml .= '<p class="help-block small">Payment Date: '.date('d-m-Y', strtotime('+5 days', strtotime($order->order->created_at))).'</p>';
+            $consignmentPaymentHtml .= '<p class="help-block small">Payment Date: '.date('d-m-Y', strtotime('+5 days', strtotime($order->created_at))).'</p>';
             $paymentTotal += $order->total;
             $revenueTotal += $revenue;
             $consignmentPaymentTotal += $consignmentPayment;

@@ -30,7 +30,7 @@ class RevenueService
             $debtStatus = $params['debt'];
             if($debtStatus == ShopProductDetail::DEBT_PAYMENT_DUE_DATE){
                 $debtStatus = ShopProductDetail::DEBT_PENDING;
-                $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -4 DAY)'));
+                $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -'.\App\Models\ShopProductDetail::PAYMENT_DUE_DATE.' DAY)'));
             }
             $query->where('debt_status', '=', $debtStatus);
         }
