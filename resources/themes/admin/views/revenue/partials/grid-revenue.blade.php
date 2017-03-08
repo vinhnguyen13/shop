@@ -47,7 +47,7 @@
                 <td>{{number_format($order->total)}}</td>
                 <td>{!! $revenueHtml !!}</td>
                 <td>{!! $consignmentPaymentHtml !!}</td>
-                <td>{!! app(\App\Models\ShopProductDetail::class)->getPayToSupplierStatus($order->productDetail->pay_to_supplier_status) !!}</td>
+                <td>{!! app(\App\Models\ShopProductDetail::class)->getDebtStatus($order->productDetail->debt_status) !!}</td>
             </tr>
         @endforeach
         <tr>

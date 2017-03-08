@@ -18,17 +18,31 @@ use DB;
 
 class RevenueService
 {
-    public function gridRevenue(){
+    public function gridRevenue($params){
         $query = ShopOrderProduct::query();
+        if(!empty($params['from_date']) & !empty($params['to_date'])){
+            $query->whereBetween('created_at', [$params['from_date'], $params['to_date']]);
+        }
+        if(!empty($params['supplier'])){
+            $query->whereIn('supplier_id', [$params['supplier']]);
+        }
+        if(isset($params['debt'])){
+            $debtStatus = $params['debt'];
+            if($debtStatus == ShopProductDetail::DEBT_PAYMENT_DUE_DATE){
+                $debtStatus = ShopProductDetail::DEBT_PENDING;
+                $query->where('created_at', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL -4 DAY)'));
+            }
+            $query->where('debt_status', '=', $debtStatus);
+        }
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }
 
-    public function gridPaymentConsignment(){
+    public function gridPaymentConsignment($params){
         $query = ShopOrderProduct::query();
         $query->join('shop_product_detail', function($join){
             $join->on('shop_product_detail.id', '=', 'shop_order_product.product_detail_id')
-                ->where('pay_to_supplier_status', '=', ShopProductDetail::PAY_SUPPLIER_PENDING);
+                ->where('debt_status', '=', ShopProductDetail::DEBT_PENDING);
         });
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;

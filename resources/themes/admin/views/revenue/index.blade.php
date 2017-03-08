@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    @php
+    $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Supplier -', 0);
+    @endphp
     <div class="box wrapRevenue">
         <div class="box-header with-border">
             <h3 class="box-title">Order Management</h3>
@@ -21,10 +24,10 @@
                                 <input type="text" class="form-control date" placeholder="TO" name="to_date">
                             </div>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control supplier" placeholder="SUPPLIER" name="supplier">
+                                {!! Form::select('supplier', $suppliers, null, ['class' => 'form-control supplier']) !!}
                             </div>
                             <div class="col-xs-2">
-                                {!! Form::select('', app(\App\Models\ShopProductDetail::class)->getPayToSupplierStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
+                                {!! Form::select('debt', app(\App\Models\ShopProductDetail::class)->getDebtStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
                             </div>
                             <div class="col-xs-1">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>

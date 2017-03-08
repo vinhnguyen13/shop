@@ -9,7 +9,7 @@ class ShopProductDetail extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
-    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note', 'pay_to_supplier_status'];
+    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note', 'debt_status'];
 
     const SPLIT_CODE = '-';
 
@@ -18,11 +18,11 @@ class ShopProductDetail extends Model
     const STOCK_OUT_OF_STOCK = 3;
     const STOCK_SOME_DAYS = 4;
 
-    const PAY_SUPPLIER_START = 0;
-    const PAY_SUPPLIER_PENDING = 1;
-    const PAY_SUPPLIER_PAID = 2;
-    const PAY_SUPPLIER_PROBLEM = 3;
-    const PAY_SUPPLIER_PAYMENT_DUE_DATE = -1;
+    const DEBT_START = 0;
+    const DEBT_PENDING = 1;
+    const DEBT_PAID = 2;
+    const DEBT_PROBLEM = 3;
+    const DEBT_PAYMENT_DUE_DATE = -1;
 
     const PAYMENT_DUE_DATE = 4;
 
@@ -92,14 +92,14 @@ class ShopProductDetail extends Model
         }
     }
 
-    public function getPayToSupplierStatus($id = null)
+    public function getDebtStatus($id = null)
     {
         $data = [
-            self::PAY_SUPPLIER_START => trans('Start'),
-            self::PAY_SUPPLIER_PENDING => trans('Pending'),
-            self::PAY_SUPPLIER_PAYMENT_DUE_DATE => trans('Payment Due Date'),
-            self::PAY_SUPPLIER_PAID => trans('Paid'),
-            self::PAY_SUPPLIER_PROBLEM => trans('Problem'),
+            self::DEBT_START => trans('Start'),
+            self::DEBT_PENDING => trans('Pending'),
+            self::DEBT_PAYMENT_DUE_DATE => trans('Payment Due Date'),
+            self::DEBT_PAID => trans('Paid'),
+            self::DEBT_PROBLEM => trans('Problem'),
         ];
 
         if (isset($data[$id])) {
