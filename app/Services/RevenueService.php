@@ -26,7 +26,7 @@ class RevenueService
         if(!empty($params['supplier'])){
             $query->whereIn('supplier_id', [$params['supplier']]);
         }
-        if(isset($params['debt'])){
+        if(isset($params['debt']) && is_numeric($params['debt'])){
             $debtStatus = $params['debt'];
             if($debtStatus == ShopProductDetail::DEBT_PAYMENT_DUE_DATE){
                 $debtStatus = ShopProductDetail::DEBT_PENDING;
