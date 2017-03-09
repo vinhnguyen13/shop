@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var textButtonStep = ['Xác nhận', 'Thanh toán'];
     var wrapCheckoutUser = 'checkout__infor__user';
+    var wrapCheckoutPayment = 'checkout__infor__payment';
     var wrapCheckoutUserShipping = 'checkout__infor__user__shipping';
     var wrapCheckoutUserBilling = 'checkout__infor__user__billing';
     var wrapCheckoutInfoProduct = 'checkout__inforpro';
@@ -8,26 +9,25 @@ $(document).ready(function(){
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
 
-    $('.'+wrapCheckoutUser).on('click', '.btn-checkout', function(){
+    $('.'+wrapCheckoutInfoProduct).on('click', '.btn-checkout', function(){
         var button = $(this);
-        var stepActive = $('.'+wrapCheckoutUser).find('.'+stepCheckout + ':not(.hide)');
-        var stepTotal = $('.'+wrapCheckoutUser).find('.'+stepCheckout).length;
+        var stepActive = $('.'+stepCheckout+':not(.hide)');
+        var stepTotal = $('.'+stepCheckout).length;
         if(button.hasClass(btnBack)){
             var stepFuture = stepActive.prev();
-            var _index = stepFuture.index();
+            var _index = stepActive.index();
         }else{
             var stepFuture = stepActive.next();
-            var _index = stepFuture.index();
+            var _index = stepActive.index();
         }
-
-        if(_index > stepTotal){
+        if(_index >= stepTotal){
             console.log('Pay');
             var form = $('#orderForm').serialize();
             $('.'+wrapCheckoutUser).trigger('checkout/func/order', [form]);
         }else{
             stepFuture.removeClass('hide');
             stepActive.addClass('hide');
-            $('.'+btnOrder).html(textButtonStep[_index-1]);
+            $('.'+btnOrder).html(textButtonStep[_index]);
             if(_index == 1){
                 $('.'+btnBack).addClass('hide');
             }else{

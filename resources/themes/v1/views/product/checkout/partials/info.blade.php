@@ -1,4 +1,4 @@
-<div class="checkout__infor__user">
+<div class="checkout__infor__user step-checkout">
     {{--USER--}}
     <div class="checkout__checkuser">
         <form action="">

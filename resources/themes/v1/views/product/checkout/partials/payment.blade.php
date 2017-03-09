@@ -1,4 +1,4 @@
-<div class="checkout__infor__payment hide">
+<div class="checkout__infor__payment step-checkout hide">
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     <div class="mgB-10">
         <label for="" class="frm">
