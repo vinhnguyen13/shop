@@ -5,7 +5,7 @@
         <div class="checkout__inner clearfix">
             @if(!empty($cart))
             <div class="checkout__inforpro">
-                @include('product.partials.checkout-products')
+                @include('product.checkout.partials.products')
             </div>
             <div class="checkout__infor">
                 <div class="clearfix">
@@ -18,8 +18,8 @@
                         <p class="fontSFURe">094 537 88 09</p>
                     </div>
                 </div>
-                @include('product.partials.checkout-info')
-                @include('product.partials.checkout-payment')
+                @include('product.checkout.partials.info')
+                @include('product.checkout.partials.payment')
             </div>
             @else
                 <div class="alert alert-info fade in alert-dismissable">

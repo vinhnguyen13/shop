@@ -23,7 +23,7 @@ class ProductController extends Controller
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
-        return view('product.index', compact('products'));
+        return view('product.main.index', compact('products'));
     }
 
     public function store(Request $request, $category=null)
@@ -32,7 +32,7 @@ class ProductController extends Controller
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
-        return view('product.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
+        return view('product.main.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
     }
 
     public function brand(Request $request, $brand=null)
@@ -41,7 +41,7 @@ class ProductController extends Controller
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
-        return view('product.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
+        return view('product.main.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
     }
 
     private function loadMore($request, $products){
@@ -51,7 +51,7 @@ class ProductController extends Controller
                 $next_page = $products->nextPageUrl();
             }
             return [
-                'html' => view('product.partials.items')->with(compact('products'))->render(),
+                'html' => view('product.main.partials.items')->with(compact('products'))->render(),
                 'next_page' => $next_page,
             ];
         }
@@ -61,7 +61,7 @@ class ProductController extends Controller
     {
         $product = ShopProduct::find($id);
         $products = app(ShopProduct::class)->getList(['limit'=>30]);
-        return view('product.detail', compact('product', 'products'));
+        return view('product.main.detail', compact('product', 'products'));
     }
 
     public function cartAdd(Request $request)
@@ -71,7 +71,7 @@ class ProductController extends Controller
         $detailID = decrypt($detailID);
         $cart = app(ShopProduct::class)->addCart($detailID, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
-        $html = view('product.partials.cart-header', compact('cart'))->render();
+        $html = view('product.main.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];
     }
 
@@ -86,14 +86,14 @@ class ProductController extends Controller
     public function cartUpdate(Request $request)
     {
         $cart = app(ShopProduct::class)->getCart();
-        $html = view('product.partials.checkout-products', compact('cart'))->render();
+        $html = view('product.checkout.partials.products', compact('cart'))->render();
         return ['html'=>$html];
     }
 
     public function checkout(Request $request)
     {
         $cart = app(ShopProduct::class)->getCart();
-        return view('product.checkout', compact('cart'));
+        return view('product.checkout.index', compact('cart'));
     }
 
     public function order(Request $request)
@@ -116,11 +116,11 @@ class ProductController extends Controller
         $order = $request->get('order');
         if(!empty($order)){
         }
-        return view('product.payment-success');
+        return view('product.checkout.payment-success');
     }
 
     public function payFail(Request $request)
     {
-        return view('product.payment-fail');
+        return view('product.checkout.payment-fail');
     }
 }

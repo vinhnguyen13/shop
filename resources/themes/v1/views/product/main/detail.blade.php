@@ -66,7 +66,7 @@
         </div>
         <div class="detail__related">
             <div class="text-center text-uper fontSFUBold fs-25">related products</div>
-            @include('product.partials.list-items')
+            @include('product.main.partials.list-items')
         </div>
 
     </div>

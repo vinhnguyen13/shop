@@ -34,7 +34,7 @@
                 <a href="" class="val-selected"><span class="icon-slice8"></span><span class="header__cart--num {!! (!empty($cart)) ? '' :'hide' !!}">{!! count($cart) or '' !!}</span></a>
                 <div class="dropdown-up-style hide">
                     <div class="dropdown__inner">
-                        @include('product.partials.cart-header')
+                        @include('product.main.partials.cart-header')
                     </div>
                 </div>
             </div>

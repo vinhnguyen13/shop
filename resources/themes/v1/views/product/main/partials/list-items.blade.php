@@ -1,6 +1,6 @@
 @if (!empty($products) && $products->count())
     <div class="row products">
-        @include('product.partials.items')
+        @include('product.main.partials.items')
     </div>
     <div class="text-center">
 {{--        {!! $products->render() !!}--}}
