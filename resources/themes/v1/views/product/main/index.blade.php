@@ -5,7 +5,7 @@
         <div class="text-center">
             @include('layouts.partials.breadcrumb')
         </div>
-        @include('product.partials.list-items')
+        @include('product.main.partials.list-items')
     </div>
 @endsection
 

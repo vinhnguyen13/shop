@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var textButtonStep = ['Đặt hàng', 'Thanh toán'];
+    var textButtonStep = ['Xác nhận', 'Thanh toán'];
     var wrapCheckoutUser = 'checkout__infor__user';
     var wrapCheckoutUserShipping = 'checkout__infor__user__shipping';
     var wrapCheckoutUserBilling = 'checkout__infor__user__billing';
@@ -64,14 +64,6 @@ $(document).ready(function(){
             });
         }, 500);
         return false;
-    });
-
-    $('.'+wrapCheckoutUser).on('click', 'input[id=chkShippingDiffBilling]', function(){
-        if($(this).is(':checked')) {
-            $('#wrap-billing').removeClass('hide');
-        } else {
-            $('#wrap-billing').addClass('hide');
-        }
     });
 
 

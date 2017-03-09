@@ -116,11 +116,11 @@ class ProductController extends Controller
         $order = $request->get('order');
         if(!empty($order)){
         }
-        return view('product.checkout.payment-success');
+        return view('product.payment.success');
     }
 
     public function payFail(Request $request)
     {
-        return view('product.checkout.payment-fail');
+        return view('product.payment.fail');
     }
 }

@@ -36,6 +36,10 @@ class ShopOrder extends Model
         }else{
             $instance = $this;
         }
+        echo "<pre>";
+        print_r(5);
+        echo "</pre>";
+        exit;
         DB::beginTransaction();
         try {
             $instance->processingSave($values);

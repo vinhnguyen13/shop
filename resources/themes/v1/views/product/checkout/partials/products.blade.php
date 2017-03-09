@@ -56,7 +56,7 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
     <p class="pull-right fontSFUBold fs-24">{{number_format($total)}} đ</p>
     <p class="fontSFUBold fs-24">TOTAL</p>
 </div>
-<button class="btn-submit-checkout btn-complete-checkout">SUBMIT</button>
+<button class="btn-submit-checkout btn-checkout">SUBMIT</button>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">REFUND POLICY</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">SHIPPING SERVICE INFORMATION</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">POLICY &amp; TERM</a></p>
