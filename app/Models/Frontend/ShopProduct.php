@@ -12,12 +12,6 @@ use Session;
 
 class ShopProduct extends MainShopProduct
 {
-    const CHECKOUT_PRODUCTS = 'products';
-    const CHECKOUT_SHIPPING = 'shipping';
-    const CHECKOUT_BILLING = 'billing';
-    const CHECKOUT_PAYMENT = 'payment';
-    const SPLIT_PRODUCT_SIZE = '_GLAB_';
-
     public function getList($params = array()){
         $query = ShopProduct::from('shop_product AS a');
         $query->where(['status'=>1]);

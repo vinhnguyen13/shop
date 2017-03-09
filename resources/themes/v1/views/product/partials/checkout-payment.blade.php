@@ -2,7 +2,7 @@
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     <div class="mgB-10">
         <label for="" class="frm">
-            <input type="radio">PAY AT STORE
+            <input name="payment_method" type="radio" value="1">PAY AT STORE
         </label>
     </div>
     <div class="mgB-10">
@@ -12,10 +12,10 @@
             <span class="icon-a-m-e-x fs-20"></span>
         </div>
         <label for="" class="frm">
-            <input type="radio">CREDIT CARD
+            <input name="payment_method" type="radio" value="1">CREDIT CARD
         </label>
     </div>
-    <div class="pay__method pay__credit">
+    <div class="pay__method pay__credit hide">
         <div class="frm-item has-error">
             <div class="frm-item-icon">
                 <input type="text" placeholder="CARD NUMBER" />
@@ -49,7 +49,7 @@
     </div>
     <div class="mgB-10">
         <label for="" class="frm">
-            <input type="radio">INTERNET BANKING
+            <input name="payment_method" type="radio">INTERNET BANKING
         </label>
     </div>
 </div>

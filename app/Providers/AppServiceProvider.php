@@ -25,11 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        require_once __DIR__ . '/../Helpers/helpers.php';
+        /**
+         * set themes
+         */
         $this->app->bind('view.finder', function($app)
         {
-            /**
-             * set themes
-             */
             $paths = $app['config']['view.paths'];
             if(Request::is('admin') || Request::is('admin/*')){
                 $theme = \Config::get('site.theme.backend');

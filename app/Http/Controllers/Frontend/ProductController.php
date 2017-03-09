@@ -90,10 +90,10 @@ class ProductController extends Controller
         return ['html'=>$html];
     }
 
-    public function checkout(Request $request, $step)
+    public function checkout(Request $request)
     {
         $cart = app(ShopProduct::class)->getCart();
-        return view('product.checkout', compact('cart', 'step'));
+        return view('product.checkout', compact('cart'));
     }
 
     public function order(Request $request)
