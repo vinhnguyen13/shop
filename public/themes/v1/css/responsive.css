@@ -275,6 +275,10 @@
     }
     .footer__right .frm-icon input {
         width: 100%;
+        height: 40px;
+    }
+    #frm-email .icon-frm {
+        padding: 13px 15px;
     }
     .step-checkout h2 {
         font-size: 20px;
@@ -315,7 +319,7 @@
         /* height: 280px; */
     }
     .detail {
-        padding-top: 50px;
+        padding-top: 20px;
     }
     .detail__desc h1 {
         font-size: 30px;
@@ -350,6 +354,10 @@
     .header__cart--item .wrap-img {
         width: 100%;
         float: none !important;
+    }
+    .slidehomepage .desc {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 
