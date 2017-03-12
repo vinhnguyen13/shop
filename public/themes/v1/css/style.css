@@ -840,18 +840,18 @@ footer {
     z-index: 10;
     display: none;
     /* height: 200px; */
-    -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.33);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.33);
+    /* -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.33); */
+    /* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.33); */
 }
 
 .product__item--infor div.clearfix p {
     text-align: left;
+    font-size: 13px;
 }
 .product__item--infor div.clearfix .product-price {
     overflow: hidden;
     font-family: "sfu_daxcondensedregular";
     font-weight: bold;
-    font-size: 16px;
     text-align: right;
 }
 .product__item--infor div.clearfix .pull-right {
@@ -888,7 +888,6 @@ footer {
 .product-price,
 .product-name {
     font-family: "sfu_daxcondensedextrabold";
-    font-size: 18px;
 }
 
 .product__item--infor .product-name {
@@ -1386,8 +1385,8 @@ footer {
 .slidedetail__pagi li a span {
     display: block;
     width: 4px;
-    height: 40px;
-    background: #dadada;
+    height: 30px;
+    background: rgba(218, 218, 218, 0.42);
 }
 
 .slidedetail__pagi li a:hover span {
@@ -1703,4 +1702,20 @@ button.close {
 }
 .auth__desktop {
     display: inline-block;
+}
+.detail__desc {
+    max-width: 400px;
+}
+.detail__desc--fix .fs-24 {
+    font-size: 20px;
+}
+.detail__desc--fix .fs-24.mgB-10 {
+    margin-bottom: 0;
+    line-height: 100%;
+}
+.detail__desc--fix .fs-24.mgB-20 {
+    margin-bottom: 10px;
+}
+.detail__desc--intro {
+    font-size: 13px;
 }
