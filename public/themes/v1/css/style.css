@@ -1719,3 +1719,10 @@ button.close {
 .detail__desc--intro {
     font-size: 13px;
 }
+.aboutus__inner {
+    width: 40%;
+    margin: 0 auto 0;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
