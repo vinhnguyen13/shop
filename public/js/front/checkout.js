@@ -28,7 +28,7 @@ $(document).ready(function(){
             stepFuture.removeClass('hide');
             stepActive.addClass('hide');
             $('.'+btnOrder).html(textButtonStep[_index]);
-            if(_index == 1){
+            if(_index >= 1){
                 $('.'+btnBack).addClass('hide');
             }else{
                 $('.'+btnBack).removeClass('hide');

@@ -2,7 +2,7 @@
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     <div class="mgB-10">
         <label for="" class="frm">
-            <input name="payment_method" type="radio" value="1">PAY AT STORE
+            <input name="payment_method" type="radio" value="1" checked>PAY AT STORE
         </label>
     </div>
     <div class="mgB-10">
