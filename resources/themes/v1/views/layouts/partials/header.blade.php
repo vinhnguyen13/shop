@@ -2,6 +2,15 @@
     <div class="container">
         <div class="pull-left lh-50 header__left">
             <button id="menu-open" class=""><span></span></button>
+            <div class="auth__desktop">
+                @if (Auth::guard('web')->guest())
+                    <a href="{{route('login')}}" class="fontSFUMeBold fs-15">LOG IN</a>
+                    <a href="{{route('register')}}" class="fontSFUMeBold fs-15">CREATE ACCOUNT</a>
+                @else
+                    <a href="javascript:;">{{auth()->user()->name}}</a>
+                    <a href="{{route('logout')}}">Đăng xuất</a>
+                @endif
+            </div>
             <div class="dropdown">
                 <a href="" class="val-selected"><span class="icon-slice6"></span></a>
                 <div class="dropdown-up-style hide">
@@ -22,11 +31,10 @@
             </div>
         </div>
         <div class="pull-right lh-50 header__right">
-            <form id="search" class="search">
+            <form class="search" id="search">
                 <a href="" class="header__right--mbsearch"><span class="icon-search"></span></a>
-
                 <div class="frm-icon">
-                    <input type="text" placeholder="Search"/>
+                    <input type="text" placeholder="Search" />
                     <button type="submit" class="icon-frm"><span class="icon-slice9"></span></button>
                 </div>
             </form>
