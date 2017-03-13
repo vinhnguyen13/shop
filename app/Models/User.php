@@ -34,6 +34,7 @@ class User extends Authenticatable
     {
         return [
             'email' => 'required|email|unique:users,email,'.$this->id,
+            'password' => 'required|min:6',
         ];
     }
 

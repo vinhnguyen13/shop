@@ -51,7 +51,7 @@ class UserController extends Controller
         if(!empty($return->id)){
             return Redirect::route('admin.user.index');
         }else{
-            return Redirect::back();
+            return Redirect::back()->withErrors($return);
         }
     }
 

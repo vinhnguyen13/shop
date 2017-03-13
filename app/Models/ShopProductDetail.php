@@ -95,7 +95,7 @@ class ShopProductDetail extends Model
     public function getDebtStatus($id = null)
     {
         $data = [
-            self::DEBT_START => trans('Start'),
+//            self::DEBT_START => trans('Start'),
             self::DEBT_PENDING => trans('Pending'),
             self::DEBT_DUE_DATE => trans('Payment Due Date'),
             self::DEBT_PAID => trans('Paid'),

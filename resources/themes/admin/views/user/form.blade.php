@@ -12,6 +12,13 @@ $isNewRecord = !empty($user->id) ? false : true;
             <h3 class="box-title"><?php echo $isNewRecord ? "Create" : "Edit"?> User</h3>
         </div>
         <div class="box-body">
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                    {{$errors->first()}}
+                </div>
+            @endif
             {{ Form::open(['route' => 'admin.user.store', 'files' => true]) }}
                 {{ Form::hidden('id', $user->id) }}
                 <div class="form-group">
@@ -26,7 +33,7 @@ $isNewRecord = !empty($user->id) ? false : true;
 
                 <div class="form-group">
                     {{ Form::label(null, 'Password') }}
-                    {{ Form::text('password', null,['class' => 'form-control'])}}
+                    {{ Form::password('password', ['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">

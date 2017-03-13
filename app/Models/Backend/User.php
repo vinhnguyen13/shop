@@ -61,7 +61,9 @@ class User extends MainUser
      */
     public function processingUser($values)
     {
-
+        if(!empty($values['password'])){
+            $this->password = \Hash::make($values['password']);
+        }
     }
 
     /**

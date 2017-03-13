@@ -18,13 +18,13 @@
                     <div class="row">
                         <form id="revenueForm">
                             <div class="col-xs-2">
-                                <input type="text" class="form-control date" placeholder="FROM" name="from_date">
+                                <input type="text" class="form-control date" placeholder="FROM" name="from_date" value="{{date('d-m-Y')}}">
                             </div>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control date" placeholder="TO" name="to_date">
+                                <input type="text" class="form-control date" placeholder="TO" name="to_date" value="{{date('d-m-Y')}}">
                             </div>
                             <div class="col-xs-2">
-                                {!! Form::select('supplier', $suppliers, null, ['class' => 'form-control supplier']) !!}
+                                {!! Form::select('supplier', $suppliers, null, ['class' => 'form-control supplier-list']) !!}
                             </div>
                             <div class="col-xs-2">
                                 {!! Form::select('debt', app(\App\Models\ShopProductDetail::class)->getDebtStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
@@ -100,10 +100,12 @@
 
 @push('styles')
 <link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="/themes/admin/plugins/select2/select2.min.css">
 @endpush
 
 @push('scripts')
 <script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/themes/admin/plugins/select2/select2.js"></script>
 <script type="text/javascript">
     $(function() {
         var urlLoadGrid = '{{route('admin.revenue.index')}}';
@@ -114,6 +116,8 @@
             autoclose: true,
             format: "dd-mm-yyyy"
         });
+
+        $( ".supplier-list" ).select2();
 
         $('.wrapRevenue').on('click', '.btn-filter', function (e) {
             var params = $('#revenueForm').serialize();
