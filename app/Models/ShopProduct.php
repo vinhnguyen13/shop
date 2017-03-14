@@ -21,6 +21,9 @@ class ShopProduct extends Model
     const TYPE_SPECIAL = 'special';
     const TYPE_DETAIL = 'detail';
 
+    const STATUS_DELETE = -1;
+    const STATUS_ACTIVE = 1;
+
     /**
      * The "booting" method of the model.
      *

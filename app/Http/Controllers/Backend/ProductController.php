@@ -85,7 +85,7 @@ class ProductController extends Controller
     {
         $model = ShopProduct::find($id);
         if(!empty($model)) {
-            $model->delete();
+            $model->processingDelete();
         }
         return Redirect::route('admin.product.index');
     }

@@ -418,4 +418,8 @@ class ShopProduct extends MainShopProduct
             }
         }
     }
+
+    public function processingDelete(){
+        $this->update(['status'=>self::STATUS_DELETE]);
+    }
 }
