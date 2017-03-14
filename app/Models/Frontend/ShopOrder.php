@@ -62,6 +62,7 @@ class ShopOrder extends Model
                             $orderProduct->order_id = $instance->id;
                             $orderProduct->product_id = $product->id;
                         }
+                        $orderProduct->order_status_id = $instance->order_status_id;
                         $orderProduct->supplier_id = $productDetail->supplier_id;
                         $orderProduct->product_detail_id = $productDetail->id;
                         $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
@@ -134,9 +135,12 @@ class ShopOrder extends Model
         $total_tax = 0;
         $total = 0;
         $total_shipping = 0;
-        if($values['payment_method'] != ShopPayment::KEY_PAYATSTORE){
+        if($values['payment_method'] == ShopPayment::KEY_PAYATSTORE){
+            $this->attributes['order_status_id'] = ShopOrderStatus::STT_COMPLETE;
+        }else{
             $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
             $total_shipping = $shipFee->value;
+            $this->attributes['order_status_id'] = ShopOrderStatus::STT_PENDING;
         }
         $carts = app(ShopProduct::class)->getCart();
         if(!empty($carts)){
@@ -201,7 +205,6 @@ class ShopOrder extends Model
         $this->attributes['total_tax'] = $total_tax;
         $this->attributes['total_shipping'] = $total_shipping;
         $this->attributes['total'] = $total;
-        $this->attributes['order_status_id'] = ShopOrderStatus::STT_PENDING;
         $this->attributes['commission'] = '0';
         $this->attributes['coupon_id'] = null;
         $this->attributes['tracking'] = uniqid();

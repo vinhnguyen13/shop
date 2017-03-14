@@ -11,12 +11,14 @@ namespace App\Services;
 use App\Helpers\Grid;
 use App\Models\Backend\ShopOrderProduct;
 use App\Models\Backend\ShopProductDetail;
+use App\Models\ShopOrderStatus;
 use DB;
 
 class RevenueService
 {
     public function gridRevenue($params){
         $query = ShopOrderProduct::query();
+        $query->where(['order_status_id'=>ShopOrderStatus::STT_COMPLETE]);
         if(!empty($params['from_date']) & !empty($params['to_date'])){
             $query->whereBetween('created_at', [$params['from_date'], $params['to_date']]);
         }

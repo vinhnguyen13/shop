@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopOrder as MainShopOrder;
+use App\Models\ShopOrderStatus;
 use DB;
 
 class ShopOrder extends MainShopOrder
@@ -17,7 +18,13 @@ class ShopOrder extends MainShopOrder
                 'label'=>'Customer',
                 'filter' => 'like',
             ],
-            'order_status_id',
+            'order_status_id' => [
+                'filter' => false,
+                'format' => function($item){
+                    $html = ShopOrderStatus::getStatus($item->order_status_id);
+                    return $html;
+                }
+            ],
             'total_price' => [
                 'filter' => false,
                 'format' => function($item){
