@@ -3,6 +3,7 @@
 @section('content')
     <div class="container detail wrap-checkout">
         <div class="checkout__inner clearfix">
+            <form id="orderForm" action="">
             @if(!empty($cart))
             <div class="checkout__inforpro">
                 @include('product.checkout.partials.products')
@@ -28,6 +29,7 @@
                 </div>
                 <a href="{{url('/')}}" class="btn btn-block btn-success">Tiếp tục mua hàng</a>
             @endif
+            </form>
         </div>
     </div>
 @endsection

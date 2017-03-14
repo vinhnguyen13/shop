@@ -140,4 +140,18 @@ class ShopProductDetail extends Model
         }
         return false;
     }
+
+    public function updateOutOfStock(){
+        $this->update([
+            'debt_status'=>ShopProductDetail::DEBT_PENDING,
+            'stock_status_id'=>ShopProductDetail::STOCK_OUT_OF_STOCK,
+        ]);
+    }
+
+    public function updateInStock(){
+        $this->update([
+            'debt_status'=>ShopProductDetail::DEBT_START,
+            'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
+        ]);
+    }
 }

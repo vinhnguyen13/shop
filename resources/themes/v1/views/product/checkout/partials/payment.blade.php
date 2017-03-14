@@ -2,7 +2,7 @@
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     <div class="mgB-10">
         <label for="" class="frm">
-            <input name="payment_method" type="radio" value="1" checked>PAY AT STORE
+            <input name="payment_method" type="radio" value="PayAtStore" checked>PAY AT STORE
         </label>
     </div>
     <div class="mgB-10">
@@ -12,7 +12,7 @@
             <span class="icon-a-m-e-x fs-20"></span>
         </div>
         <label for="" class="frm">
-            <input name="payment_method" type="radio" value="1">CREDIT CARD
+            <input name="payment_method" type="radio" value="VISA">VISA/ MASTERCARD
         </label>
     </div>
     <div class="pay__method pay__credit hide">
@@ -49,7 +49,7 @@
     </div>
     <div class="mgB-10">
         <label for="" class="frm">
-            <input name="payment_method" type="radio">INTERNET BANKING
+            <input name="payment_method" type="radio" value="IB_ONLINE">INTERNET BANKING
         </label>
     </div>
 </div>

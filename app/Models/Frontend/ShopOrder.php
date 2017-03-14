@@ -8,6 +8,7 @@ use App\Models\ShopOrderProduct;
 use App\Models\ShopOrderStatus;
 use App\Models\ShopPayment;
 use App\Models\ShopProductDetail;
+use App\Models\ShopShipFee;
 use DB;
 
 class ShopOrder extends Model
@@ -50,28 +51,23 @@ class ShopOrder extends Model
                  * Save shop_order_product
                  */
                 if(!empty($carts)){
-                    $subtotal = 0;
-                    $tax = 0;
-                    $total = 0;
                     foreach($carts as $productID_detailID=>$item){
-                        $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_detailID);
-                        $productID = $product_details[0];
-                        $productDetailID = $product_details[1];
-                        $product = ShopProduct::find($productID);
-                        $productDetail = ShopProductDetail::find($productDetailID);
-                        $product->setCart($item['detailID'], $item['quantity']);
-                        $price = $productDetail->price;
+                        $productDetail = ShopProductDetail::find($item['detailID']);
+                        $product = $productDetail->product;
+                        $price = $productDetail->getPrice();
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$productID]);
+                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product->id]);
                         if(empty($orderProduct->id)){
                             $orderProduct = new ShopOrderProduct();
                             $orderProduct->order_id = $record->id;
-                            $orderProduct->product_id = $productID;
+                            $orderProduct->product_id = $product->id;
                         }
                         $orderProduct->supplier_id = $productDetail->supplier_id;
                         $orderProduct->product_detail_id = $productDetail->id;
-                        $orderProduct->name = $product->name;
+                        $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
+                        $orderProduct->product_name = $product->name;
+                        $orderProduct->color = $product->color;
                         $orderProduct->sku = $productDetail->sku;
                         $orderProduct->size = $productDetail->size;
                         $orderProduct->quantity = $item['quantity'];
@@ -81,6 +77,7 @@ class ShopOrder extends Model
                         $orderProduct->tax = $tax;
                         $orderProduct->reward = 0;
                         $orderProduct->save();
+                        $productDetail->updateOutOfStock();
                     }
                 }
                 app(ShopProduct::class)->removeCartAll();
@@ -116,6 +113,40 @@ class ShopOrder extends Model
         $paymentOption = ShopPayment::where(['key'=>$values['payment_method']])->first();
         $user = auth()->user();
         /*
+         * Coupon
+         */
+        if(!empty($values['coupon_code'])){
+            $code = CpCode::query()->where(['code'=>$values['coupon_code']]);
+            if(!empty($code)){
+                switch($code->amount_type){
+                    case CpCode::AMOUNT_TYPE_PERCENT:
+                        break;
+                    case CpCode::AMOUNT_TYPE_PRICE:
+                        break;
+                }
+
+            }
+        }
+        /*
+         *  Save Order
+         */
+        $total_price = 0;
+        $total_tax = 0;
+        $total = 0;
+        $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
+        $total_shipping = $shipFee->value;
+        $carts = app(ShopProduct::class)->getCart();
+        if(!empty($carts)){
+            foreach($carts as $productDetailID=>$item){
+                $productDetail = ShopProductDetail::find($item['detailID']);
+                $product = $productDetail->product;
+                $price = $productDetail->getPrice();
+                $total_price += $price * $item['quantity'];
+                $total_tax += $product->taxWithPrice($price);
+            }
+            $total = $total_price + $total_shipping + $total_tax;
+        }
+        /*
          * Save infomation custommer
          */
         $customer = ShopCustomer::query()->where(['email'=>$values['email']])->orWhere(['phone'=>$values['shipping_phone']])->toSql();
@@ -143,41 +174,8 @@ class ShopOrder extends Model
             }
         }
         /*
-         * Coupon
+         * Fill order
          */
-        if(!empty($values['coupon_code'])){
-            $code = CpCode::query()->where(['code'=>$values['coupon_code']]);
-            if(!empty($code)){
-                switch($code->amount_type){
-                    case CpCode::AMOUNT_TYPE_PERCENT:
-                        break;
-                    case CpCode::AMOUNT_TYPE_PRICE:
-                        break;
-                }
-
-            }
-        }
-        /*
-         *  Save Order
-         */
-        $total_price = 0;
-        $total_tax = 0;
-        $total_shipping = 0;
-        $total = 0;
-        $carts = app(ShopProduct::class)->getCart();
-        if(!empty($carts)){
-            foreach($carts as $productID_detailID=>$item){
-                $product_details = explode(ShopProduct::SPLIT_PRODUCT_SIZE, $productID_detailID);
-                $product_id = $product_details[0];
-                $product = ShopProduct::find($product_id);
-                $product->setCart($item['detailID'], $item['quantity']);
-                $price = $product->priceWithSize();
-                $total_price += $price * $item['quantity'];
-                $total_tax += $product->taxWithPrice($price);
-
-            }
-            $total = $total_price + $total_shipping + $total_tax;
-        }
 
         $this->attributes['invoice_code'] = $this->generateInvoicePrefix();
         $this->attributes['store_id'] = '1';
@@ -209,5 +207,14 @@ class ShopOrder extends Model
         $this->attributes['user_agent'] = request()->header('User-Agent');
         $this->attributes['accept_language'] = app()->getLocale();
 
+    }
+
+    public function getShipFeeWithCity($cityID)
+    {
+        $shipFee = ShopShipFee::query()->where(['country_id'=>self::COUNTRY_VN, 'city_id'=>$cityID])->where('status', '=', 1)->first();
+        if(empty($shipFee)){
+            $shipFee = ShopShipFee::query()->where(['country_id'=>self::COUNTRY_VN])->where('status', '=', 1)->whereNull('city_id')->first();
+        }
+        return $shipFee;
     }
 }

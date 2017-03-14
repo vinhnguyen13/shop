@@ -41,7 +41,7 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
 </div>
 <div class="clearfix pdL-15 pdR-15 mgB-40">
     <div class="code__promo">
-        <input type="text" placeholder="PROMO CODE">
+        <input name="coupon_code" type="text" placeholder="PROMO CODE">
     </div>
     <div class="overflow-all">
         <button class="btn-apply-checkout btn-coupon">APPLY</button>
@@ -56,8 +56,8 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
     <p class="pull-right fontSFUBold fs-24">{{number_format($total)}} đ</p>
     <p class="fontSFUBold fs-24">TOTAL</p>
 </div>
-<a class="btn-checkout btn-back hide">BACK</a>
 <button class="btn-submit-checkout btn-checkout btn-order">Xác nhận</button>
+<a class="btn-checkout btn-back hide">BACK</a>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">REFUND POLICY</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">SHIPPING SERVICE INFORMATION</a></p>
 <p class="color-7c7c7c fontSFUMeBold text-center mgB-20 fs-18"><a href="">POLICY &amp; TERM</a></p>

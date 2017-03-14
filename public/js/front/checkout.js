@@ -8,31 +8,36 @@ $(document).ready(function(){
     var stepCheckout = 'step-checkout';
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
+    var _indexStep = 1;
 
     $('.'+wrapCheckoutInfoProduct).on('click', '.btn-checkout', function(){
         var button = $(this);
         var stepActive = $('.'+stepCheckout+':not(.hide)');
         var stepTotal = $('.'+stepCheckout).length;
+
         if(button.hasClass(btnBack)){
             var stepFuture = stepActive.prev();
-            var _index = stepActive.index();
+            _indexStep--;
         }else{
             var stepFuture = stepActive.next();
-            var _index = stepActive.index();
+            _indexStep++;
         }
-        if(_index >= stepTotal){
+        if(_indexStep == 1){
+            $('.'+btnBack).addClass('hide');
+        }else{
+            $('.'+btnBack).removeClass('hide');
+        }
+        $('.'+btnOrder).html(textButtonStep[_indexStep-1]);
+        console.log(_indexStep);
+        if(_indexStep > stepTotal){
+            _indexStep--;
             console.log('Pay');
             var form = $('#orderForm').serialize();
             $('.'+wrapCheckoutUser).trigger('checkout/func/order', [form]);
         }else{
             stepFuture.removeClass('hide');
             stepActive.addClass('hide');
-            $('.'+btnOrder).html(textButtonStep[_index]);
-            if(_index >= 1){
-                $('.'+btnBack).addClass('hide');
-            }else{
-                $('.'+btnBack).removeClass('hide');
-            }
+
         }
         return false;
     });
