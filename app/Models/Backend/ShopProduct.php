@@ -116,13 +116,13 @@ class ShopProduct extends MainShopProduct
      */
     public function updateOrCreate(array $attributes, array $values = [])
     {
-        DB::beginTransaction();
-        try {
-            $instance = $this->firstOrNew($attributes);
-            $instance->fill($values);
-            $validate = $instance->validate($instance->attributes);
-            $instance->processingSave($values);
-            if ($validate->passes()) {
+        $instance = $this->firstOrNew($attributes);
+        $instance->fill($values);
+        $validate = $instance->validate($instance->attributes);
+        $instance->processingSave($values);
+        if ($validate->passes()) {
+            DB::beginTransaction();
+            try {
                 $instance->save();
                 $instance->processingImages($values);
                 $instance->processingDiscount($values);
@@ -130,24 +130,24 @@ class ShopProduct extends MainShopProduct
                 $instance->processingDetail($values);
                 $instance->processingCategory($values);
                 $instance->updateAfterSave($values);
-            } else {
-                return $validate->getMessageBag();
+                DB::commit();
+                return $instance;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
             }
-
-            if(!empty($instance->errors)){
-    //                $messageBag = new \Illuminate\Support\MessageBag();
-                $messageBag = $validate->getMessageBag();
-                foreach($instance->errors as $error){
-                    $messageBag->merge($error->getMessages());
-                }
-                return $validate->getMessageBag();
-            }
-            DB::commit();
-            return $instance;
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
+        } else {
+            return $validate->getMessageBag();
         }
+        if(!empty($instance->errors)){
+//                $messageBag = new \Illuminate\Support\MessageBag();
+            $messageBag = $validate->getMessageBag();
+            foreach($instance->errors as $error){
+                $messageBag->merge($error->getMessages());
+            }
+            return $validate->getMessageBag();
+        }
+
     }
 
     /**
