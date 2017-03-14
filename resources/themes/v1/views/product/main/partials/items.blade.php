@@ -2,6 +2,7 @@
     <?php
     $url = route('product.detail', ['id'=>$product->id, 'slug'=>str_slug($product->name)]);
     $details = $product->getDetailsGroupBySize();
+    $price = $product->getPriceDefault();
     ?>
     <div class="col-lg-3 col-xs-6 col-md-4">
         <div class="product__item">
@@ -30,7 +31,7 @@
                             <p class="product-name text-uper">{{$product->name}}</p>
                             <p class="product-type text-uper">{{$product->color}}</p>
                         </div>
-                        <p class="product-price">đ {{number_format($product->price, 0)}}</p>
+                        <p class="product-price">đ {{number_format($price, 0)}}</p>
 
                     </div>
                 </div>

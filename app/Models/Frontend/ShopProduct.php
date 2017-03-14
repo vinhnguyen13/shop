@@ -82,7 +82,12 @@ class ShopProduct extends MainShopProduct
         return false;
     }
 
-    public function checkout(){
-
+    public function getPriceDefault($direction = 'asc'){
+        $price = 0;
+        $productDetailDefault = $this->getDetailsDefault($direction = 'asc');
+        if(!empty($productDetailDefault)){
+            $price = $productDetailDefault->price;
+        }
+        return $price;
     }
 }

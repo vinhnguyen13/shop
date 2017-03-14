@@ -66,6 +66,8 @@ class ShopProductDetail extends MainShopProductDetail
                     return app(self::class)->getStockStatus($item->stock_status_id);
                 }
             ],
+            'created_at',
+            'updated_at',
             'custom_column' => [
                 'custom' => true,
                 'label' => 'Action',

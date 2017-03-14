@@ -18,7 +18,34 @@ class ShopOrder extends MainShopOrder
                 'filter' => 'like',
             ],
             'order_status_id',
-            'total',
+            'total_price' => [
+                'filter' => false,
+                'format' => function($item){
+                    $html = number_format($item->total_price);
+                    return $html;
+                }
+            ],
+            'total_tax' => [
+                'filter' => false,
+                'format' => function($item){
+                    $html = number_format($item->total_tax);
+                    return $html;
+                }
+            ],
+            'total_shipping' => [
+                'filter' => false,
+                'format' => function($item){
+                    $html = number_format($item->total_shipping);
+                    return $html;
+                }
+            ],
+            'total' => [
+                'filter' => false,
+                'format' => function($item){
+                    $html = number_format($item->total);
+                    return $html;
+                }
+            ],
             'created_at',
             'updated_at',
         ]);

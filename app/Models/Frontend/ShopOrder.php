@@ -45,8 +45,7 @@ class ShopOrder extends Model
             if ($validate->passes() && empty($instance->errors)) {
                 $instance->save();
                 $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
-                $record = $this->find($instance->id);
-                $record->update(['invoice_code'=>$invID]);
+                $instance->update(['invoice_code'=>$invID]);
                 /*
                  * Save shop_order_product
                  */
@@ -57,10 +56,10 @@ class ShopOrder extends Model
                         $price = $productDetail->getPrice();
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id'=>$record->id, 'product_id'=>$product->id]);
+                        $orderProduct = ShopOrderProduct::where(['order_id'=>$instance->id, 'product_id'=>$product->id]);
                         if(empty($orderProduct->id)){
                             $orderProduct = new ShopOrderProduct();
-                            $orderProduct->order_id = $record->id;
+                            $orderProduct->order_id = $instance->id;
                             $orderProduct->product_id = $product->id;
                         }
                         $orderProduct->supplier_id = $productDetail->supplier_id;
@@ -128,13 +127,21 @@ class ShopOrder extends Model
             }
         }
         /*
-         *  Save Order
+         *  Calculator price of order
+         *  Pay at Store: no ship
          */
         $total_price = 0;
         $total_tax = 0;
         $total = 0;
-        $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
-        $total_shipping = $shipFee->value;
+        $total_shipping = 0;
+        echo "<pre>";
+        print_r($values['payment_method']);
+        echo "</pre>";
+        exit;
+        if($values['payment_method'] == ShopPayment::KEY_PAYATSTORE){
+            $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
+            $total_shipping = $shipFee->value;
+        }
         $carts = app(ShopProduct::class)->getCart();
         if(!empty($carts)){
             foreach($carts as $productDetailID=>$item){
