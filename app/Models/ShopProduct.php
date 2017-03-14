@@ -170,4 +170,24 @@ class ShopProduct extends Model
         return $query->first();
     }
 
+    public function updateStockByIds($ids){
+        if(!empty($ids)){
+            foreach($ids as $id){
+                $product = self::find($id);
+                $product->updateStock();
+            }
+        }
+    }
+
+    public function updateStock(){
+        $stock_in = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->count();
+        $stock_in_count = $stock_in ? $stock_in : 0;
+        $stock_out = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_OUT_OF_STOCK])->count();
+        $stock_out_count = $stock_out ? $stock_out : 0;
+        $this->update([
+            'stock_in'=>$stock_in_count,
+            'stock_out'=>$stock_out_count
+        ]);
+    }
+
 }

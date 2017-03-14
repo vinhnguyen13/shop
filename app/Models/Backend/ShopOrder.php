@@ -21,7 +21,9 @@ class ShopOrder extends MainShopOrder
             'order_status_id' => [
                 'filter' => false,
                 'format' => function($item){
+                    $count = ShopOrderProduct::query()->where(['order_id'=>$item->id])->count();
                     $html = ShopOrderStatus::getStatus($item->order_status_id);
+                    $html .= '<p class="help-block small">'.\Html::link(route('admin.order-product.index', ['order_id'=>$item->id]), 'Products: '.$count, ['target'=>'_blank']).'</p>';
                     return $html;
                 }
             ],
@@ -53,6 +55,7 @@ class ShopOrder extends MainShopOrder
                     return $html;
                 }
             ],
+
             'created_at',
             'updated_at',
         ]);

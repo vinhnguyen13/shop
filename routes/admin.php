@@ -122,6 +122,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
         Route::get('/order/delete/{id}', ['uses' => 'OrderController@delete', 'as'=>'admin.order.delete']);
         /*
+         * Order
+         */
+        Route::get('/order-product', ['uses' => 'OrderProductController@index', 'as'=>'admin.order-product.index']);
+        /*
          * Revenue
          */
         Route::any('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);

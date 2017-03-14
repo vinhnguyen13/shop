@@ -49,6 +49,7 @@ class ShopOrder extends Model
                 /*
                  * Save shop_order_product
                  */
+                $pids = null;
                 if(!empty($carts)){
                     foreach($carts as $productID_detailID=>$item){
                         $productDetail = ShopProductDetail::find($item['detailID']);
@@ -78,8 +79,10 @@ class ShopOrder extends Model
                         $orderProduct->reward = 0;
                         $orderProduct->save();
                         $productDetail->updateOutOfStock();
+                        $pids[] = $product->id;
                     }
                 }
+                app(ShopProduct::class)->updateStockByIds($pids);
                 app(ShopProduct::class)->removeCartAll();
                 DB::commit();
                 /**
