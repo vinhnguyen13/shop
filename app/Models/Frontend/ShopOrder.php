@@ -134,11 +134,7 @@ class ShopOrder extends Model
         $total_tax = 0;
         $total = 0;
         $total_shipping = 0;
-        echo "<pre>";
-        print_r($values['payment_method']);
-        echo "</pre>";
-        exit;
-        if($values['payment_method'] == ShopPayment::KEY_PAYATSTORE){
+        if($values['payment_method'] != ShopPayment::KEY_PAYATSTORE){
             $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
             $total_shipping = $shipFee->value;
         }
