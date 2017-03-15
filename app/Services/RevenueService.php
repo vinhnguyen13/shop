@@ -20,7 +20,7 @@ class RevenueService
         $query = ShopOrderProduct::query();
         $query->where(['order_status_id'=>ShopOrderStatus::STT_COMPLETE]);
         if(!empty($params['from_date']) & !empty($params['to_date'])){
-            $query->whereBetween('created_at', [$params['from_date'], $params['to_date']]);
+            $query->whereBetween('created_at', [date("Y-m-d", strtotime($params['from_date']) ), date("Y-m-d", strtotime($params['to_date']) )]);
         }
         if(!empty($params['supplier'])){
             $query->whereIn('supplier_id', [$params['supplier']]);
