@@ -38,6 +38,7 @@
                         </form>
                     </div>
                 </div><!-- /.box-body -->
+                <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
             </div>
             <div class="box-body-grid">
                 @include('revenue.partials.grid-revenue')
@@ -82,12 +83,11 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="col-xs-12">
-                                {{--@include('revenue.partials.grid-payment-consignment')--}}
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Print & Update Payment Status</button>
+                        <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print & Update Payment Status</button>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <!-- /.Modal -->
     </div>
 
-
+    <div id="iframeplaceholder"></div>
 @endsection
 
 @push('styles')
@@ -187,6 +187,23 @@
                 });
             }
         });
+
+        $('.wrapRevenue').on('click', '.btn-print', function (e) {
+            var url = urlDebtPaymentDueDate+'?print=1';
+            loadiFrame(url);
+            $("#myiframe").load(
+                    function() {
+                        window.frames['myname'].focus();
+                        window.frames['myname'].print();
+                    }
+            );
+//            var _window = window.open(url);
+//            _window.window.print();
+        });
+        function loadiFrame(src)
+        {
+            $("#iframeplaceholder").html("<iframe id='myiframe' style='display:none;' name='myname' src='" + src + "' />");
+        }
     });
 </script>
 @endpush

@@ -25,7 +25,10 @@ class RevenueController extends Controller
         $all = Input::all();
         $orders = app(RevenueService::class)->gridDebtPaymentDueDate($all);
         if ($request->ajax()) {
-            return view('revenue.partials.grid-payment-consignment', compact('orders'));
+            return view('revenue.partials.grid-debt-payment-due-date', compact('orders'));
+        }
+        if($request->get('print')){
+            return view('revenue.print.grid-debt-payment-due-date', compact('orders'));
         }
     }
 
