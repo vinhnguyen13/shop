@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Glab') }}</title>
     {!! $metaHTML or '' !!}
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/bootstrap.min.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/reset.min.css?v='.$version_deploy) }}">
