@@ -1775,3 +1775,36 @@ button.close {
 .reciept__layout .reciep__content .fs-14 {
     font-size: 12px;
 }
+
+.print__a5 {
+    max-width: 800px;
+    margin: 50px auto 0;
+    border: 1px solid #ddd;
+    padding: 20px 25px 50px;
+}
+.print__a5 table {
+    width: 100%;
+}
+.print__a5 table thead {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.print__a5 table td {
+    font-size: 13px;
+    padding: 8px 10px;
+}
+.print__a5 table thead td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+button {
+    display: inline-block;
+    border: none;
+    background: #000;
+    color: #fff;
+    font-family: "sfu_daxcondensedmedium";
+    padding: 3px 25px;
+}
+button:hover {
+    opacity: .8;
+}
