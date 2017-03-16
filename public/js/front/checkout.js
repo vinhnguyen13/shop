@@ -28,7 +28,6 @@ $(document).ready(function(){
         var stepActive = $('.'+stepCheckout+':not(.hide)');
         var stepTotal = $('.'+stepCheckout).length;
         var form = $('#orderForm');
-        $('.'+wrapCheckout).trigger('checkout/func/validate', [form]);
 
         if(button.hasClass(btnBack)){
             var stepFuture = stepActive.prev();
@@ -191,39 +190,6 @@ $(document).ready(function(){
         var quantity = $(this).val();
         console.log(detail);
         $('.'+wrapCheckoutUser).trigger('checkout/func/updateCart', [detail, quantity]);
-    });
-
-    $('.'+wrapCheckout).bind('checkout/func/validate', function (event, form) {
-        var data = form.serializeArray();
-        if(data.length > 0){
-            $.each(data, function(index, value){
-                var element = $('input[name="'+value.name+'"]');
-                var required = element.attr('required');
-                $('.'+wrapCheckout).trigger('location/bookVisit/cleanError', [element]);
-                if(required){
-                    if(!element.val()){
-                        sttError = true;
-                        $('.'+wrapCheckout).trigger('location/bookVisit/displayError', [element, 'Please fill data.']);
-                    }
-                }
-            });
-        }
-    });
-
-    $('.'+wrapCheckout).bind('location/bookVisit/displayError', function (event, element, message) {
-        if(element){
-            var parent = element.parent();
-            parent.addClass('has-error');
-            parent.append('<div class="error">'+message+'</div>');
-        }
-    });
-
-    $('.'+wrapCheckout).bind('location/bookVisit/cleanError', function (event, element) {
-        if(element){
-            var parent = element.parent();
-            parent.removeClass('has-error');
-            parent.find('.error').remove();
-        }
     });
 
     $('.'+wrapCheckoutUser).bind('checkout/func/updateCart', function (event, detail, quantity) {
