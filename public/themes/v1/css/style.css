@@ -85,7 +85,7 @@ body.active:before {
     font-family: "sfu_daxcondensedmedium";
     font-size: 15px;
     padding: 10px 30px 10px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     margin-bottom: 30px;
     background: #000;
     color: #fff;
@@ -819,6 +819,7 @@ footer {
 .products {
     margin: 0;
     padding-top: 70px;
+    padding-bottom: 50px;
 }
 
 .products > div {
@@ -1728,4 +1729,49 @@ button.close {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+.reciep {
+    width: 70%;
+    margin: 0 auto 0;
+    padding: 150px 0;
+}
+.reciep__top {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.reciep__logo {
+    display: inline-block;
+    width: 80px;
+    margin-bottom: 15px;
+}
+.reciep__content h2 {
+    font-size: 17px;
+    font-family: "sfu_daxcondensedextrabold";
+    text-align: center;
+    letter-spacing: 1.4px;
+    margin-bottom: 25px;
+}
+.reciep__content--items {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+.reciep__content--items .overflow-all {
+    text-align: right;
+}
+.reciep__content--items > div {
+    padding: 5px 0;
+}
+.reciept__layout {
+    max-width: 340px;
+    padding: 30px 20px;
+    border: 1px solid #ddd;
+    margin: 50px auto;
+}
+.reciept__layout .reciep__top {
+    margin-bottom: 20px;
+}
+.reciept__layout .reciep__content .fs-14 {
+    font-size: 12px;
 }

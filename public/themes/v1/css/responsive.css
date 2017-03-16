@@ -376,6 +376,13 @@
     .products {
         padding-top: 30px;
     }
+    .reciep {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
 }
 
 @media (max-width: 320px) {}
