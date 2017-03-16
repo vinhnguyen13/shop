@@ -51,4 +51,8 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
      * Location
      */
     Route::post('/location', ['uses' => 'HomeController@location'])->name('home.location');
+    /*
+     * Static page
+     */
+    Route::get('/about', ['uses' => 'PageController@about'])->name('page.about');
 });

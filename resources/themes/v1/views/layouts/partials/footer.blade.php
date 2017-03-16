@@ -9,7 +9,7 @@
                 <li><a href="">store</a></li>
                 <li><a href="">CONSIGNMENT</a></li>
                 <li><a href="">consigment</a></li>
-                <li><a href="">ABOUT US</a></li>
+                <li><a href="{{route('page.about')}}">ABOUT US</a></li>
                 <li><a href="">LOCATION</a></li><li><a href="">POLICY &amp; TERM</a></li>
             </ul>
 
