@@ -55,4 +55,5 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
      * Static page
      */
     Route::get('/about', ['uses' => 'PageController@about'])->name('page.about');
+    Route::get('/scanner-barcode', ['uses' => 'PageController@scannerBarcode'])->name('page.scanner-barcode');
 });
