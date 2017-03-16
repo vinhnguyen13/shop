@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var textButtonStep = ['Next', 'Next', 'Checkout'];
     var wrapCheckoutUser = 'checkout__infor__user';
+    var wrapCheckoutShipping = 'checkout__infor__shipping';
     var wrapCheckout = 'wrap-checkout';
     var wrapCheckoutUserShipping = 'checkout__infor__user__shipping';
     var wrapCheckoutUserBilling = 'checkout__infor__user__billing';
@@ -73,7 +74,7 @@ $(document).ready(function(){
     });
 
 
-    $('.'+wrapCheckoutUser).on('change', '.select-city, .select-district', function(){
+    $('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){
         $(this).loading({inside_right: true});
         var timer = 0;
         var child = $(this).attr('data-child');
@@ -148,7 +149,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data.code == 0) {
                         $('body').loading({remove: true});
-                        var redirect = urlPaymentSuccess+'?order=';
+                        var redirect = urlPaymentSuccess+'?order='+data.return.id;
                         window.location.href = redirect;
                     }else{
                         console.log(data.message);

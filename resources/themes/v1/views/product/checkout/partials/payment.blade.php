@@ -5,7 +5,7 @@
             <input name="payment_method" type="radio" value="PayAtStore" checked>PAY AT STORE
         </label>
     </div>
-    <div class="mgB-10">
+    <div class="mgB-10 hide">
         <div class="pull-right">
             <span class="icon-v-i-s-a mgR-10 fs-20"></span>
             <span class="icon-m-a-s-t-e-r mgR-10 fs-20"></span>
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="mgB-10">
+    <div class="mgB-10 hide">
         <label for="" class="frm">
             <input name="payment_method" type="radio" value="IB_ONLINE">INTERNET BANKING
         </label>

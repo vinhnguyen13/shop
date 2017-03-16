@@ -3,7 +3,7 @@
 @section('content')
     <div class="reciep">
         <div class="reciep__top">
-            <a href="" class="reciep__logo"><img src="icons/logo-footer.svg" alt=""></a>
+            <a href="" class="reciep__logo"><img src="/themes/v1/icons/logo-footer.svg" alt=""></a>
             <p class="fontSFURe fs-13 mgB-5 font-600">135/58 Trần Hưng Đạo , District 1, HCM city , Việt Nam.</p>
             <p class="fontSFURe fs-13 mgB-15 font-600">glab.vn@gmail.com  -   094 537 88 09</p>
             <p class="fontSFURe fs-13 font-600">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
