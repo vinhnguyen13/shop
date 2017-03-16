@@ -159,14 +159,15 @@ class ShopOrder extends Model
         /*
          * Save infomation custommer
          */
-        $customer = ShopCustomer::query()->where(['email'=>$values['email']])->orWhere(['phone'=>$values['shipping_phone']])->toSql();
+        $email = !empty($user->email) ? $user->email : $values['email'];
+        $customer = ShopCustomer::query()->where(['email'=>$email])->orWhere(['phone'=>$values['shipping_phone']])->toSql();
         if(empty($customer->id)){
             $customer = new ShopCustomer();
             $customer->fill([
                 'customer_group_id'=>1,
                 'user_id'=>auth()->id(),
                 'name'=>$values['shipping_name'],
-                'email'=>$values['email'],
+                'email'=>$email,
                 'address'=>$values['shipping_address'],
                 'country_id'=>self::COUNTRY_VN,
                 'city_id'=>$values['shipping_city_id'],

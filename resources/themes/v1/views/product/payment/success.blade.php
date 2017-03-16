@@ -1,12 +1,79 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="text-center">
-            <div class="alert alert-info fade in alert-dismissable">
-                <h4><i class="icon fa fa-warning"></i> Đặt hàng!</h4>
-                <p>Bạn đã đặt hàng thành công</p>
+    <div class="reciep">
+        <div class="reciep__top">
+            <a href="" class="reciep__logo"><img src="icons/logo-footer.svg" alt=""></a>
+            <p class="fontSFURe fs-13 mgB-5 font-600">135/58 Trần Hưng Đạo , District 1, HCM city , Việt Nam.</p>
+            <p class="fontSFURe fs-13 mgB-15 font-600">glab.vn@gmail.com  -   094 537 88 09</p>
+            <p class="fontSFURe fs-13 font-600">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
+        </div>
+        <div class="reciep__content">
+            <h2>CUSTOMER RECEIPT</h2>
+            <p class="fontSFUMeBold fs-14 mgB-5">DATE/TIME:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">SERVED BY:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">INVOICE #:</p>
+            <div class="reciep__content--items">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
+                        <div>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
+                        </div>
+                    </div>
+                    <div class="overflow-all">
+                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
+                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
+                        <div>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
+                        </div>
+                    </div>
+                    <div class="overflow-all">
+                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
+                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
+                        <div>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
+                        </div>
+                    </div>
+                    <div class="overflow-all">
+                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
+                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
+                    </div>
+                </div>
             </div>
+            <div class="row mgB-20">
+                <div class="col-xs-6 text-right">
+                    <p class="fontSFUBold fs-14">SUBTOTAL</p>
+                    <p class="fontSFUBold fs-14">DISCOUNT AMOUNT</p>
+                    <p class="fontSFUBold fs-14">TOTAL</p>
+                    <p class="fontSFUBold fs-14">PAY BY</p>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <p class="fontSFUBold fs-14">42.000.000 đ</p>
+                    <p class="fontSFUBold fs-14">0.0 đ</p>
+                    <p class="fontSFUBold fs-14">42.000.000 đ</p>
+                    <p class="fontSFUBold fs-14">CASH</p>
+                </div>
+            </div>
+            <p class="fontSFUMeBold fs-14 mgB-5">CUSTOMER:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">EMAIL:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">PHONE:</p>
+            <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">NOTICE!!!</p>
+            <p class="fontSFURe fs-13 font-600 text-center mgB-40">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
+            <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">THANK YOU AND HOPE YOU HAD GREAT SHOPPING EXPERIENCE</p>
         </div>
     </div>
 @endsection

@@ -19,7 +19,10 @@
                         <p class="fontSFURe">094 537 88 09</p>
                     </div>
                 </div>
-                @include('product.checkout.partials.info')
+                @if (Auth::guard('web')->guest())
+                    @include('product.checkout.partials.member')
+                @endif
+                @include('product.checkout.partials.shipping-info')
                 @include('product.checkout.partials.payment')
             </div>
             @else
@@ -47,6 +50,7 @@
         var urlLocation = "{{route('home.location')}}";
         var urlPaymentSuccess = "{{route('product.payment.success')}}";
         var urlPaymentFail = "{{route('product.payment.fail')}}";
+        var urlLogin = "{{route('login')}}";
     </script>
     <script src="{!! asset('js/front/checkout.js')  !!}"></script>
 @endpush

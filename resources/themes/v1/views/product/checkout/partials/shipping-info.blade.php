@@ -1,43 +1,12 @@
-<div class="checkout__infor__user step-checkout">
-    {{--USER--}}
-    <div class="checkout__checkuser">
-        <div class="row mgB-20">
-            <div class="col-sm-6">
-                <label for="" class="frm">
-                    <input type="radio" name="user-exist" value="1">LOG IN
-                </label>
-            </div>
-            <div class="col-sm-6">
-                <label for="" class="frm">
-                    <input type="radio" name="user-exist" value="0">REGISTER
-                </label>
-            </div>
-        </div>
-        <div class="frm-item has-error">
-            <input type="text" placeholder="EMAIL">
-            @if ($errors->has('email'))
-                <div class="error">{{ $errors->first('email') }}</div>
-            @endif
-        </div>
-        <div class="frm-item">
-            <input type="text" placeholder="PASSWORD">
-        </div>
-        <button>SIGN IN</button>
-    </div>
-    <label for="" class="frm">
-        <input type="radio">CHECK OUT AS GUEST
-    </label>
+<div class="checkout__infor__shipping step-checkout hide">
     {{--SHIPPING--}}
     <div class="checkout__infor__user__shipping">
         <p class="fontSFUBold mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
         <div class="frm-item">
-            <input name="shipping_name" placeholder="Họ Tên (*)" class="form-control" type="text">
+            <input name="shipping_name" required placeholder="Họ Tên (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
-            <input name="shipping_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
-        </div>
-        <div class="frm-item">
-            <input name="email" placeholder="E-Mail" class="form-control" type="text">
+            <input name="shipping_address" required placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
         </div>
         <div class="frm-item same-city">
             <?php
@@ -52,7 +21,7 @@
             {!! Form::select('shipping_ward_id', ['Phường/Xã'], null, ['class' => 'select-ward']) !!}
         </div>
         <div class="frm-item">
-            <input name="shipping_phone" placeholder="Điện thoại  (*)" class="form-control" type="text">
+            <input name="shipping_phone" required placeholder="Điện thoại  (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
             <textarea class="form-control" name="comment" placeholder="Lưu ý"></textarea>

@@ -1,19 +1,34 @@
 $(document).ready(function(){
-    var textButtonStep = ['Xác nhận', 'Thanh toán'];
+    var textButtonStep = ['Next', 'Next', 'Checkout'];
     var wrapCheckoutUser = 'checkout__infor__user';
-    var wrapCheckoutPayment = 'checkout__infor__payment';
+    var wrapCheckout = 'wrap-checkout';
     var wrapCheckoutUserShipping = 'checkout__infor__user__shipping';
     var wrapCheckoutUserBilling = 'checkout__infor__user__billing';
     var wrapCheckoutInfoProduct = 'checkout__inforpro';
     var stepCheckout = 'step-checkout';
     var btnBack = 'btn-back';
     var btnOrder = 'btn-order';
+    var btnAuthentication = 'btn-authentication';
     var _indexStep = 1;
+    var sttError;
 
-    $('.'+wrapCheckoutInfoProduct).on('click', '.btn-checkout', function(){
+    $('.'+stepCheckout+':first').removeClass('hide');
+
+    $('.'+wrapCheckout).on('click', 'input[name="user-exist"]', function(){
+        var userExist = $(this).val();
+        if(userExist == 1){
+            $('input[name="password"]').removeAttr('disabled');
+        }else{
+            $('input[name="password"]').attr('disabled', 'disabled');
+        }
+    });
+
+    $('.'+wrapCheckout).on('click', '.btn-checkout', function(){
         var button = $(this);
         var stepActive = $('.'+stepCheckout+':not(.hide)');
         var stepTotal = $('.'+stepCheckout).length;
+        var form = $('#orderForm');
+        $('.'+wrapCheckout).trigger('checkout/func/validate', [form]);
 
         if(button.hasClass(btnBack)){
             var stepFuture = stepActive.prev();
@@ -23,21 +38,37 @@ $(document).ready(function(){
             _indexStep++;
         }
         if(_indexStep == 1){
+            $('.'+btnOrder).addClass('hide');
             $('.'+btnBack).addClass('hide');
         }else{
+            $('.'+btnOrder).removeClass('hide');
             $('.'+btnBack).removeClass('hide');
         }
         $('.'+btnOrder).html(textButtonStep[_indexStep-1]);
         console.log(_indexStep);
-        if(_indexStep > stepTotal){
-            _indexStep--;
-            console.log('Pay');
-            var form = $('#orderForm').serialize();
-            $('.'+wrapCheckoutUser).trigger('checkout/func/order', [form]);
-        }else{
-            stepFuture.removeClass('hide');
-            stepActive.addClass('hide');
 
+        var userExist = $('input[name="user-exist"]:checked').val();
+        if(userExist == 1){
+            var email = $('input[name="email"]').val();
+            var password = $('input[name="password"]').val();
+            $.ajax({
+                type: "post",
+                url: urlLogin,
+                data: {email: email, password: password},
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        }else{
+            if(_indexStep > stepTotal){
+                _indexStep--;
+                console.log('Pay');
+                $('.'+wrapCheckoutUser).trigger('checkout/func/order', [form.serialize()]);
+            }else{
+                stepFuture.removeClass('hide');
+                stepActive.addClass('hide');
+
+            }
         }
         return false;
     });
@@ -160,6 +191,39 @@ $(document).ready(function(){
         var quantity = $(this).val();
         console.log(detail);
         $('.'+wrapCheckoutUser).trigger('checkout/func/updateCart', [detail, quantity]);
+    });
+
+    $('.'+wrapCheckout).bind('checkout/func/validate', function (event, form) {
+        var data = form.serializeArray();
+        if(data.length > 0){
+            $.each(data, function(index, value){
+                var element = $('input[name="'+value.name+'"]');
+                var required = element.attr('required');
+                $('.'+wrapCheckout).trigger('location/bookVisit/cleanError', [element]);
+                if(required){
+                    if(!element.val()){
+                        sttError = true;
+                        $('.'+wrapCheckout).trigger('location/bookVisit/displayError', [element, 'Please fill data.']);
+                    }
+                }
+            });
+        }
+    });
+
+    $('.'+wrapCheckout).bind('location/bookVisit/displayError', function (event, element, message) {
+        if(element){
+            var parent = element.parent();
+            parent.addClass('has-error');
+            parent.append('<div class="error">'+message+'</div>');
+        }
+    });
+
+    $('.'+wrapCheckout).bind('location/bookVisit/cleanError', function (event, element) {
+        if(element){
+            var parent = element.parent();
+            parent.removeClass('has-error');
+            parent.find('.error').remove();
+        }
     });
 
     $('.'+wrapCheckoutUser).bind('checkout/func/updateCart', function (event, detail, quantity) {
