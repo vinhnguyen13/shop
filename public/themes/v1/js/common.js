@@ -103,9 +103,9 @@ $(document).ready(function () {
         }else {
             $('.toggle__auth').removeClass('active');
             $('.auth__user').removeClass('show__auth--user');
-            _this.parent().addClass('show__sub--search');
             _this.addClass('active');
             $('#wrapper').addClass('header__mobi');
+            _this.parent().addClass('show__sub--search');
         }
         
 	});
@@ -114,6 +114,7 @@ $(document).ready(function () {
         $('.auth__user').removeClass('show__auth--user');
         $('.header__right--mbsearch').removeClass('active');
         $('form.search').removeClass('show__sub--search');
+        $('.toggle__auth').removeClass('active');
 	});
 
 	$('#menu li.has-sub > a').on('click', function (e) {

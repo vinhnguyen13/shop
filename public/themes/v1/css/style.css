@@ -321,6 +321,7 @@ header.active {
     display: inline-block;
     margin-left: 13px;
     vertical-align: middle;
+    z-index: 2;
 }
 
 .header__cart .dropdown__inner {
@@ -399,12 +400,7 @@ div.header__cart--item:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-}
-
-.header__left {
-    position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 #menu {
@@ -1131,73 +1127,6 @@ footer {
     font-size: 20px;
 }
 
-.header__left .dropdown {
-    display: none;
-    vertical-align: middle;
-    line-height: 100%;
-}
-
-.header__left .dropdown ul {
-    padding: 10px 0;
-}
-
-.header__left .dropdown li {
-    /* margin-bottom: 10px; */
-    padding: 0 10px;
-}
-
-.header__left .dropdown a {
-    margin: 0;
-    padding: 10px 0;
-    height: inherit;
-    line-height: 100%;
-    text-align: center;
-    display: block;
-    font-family: "sfu_daxcondensedmedium";
-    font-weight: bold;
-}
-
-.header__left .dropdown a span {
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.header__left .dropdown .btn-auth-go a {
-    color: #fff;
-    background: #dd5044;
-    border-radius: 3px;
-}
-
-.header__left .dropdown .btn-auth-go a span {
-    font-size: 18px;
-    vertical-align: middle;
-    position: relative;
-    top: -2px;
-    margin-right: 15px;
-}
-
-.header__left .dropdown .btn-auth-face a {
-    color: #fff;
-    background: #3b579d;
-    border-radius: 3px;
-}
-
-.header__left .dropdown .btn-auth-face a span {
-    position: relative;
-    margin-right: 15px;
-}
-
-.header__left .dropdown__inner {
-    right: inherit;
-    left: 0;
-    top: 49px;
-}
-
-.header__left .dropdown .btn-auth-face a:hover,
-.header__left .dropdown .btn-auth-go a:hover {
-    opacity: .7;
-}
-
 .checkout__inner {}
 
 .table-customize {
@@ -1810,4 +1739,37 @@ button {
 }
 button:hover {
     opacity: .8;
+}
+.header__left,
+.header__right {
+    position: relative;
+    z-index: 2;
+}
+.auth__user {
+    display: inline-block;
+    vertical-align: middle;
+}
+.auth__user ul {
+    overflow: hidden;
+    display: none;
+    opacity: 0;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+.show__auth--user ul {
+    opacity: 1;
+}
+.auth__user ul li {
+    float: left;
+    padding: 0 15px;
+}
+.auth__user ul li a {
+    font-family: "sfu_daxcondensedregular";
+    font-size: 12px;
+}
+.header__left .auth__user a {
+    margin: 0;
+}
+.header__left .toggle__auth {
+    
 }
