@@ -110,8 +110,12 @@ $(document).ready(function () {
         
 	});
 	hideElOutSite('.header__right .frm-icon, .header__right--mbsearch, .auth__user', function () {
+        var wWin = $(window).outerWidth();
+
 		$('#wrapper').removeClass('header__mobi');
-        $('.auth__user').removeClass('show__auth--user');
+        if (wWin <= 768) {
+            $('.auth__user').removeClass('show__auth--user');
+        }
         $('.header__right--mbsearch').removeClass('active');
         $('form.search').removeClass('show__sub--search');
         $('.toggle__auth').removeClass('active');
