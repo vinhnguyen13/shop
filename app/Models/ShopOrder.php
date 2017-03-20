@@ -38,4 +38,14 @@ class ShopOrder extends Model
         ];
     }
 
+    public function customer()
+    {
+        return $this->hasOne('App\Models\ShopCustomer', 'id', 'customer_id');
+    }
+
+    public function orderProducts()
+    {
+        return ShopOrderProduct::query()->where(['order_id'=>$this->id])->get();
+    }
+
 }

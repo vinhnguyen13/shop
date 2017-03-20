@@ -149,10 +149,11 @@ class ProductController extends Controller
 
     public function paySuccess(Request $request)
     {
-        $order = $request->get('order');
-        if(!empty($order)){
+        $orderID = $request->get('order');
+        if(!empty($orderID)){
+            $order = ShopOrder::find($orderID);
         }
-        return view('product.payment.success');
+        return view('product.payment.success', compact('order'));
     }
 
     public function payFail(Request $request)

@@ -10,49 +10,28 @@
         </div>
         <div class="reciep__content">
             <h2>CUSTOMER RECEIPT</h2>
-            <p class="fontSFUMeBold fs-14 mgB-5">DATE/TIME:</p>
-            <p class="fontSFUMeBold fs-14 mgB-5">SERVED BY:</p>
-            <p class="fontSFUMeBold fs-14 mgB-5">INVOICE #:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">DATE/TIME:{{$order->created_at}}</p>
+            {{--<p class="fontSFUMeBold fs-14 mgB-5">SERVED BY:</p>--}}
+            <p class="fontSFUMeBold fs-14 mgB-5">INVOICE #:{{$order->invoice_code}}</p>
+            <?php
+                $orderProducts = $order->orderProducts();
+            ?>
             <div class="reciep__content--items">
+                @foreach($orderProducts as $orderProduct)
                 <div class="clearfix">
                     <div class="pull-left">
-                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
+                        <p class="fontSFUBold fs-14">{{$orderProduct->product_name}}  (SKU : {{$orderProduct->sku}})</p>
                         <div>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
+                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
                         </div>
                     </div>
                     <div class="overflow-all">
-                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
-                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
+                        <p class="fontSFUBold fs-14">{{number_format($orderProduct->price)}} đ</p>
+                        {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
                     </div>
                 </div>
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
-                        <div>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
-                        </div>
-                    </div>
-                    <div class="overflow-all">
-                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
-                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
-                    </div>
-                </div>
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <p class="fontSFUBold fs-14">AIR MAX 1 PRM "ATMOS"  (SKU : BB4486)</p>
-                        <div>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : 9us</span>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: 1</span>
-                        </div>
-                    </div>
-                    <div class="overflow-all">
-                        <p class="fontSFUBold fs-14">14.000.000 đ</p>
-                        <p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="row mgB-20">
                 <div class="col-xs-6 text-right">
@@ -68,9 +47,9 @@
                     <p class="fontSFUBold fs-14">CASH</p>
                 </div>
             </div>
-            <p class="fontSFUMeBold fs-14 mgB-5">CUSTOMER:</p>
-            <p class="fontSFUMeBold fs-14 mgB-5">EMAIL:</p>
-            <p class="fontSFUMeBold fs-14 mgB-5">PHONE:</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">CUSTOMER: {{$order->customer->name}}</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">EMAIL: {{$order->customer->email}}</p>
+            <p class="fontSFUMeBold fs-14 mgB-5">PHONE:  {{$order->customer->phone}}</p>
             <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">NOTICE!!!</p>
             <p class="fontSFURe fs-13 font-600 text-center mgB-40">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
             <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">THANK YOU AND HOPE YOU HAD GREAT SHOPPING EXPERIENCE</p>
