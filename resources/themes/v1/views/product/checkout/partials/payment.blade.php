@@ -1,8 +1,15 @@
 <div class="checkout__infor__payment step-checkout">
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
+    @if($is_seller)
     <div class="mgB-10">
         <label for="" class="frm">
             <input name="payment_method" type="radio" value="PayAtStore" checked>PAY AT STORE
+        </label>
+    </div>
+    @endif
+    <div class="mgB-10">
+        <label for="" class="frm">
+            <input name="payment_method" type="radio" value="OrderOnline">ORDER ONLINE
         </label>
     </div>
     <div class="mgB-10 hide">

@@ -94,6 +94,8 @@ class ProductController extends Controller
 
     public function checkout(Request $request, $step)
     {
+        $user = auth()->user();
+        $is_seller = !empty($user->is_seller) ? $user->is_seller : 0;
         $nextStep = app(Payment::class)->nextStep($step);
         $view = app(Payment::class)->viewByStep($step);
         $cart = app(Payment::class)->getCart();
@@ -127,7 +129,7 @@ class ProductController extends Controller
                 return redirect(route('product.payment.success', ['order'=>$return->id]));
             }
         }
-        return view('product.checkout.index', compact('cart', 'step', 'view'));
+        return view('product.checkout.index', compact('cart', 'step', 'is_seller', 'view'));
     }
 
     public function order(Request $request)

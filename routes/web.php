@@ -18,15 +18,15 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     /*
      * User authencation
      */
-    Route::get('/login', ['uses' => '\App\Http\Controllers\Auth\LoginController@showLoginForm', 'as' => 'login']);
-    Route::post('/login', ['uses' => '\App\Http\Controllers\Auth\LoginController@login', 'as' => 'login']);
-    Route::any('/logout', ['uses' => '\App\Http\Controllers\Auth\AuthController@logout', 'as' => 'logout']);
-    Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@showRegistrationForm', 'as' => 'register']);
-    Route::post('/register', ['uses' => '\App\Http\Controllers\Auth\RegisterController@register', 'as' => 'register.store']);
-    Route::get('/password/forgot', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm', 'as' => 'password.form']);
-    Route::post('/password/email', ['uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail', 'as' => 'password.sendResetLinkEmail']);
-    Route::get('/password/reset/{token}', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@showResetForm', 'as' => 'password.showResetForm']);
-    Route::post('/password/reset', ['uses' => '\App\Http\Controllers\Auth\ResetPasswordController@reset', 'as' => 'password.reset']);
+    Route::get('/login', ['uses' => '\App\Http\Controllers\Frontend\Auth\LoginController@showLoginForm', 'as' => 'login']);
+    Route::post('/login', ['uses' => '\App\Http\Controllers\Frontend\Auth\LoginController@login', 'as' => 'login']);
+    Route::any('/logout', ['uses' => '\App\Http\Controllers\Frontend\Auth\AuthController@logout', 'as' => 'logout']);
+    Route::get('/register', ['uses' => '\App\Http\Controllers\Frontend\Auth\RegisterController@showRegistrationForm', 'as' => 'register']);
+    Route::post('/register', ['uses' => '\App\Http\Controllers\Frontend\Auth\RegisterController@register', 'as' => 'register.store']);
+    Route::get('/password/forgot', ['uses' => '\App\Http\Controllers\Frontend\Auth\ForgotPasswordController@showLinkRequestForm', 'as' => 'password.form']);
+    Route::post('/password/email', ['uses' => '\App\Http\Controllers\Frontend\Auth\ForgotPasswordController@sendResetLinkEmail', 'as' => 'password.sendResetLinkEmail']);
+    Route::get('/password/reset/{token}', ['uses' => '\App\Http\Controllers\Frontend\Auth\ResetPasswordController@showResetForm', 'as' => 'password.showResetForm']);
+    Route::post('/password/reset', ['uses' => '\App\Http\Controllers\Frontend\Auth\ResetPasswordController@reset', 'as' => 'password.reset']);
     Route::get('/user/confirm-login/{id}/{code}', ['uses' => 'UserController@confirmLogin', 'as' => 'user.confirmLogin']);
     /*
      *  Socialite authencation
