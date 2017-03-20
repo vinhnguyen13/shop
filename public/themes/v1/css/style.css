@@ -961,7 +961,7 @@ footer {
 
 .breakcum li {
     display: inline-block;
-    margin: 0 8px;
+    margin: 0 3px;
 }
 
 .breakcum li a {
@@ -988,6 +988,10 @@ footer {
 
 .detail {
     padding-top: 100px;
+}
+
+.wrap-checkout {
+    padding-top: 50px;
 }
 
 .detail__img .slidedetailpage {
@@ -1257,6 +1261,7 @@ footer {
     width: 60%;
     padding-right: 100px;
     float: left;
+    padding-top: 40px;
 }
 
 .checkout__slect--payment {
@@ -1772,4 +1777,18 @@ button:hover {
 }
 .header__left .toggle__auth {
     
+}
+.btn__conti--pay,
+.btn__comp--order {
+    padding: 15px 0;
+    width: 50%;
+    font-size: 20px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.checkout__pd {
+    padding-top: 100px;
+}
+.checkout__pd .checkout__infor {
+    padding-top: 0;
 }
