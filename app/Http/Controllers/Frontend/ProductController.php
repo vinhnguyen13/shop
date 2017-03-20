@@ -19,7 +19,7 @@ class ProductController extends Controller
 {
     public function index(Request $request, $category=null)
     {
-        $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>30]);
+        $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>ShopProduct::PAGINATE]);
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function store(Request $request, $category=null)
     {
-        $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>30]);
+        $products = app(ShopProduct::class)->getList(['category'=>$category, 'limit'=>ShopProduct::PAGINATE]);
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }
@@ -37,7 +37,7 @@ class ProductController extends Controller
 
     public function brand(Request $request, $brand=null)
     {
-        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>30]);
+        $products = app(ShopProduct::class)->getList(['brand'=>$brand, 'limit'=>ShopProduct::PAGINATE]);
         if($request->ajax()) {
             return $this->loadMore($request, $products);
         }

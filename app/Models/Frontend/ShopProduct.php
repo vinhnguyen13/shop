@@ -12,6 +12,8 @@ use Session;
 
 class ShopProduct extends MainShopProduct
 {
+    const PAGINATE = 20;
+
     public function getList($params = array()){
         $query = ShopProduct::from('shop_product AS a');
         $query->where(['status'=>1]);
