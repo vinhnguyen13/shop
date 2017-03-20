@@ -11,6 +11,8 @@ use App\Helpers\AppHelper;
 use App\Models\Backend\ShopManufacturer;
 use App\Models\Frontend\ShopOrder;
 use App\Models\Frontend\ShopProduct;
+use App\Models\Frontend\User;
+use App\Services\Payment;
 use Illuminate\Http\Request;
 use Input;
 use Illuminate\Support\Facades\Redirect;
@@ -69,7 +71,7 @@ class ProductController extends Controller
         $quantity = $request->get('quantity');
         $detailID = $request->get('detail');
         $detailID = decrypt($detailID);
-        $cart = app(ShopProduct::class)->addCart($detailID, $quantity);
+        $cart = app(Payment::class)->addCart($detailID, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.main.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];
@@ -79,21 +81,53 @@ class ProductController extends Controller
     {
         $detailID = $request->get('detail');
         $detailID = decrypt($detailID);
-        $cart = app(ShopProduct::class)->removeCart($detailID);
+        $cart = app(Payment::class)->removeCart($detailID);
         return $cart;
     }
 
     public function cartUpdate(Request $request)
     {
-        $cart = app(ShopProduct::class)->getCart();
+        $cart = app(Payment::class)->getCart();
         $html = view('product.checkout.partials.products', compact('cart'))->render();
         return ['html'=>$html];
     }
 
-    public function checkout(Request $request)
+    public function checkout(Request $request, $step)
     {
-        $cart = app(ShopProduct::class)->getCart();
-        return view('product.checkout.index', compact('cart'));
+        $nextStep = app(Payment::class)->nextStep($step);
+        $view = app(Payment::class)->viewByStep($step);
+        $cart = app(Payment::class)->getCart();
+        if (!auth()->guest()){
+            $stepFirst = app(Payment::class)->isStep($step, 1);
+            if($stepFirst){
+                return redirect(route('product.checkout', ['step'=>$nextStep]));
+            }
+        }
+        if($request->isMethod('post')){
+            $input = \Input::all();
+            /*
+             * Login if exist account
+             */
+            if(!empty($input['password'])){
+                app(User::class)->login($input['email'], $input['password']);
+            }
+            app(Payment::class)->addCheckoutInfo($input);
+            if(!empty($nextStep)){
+                /*
+                 * Redirect next step
+                 */
+                return redirect(route('product.checkout', ['step'=>$nextStep]));
+            }else{
+                /*
+                 * Order with information all steps
+                 */
+                $checkoutInfo = app(Payment::class)->getCheckoutInfo();
+                unset($checkoutInfo['_token']);
+                $return = app(Payment::class)->processingSaveOrder([], $checkoutInfo);
+                return redirect(route('product.payment.success', ['order'=>$return->id]));
+            }
+        }
+        return view('product.checkout.index', compact('cart', 'step', 'view'));
     }
 
     public function order(Request $request)
@@ -101,7 +135,7 @@ class ProductController extends Controller
         if($request->isMethod('post')) {
             $input = \Input::all();
             unset($input['_token']);
-            $return = app(ShopOrder::class)->processingSaveOrder([], $input);
+            $return = app(Payment::class)->processingSaveOrder([], $input);
             if(!empty($return->id)){
                 return ['code'=>0, 'message'=>'', 'return'=>$return];
             }else{

@@ -46,4 +46,30 @@ class User extends MainUser
         }
     }
 
+    /**
+     * Login by email, password
+     * @param $email
+     * @param $password
+     * @return array
+     */
+    public function login($email, $password){
+        $user = User::query()->where('email', $email)->orWhere('username', $email)->first();
+        if(empty($user)){
+            return ['code'=>1, 'message'=>['email'=>trans('user.login.account_not_found')]];
+        }
+        if( !empty($user) &&  \Hash::check( $password, $user->getAuthPassword()) !== false) {
+            // Password is matching
+            \Auth::guard('web')->login($user);
+            return ['code'=>0, 'message'=>trans('user.login.success')];
+        } else {
+            // Password is not matching
+            return ['code'=>1, 'message'=>['password'=>trans('user.login.pass_not_match')]];
+        }
+        /*if (\Auth::attempt(['email' => $email, 'password' => $password])) {
+                    return redirect()->intended('/');
+                }*/
+        /*$chk = Auth::loginUsingId(1);;
+        Auth::guard('web')->user()*/
+    }
+
 }

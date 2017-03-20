@@ -24,7 +24,7 @@ $(document).ready(function(){
         }
     });
 
-    $('.'+wrapCheckout).on('click', '.btn-checkout', function(){
+    /*$('.'+wrapCheckout).on('click', '.btn-checkout', function(){
         var button = $(this);
         var stepActive = $('.'+stepCheckout+':not(.hide)');
         var stepTotal = $('.'+stepCheckout).length;
@@ -71,7 +71,7 @@ $(document).ready(function(){
             }
         }
         return false;
-    });
+    });*/
 
 
     $('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){

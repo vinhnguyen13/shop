@@ -1,8 +1,8 @@
-<div class="checkout__infor__user step-checkout hide">
+<div class="checkout__infor__user step-checkout">
     {{--USER--}}
     <div class="checkout__checkuser">
         <div class="frm-item has-error">
-            <input name="email" required type="text" placeholder="EMAIL">
+            <input name="email" type="text" placeholder="EMAIL">
             @if ($errors->has('email'))
                 <div class="error">{{ $errors->first('email') }}</div>
             @endif

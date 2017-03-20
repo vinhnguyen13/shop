@@ -1,4 +1,4 @@
-<div class="checkout__infor__payment step-checkout hide">
+<div class="checkout__infor__payment step-checkout">
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     <div class="mgB-10">
         <label for="" class="frm">
@@ -52,4 +52,5 @@
             <input name="payment_method" type="radio" value="IB_ONLINE">INTERNET BANKING
         </label>
     </div>
+    <button class="btn-submit-checkout btn-checkout btn-order">Next</button>
 </div>

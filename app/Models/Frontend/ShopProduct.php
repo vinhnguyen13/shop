@@ -8,7 +8,7 @@ use App\Models\Backend\ShopManufacturer;
 use App\Models\Backend\ShopCategory;
 use App\Models\ShopProduct as MainShopProduct;
 use DB;
-use Session;
+
 
 class ShopProduct extends MainShopProduct
 {
@@ -36,52 +36,6 @@ class ShopProduct extends MainShopProduct
         }
         $products = $query->orderBy('updated_at', 'DESC')->paginate($params['limit'], ['*'], 'page');
         return $products;
-    }
-
-    public function addCart($detailID, $quantity){
-        $item = [
-            'detailID'=>$detailID,
-            'quantity'=>$quantity,
-        ];
-        $cart = [];
-        if (Session::has('cart')) {
-            $cart = Session::get('cart');
-        }
-        if(!empty($cart[$detailID]) && $cart[$detailID]['detailID'] == $detailID){
-            $cart[$detailID]['quantity'] = $quantity;
-        }else{
-            $cart[$detailID] = $item;
-        }
-        Session::put('cart', $cart);
-        return $cart;
-
-    }
-
-    public function getCart(){
-        if (Session::has('cart')) {
-            $cart = Session::get('cart');
-            return $cart;
-        }
-        return false;
-    }
-
-    public function removeCart($detailID){
-        if (Session::has('cart')) {
-            $cart = Session::get('cart');
-            if(!empty($cart[$detailID])){
-                unset($cart[$detailID]);
-                Session::put('cart', $cart);
-                return $cart;
-            }
-        }
-       return false;
-    }
-
-    public function removeCartAll(){
-        if (Session::has('cart')) {
-            Session::remove('cart');
-        }
-        return false;
     }
 
     public function getPriceDefault($direction = 'asc'){

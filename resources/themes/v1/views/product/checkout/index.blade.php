@@ -3,7 +3,8 @@
 @section('content')
     <div class="container detail wrap-checkout">
         <div class="checkout__inner clearfix">
-            <form id="orderForm" action="">
+            <form id="orderForm" action="{{route('product.checkout', ['step'=>$step])}}" method="post">
+            {{ csrf_field() }}
             @if(!empty($cart))
             <div class="checkout__inforpro">
                 @include('product.checkout.partials.products')
@@ -19,11 +20,7 @@
                         <p class="fontSFURe">094 537 88 09</p>
                     </div>
                 </div>
-                @if (Auth::guard('web')->guest())
-                    @include('product.checkout.partials.member')
-                @endif
-                @include('product.checkout.partials.shipping-info')
-                @include('product.checkout.partials.payment')
+                @include('product.checkout.partials.'.$view)
             </div>
             @else
                 <div class="alert alert-info fade in alert-dismissable">

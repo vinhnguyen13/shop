@@ -1,12 +1,12 @@
-<div class="checkout__infor__shipping step-checkout hide">
+<div class="checkout__infor__shipping step-checkout">
     {{--SHIPPING--}}
     <div class="checkout__infor__user__shipping">
         <p class="fontSFUBold mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
         <div class="frm-item">
-            <input name="shipping_name" required placeholder="Họ Tên (*)" class="form-control" type="text">
+            <input name="shipping_name" placeholder="Họ Tên (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
-            <input name="shipping_address" required placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
+            <input name="shipping_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
         </div>
         <div class="frm-item same-city">
             <?php
@@ -21,7 +21,7 @@
             {!! Form::select('shipping_ward_id', ['Phường/Xã'], null, ['class' => 'select-ward']) !!}
         </div>
         <div class="frm-item">
-            <input name="shipping_phone" required placeholder="Điện thoại  (*)" class="form-control" type="text">
+            <input name="shipping_phone" placeholder="Điện thoại  (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
             <textarea class="form-control" name="comment" placeholder="Lưu ý"></textarea>
@@ -44,10 +44,10 @@
             </div>
         </div>
         <div class="frm-item">
-            <input name="billing_name" placeholder="Họ Tên" class="form-control" type="text">
+            <input name="billing_name" placeholder="Họ Tên (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
-            <input name="billing_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'." class="form-control" type="text">
+            <input name="billing_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'. (*)" class="form-control" type="text">
         </div>
         <div class="frm-item same-city">
             <?php
@@ -62,10 +62,11 @@
             {!! Form::select('billing_ward_id', ['Phường/Xã'], null, ['class' => 'select-ward']) !!}
         </div>
         <div class="frm-item">
-            <input name="billing_phone" placeholder="Điện thoại" class="form-control" type="text">
+            <input name="billing_phone" placeholder="Điện thoại (*)" class="form-control" type="text">
         </div>
         <div class="frm-item">
             <input name="billing_tax_code" placeholder="Mã số thuế" class="form-control" type="text">
         </div>
     </div>
+    <button class="btn-submit-checkout btn-checkout btn-order">Next</button>
 </div>
