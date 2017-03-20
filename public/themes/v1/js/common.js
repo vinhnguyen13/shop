@@ -1,6 +1,35 @@
 // JavaScript Document
 $(document).ready(function () {
 
+    $('.toggle__auth').on('click', function (e) {
+        e.preventDefault();
+        var _this = $(this),
+            wWin = $(window).outerWidth();
+
+        if ( wWin > 768 ) {
+            _this.hide();
+            _this.parent().find('ul').show();
+            setTimeout(function () {
+                _this.parent().addClass('show__auth--user');
+            }, 100);
+        }else {
+            if ( _this.hasClass('active') ) {
+                _this.removeClass('active');
+                _this.parent().removeClass('show__auth--user');
+                $('#wrapper').removeClass('header__mobi');
+            }else {
+
+                _this.addClass('active');
+                _this.parent().addClass('show__auth--user');
+                $('#wrapper').addClass('header__mobi');
+                $('form.search').removeClass('show__sub--search');
+                $('.header__right--mbsearch').removeClass('active');
+            }
+            
+        }
+        
+    });
+
     $('.header__left .dropdown').dropdown();
 
 	var hWindow,
@@ -65,10 +94,31 @@ $(document).ready(function () {
 
 	$('.header__right--mbsearch').on('click', function (e) {
 		e.preventDefault();
-        $('#wrapper').addClass('header__mobi');
+        var _this = $(this);
+
+        if ( _this.hasClass('active') ) {
+            _this.removeClass('active');
+            _this.parent().removeClass('show__sub--search');
+            $('#wrapper').removeClass('header__mobi');
+        }else {
+            $('.toggle__auth').removeClass('active');
+            $('.auth__user').removeClass('show__auth--user');
+            _this.addClass('active');
+            $('#wrapper').addClass('header__mobi');
+            _this.parent().addClass('show__sub--search');
+        }
+        
 	});
-	hideElOutSite('.header__right .frm-icon, .header__right--mbsearch, .header__left .dropdown', function () {
+	hideElOutSite('.header__right .frm-icon, .header__right--mbsearch, .auth__user', function () {
+        var wWin = $(window).outerWidth();
+
 		$('#wrapper').removeClass('header__mobi');
+        if (wWin <= 768) {
+            $('.auth__user').removeClass('show__auth--user');
+        }
+        $('.header__right--mbsearch').removeClass('active');
+        $('form.search').removeClass('show__sub--search');
+        $('.toggle__auth').removeClass('active');
 	});
 
 	$('#menu li.has-sub > a').on('click', function (e) {

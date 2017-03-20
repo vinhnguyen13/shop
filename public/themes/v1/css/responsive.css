@@ -61,12 +61,14 @@
 @media (max-width: 768px) {
     .header__mobi #container {
         margin-top: 75px;
+        z-index: 10;
     }
     .header__right--mbsearch {
         display: block;
         padding: 5px;
         vertical-align: middle;
-        z-index: 1;
+        z-index: 2;
+        position: relative;
     }
     .connect__items--item {
         width: 50%;
@@ -75,11 +77,13 @@
         position: absolute;
         z-index: 2;
         right: 0;
-        width: 250px;
         top: 60px;
-        display: none;
         left: 15px;
         right: 15px;
+        display: none;
+    }
+    .show__sub--search .frm-icon {
+        display: block;
     }
     .header__right .frm-icon input {
         width: 100%;
@@ -168,10 +172,6 @@
     }
     .search .frm-icon input {
     }
-    .header__right .frm-icon {
-        display: block;
-        width: auto;
-    }
     .checkout__final--tbl.table-responsive > tbody > tr td:before {
         font-size: 17px;
         font-family: "sfu_daxcondensedmedium";
@@ -191,7 +191,8 @@
     header {
         position: relative !important;
         transform: translate3d(0, 0, 0) !important;
-        z-index: 10;
+        z-index: 9;
+        height: 50px;
     }
     #wrapper {
         padding-top: 0;
@@ -204,10 +205,14 @@
         display: none;
     }
     #menu-open {
-        /* margin-top: 3px; */
+        z-index: 2;
+    }
+    .auth__user .toggle__auth {
+        position: relative;
+        z-index: 2;
     }
     .header__left {
-        position: static;
+        /* position: static; */
     }
     .header__left .dropdown__inner {
         position: static;
@@ -244,9 +249,36 @@
     }
     #container {
         position: relative;
-        z-index: 100;
         transition: margin-top .3s ease-out;
         background-color: #fff;
+    }
+    .header__left, .header__right {
+        position: static;
+        
+    }
+    .header__left {
+        left: 15px;
+    }
+    .header__right {
+        right: 15px;
+    }
+    .auth__user ul {
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        z-index: 3;
+        top: 60px;
+    }
+    .show__auth--user ul {
+        display: block;
+    }
+    .auth__user ul li {
+        padding: 0;
+        width: 50%;
+        text-align: center;
+    }
+    .auth__user ul li a {
+        font-size: 14px;
     }
 }
 
