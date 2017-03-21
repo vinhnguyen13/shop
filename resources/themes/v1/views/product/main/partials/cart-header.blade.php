@@ -7,12 +7,15 @@
         $tax = 0;
         $total = 0;
         ?>
-        @foreach($cart as $item)
+        @foreach($cart as $pid => $item)
             <?php
-                $productDetail = App\Models\Frontend\ShopProductDetail::find($item['detailID']);
+                $detailID = array_keys($item);
+                $detailID = $detailID[0];
+                $quantity = count($cart[$pid]);
+                $productDetail = App\Models\Frontend\ShopProductDetail::find($detailID);
                 $product = $productDetail->product;
                 $price = $productDetail->getPrice();
-                $subtotalProduct = $price * $item['quantity'];
+                $subtotalProduct = $price * $quantity;
                 $subtotal += $subtotalProduct;
                 $tax += $product->taxWithPrice($price);
             ?>
@@ -27,7 +30,7 @@
 
                     <p class="pull-right fontSFUBold fs-12">đ {{number_format($subtotalProduct)}}</p>
 
-                    <p class="text-uper fontSFUBold fs-12">Size: {{$productDetail->size}} - Quantity: {{$item['quantity']}}</p>
+                    <p class="text-uper fontSFUBold fs-12">Size: {{$productDetail->size}} - Quantity: {{$quantity}}</p>
                 </div>
             </a>
         @endforeach

@@ -11,8 +11,8 @@ $(document).ready(function () {
             }
         },
         closeWhenSelectVal: function (item, dropItem) {
-            $('#val-size').val( item.find('.detail__size').data('value') );
-            $('#val-price').val( item.find('.detail__price').data('value') );
+            $('#val-size').val( item.find('.detail__size').data('size') );
+            $('#val-product').val( item.find('.detail__size').data('product') );
 
             var itemSizeClone = item.find('.detail__size').clone(),
                 itemPriceClone = item.find('.detail__price').clone();
@@ -101,10 +101,10 @@ $(document).ready(function () {
     $(document).on('click', '.btn-buy', function (e) {
         $(this).loading({inside_right: true});
         var form = $('#frmAddCart');
-        var detail = $('input[name="detail"]').val();
-        if(detail){
+        var product = $('input[name="product"]').val();
+        if(product){
             var data = form.serializeArray();
-            data.push({name: "data", detail: detail});
+            data.push({name: "data", product: product});
             $.ajax({
                 type: "post",
                 url: urlAddCart,

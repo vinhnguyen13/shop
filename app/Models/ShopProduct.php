@@ -154,6 +154,7 @@ class ShopProduct extends Model
         $sub = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC');
         $details = ShopProductDetail::query()->select([
             'id',
+            'product_id',
             'size',
             'supplier_id',
             'price_in',
@@ -162,6 +163,12 @@ class ShopProduct extends Model
         ])->from(DB::raw("(".$sub->toSql().") as `sub`"))
             ->mergeBindings($sub->getQuery())
             ->groupBy(DB::raw("size"))->orderBy('size')->get();
+        return $details;
+    }
+
+    public function getDetailsForCheckout($limit = 1)
+    {
+        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC')->limit($limit)->get();
         return $details;
     }
 

@@ -43,11 +43,7 @@
         var urlRemoveCart = "{{route('product.cart.remove')}}";
         var urlUpdateCart = "{{route('product.cart.update')}}";
         var urlAddCart = "{{route('product.cart.add')}}";
-        var urlOrder = "{{route('product.order')}}";
         var urlLocation = "{{route('home.location')}}";
-        var urlPaymentSuccess = "{{route('product.payment.success')}}";
-        var urlPaymentFail = "{{route('product.payment.fail')}}";
-        var urlLogin = "{{route('login')}}";
     </script>
     <script src="{!! asset('js/front/checkout.js')  !!}"></script>
 @endpush

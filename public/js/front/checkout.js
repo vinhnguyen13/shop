@@ -105,20 +105,23 @@ $(document).ready(function(){
     });
 
     $('.'+wrapCheckoutInfoProduct).on('change', '.quantity_select', function(){
-        var detail = $(this).closest('.checkout__inforpro-detail').attr('data-product-detail');
+        var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
+        var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
         var quantity = $(this).val();
-        console.log(detail);
-        $('.'+wrapCheckoutUser).trigger('checkout/func/updateCart', [detail, quantity]);
+        console.log(product, size);
+        if(size && product){
+            $('.'+wrapCheckoutUser).trigger('checkout/func/updateCart', [product, size, quantity]);
+        }
     });
 
-    $('.'+wrapCheckoutUser).bind('checkout/func/updateCart', function (event, detail, quantity) {
+    $('.'+wrapCheckoutUser).bind('checkout/func/updateCart', function (event, product, size, quantity) {
         $(this).loading({inside_right: true});
         var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
                 url: urlAddCart,
-                data: {detail: detail, quantity: quantity},
+                data: {product: product, size: size, quantity: quantity},
                 success: function (data) {
                     if(data.total > 0){
                         if($('.header__cart .val-selected .header__cart--num').length > 0) {

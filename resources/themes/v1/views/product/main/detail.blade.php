@@ -42,12 +42,12 @@
                                             <ul>
                                                 @foreach($details as $detail)
                                                     @if (!empty($detail->size))
-                                                        <li><a href=""><span class="pull-right detail__price" data-value="{{$detail->getPrice()}}">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-value="{{encrypt($detail->id)}}">{{$detail->size}}</span></a></li>
+                                                        <li><a href=""><span class="pull-right detail__price">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-size="{{$detail->size}}" data-product="{{encrypt($detail->product_id)}}" data-detail="{{$detail->id}}">{{$detail->size}}</span></a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>
-                                            <input type="hidden" name="detail" id="val-size" value="">
-                                            <input type="hidden" name="price" id="val-price" value="">
+                                            <input type="hidden" name="size" id="val-size" value="">
+                                            <input type="hidden" name="product" id="val-product" value="">
                                             <input type="hidden" name="quantity" value="1">
                                         </div>
                                     </div>

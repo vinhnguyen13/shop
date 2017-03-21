@@ -71,9 +71,10 @@ class ProductController extends Controller
     public function cartAdd(Request $request)
     {
         $quantity = $request->get('quantity');
-        $detailID = $request->get('detail');
-        $detailID = decrypt($detailID);
-        $cart = app(Payment::class)->addCart($detailID, $quantity);
+        $size = $request->get('size');
+        $product = $request->get('product');
+        $productID = decrypt($product);
+        $cart = app(Payment::class)->addCart($productID, $size, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.main.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];
@@ -135,7 +136,11 @@ class ProductController extends Controller
                 $checkoutInfo = app(Payment::class)->getCheckoutInfo();
                 unset($checkoutInfo['_token']);
                 $return = app(Payment::class)->processingSaveOrder([], $checkoutInfo);
-                return redirect(route('product.payment.success', ['order'=>$return->id]));
+                if(!empty($return->id)){
+                    return redirect(route('product.payment.success', ['order'=>$return->id]));
+                }else{
+                    return Redirect::back();
+                }
             }
         }
         return view('product.checkout.index', compact('cart', 'step', 'is_seller', 'view'));

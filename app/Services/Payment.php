@@ -45,19 +45,23 @@ class Payment
      * @param $quantity
      * @return array|mixed
      */
-    public function addCart($detailID, $quantity){
-        $item = [
-            'detailID'=>$detailID,
-            'quantity'=>$quantity,
-        ];
+    public function addCart($productID, $size, $quantity){
+        $details = ShopProductDetail::query()->where(['product_id' => $productID, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC')->limit($quantity)->get();
         $cart = [];
         if (Session::has('cart')) {
             $cart = Session::get('cart');
         }
-        if(!empty($cart[$detailID]) && $cart[$detailID]['detailID'] == $detailID){
-            $cart[$detailID]['quantity'] = $quantity;
-        }else{
-            $cart[$detailID] = $item;
+        if(!empty($details)){
+            if($cart[$productID]){
+                unset($cart[$productID]);
+            }
+            foreach($details as $detail){
+                $item = [
+                    'detailID'=>$detail->id,
+                    'quantity'=>1,
+                ];
+                $cart[$productID][$detail->id] = $item;
+            }
         }
         Session::put('cart', $cart);
         return $cart;
@@ -171,11 +175,15 @@ class Payment
                  */
                 $pids = null;
                 if(!empty($carts)){
-                    foreach($carts as $productID_detailID=>$item){
-                        $productDetail = ShopProductDetail::find($item['detailID']);
+                    foreach($carts as $pid=>$item){
+                        $detailID = array_keys($item);
+                        $detailID = $detailID[0];
+                        $quantity = 1;
+
+                        $productDetail = ShopProductDetail::find($detailID);
                         $product = $productDetail->product;
                         $price = $productDetail->getPrice();
-                        $subtotalProduct = $price * $item['quantity'];
+                        $subtotalProduct = $price * $quantity;
                         $tax = $product->taxWithPrice($price);
                         $orderProduct = ShopOrderProduct::where(['order_id'=>$order->id, 'product_id'=>$product->id]);
                         if(empty($orderProduct->id)){
@@ -191,7 +199,7 @@ class Payment
                         $orderProduct->color = $product->color;
                         $orderProduct->sku = $productDetail->sku;
                         $orderProduct->size = $productDetail->size;
-                        $orderProduct->quantity = $item['quantity'];
+                        $orderProduct->quantity = $quantity;
                         $orderProduct->price_in = $productDetail->price_in;
                         $orderProduct->price = $productDetail->price;
                         $orderProduct->total = $subtotalProduct;
@@ -277,11 +285,15 @@ class Payment
         }
         $carts = $this->getCart();
         if(!empty($carts)){
-            foreach($carts as $productDetailID=>$item){
-                $productDetail = ShopProductDetail::find($item['detailID']);
+            foreach($carts as $pid=>$item){
+                $detailID = array_keys($item);
+                $detailID = $detailID[0];
+                $quantity = 1;
+
+                $productDetail = ShopProductDetail::find($detailID);
                 $product = $productDetail->product;
                 $price = $productDetail->getPrice();
-                $total_price += $price * $item['quantity'];
+                $total_price += $price * $quantity;
                 $total_tax += $product->taxWithPrice($price);
             }
             $total = $total_price + $total_shipping + $total_tax;

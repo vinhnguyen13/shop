@@ -8,27 +8,30 @@ $tax = 0;
 $total = 0;
 $quantities =[1=>1,2,3,4,5];
 ?>
-@foreach($cart as $item)
+@foreach($cart as $pid=>$item)
 <?php
-    $productDetail = App\Models\Frontend\ShopProductDetail::find($item['detailID']);
+    $detailID = array_keys($item);
+    $detailID = $detailID[0];
+    $quantity = count($cart[$pid]);
+    $productDetail = App\Models\Frontend\ShopProductDetail::find($detailID);
     $product = $productDetail->product;
     $price = $productDetail->getPrice();
-    $subtotalProduct = $price * $item['quantity'];
+    $subtotalProduct = $price * $quantity;
     $subtotal += $subtotalProduct;
     $tax += $product->taxWithPrice($price);
 ?>
-<div class="clearfix mgB-40 checkout__inforpro-detail" data-product-detail="{{encrypt($item['detailID'])}}">
+<div class="clearfix mgB-40 checkout__inforpro-detail" data-product="{{encrypt($productDetail->product_id)}}" data-size="{{$productDetail->size}}" data-detail="{{$productDetail->id}}">
     <div class="checkout__inforpro--img pull-left">
         <img src="{{$product->thumb()}}" alt="">
     </div>
     <div class="overflow-all">
         <a href="" class="pro-remove removeCart"><span class="icon-uniF335"></span></a>
         <p class="fontSFUMeBold fs-20">{!! $product->name !!}</p>
-        <p class="fontSFUMeBold fs-12"><em>SKU:</em> {{$productDetail->sku}}</p>
+        <p class="fontSFUMeBold fs-12"><em>SKU:</em> {{$product->sku_producer}}</p>
         <p class="fontSFUMeBold fs-12"><em>COLOR:</em> {{$product->color}}</p>
         <p class="fontSFUMeBold fs-12"><em>SIZE:</em> {{$productDetail->size}}</p>
         <p class="price__item">{{number_format($subtotalProduct)}} đ</p>
-        <p class="fontSFUMeBold fs-12">QTY: {!! Form::select('quantity_select', $quantities, $item['quantity'], ['class' => 'quantity_select']) !!}</p>
+        <p class="fontSFUMeBold fs-12">QTY: {!! Form::select('quantity_select', $quantities, $quantity, ['class' => 'quantity_select']) !!}</p>
     </div>
 </div>
 @endforeach
