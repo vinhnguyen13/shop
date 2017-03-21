@@ -39,7 +39,6 @@
                 @endforeach
             </div>
             @php
-            $subtotalProduct += $orderProduct->total;
             $total = $subtotalProduct + $totalShipping - $totalDiscount;
             @endphp
             <div class="row mgB-20">

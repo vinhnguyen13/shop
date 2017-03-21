@@ -1,5 +1,10 @@
 <div class="checkout__infor__payment step-checkout">
     <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
+    @if ($errors->has('payment_method'))
+        <div class="frm-item has-error">
+            <div class="error">{{ $errors->first('payment_method') }}</div>
+        </div>
+    @endif
     @if($is_seller)
     <div class="mgB-10">
         <label for="" class="frm">

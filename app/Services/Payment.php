@@ -52,7 +52,7 @@ class Payment
             $cart = Session::get('cart');
         }
         if(!empty($details)){
-            if($cart[$productID]){
+            if(!empty($cart[$productID])){
                 unset($cart[$productID]);
             }
             foreach($details as $detail){
@@ -175,41 +175,41 @@ class Payment
                  */
                 $pids = null;
                 if(!empty($carts)){
-                    foreach($carts as $pid=>$item){
-                        $detailID = array_keys($item);
-                        $detailID = $detailID[0];
-                        $quantity = 1;
+                    foreach($carts as $pid=>$itemDetails) {
+                        foreach($itemDetails as $detailID=>$item) {
+                            $quantity = 1;
 
-                        $productDetail = ShopProductDetail::find($detailID);
-                        $product = $productDetail->product;
-                        $price = $productDetail->getPrice();
-                        $subtotalProduct = $price * $quantity;
-                        $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id'=>$order->id, 'product_id'=>$product->id]);
-                        if(empty($orderProduct->id)){
-                            $orderProduct = new ShopOrderProduct();
-                            $orderProduct->order_id = $order->id;
-                            $orderProduct->product_id = $product->id;
+                            $productDetail = ShopProductDetail::find($detailID);
+                            $product = $productDetail->product;
+                            $price = $productDetail->getPrice();
+                            $subtotalProduct = $price * $quantity;
+                            $tax = $product->taxWithPrice($price);
+                            $orderProduct = ShopOrderProduct::where(['order_id' => $order->id, 'product_detail_id' => $detailID]);
+                            if (empty($orderProduct->id)) {
+                                $orderProduct = new ShopOrderProduct();
+                                $orderProduct->order_id = $order->id;
+                                $orderProduct->product_id = $product->id;
+                                $orderProduct->product_detail_id = $productDetail->id;
+                            }
+                            $orderProduct->order_status_id = $order->order_status_id;
+                            $orderProduct->supplier_id = $productDetail->supplier_id;
+                            $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
+                            $orderProduct->product_name = $product->name;
+                            $orderProduct->color = $product->color;
+                            $orderProduct->sku = $productDetail->sku;
+                            $orderProduct->size = $productDetail->size;
+                            $orderProduct->quantity = $quantity;
+                            $orderProduct->price_in = $productDetail->price_in;
+                            $orderProduct->price = $productDetail->price;
+                            $orderProduct->total = $subtotalProduct;
+                            $orderProduct->tax = $tax;
+                            $orderProduct->reward = 0;
+                            $orderProduct->save();
+                            if ($order->order_status_id == ShopOrderStatus::STT_COMPLETE) {
+                                $productDetail->updateOutOfStock();
+                            }
+                            $pids[] = $product->id;
                         }
-                        $orderProduct->order_status_id = $order->order_status_id;
-                        $orderProduct->supplier_id = $productDetail->supplier_id;
-                        $orderProduct->product_detail_id = $productDetail->id;
-                        $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
-                        $orderProduct->product_name = $product->name;
-                        $orderProduct->color = $product->color;
-                        $orderProduct->sku = $productDetail->sku;
-                        $orderProduct->size = $productDetail->size;
-                        $orderProduct->quantity = $quantity;
-                        $orderProduct->price_in = $productDetail->price_in;
-                        $orderProduct->price = $productDetail->price;
-                        $orderProduct->total = $subtotalProduct;
-                        $orderProduct->tax = $tax;
-                        $orderProduct->reward = 0;
-                        $orderProduct->save();
-                        if($order->order_status_id == ShopOrderStatus::STT_COMPLETE){
-                            $productDetail->updateOutOfStock();
-                        }
-                        $pids[] = $product->id;
                     }
                 }
                 if($order->order_status_id == ShopOrderStatus::STT_COMPLETE){
@@ -285,16 +285,16 @@ class Payment
         }
         $carts = $this->getCart();
         if(!empty($carts)){
-            foreach($carts as $pid=>$item){
-                $detailID = array_keys($item);
-                $detailID = $detailID[0];
-                $quantity = 1;
+            foreach($carts as $pid=>$itemDetails) {
+                foreach($itemDetails as $detailID=>$item) {
+                    $quantity = 1;
 
-                $productDetail = ShopProductDetail::find($detailID);
-                $product = $productDetail->product;
-                $price = $productDetail->getPrice();
-                $total_price += $price * $quantity;
-                $total_tax += $product->taxWithPrice($price);
+                    $productDetail = ShopProductDetail::find($detailID);
+                    $product = $productDetail->product;
+                    $price = $productDetail->getPrice();
+                    $total_price += $price * $quantity;
+                    $total_tax += $product->taxWithPrice($price);
+                }
             }
             $total = $total_price + $total_shipping + $total_tax;
         }
