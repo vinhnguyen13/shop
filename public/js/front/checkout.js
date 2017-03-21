@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var textButtonStep = ['Next', 'Next', 'Checkout'];
     var wrapCheckoutUser = 'checkout__infor__user';
     var wrapCheckoutShipping = 'checkout__infor__shipping';
     var wrapCheckout = 'wrap-checkout';
@@ -7,11 +6,6 @@ $(document).ready(function(){
     var wrapCheckoutUserBilling = 'checkout__infor__user__billing';
     var wrapCheckoutInfoProduct = 'checkout__inforpro';
     var stepCheckout = 'step-checkout';
-    var btnBack = 'btn-back';
-    var btnOrder = 'btn-order';
-    var btnAuthentication = 'btn-authentication';
-    var _indexStep = 1;
-    var sttError;
 
     $('.'+stepCheckout+':first').removeClass('hide');
 
@@ -23,56 +17,6 @@ $(document).ready(function(){
             $('input[name="password"]').attr('disabled', 'disabled');
         }
     });
-
-    /*$('.'+wrapCheckout).on('click', '.btn-checkout', function(){
-        var button = $(this);
-        var stepActive = $('.'+stepCheckout+':not(.hide)');
-        var stepTotal = $('.'+stepCheckout).length;
-        var form = $('#orderForm');
-
-        if(button.hasClass(btnBack)){
-            var stepFuture = stepActive.prev();
-            _indexStep--;
-        }else{
-            var stepFuture = stepActive.next();
-            _indexStep++;
-        }
-        if(_indexStep == 1){
-            $('.'+btnOrder).addClass('hide');
-            $('.'+btnBack).addClass('hide');
-        }else{
-            $('.'+btnOrder).removeClass('hide');
-            $('.'+btnBack).removeClass('hide');
-        }
-        $('.'+btnOrder).html(textButtonStep[_indexStep-1]);
-        console.log(_indexStep);
-
-        var userExist = $('input[name="user-exist"]:checked').val();
-        if(userExist == 1){
-            var email = $('input[name="email"]').val();
-            var password = $('input[name="password"]').val();
-            $.ajax({
-                type: "post",
-                url: urlLogin,
-                data: {email: email, password: password},
-                success: function (data) {
-                    location.reload();
-                }
-            });
-        }else{
-            if(_indexStep > stepTotal){
-                _indexStep--;
-                console.log('Pay');
-                $('.'+wrapCheckoutUser).trigger('checkout/func/order', [form.serialize()]);
-            }else{
-                stepFuture.removeClass('hide');
-                stepActive.addClass('hide');
-
-            }
-        }
-        return false;
-    });*/
-
 
     $('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){
         $(this).loading({inside_right: true});
@@ -138,32 +82,6 @@ $(document).ready(function(){
     });
     $('.'+wrapCheckoutUserShipping).trigger('checkout/ui/autoFillBillingForm');
 
-    $('.'+wrapCheckoutUser).bind('checkout/func/order', function (event, form) {
-        $(this).loading({inside_right: true});
-        var timer = 0;
-        timer = setTimeout(function () {
-            $.ajax({
-                type: "post",
-                url: urlOrder,
-                data: form,
-                success: function (data) {
-                    if(data.code == 0) {
-                        $('body').loading({remove: true});
-                        var redirect = urlPaymentSuccess+'?order='+data.return.id;
-                        window.location.href = redirect;
-                    }else{
-                        console.log(data.message);
-                        var html = '';
-                        $.each(data.message, function (index, value) {
-                            html += value[0]+'<br/>';
-                        });
-                        $('#orderForm .alert-dismissable p').html(html);
-                        $('#orderForm .alert-dismissable').removeClass('hide');
-                    }
-                }
-            });
-        }, 500);
-    });
 
     $('.'+wrapCheckoutInfoProduct).on('click', '.removeCart', function(){
         $(this).loading({inside_right: true});

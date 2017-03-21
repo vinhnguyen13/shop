@@ -2,11 +2,17 @@
     {{--SHIPPING--}}
     <div class="checkout__infor__user__shipping">
         <p class="fontSFUBold mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('shipping_name')?" has-error":""}}">
             <input name="shipping_name" placeholder="Họ Tên (*)" class="form-control" type="text">
+            @if ($errors->has('shipping_name'))
+                <div class="error">{{ $errors->first('shipping_name') }}</div>
+            @endif
         </div>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('shipping_address')?" has-error":""}}">
             <input name="shipping_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'.  (*)" class="form-control" type="text">
+            @if ($errors->has('shipping_address'))
+                <div class="error">{{ $errors->first('shipping_address') }}</div>
+            @endif
         </div>
         <div class="frm-item same-city">
             <?php
@@ -20,8 +26,11 @@
         <div class="frm-item same-ward">
             {!! Form::select('shipping_ward_id', ['Phường/Xã'], null, ['class' => 'select-ward']) !!}
         </div>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('shipping_phone')?" has-error":""}}">
             <input name="shipping_phone" placeholder="Điện thoại  (*)" class="form-control" type="text">
+            @if ($errors->has('shipping_phone'))
+                <div class="error">{{ $errors->first('shipping_phone') }}</div>
+            @endif
         </div>
         <div class="frm-item">
             <textarea class="form-control" name="comment" placeholder="Lưu ý"></textarea>
@@ -43,11 +52,17 @@
                 </label>
             </div>
         </div>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('billing_name')?" has-error":""}}">
             <input name="billing_name" placeholder="Họ Tên (*)" class="form-control" type="text">
+            @if ($errors->has('billing_name'))
+                <div class="error">{{ $errors->first('billing_name') }}</div>
+            @endif
         </div>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('billing_address')?" has-error":""}}">
             <input name="billing_address" placeholder="Địa chỉ. Vui lòng điền CHÍNH XÁC 'tầng, số nhà, đường'. (*)" class="form-control" type="text">
+            @if ($errors->has('billing_address'))
+                <div class="error">{{ $errors->first('billing_address') }}</div>
+            @endif
         </div>
         <div class="frm-item same-city">
             <?php
@@ -61,12 +76,17 @@
         <div class="frm-item same-ward">
             {!! Form::select('billing_ward_id', ['Phường/Xã'], null, ['class' => 'select-ward']) !!}
         </div>
-        <div class="frm-item">
+        <div class="frm-item{{ $errors->has('billing_phone')?" has-error":""}}">
             <input name="billing_phone" placeholder="Điện thoại (*)" class="form-control" type="text">
+            @if ($errors->has('billing_phone'))
+                <div class="error">{{ $errors->first('billing_phone') }}</div>
+            @endif
         </div>
         <div class="frm-item">
             <input name="billing_tax_code" placeholder="Mã số thuế" class="form-control" type="text">
         </div>
     </div>
-    <button class="btn-submit-checkout btn-checkout btn-order">Next</button>
+    <div class="text-center mgT-40">
+        <button class="btn__comp--order">Continue</button>
+    </div>
 </div>

@@ -159,13 +159,13 @@ class Payment
         }
         DB::beginTransaction();
         try {
-            $instance = $this->processingSave($attributes, $values);
-            $instance->fill($values);
-            $validate = $instance->validate($instance->getAttributes());
-            if ($validate->passes() && empty($instance->errors)) {
-                $instance->save();
-                $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($instance->id, 4, '0', STR_PAD_LEFT);
-                $instance->update(['invoice_code'=>$invID]);
+            $order = $this->processingSave($attributes, $values);
+            $order->fill($values);
+            $validate = $order->validate($order->getAttributes());
+            if ($validate->passes() && empty($order->errors)) {
+                $order->save();
+                $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
+                $order->update(['invoice_code'=>$invID]);
                 /*
                  * Save shop_order_product
                  */
@@ -177,13 +177,13 @@ class Payment
                         $price = $productDetail->getPrice();
                         $subtotalProduct = $price * $item['quantity'];
                         $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id'=>$instance->id, 'product_id'=>$product->id]);
+                        $orderProduct = ShopOrderProduct::where(['order_id'=>$order->id, 'product_id'=>$product->id]);
                         if(empty($orderProduct->id)){
                             $orderProduct = new ShopOrderProduct();
-                            $orderProduct->order_id = $instance->id;
+                            $orderProduct->order_id = $order->id;
                             $orderProduct->product_id = $product->id;
                         }
-                        $orderProduct->order_status_id = $instance->order_status_id;
+                        $orderProduct->order_status_id = $order->order_status_id;
                         $orderProduct->supplier_id = $productDetail->supplier_id;
                         $orderProduct->product_detail_id = $productDetail->id;
                         $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
@@ -198,22 +198,26 @@ class Payment
                         $orderProduct->tax = $tax;
                         $orderProduct->reward = 0;
                         $orderProduct->save();
-                        $productDetail->updateOutOfStock();
+                        if($order->order_status_id == ShopOrderStatus::STT_COMPLETE){
+                            $productDetail->updateOutOfStock();
+                        }
                         $pids[] = $product->id;
                     }
                 }
-                app(ShopProduct::class)->updateStockByIds($pids);
+                if($order->order_status_id == ShopOrderStatus::STT_COMPLETE){
+                    app(ShopProduct::class)->updateStockByIds($pids);
+                }
                 $this->removeCartAll();
                 DB::commit();
                 /**
                  * Remove quantity
                  */
 
-                return $instance;
+                return $order;
             }else{
                 $messageBag = $validate->getMessageBag();
-                if(!empty($instance->errors)){
-                    foreach($instance->errors as $error){
+                if(!empty($order->errors)){
+                    foreach($order->errors as $error){
                         $messageBag->merge($error->getMessages());
                     }
                 }

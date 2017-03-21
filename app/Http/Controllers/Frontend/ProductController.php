@@ -8,12 +8,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\AppHelper;
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Backend\ShopManufacturer;
 use App\Models\Frontend\ShopOrder;
 use App\Models\Frontend\ShopProduct;
 use App\Models\Frontend\User;
 use App\Services\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 
@@ -107,6 +109,13 @@ class ProductController extends Controller
         }
         if($request->isMethod('post')){
             $input = \Input::all();
+            $checkoutRequest = new CheckoutRequest();
+            $rules = $checkoutRequest->rules($step);
+            $validator = Validator::make($input, $rules, $checkoutRequest->messages());
+            if($validator->fails()) {
+                \Session::flash('errors', $validator->errors());
+                return Redirect::back();
+            }
             /*
              * Login if exist account
              */

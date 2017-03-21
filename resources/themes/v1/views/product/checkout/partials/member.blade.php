@@ -22,7 +22,9 @@
         <div class="frm-item">
             <input name="password" type="password" placeholder="PASSWORD" disabled>
         </div>
-        <button class="btn-checkout btn-authentication">Next</button>
+        <div class="text-center mgT-40">
+            <button class="btn__comp--order">Continue</button>
+        </div>
     </div>
 
 </div>

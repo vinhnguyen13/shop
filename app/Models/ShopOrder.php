@@ -40,7 +40,12 @@ class ShopOrder extends Model
 
     public function customer()
     {
-        return $this->hasOne('App\Models\ShopCustomer', 'id', 'customer_id');
+        return $this->hasOne(ShopCustomer::class, 'id', 'customer_id');
+    }
+
+    public function paymentMethod()
+    {
+        return $this->hasOne(ShopPayment::class, 'id', 'payment_method_id');
     }
 
     public function orderProducts()

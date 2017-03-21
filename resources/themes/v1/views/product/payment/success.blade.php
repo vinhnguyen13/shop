@@ -3,7 +3,7 @@
 @section('content')
     <div class="reciep">
         <div class="reciep__top">
-            <a href="" class="reciep__logo"><img src="/themes/v1/icons/logo-footer.svg" alt=""></a>
+            <a href="{{url('/')}}" class="reciep__logo"><img src="/themes/v1/icons/logo-footer.svg" alt=""></a>
             <p class="fontSFURe fs-13 mgB-5 font-600">135/58 Trần Hưng Đạo , District 1, HCM city , Việt Nam.</p>
             <p class="fontSFURe fs-13 mgB-15 font-600">glab.vn@gmail.com  -   094 537 88 09</p>
             <p class="fontSFURe fs-13 font-600">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
@@ -15,36 +15,47 @@
             <p class="fontSFUMeBold fs-14 mgB-5">INVOICE #:{{$order->invoice_code}}</p>
             <?php
                 $orderProducts = $order->orderProducts();
+                $totalDiscount = $subtotalProduct = 0;
+                $totalShipping = $order->total_shipping;
             ?>
             <div class="reciep__content--items">
                 @foreach($orderProducts as $orderProduct)
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <p class="fontSFUBold fs-14">{{$orderProduct->product_name}}  (SKU : {{$orderProduct->sku}})</p>
-                        <div>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
-                            <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <p class="fontSFUBold fs-14">{{$orderProduct->product_name}}  (SKU : {{$orderProduct->sku}})</p>
+                            <div>
+                                <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
+                                <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
+                            </div>
+                        </div>
+                        <div class="overflow-all">
+                            <p class="fontSFUBold fs-14">{{number_format($orderProduct->price)}} đ</p>
+                            {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
                         </div>
                     </div>
-                    <div class="overflow-all">
-                        <p class="fontSFUBold fs-14">{{number_format($orderProduct->price)}} đ</p>
-                        {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
-                    </div>
-                </div>
+                    @php
+                        $subtotalProduct += $orderProduct->total;
+                    @endphp
                 @endforeach
             </div>
+            @php
+            $subtotalProduct += $orderProduct->total;
+            $total = $subtotalProduct + $totalShipping - $totalDiscount;
+            @endphp
             <div class="row mgB-20">
                 <div class="col-xs-6 text-right">
                     <p class="fontSFUBold fs-14">SUBTOTAL</p>
+                    <p class="fontSFUBold fs-14">SHIP AMOUNT</p>
                     <p class="fontSFUBold fs-14">DISCOUNT AMOUNT</p>
                     <p class="fontSFUBold fs-14">TOTAL</p>
                     <p class="fontSFUBold fs-14">PAY BY</p>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <p class="fontSFUBold fs-14">42.000.000 đ</p>
-                    <p class="fontSFUBold fs-14">0.0 đ</p>
-                    <p class="fontSFUBold fs-14">42.000.000 đ</p>
-                    <p class="fontSFUBold fs-14">CASH</p>
+                    <p class="fontSFUBold fs-14">{{number_format($subtotalProduct)}} đ</p>
+                    <p class="fontSFUBold fs-14">{{number_format($totalShipping)}} đ</p>
+                    <p class="fontSFUBold fs-14">{{number_format($totalDiscount)}} đ</p>
+                    <p class="fontSFUBold fs-14">{{number_format($total)}} đ</p>
+                    <p class="fontSFUBold fs-14">{{$order->paymentMethod->name}}</p>
                 </div>
             </div>
             <p class="fontSFUMeBold fs-14 mgB-5">CUSTOMER: {{$order->customer->name}}</p>

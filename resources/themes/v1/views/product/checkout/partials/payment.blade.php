@@ -59,5 +59,7 @@
             <input name="payment_method" type="radio" value="IB_ONLINE">INTERNET BANKING
         </label>
     </div>
-    <button class="btn-submit-checkout btn-checkout btn-order">Next</button>
+    <div class="text-center mgT-40">
+        <button class="btn__comp--order">Continue</button>
+    </div>
 </div>
