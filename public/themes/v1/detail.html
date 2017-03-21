@@ -148,31 +148,45 @@
             <div class="container detail">
                 <div class="row">
                     <div class="detail__img col-sm-8">
-                        <div class="slidedetailpage">
-                            <div class="slidedetail__item">
-                                <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_1_copy.png" alt="" />
+                        <ul class="breakcum">
+                            <li><a href="">home</a></li>
+                            <li><span>/</span></li>
+                            <li><a href="">footwear</a></li>
+                            <li><span>/</span></li>
+                            <li class="active">nike air more uptempo</li>
+                        </ul>
+                        <div class="slidedetailpage swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="slidedetail__item swiper-slide">
+                                    <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_1_copy.png" alt="" />
+                                </div>
+                                <div class="slidedetail__item swiper-slide">
+                                    <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_2.png" alt="" />
+                                </div>
+                                <div class="slidedetail__item swiper-slide">
+                                    <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_3.png" alt="" />
+                                </div>
+                                <div class="slidedetail__item swiper-slide">
+                                    <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_4.png" alt="" />
+                                </div>
                             </div>
-                            <div class="slidedetail__item">
-                                <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_2.png" alt="" />
-                            </div>
-                            <div class="slidedetail__item">
-                                <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_3.png" alt="" />
-                            </div>
-                            <div class="slidedetail__item">
-                                <img src="https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/8/4/843871_001_4.png" alt="" />
-                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
                         <div class="slidedetail__pagi"></div>
                     </div>
                     <div class="col-sm-4 detail__desc">
                         <div class="detail__desc--inner">
                             <div class="detail__desc--fix">
-                                <ul class="breakgum clearfix">
+                                <ul class="breakcum">
                                     <li><a href="">home</a></li>
                                     <li><span>/</span></li>
                                     <li><a href="">footwear</a></li>
                                     <li><span>/</span></li>
-                                    <li>nike air more uptempo</li>
+                                    <li class="active">nike air more uptempo</li>
                                 </ul>
                                 <p class="text-uper fontSFURe font-bold lh-30 fs-24 mgB-10">nike</p>
                                 <p class="text-uper fontSFURe font-bold fs-24 mgB-0 lh-40 mgB-20">air more uptempo air more uptempo</p>
@@ -592,6 +606,32 @@
                 prevButton: '.swiper-button-prev'
             });
 
+            
+            swiperDetail();
+            $(window).on('resize', function () {
+                swiperDetail();
+            });
+            //slide img detail mobile
+            function swiperDetail() {
+                var wWin = $(window).outerWidth(), swiperDetail;
+
+                swiperDetail = new Swiper('.slidedetailpage', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true,
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    spaceBetween: 10
+                });
+
+                if ( wWin > 768 ) {
+                    var swiperWrapper = $('.slidedetailpage .swiper-wrapper'),
+                        newSlides = $('.slidedetailpage').find('.swiper-slide').clone(true);
+
+                    swiperDetail.destroy();
+                    swiperWrapper.empty().append(newSlides);
+                }
+            }
+            
             $('.detail__desc .dropdown').dropdown({
                 beforeOpen: function () {
                     var hSlim = $('.detail__desc .dropdown ul').outerHeight();

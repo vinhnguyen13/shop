@@ -983,6 +983,14 @@ footer {
 .breakcum li a:hover {
     text-decoration: underline;
 }
+.detail__img .breakcum li,
+.detail__desc--fix .breakcum li {
+    text-transform: uppercase;
+    font-family: "sfu_daxcondensedregular";
+    color: #404040;
+    font-size: 14px;
+    color: #aeaeae;
+}
 
 
 /*----------End Category------------*/
@@ -1003,6 +1011,9 @@ footer {
 
 .detail__img .slidedetailpage .swiper-slide {
     text-align: center;
+    flex-shrink: inherit;
+    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
 }
 
 .detail__img .slidedetailpage .swiper-slide:before {
@@ -1864,4 +1875,20 @@ button:hover {
     display: block;
     padding-left: 30%;
     font-family: "sfu_daxcondensedregular";
+}
+.detail__img .breakcum {
+    text-align: center;
+    display: none;
+    margin: 0;
+}
+.detail__desc--fix .breakcum {
+    margin: 0 0 10px 0;
+}
+.detail__img .slidedetailpage .swiper-wrapper {
+    display: inherit !important;
+}
+.detail__img .swiper-pagination,
+.detail__img .swiper-button-next,
+.detail__img .swiper-button-prev {
+    display: none;
 }
