@@ -200,7 +200,7 @@ body.active:before {
     background: #505050;
     border-radius: 0;
     width: 3%;
-    height: 6px;
+    height: 3px;
 }
 
 .swiper-container-horizontal>.swiper-pagination-bullets {
@@ -1025,7 +1025,7 @@ footer {
 }
 
 .detail__img .swiper-pagination-bullet {
-    width: 6%;
+    width: 3%;
 }
 
 .detail__img--thumb {
