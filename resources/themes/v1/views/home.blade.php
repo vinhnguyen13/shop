@@ -82,7 +82,7 @@
         $obj = \GuzzleHttp\json_decode($content);
         if(!empty($obj->items)){
             foreach($obj->items as $key => $item){
-                if($key <= 11){
+                if($key <= 9){
                 $url = 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg';
                 if(!empty($item->images->low_resolution->url)){
                     $url = $item->images->low_resolution->url;
