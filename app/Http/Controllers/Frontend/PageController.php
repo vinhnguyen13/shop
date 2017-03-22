@@ -21,4 +21,9 @@ class PageController extends Controller
         return view('page.scanner-barcode');
     }
 
+    public function instagram()
+    {
+        return view('page.instagram');
+    }
+
 }

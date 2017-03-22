@@ -76,42 +76,29 @@
         <a href="" class="fs-30"><span class="icon-play"></span></a>
     </div>
     <div class="connect__items">
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
+        <?php
+        $url = 'https://www.instagram.com/glab.vn/media/';
+        $content = file_get_contents($url);
+        $obj = \GuzzleHttp\json_decode($content);
+        if(!empty($obj->items)){
+            foreach($obj->items as $key => $item){
+                if($key <= 11){
+                $url = 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg';
+                if(!empty($item->images->low_resolution->url)){
+                    $url = $item->images->low_resolution->url;
+                }
+                ?>
+                <div class="connect__items--item">
+                    <a href="https://www.instagram.com/glab.vn/" target="_blank">
+                        <span class="icon-306026 fs-30"></span>
+                        <div class="wrap-img"><img src="{{$url}}" alt="" /></div>
+                    </a>
+                </div>
+                <?php
+                }
+            }
+        }
+        ?>
     </div>
 </div>
 <!-- InstanceEndEditable -->
