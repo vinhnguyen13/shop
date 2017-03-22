@@ -1,4 +1,35 @@
 $(document).ready(function () {
+    var swiper = new Swiper('.detail__related .swiper-container', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+    });
+
+
+    swiperDetail();
+    $(window).on('resize', function () {
+        swiperDetail();
+    });
+    //slide img detail mobile
+    function swiperDetail() {
+        var wWin = $(window).outerWidth(), swiperDetail;
+
+        swiperDetail = new Swiper('.slidedetailpage', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            spaceBetween: 10
+        });
+
+        if ( wWin > 768 ) {
+            var swiperWrapper = $('.slidedetailpage .swiper-wrapper'),
+                newSlides = $('.slidedetailpage').find('.swiper-slide').clone(true);
+
+            swiperDetail.destroy();
+            swiperWrapper.empty().append(newSlides);
+        }
+    }
+
     $('.detail__desc .dropdown').dropdown({
         beforeOpen: function () {
             var hSlim = $('.detail__desc .dropdown ul').outerHeight();
@@ -11,8 +42,8 @@ $(document).ready(function () {
             }
         },
         closeWhenSelectVal: function (item, dropItem) {
-            $('#val-size').val( item.find('.detail__size').data('size') );
-            $('#val-product').val( item.find('.detail__size').data('product') );
+            $('#val-size').val( item.find('.detail__size').data('value') );
+            $('#val-price').val( item.find('.detail__price').data('value') );
 
             var itemSizeClone = item.find('.detail__size').clone(),
                 itemPriceClone = item.find('.detail__price').clone();
@@ -93,8 +124,6 @@ $(document).ready(function () {
                 }
             }
         });
-
-
     /**
      * Buy button
      */

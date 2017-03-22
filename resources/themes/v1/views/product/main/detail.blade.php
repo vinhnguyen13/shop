@@ -9,13 +9,27 @@
     <div class="container detail">
         <div class="row">
             <div class="detail__img col-sm-8">
-                <div class="slidedetailpage">
+                <ul class="breakcum">
+                    <li><a href="{{url('/')}}">home</a></li>
+                    <li><span>/</span></li>
+                    <li><a href="{{route('product.category', ['category'=>'footwear'])}}">footwear</a></li>
+                    <li><span>/</span></li>
+                    <li>{{$product->name}}</li>
+                </ul>
+                <div class="slidedetailpage swiper-container">
                     @if (!empty($images) && count($images) > 0)
+                        <div class="swiper-wrapper">
                         @foreach($images as $image)
-                            <div class="slidedetail__item">
+                            <div class="slidedetail__item swiper-slide">
                                 <img src="{{$image->url('original')}}" alt="" />
                             </div>
                         @endforeach
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     @endif
                 </div>
                 <div class="slidedetail__pagi"></div>
@@ -23,15 +37,15 @@
             <div class="col-sm-4 detail__desc">
                 <div class="detail__desc--inner">
                     <div class="detail__desc--fix">
-                        <ul class="breakgum clearfix">
+                        <ul class="breakcum">
                             <li><a href="{{url('/')}}">home</a></li>
                             <li><span>/</span></li>
                             <li><a href="{{route('product.category', ['category'=>'footwear'])}}">footwear</a></li>
                             <li><span>/</span></li>
                             <li>{{$product->name}}</li>
                         </ul>
-                        <p class="text-uper fontSFUL lh-30 fs-40 mgB-10">{{$product->manufacturer->name or ''}}</p>
-                        <p class="text-uper fontSFUMeBold fs-40 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
+                        <p class="text-uper fontSFURe font-bold lh-30 fs-24 mgB-10">{{$product->manufacturer->name or ''}}</p>
+                        <p class="text-uper fontSFURe font-bold fs-24 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
                         @if (!empty($details) && $details->count() > 0)
                         <div class="mgB-20">
                             <div class="dropdown">
@@ -58,7 +72,9 @@
                         @endif
                         <div class="detail__desc--intro">
                             <p class="title__detailproduct">Detail</p>
-                            <p>{!! $product->description !!}</p>
+                            <div class="fontSFUMeBold color-7c7c7c mgB-5">
+                                {!! $product->description !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,6 +95,7 @@
 @push('scripts')
     <script type="text/javascript" src="/themes/v1/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
     <script>
         var urlAddCart = "{{route('product.cart.add')}}";
     </script>
