@@ -197,7 +197,7 @@ body.active:before {
     color: #6c6c6c;
 }
 .swiper-pagination-bullet {
-    background: #505050;
+    background: #757575;
     border-radius: 0;
     width: 3%;
     height: 3px;
