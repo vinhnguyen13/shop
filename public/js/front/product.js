@@ -42,8 +42,8 @@ $(document).ready(function () {
             }
         },
         closeWhenSelectVal: function (item, dropItem) {
-            $('#val-size').val( item.find('.detail__size').data('value') );
-            $('#val-price').val( item.find('.detail__price').data('value') );
+            $('#val-size').val( item.find('.detail__size').data('size') );
+            $('#val-product').val( item.find('.detail__size').data('product') );
 
             var itemSizeClone = item.find('.detail__size').clone(),
                 itemPriceClone = item.find('.detail__price').clone();
