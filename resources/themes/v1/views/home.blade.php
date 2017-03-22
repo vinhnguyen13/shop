@@ -83,13 +83,14 @@
         if(!empty($obj->items)){
             foreach($obj->items as $key => $item){
                 if($key <= 9){
+                $link = $item->link;
                 $url = 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg';
                 if(!empty($item->images->standard_resolution->url)){
                     $url = $item->images->standard_resolution->url;
                 }
                 ?>
                 <div class="connect__items--item">
-                    <a href="https://www.instagram.com/glab.vn/" target="_blank">
+                    <a href="{{$link}}" target="_blank">
                         <span class="icon-306026 fs-30"></span>
                         <div class="wrap-img"><img src="{{$url}}" alt="" /></div>
                     </a>
