@@ -112,42 +112,6 @@
                 <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
             </a>
         </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
-        <div class="connect__items--item">
-            <a href="">
-                <span class="icon-306026 fs-30"></span>
-                <div class="wrap-img"><img src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17076978_1652568568371454_5195433053899456512_n.jpg" alt="" /></div>
-            </a>
-        </div>
     </div>
 </div>
 <!-- InstanceEndEditable -->

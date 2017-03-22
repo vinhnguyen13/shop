@@ -39,7 +39,7 @@
                 </li>
                 <li><a href=""><span class="menu__txt">consigment</span></a></li>
                 <li><a href=""><span class="menu__txt">location</span></a></li>
-                <li><a href=""><span class="menu__txt">about us</span></a></li>
+                <li><a href="{{route('page.about')}}"><span class="menu__txt">about us</span></a></li>
                 <li><a href=""><span class="menu__txt">support</span></a></li>
             </ul>
         </div>
