@@ -82,9 +82,10 @@ class ProductController extends Controller
 
     public function cartRemove(Request $request)
     {
-        $detailID = $request->get('detail');
-        $detailID = decrypt($detailID);
-        $cart = app(Payment::class)->removeCart($detailID);
+        $size = $request->get('size');
+        $product = $request->get('product');
+        $productID = decrypt($product);
+        $cart = app(Payment::class)->removeCart($productID, $size);
         return $cart;
     }
 

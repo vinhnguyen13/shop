@@ -86,14 +86,15 @@ $(document).ready(function(){
     $('.'+wrapCheckoutInfoProduct).on('click', '.removeCart', function(){
         $(this).loading({inside_right: true});
         $(this).closest('tr').remove();
-        var detail = $(this).closest('.checkout__inforpro-detail').attr('data-product-detail');
-        if(detail) {
+        var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
+        var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
+        if(size && product){
             var timer = 0;
             timer = setTimeout(function () {
                 $.ajax({
                     type: "post",
                     url: urlRemoveCart,
-                    data: {detail: detail},
+                    data: {product: product, size: size},
                     success: function (data) {
                         $('body').loading({remove: true});
                         location.reload(true);

@@ -51,16 +51,17 @@ class Payment
         if (Session::has('cart')) {
             $cart = Session::get('cart');
         }
+        $key = $productID.'-'.$size;
         if(!empty($details)){
-            if(!empty($cart[$productID])){
-                unset($cart[$productID]);
+            if(!empty($cart[$key])){
+                unset($cart[$key]);
             }
             foreach($details as $detail){
                 $item = [
                     'detailID'=>$detail->id,
                     'quantity'=>1,
                 ];
-                $cart[$productID][$detail->id] = $item;
+                $cart[$key][$detail->id] = $item;
             }
         }
         Session::put('cart', $cart);
@@ -83,11 +84,12 @@ class Payment
      * @param $detailID
      * @return bool|mixed
      */
-    public function removeCart($detailID){
+    public function removeCart($productID, $size){
         if (Session::has('cart')) {
             $cart = Session::get('cart');
-            if(!empty($cart[$detailID])){
-                unset($cart[$detailID]);
+            $key = $productID.'-'.$size;
+            if(!empty($cart[$key])){
+                unset($cart[$key]);
                 Session::put('cart', $cart);
                 return $cart;
             }
