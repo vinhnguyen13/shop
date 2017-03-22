@@ -65,6 +65,8 @@
         </label>
     </div>
     <div class="text-center mgT-40">
-        <button class="btn__comp--order">Continue</button>
+        <button class="btn__comp--order">COMPLETE ORDER</button>
+        <p class="fontSFUMeBold fs-14 mgB-50">By Clicking "Complete Order" you are accepting <br> G-LAB Terms and Conditions.</p>
+        <a href="" class="fontSFUMeBold d-ib fs-12 text-uper font-bold"><span class="icon-b-a-c-k d-ib mgR-15 fs-13"></span>Return to filling infomation</a>
     </div>
 </div>

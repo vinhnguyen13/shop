@@ -86,7 +86,7 @@
             <input name="billing_tax_code" placeholder="Mã số thuế" class="form-control" type="text">
         </div>
     </div>
-    <div class="text-center mgT-40">
-        <button class="btn__comp--order">Continue</button>
+    <div class="text-center mgT-30">
+        <button class="btn__conti--pay">CONTINUE TO PAYMENT METHOD</button>
     </div>
 </div>

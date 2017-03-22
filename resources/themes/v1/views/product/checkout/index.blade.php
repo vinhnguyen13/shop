@@ -3,7 +3,7 @@
 @section('content')
     <div class="container detail wrap-checkout">
         <div class="checkout__inner clearfix">
-            <form id="orderForm" action="{{route('product.checkout', ['step'=>$step])}}" method="post">
+            <form action="{{route('product.checkout', ['step'=>$step])}}" method="post">
             {{ csrf_field() }}
             @if(!empty($cart))
             <div class="checkout__inforpro">
