@@ -145,9 +145,8 @@ class UserController extends Controller
     {
         $input = Input::all();
         if ($request->ajax()) {
-            $user = User::query()->where('email', $input['email'])->first();
-            if( !empty($user->id) &&  \Hash::check( $input['password'], $user->getAuthPassword()) !== false) {
-                // Password is matching
+            $user = app(User::class)->verify($input['email'], $input['password']);
+            if( !empty($user->id)) {
                 return ['code'=>0, 'message'=>trans('user.login.success')];
             }else{
                 return ['code'=>1, 'message'=>trans('auth.failed')];

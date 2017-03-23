@@ -55,4 +55,13 @@ class User extends Authenticatable
         return $imageService;
     }
 
+    public function verify($email, $password){
+        $user = User::query()->where('email', $email)->orWhere('username', $email)->first();
+        if( !empty($user->id) &&  \Hash::check( $password, $user->getAuthPassword()) !== false) {
+            return $user;
+        }else{
+            return false;
+        }
+    }
+
 }

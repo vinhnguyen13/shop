@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-payment-supplier-verified"><i class="fa fa-check"></i> Update</button>
+                    <button type="button" class="btn btn-primary btn-update-order-status"><i class="fa fa-check"></i> Update</button>
                 </div>
             </div>
         </div>
@@ -57,9 +57,35 @@
 @push('scripts')
 <script type="text/javascript">
     $(function() {
+        var urlOrderUpdateStatus = '{{route('admin.order.updateStatus')}}';
         $('.wrapOrder').on('click', '.btn-update-order', function (e) {
+            var orderID = $(this).attr('data-order');
+            $('#modal-update-order').find('.btn-update-order-status').attr('data-order', orderID);
             $('#modal-update-order').modal('show');
             return false;
+        });
+
+        $('#modal-update-order').on('click', '.btn-update-order-status', function (e) {
+            var orderID = $(this).attr('data-order');
+            var status = $('select[name="status"]').val();
+            var email = $('input[name="email"]').val();
+            var password = $('input[name="password"]').val();
+            console.log(orderID, status);
+            if (orderID) {
+                $('#modal-update-order').loading({display: true});
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: urlOrderUpdateStatus,
+                    data: {orderID: orderID, status: status, email: email, password: password},
+                    success: function (data) {
+                        $('#modal-update-order').loading({display: false});
+                    },
+                    error: function (error) {
+                    }
+                });
+            }
+
         });
     });
 </script>

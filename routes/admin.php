@@ -121,8 +121,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/order/edit/{id}', ['uses' => 'OrderController@edit', 'as'=>'admin.order.edit']);
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
         Route::get('/order/delete/{id}', ['uses' => 'OrderController@delete', 'as'=>'admin.order.delete']);
+        Route::post('/order/update-status', ['uses' => 'OrderController@updateStatus', 'as'=>'admin.order.updateStatus']);
         /*
-         * Order
+         * Order Product
          */
         Route::get('/order-product', ['uses' => 'OrderProductController@index', 'as'=>'admin.order-product.index']);
         /*
