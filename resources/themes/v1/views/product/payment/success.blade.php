@@ -83,7 +83,7 @@
 <script type="text/javascript">
     $(function() {
         $('.reciep').on('click', '.btn-print', function (e) {
-            var url = '{{route('product.payment.success')}}?order={{$order->id}}}1&print=1';
+            var url = '{{route('product.payment.success')}}?order={{$order->id}}&print=1';
             loadiFrame(url);
             $("#printIframe").load(
                     function () {
