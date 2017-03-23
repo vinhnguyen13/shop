@@ -6,5 +6,6 @@ use App\Models\ShopOrderDetail as Model;
 
 class ShopOrderDetail extends Model
 {
-    
+
+
 }

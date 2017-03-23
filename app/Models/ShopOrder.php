@@ -38,6 +38,11 @@ class ShopOrder extends Model
         ];
     }
 
+    public function seller()
+    {
+        return $this->hasOne(User::class, 'id', 'seller_id');
+    }
+
     public function customer()
     {
         return $this->hasOne(ShopCustomer::class, 'id', 'customer_id');

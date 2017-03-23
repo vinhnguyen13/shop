@@ -14,7 +14,6 @@ class ShopCustomer extends MainShopCustomer
             'id',
             'name',
             'phone',
-            'fax',
             'email',
             'created_at',
         ]);
