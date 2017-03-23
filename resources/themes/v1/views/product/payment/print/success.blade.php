@@ -25,14 +25,14 @@
                     $quantity = $orderProduct->quantity;
                     ?>
                     <div class="clearfix">
-                        <div class="pull-left">
+                        <div class="pull-left" style="widows: 70%;">
                             <p class="fontSFUBold fs-14">{{$orderProduct->product->name}}  (SKU : {{$orderProduct->product->sku_producer}})</p>
                             <div>
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
                             </div>
                         </div>
-                        <div>
+                        <div class="overflow-all">
                             <p class="fontSFUBold fs-14">{{number_format($price * $quantity)}} đ</p>
                             {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
                         </div>
