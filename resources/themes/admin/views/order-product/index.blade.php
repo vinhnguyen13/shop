@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Order', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Revenue Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Order Product', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Order Product Management']])
 @endsection
 
 @section('grid')
@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Order Management</h3>
+            <h3 class="box-title">Order Product Management</h3>
         </div>
         {!! $grid->table() !!}
     </div>

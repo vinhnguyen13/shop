@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Order', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Order Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Revenue', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Revenue Management']])
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     @endphp
     <div class="box wrapRevenue">
         <div class="box-header with-border">
-            <h3 class="box-title">Order Management</h3>
+            <h3 class="box-title">Revenue Management</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
             <div class="col-md-12">

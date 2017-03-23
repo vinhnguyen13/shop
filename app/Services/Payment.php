@@ -163,7 +163,7 @@ class Payment
         if(!empty($orderDetails)){
             foreach($orderDetails as $orderDetail) {
                 $product = ShopProduct::find($orderDetail->product_id);
-                $productDetails = $product->getDetailsBySize($orderDetail->size);
+                $productDetails = $product->getDetailsBySize($orderDetail->size, $orderDetail->quantity);
                 if(!empty($productDetails)) {
                     foreach ($productDetails as $productDetail) {
                         $quantity = 1;
