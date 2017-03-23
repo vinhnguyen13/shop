@@ -25,7 +25,7 @@
                     $quantity = $orderProduct->quantity;
                     ?>
                     <div class="clearfix">
-                        <div class="pull-left" style="widows: 70%;">
+                        <div class="pull-left" style="width: 70%;">
                             <p class="fontSFUBold fs-14">{{$orderProduct->product->name}}  (SKU : {{$orderProduct->product->sku_producer}})</p>
                             <div>
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
