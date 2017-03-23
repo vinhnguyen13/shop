@@ -32,7 +32,7 @@
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
                             </div>
                         </div>
-                        <div class="overflow-all">
+                        <div>
                             <p class="fontSFUBold fs-14">{{number_format($price * $quantity)}} đ</p>
                             {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
                         </div>
