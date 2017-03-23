@@ -172,9 +172,26 @@ class ShopProduct extends Model
         return $details;
     }
 
-    public function getDetailsDefault($direction = 'asc'){
-        $query = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->orderBy('price', $direction);
+    public function getDetailsDefault($size = null, $direction = 'asc')
+    {
+        $query = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK]);
+        if(!empty($size)){
+            $query->where(['size'=>$size]);
+        }
+        $query->orderBy('price', $direction);
         return $query->first();
+    }
+
+    public function getDetailsBySize($size, $quantity, $direction = 'asc')
+    {
+        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', $direction)->limit($quantity)->get();
+        return $details;
+    }
+
+    public function countDetailsBySize($size)
+    {
+        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->count();
+        return $details;
     }
 
     public function updateStockByIds($ids){

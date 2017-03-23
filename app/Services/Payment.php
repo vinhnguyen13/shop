@@ -45,25 +45,27 @@ class Payment
      * @param $quantity
      * @return array|mixed
      */
-    public function addCart($productID, $size, $quantity){
-        $details = ShopProductDetail::query()->where(['product_id' => $productID, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC')->limit($quantity)->get();
+    public function addCart($productID, $detailID, $size, $quantity){
+        $product = ShopProduct::find($productID);
+        $totalDetail = $product->countDetailsBySize($size);
+        if($quantity > $totalDetail){
+            return false;
+        }
         $cart = [];
         if (Session::has('cart')) {
             $cart = Session::get('cart');
         }
         $key = $productID.'-'.$size;
-        if(!empty($details)){
-            if(!empty($cart[$key])){
-                unset($cart[$key]);
-            }
-            foreach($details as $detail){
-                $item = [
-                    'detailID'=>$detail->id,
-                    'quantity'=>1,
-                ];
-                $cart[$key][$detail->id] = $item;
-            }
+        if(!empty($cart[$key])){
+            unset($cart[$key]);
         }
+        $item = [
+            'productID'=>$productID,
+            'detailID'=>$detailID,
+            'size'=>$size,
+            'quantity'=>$quantity,
+        ];
+        $cart[$key] = $item;
         Session::put('cart', $cart);
         return $cart;
 
@@ -148,6 +150,55 @@ class Payment
         return false;
     }
 
+    public function processingSaveOrderProduct($order){
+        if ($order->order_status_id != ShopOrderStatus::STT_COMPLETE) {
+            return false;
+        }
+        /*
+         * Save shop_order_product
+         */
+        $carts = $this->getCart();
+        $pids = null;
+        if(!empty($carts)){
+            foreach($carts as $pid=>$itemDetails) {
+                foreach($itemDetails as $detailID=>$item) {
+                    $quantity = 1;
+
+                    $productDetail = ShopProductDetail::find($detailID);
+                    $product = $productDetail->product;
+                    $price = $productDetail->getPrice();
+                    $subtotalProduct = $price * $quantity;
+                    $tax = $product->taxWithPrice($price);
+                    $orderProduct = ShopOrderProduct::where(['order_id' => $order->id, 'product_detail_id' => $detailID]);
+                    if (empty($orderProduct->id)) {
+                        $orderProduct = new ShopOrderProduct();
+                        $orderProduct->order_id = $order->id;
+                        $orderProduct->product_id = $product->id;
+                        $orderProduct->product_detail_id = $productDetail->id;
+                    }
+                    $orderProduct->order_status_id = $order->order_status_id;
+                    $orderProduct->supplier_id = $productDetail->supplier_id;
+                    $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
+                    $orderProduct->product_name = $product->name;
+                    $orderProduct->color = $product->color;
+                    $orderProduct->sku = $productDetail->sku;
+                    $orderProduct->size = $productDetail->size;
+                    $orderProduct->quantity = $quantity;
+                    $orderProduct->price_in = $productDetail->price_in;
+                    $orderProduct->price = $productDetail->price;
+                    $orderProduct->total = $subtotalProduct;
+                    $orderProduct->tax = $tax;
+                    $orderProduct->reward = 0;
+                    $orderProduct->save();
+
+                    $productDetail->updateOutOfStock();
+                    $pids[] = $product->id;
+                }
+            }
+        }
+        app(ShopProduct::class)->updateStockByIds($pids);
+    }
+
     /**
      * Create or update a related record matching the attributes, and fill it with values.
      *
@@ -172,51 +223,7 @@ class Payment
                 $order->save();
                 $invID = self::INVOICE_PREFIX.date('Ymd').'-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
                 $order->update(['invoice_code'=>$invID]);
-                /*
-                 * Save shop_order_product
-                 */
-                $pids = null;
-                if(!empty($carts)){
-                    foreach($carts as $pid=>$itemDetails) {
-                        foreach($itemDetails as $detailID=>$item) {
-                            $quantity = 1;
-
-                            $productDetail = ShopProductDetail::find($detailID);
-                            $product = $productDetail->product;
-                            $price = $productDetail->getPrice();
-                            $subtotalProduct = $price * $quantity;
-                            $tax = $product->taxWithPrice($price);
-                            $orderProduct = ShopOrderProduct::where(['order_id' => $order->id, 'product_detail_id' => $detailID]);
-                            if (empty($orderProduct->id)) {
-                                $orderProduct = new ShopOrderProduct();
-                                $orderProduct->order_id = $order->id;
-                                $orderProduct->product_id = $product->id;
-                                $orderProduct->product_detail_id = $productDetail->id;
-                            }
-                            $orderProduct->order_status_id = $order->order_status_id;
-                            $orderProduct->supplier_id = $productDetail->supplier_id;
-                            $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
-                            $orderProduct->product_name = $product->name;
-                            $orderProduct->color = $product->color;
-                            $orderProduct->sku = $productDetail->sku;
-                            $orderProduct->size = $productDetail->size;
-                            $orderProduct->quantity = $quantity;
-                            $orderProduct->price_in = $productDetail->price_in;
-                            $orderProduct->price = $productDetail->price;
-                            $orderProduct->total = $subtotalProduct;
-                            $orderProduct->tax = $tax;
-                            $orderProduct->reward = 0;
-                            $orderProduct->save();
-                            if ($order->order_status_id == ShopOrderStatus::STT_COMPLETE) {
-                                $productDetail->updateOutOfStock();
-                            }
-                            $pids[] = $product->id;
-                        }
-                    }
-                }
-                if($order->order_status_id == ShopOrderStatus::STT_COMPLETE){
-                    app(ShopProduct::class)->updateStockByIds($pids);
-                }
+                $this->processingSaveOrderProduct($order);
                 $this->removeCartAll();
                 DB::commit();
                 /**

@@ -73,8 +73,10 @@ class ProductController extends Controller
         $quantity = $request->get('quantity');
         $size = $request->get('size');
         $product = $request->get('product');
-        $productID = decrypt($product);
-        $cart = app(Payment::class)->addCart($productID, $size, $quantity);
+        $productID = !empty($product) ? decrypt($product) : null;
+        $detail = $request->get('detail');
+        $detailID = !empty($detail) ? decrypt($detail) : null;
+        $cart = app(Payment::class)->addCart($productID, $detailID, $size, $quantity);
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.main.partials.cart-header', compact('cart'))->render();
         return ['total'=>$total, 'html'=>$html];

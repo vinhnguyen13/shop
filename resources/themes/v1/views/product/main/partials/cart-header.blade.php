@@ -9,12 +9,10 @@
         ?>
         @foreach($cart as $pid => $item)
             <?php
-                $detailID = array_keys($item);
-                $detailID = $detailID[0];
-                $quantity = count($cart[$pid]);
-                $productDetail = App\Models\Frontend\ShopProductDetail::find($detailID);
-                $product = $productDetail->product;
-                $price = $productDetail->getPrice();
+                $size = $item['size'];
+                $quantity = $item['quantity'];
+                $product = \App\Models\Frontend\ShopProduct::find($pid);
+                $price = $product->getPriceDefault($size);
                 $subtotalProduct = $price * $quantity;
                 $subtotal += $subtotalProduct;
                 $tax += $product->taxWithPrice($price);
@@ -30,7 +28,7 @@
 
                     <p class="pull-right fontSFUBold fs-12">đ {{number_format($subtotalProduct)}}</p>
 
-                    <p class="text-uper fontSFUBold fs-12">Size: {{$productDetail->size}} - Quantity: {{$quantity}}</p>
+                    <p class="text-uper fontSFUBold fs-12">Size: {{$size}} - Quantity: {{$quantity}}</p>
                 </div>
             </a>
         @endforeach

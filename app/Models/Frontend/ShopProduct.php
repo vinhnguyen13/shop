@@ -38,9 +38,9 @@ class ShopProduct extends MainShopProduct
         return $products;
     }
 
-    public function getPriceDefault($direction = 'asc'){
+    public function getPriceDefault($size = null, $direction = 'asc'){
         $price = 0;
-        $productDetailDefault = $this->getDetailsDefault($direction = 'asc');
+        $productDetailDefault = $this->getDetailsDefault($size, $direction = 'asc');
         if(!empty($productDetailDefault)){
             $price = $productDetailDefault->price;
         }
