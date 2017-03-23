@@ -53,4 +53,9 @@ class ShopOrder extends Model
         return ShopOrderProduct::query()->where(['order_id'=>$this->id])->get();
     }
 
+    public function orderDetails()
+    {
+        return ShopOrderDetail::query()->where(['order_id'=>$this->id])->get();
+    }
+
 }

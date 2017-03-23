@@ -172,6 +172,15 @@ class ShopProduct extends Model
         return $details;
     }
 
+    public function getPriceDefault($size = null, $direction = 'asc'){
+        $price = 0;
+        $productDetailDefault = $this->getDetailsDefault($size, $direction = 'asc');
+        if(!empty($productDetailDefault)){
+            $price = $productDetailDefault->price;
+        }
+        return $price;
+    }
+
     public function getDetailsDefault($size = null, $direction = 'asc')
     {
         $query = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK]);

@@ -138,7 +138,7 @@ class ProductController extends Controller
                  */
                 $checkoutInfo = app(Payment::class)->getCheckoutInfo();
                 unset($checkoutInfo['_token']);
-                $return = app(Payment::class)->processingSaveOrder([], $checkoutInfo);
+                $return = app(Payment::class)->checkout($checkoutInfo);
                 if(!empty($return->id)){
                     return redirect(route('product.payment.success', ['order'=>$return->id]));
                 }else{
@@ -154,7 +154,7 @@ class ProductController extends Controller
         if($request->isMethod('post')) {
             $input = \Input::all();
             unset($input['_token']);
-            $return = app(Payment::class)->processingSaveOrder([], $input);
+            $return = app(Payment::class)->checkout($input);
             if(!empty($return->id)){
                 return ['code'=>0, 'message'=>'', 'return'=>$return];
             }else{

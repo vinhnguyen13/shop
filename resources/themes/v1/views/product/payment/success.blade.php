@@ -14,27 +14,31 @@
             {{--<p class="fontSFUMeBold fs-14 mgB-5">SERVED BY:</p>--}}
             <p class="fontSFUMeBold fs-14 mgB-5">INVOICE #:{{$order->invoice_code}}</p>
             <?php
-                $orderProducts = $order->orderProducts();
+                $orderDetails = $order->orderDetails();
                 $totalDiscount = $subtotalProduct = 0;
                 $totalShipping = $order->total_shipping;
             ?>
             <div class="reciep__content--items">
-                @foreach($orderProducts as $orderProduct)
+                @foreach($orderDetails as $orderProduct)
+                    <?php
+                    $price = $orderProduct->product->getPriceDefault($orderProduct->size);
+                    $quantity = $orderProduct->quantity;
+                    ?>
                     <div class="clearfix">
                         <div class="pull-left">
-                            <p class="fontSFUBold fs-14">{{$orderProduct->product_name}}  (SKU : {{$orderProduct->sku}})</p>
+                            <p class="fontSFUBold fs-14">{{$orderProduct->product->name}}  (SKU : {{$orderProduct->product->sku_producer}})</p>
                             <div>
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
                                 <span class="fontSFURe fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
                             </div>
                         </div>
                         <div class="overflow-all">
-                            <p class="fontSFUBold fs-14">{{number_format($orderProduct->price)}} đ</p>
+                            <p class="fontSFUBold fs-14">{{number_format($price * $quantity)}} đ</p>
                             {{--<p class="fontSFURe fs-13 color-7c7c7c">-0.00</p>--}}
                         </div>
                     </div>
                     @php
-                        $subtotalProduct += $orderProduct->total;
+                        $subtotalProduct += $price * $quantity;
                     @endphp
                 @endforeach
             </div>

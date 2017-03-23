@@ -37,13 +37,4 @@ class ShopProduct extends MainShopProduct
         $products = $query->orderBy('updated_at', 'DESC')->paginate($params['limit'], ['*'], 'page');
         return $products;
     }
-
-    public function getPriceDefault($size = null, $direction = 'asc'){
-        $price = 0;
-        $productDetailDefault = $this->getDetailsDefault($size, $direction = 'asc');
-        if(!empty($productDetailDefault)){
-            $price = $productDetailDefault->price;
-        }
-        return $price;
-    }
 }
