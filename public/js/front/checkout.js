@@ -111,11 +111,11 @@ $(document).ready(function(){
         var quantity = $(this).val();
         console.log(product, size);
         if(size && product){
-            $('.'+wrapCheckoutUser).trigger('checkout/func/updateCart', [product, size, quantity]);
+            $('.'+wrapCheckoutInfoProduct).trigger('checkout/func/updateCart', [product, size, quantity]);
         }
     });
 
-    $('.'+wrapCheckoutUser).bind('checkout/func/updateCart', function (event, product, size, quantity) {
+    $('.'+wrapCheckoutInfoProduct).bind('checkout/func/updateCart', function (event, product, size, quantity) {
         $(this).loading({inside_right: true});
         var timer = 0;
         timer = setTimeout(function () {

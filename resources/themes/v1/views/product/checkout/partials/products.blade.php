@@ -40,7 +40,7 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
     <p class="pull-right fontSFUMeBold fs-18 font-bold">{{number_format($subtotal)}} đ</p>
     <p class="fontSFUMeBold fs-18 font-bold">SUBTOTAL</p>
 </div>
-<div class="clearfix pdL-15 pdR-15 mgB-40">
+<div class="clearfix pdL-15 pdR-15 mgB-40 hide">
     <div class="code__promo">
         <input name="coupon_code" type="text" placeholder="PROMO CODE">
     </div>

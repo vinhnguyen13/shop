@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.print')
 
 @section('content')
     <div class="reciep">
@@ -67,12 +67,8 @@
             <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">NOTICE!!!</p>
             <p class="fontSFURe fs-13 font-600 text-center mgB-40">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
             <p class="fontSFUBold fs-14 text-center mgT-20 mgB-20">THANK YOU AND HOPE YOU HAD GREAT SHOPPING EXPERIENCE</p>
-            <div class="text-right mgT-30">
-                <button class="btn btn-default btn-sm btn-print"><i class="fa fa-print"></i>Print</button>
-            </div>
         </div>
     </div>
-    <div id="iframeplaceholder"></div>
 @endsection
 
 @push('styles')
@@ -80,22 +76,5 @@
 @endpush
 
 @push('scripts')
-<script type="text/javascript">
-    $(function() {
-        $('.reciep').on('click', '.btn-print', function (e) {
-            var url = '{{route('product.payment.success')}}?order={{$order->id}}}1&print=1';
-            loadiFrame(url);
-            $("#printIframe").load(
-                    function () {
-                        window.frames['myname'].focus();
-                        window.frames['myname'].print();
-                    }
-            );
-        });
-        function loadiFrame(src) {
-            $("#iframeplaceholder").html("<iframe id='printIframe' style='display:none;' name='myname' src='" + src + "' />");
-        }
-    });
-</script>
 
 @endpush

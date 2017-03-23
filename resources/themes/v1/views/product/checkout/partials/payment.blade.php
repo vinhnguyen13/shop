@@ -14,7 +14,7 @@
     @endif
     <div class="mgB-10">
         <label for="" class="frm">
-            <input name="payment_method" type="radio" value="OrderOnline">ORDER ONLINE
+            <input name="payment_method" type="radio" value="OrderOnline"@if(!$is_seller) checked @endif>ORDER ONLINE
         </label>
     </div>
     <div class="mgB-10 hide">

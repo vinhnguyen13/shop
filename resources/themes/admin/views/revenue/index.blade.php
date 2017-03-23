@@ -191,7 +191,7 @@
         $('.wrapRevenue').on('click', '.btn-print', function (e) {
             var url = urlDebtPaymentDueDate+'?print=1';
             loadiFrame(url);
-            $("#myiframe").load(
+            $("#printIframe").load(
                     function() {
                         window.frames['myname'].focus();
                         window.frames['myname'].print();
@@ -202,7 +202,7 @@
         });
         function loadiFrame(src)
         {
-            $("#iframeplaceholder").html("<iframe id='myiframe' style='display:none;' name='myname' src='" + src + "' />");
+            $("#iframeplaceholder").html("<iframe id='printIframe' style='display:none;' name='myname' src='" + src + "' />");
         }
     });
 </script>

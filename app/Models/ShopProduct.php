@@ -183,7 +183,7 @@ class ShopProduct extends Model
 
     public function getDetailsDefault($size = null, $direction = 'asc')
     {
-        $query = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK]);
+        $query = ShopProductDetail::query()->where(['product_id'=>$this->id]);
         if(!empty($size)){
             $query->where(['size'=>$size]);
         }
