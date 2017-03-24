@@ -85,10 +85,10 @@ $(document).ready(function () {
 		}        
 	});
 
-    $('#menu .inner-menu').slimScroll({
+    /*$('#menu .inner-menu').slimScroll({
 	    height: '100%',
 	    alwaysVisible: true
-	});
+	});*/
 
 	$('.header__cart').dropdown();
 
