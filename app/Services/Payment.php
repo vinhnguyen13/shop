@@ -170,7 +170,7 @@ class Payment
                         $price = $productDetail->getPrice();
                         $subtotalProduct = $price * $quantity;
                         $tax = $product->taxWithPrice($price);
-                        $orderProduct = ShopOrderProduct::where(['order_id' => $order->id, 'product_detail_id' => $productDetail->id]);
+                        $orderProduct = ShopOrderProduct::query()->where(['order_id' => $order->id, 'product_detail_id' => $productDetail->id])->first();
                         if (empty($orderProduct->id)) {
                             $orderProduct = new ShopOrderProduct();
                             $orderProduct->order_id = $order->id;

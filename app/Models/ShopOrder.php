@@ -67,14 +67,17 @@ class ShopOrder extends Model
     public function updateStatus($status)
     {
         if($status == ShopOrderStatus::STT_COMPLETE){
-            $orderDetails = ShopOrderDetail::query()->where(['order_id'=>$this->id])->get();
+            $totalOrderProduct = ShopOrderProduct::query()->where(['order_id' => $this->id])->count();
             $flag = true;
-            if(!empty($orderDetails)) {
-                foreach ($orderDetails as $orderDetail) {
-                    $product = ShopProduct::find($orderDetail->product_id);
-                    $totalDetail = $product->countDetailsBySize($orderDetail->size);
-                    if($orderDetail->quantity > $totalDetail){
-                        $flag = false;
+            if(empty($totalOrderProduct)) {
+                $orderDetails = ShopOrderDetail::query()->where(['order_id' => $this->id])->get();
+                if (!empty($orderDetails)) {
+                    foreach ($orderDetails as $orderDetail) {
+                        $product = ShopProduct::find($orderDetail->product_id);
+                        $totalDetail = $product->countDetailsBySize($orderDetail->size);
+                        if ($orderDetail->quantity > $totalDetail) {
+                            $flag = false;
+                        }
                     }
                 }
             }
