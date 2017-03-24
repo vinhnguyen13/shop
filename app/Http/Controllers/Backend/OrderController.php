@@ -9,7 +9,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Backend\ShopOrder;
 use App\Models\Backend\User;
-use App\Services\Payment;
 use Illuminate\Http\Request;
 use Input;
 
@@ -34,9 +33,7 @@ class OrderController extends Controller
         if(!empty($orderID) && !empty($user->id)){
             $order = ShopOrder::find($orderID);
             if(!empty($order->id)){
-                $order->order_status_id = $status;
-                $order->save();
-                app(Payment::class)->processingSaveOrderProduct($order);
+                $order->updateStatus($status);
             }
 
         }

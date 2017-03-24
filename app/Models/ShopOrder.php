@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasValidator;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\Payment;
 
 class ShopOrder extends Model
 {
@@ -61,6 +62,31 @@ class ShopOrder extends Model
     public function orderDetails()
     {
         return ShopOrderDetail::query()->where(['order_id'=>$this->id])->get();
+    }
+
+    public function updateStatus($status)
+    {
+        if($status == ShopOrderStatus::STT_COMPLETE){
+            $orderDetails = ShopOrderDetail::query()->where(['order_id'=>$this->id])->get();
+            $flag = true;
+            if(!empty($orderDetails)) {
+                foreach ($orderDetails as $orderDetail) {
+                    $product = ShopProduct::find($orderDetail->product_id);
+                    $totalDetail = $product->countDetailsBySize($orderDetail->size);
+                    if($orderDetail->quantity > $totalDetail){
+                        $flag = false;
+                    }
+                }
+            }
+            if($flag == true){
+                $this->order_status_id = $status;
+                $this->save();
+                app(Payment::class)->processingSaveOrderProduct($this);
+            }
+        }else{
+            $this->order_status_id = $status;
+            $this->save();
+        }
     }
 
 }
