@@ -7,7 +7,6 @@
 
 body {
     overflow-x: hidden;
-    font-family: 'Cabin', sans-serif;
 }
 
 .menu-left #wrapper {
@@ -49,11 +48,29 @@ body.active:before {
     background: rgba(0, 0, 0, 0.19);
 }
 
-.font-400 {font-weight: 400 !important;}
-.font-500 {font-weight: 500 !important;}
-.font-500i {font-weight: 500 !important;}
-.font-600 {font-weight: 600 !important;}
-.font-700 {font-weight: 700 !important;}
+.fontSFUBold {
+    font-family: "sfu_daxcondensedextrabold";
+}
+
+.fontSFURe {
+    font-family: "sfu_daxcondensedregular";
+}
+
+.fontSFUMeBold {
+    font-family: "sfu_daxcondensedmedium";
+}
+
+.fontSFUL {
+    font-family: "sfu_daxcondensed_light";
+}
+
+.fontGlab {
+    font-family: "glab-icon-pack-finalregular";
+}
+
+.font-bold {
+    font-weight: bold;
+}
 
 .letter-1 {letter-spacing: 1px;}
 .letter-2 {letter-spacing: 2px;}
@@ -65,7 +82,7 @@ body.active:before {
 
 .btn-see-more {
     display: inline-block;
-    
+    font-family: "sfu_daxcondensedmedium";
     font-size: 15px;
     padding: 10px 30px 10px;
     /* margin-top: 50px; */
@@ -91,7 +108,7 @@ body.active:before {
     border: none;
     color: #ffffff;
     text-transform: uppercase;
-    
+    font-family: "sfu_daxcondensedregular";
     font-size: 20px;
     letter-spacing: 2px;
     padding: 12px 35px;
@@ -109,7 +126,7 @@ body.active:before {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
-    
+    font-family: "sfu_daxcondensed_light";
     width: 230px;
     box-shadow: 0px 0px 1px rgba(60, 60, 60, 0.37);
 }
@@ -249,7 +266,7 @@ body.active:before {
     padding: 5px 20px;
     /* box-shadow: 0px 0px 1px #7c7c7c; */
     width: 100%;
-    
+    font-family: "sfu_daxcondensedregular";
     font-size: 18px;
 }
 
@@ -337,12 +354,7 @@ div.header__cart--item:hover {
     width: 75px;
     margin-right: 30px;
 }
-.header__cart--item .wrap-img img {
-    height: inherit;
-    width: inherit;
-    -o-object-fit: inherit;
-    object-fit: inherit;
-}
+
 .header__cart a {
     display: block;
     position: relative;
@@ -360,7 +372,7 @@ div.header__cart--item:hover {
     color: #fff;
     padding: 20px 0;
     font-size: 20px;
-    
+    font-family: "sfu_daxcondensedregular";
     font-weight: bold;
 }
 
@@ -377,13 +389,6 @@ div.header__cart--item:hover {
     line-height: 100%;
     position: relative;
     top: -2px;
-    -webkit-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-    transform: scale(1);
-}
-.header__cart--num.active {
-    transform: scale(1.5);
-    color: red;
 }
 
 .header__cart .icon-cart {
@@ -433,7 +438,7 @@ div.header__cart--item:hover {
     text-align: center;
     padding: 0 20px;
     text-transform: uppercase;
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 12px;
     color: #cecece;
     position: relative;
@@ -496,7 +501,7 @@ div.header__cart--item:hover {
     width: 100%;
     left: 0;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 20px;
     letter-spacing: 2px;
     overflow: hidden;
@@ -702,7 +707,7 @@ footer {
 
 .footer__menu li a {
     font-size: 15px;
-    
+    font-family: "sfu_daxcondensedmedium";
 }
 
 .footer__right,
@@ -716,7 +721,7 @@ footer {
 }
 
 .footer__right {
-    
+    font-family: "sfu_daxcondensedextrabold";
     text-transform: uppercase;
     text-align: center;
     margin-top: 20px;
@@ -746,7 +751,7 @@ footer {
 .slidehomepage .desc h2 {
     color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    
+    font-family: "sfu_daxcondensedextrabold";
     text-transform: uppercase;
     font-size: 48px;
     font-weight: bold;
@@ -834,7 +839,7 @@ footer {
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
     padding: 15px 15px 5px;
-    
+    font-family: "sfu_daxcondensedregular";
     z-index: 10;
     display: none;
     /* height: 200px; */
@@ -845,14 +850,10 @@ footer {
 .product__item--infor div.clearfix p {
     text-align: left;
     font-size: 13px;
-    padding-left: 0;
-}
-.product__item--infor div.clearfix .product-type {
-    font-size: 12px;
 }
 .product__item--infor div.clearfix .product-price {
     overflow: hidden;
-    
+    font-family: "sfu_daxcondensedregular";
     font-weight: bold;
     text-align: right;
 }
@@ -869,17 +870,18 @@ footer {
 
 .avai__size {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .size-item .size {
     display: inline-block;
-    font-size: 13px;
+    line-height: 100%;
+    font-size: 15px;
     height: 20px;
+    line-height: 20px;
     text-align: center;
     margin: 0 0 0;
     padding: 0 4px;
-    line-height: 20px;
 }
 
 .size-item .size:hover {
@@ -888,16 +890,15 @@ footer {
 
 .product-price,
 .product-name {
-    
+    font-family: "sfu_daxcondensedextrabold";
 }
 
 .product__item--infor .product-name {
     white-space: nowrap;
-    max-width: 80%;
+    max-width: 70%;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 10px;
-    font-weight: 700;
 }
 
 .connect__items--item {
@@ -967,12 +968,13 @@ footer {
 
 .breakcum li a {
     text-transform: uppercase;
+    font-family: "sfu_daxcondensedregular";
     color: #404040;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .breakcum li.active a {
-    
+    font-family: "sfu_daxcondensedextrabold"
 }
 
 .breakcum li span {
@@ -985,8 +987,9 @@ footer {
 .detail__img .breakcum li,
 .detail__desc--fix .breakcum li {
     text-transform: uppercase;
+    font-family: "sfu_daxcondensedregular";
     color: #404040;
-    font-size: 13px;
+    font-size: 14px;
     color: #aeaeae;
 }
 
@@ -1072,7 +1075,7 @@ footer {
 .detail__desc .btn-buy {
     background: #4d4d4d;
     border: none;
-    
+    font-family: "sfu_daxcondensedmedium";
     color: #fff;
     padding: 10px 20px 9px;
     display: block;
@@ -1091,12 +1094,12 @@ footer {
 .detail__desc--param p,
 .detail__desc--intro p {
     margin-bottom: 10px;
-    
+    font-family: "sfu_daxcondensedregular";
     font-size: 16px;
 }
 
 .detail__desc--intro .title__detailproduct {
-    
+    font-family: "sfu_daxcondensedmedium";
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
@@ -1136,7 +1139,7 @@ footer {
     border: none;
     background: #262626;
     text-transform: uppercase;
-    
+    font-family: 'sfu_daxcondensedmedium';
     color: #fff;
     font-size: 20px;
 }
@@ -1352,7 +1355,7 @@ footer {
     float: left;
     color: #d6d6d6;
     text-transform: uppercase;
-    
+    font-family: "sfu_daxcondensedregular";
     font-size: 12px;
     padding: 0 5px;
 }
@@ -1362,7 +1365,7 @@ footer {
 }
 
 .breakgum li a {
-    
+    font-family: "sfu_daxcondensedmedium";
     font-size: 12px;
 }
 
@@ -1372,7 +1375,7 @@ footer {
     display: block;
     padding: 10px 15px;
     text-transform: uppercase;
-    
+    font-family: "sfu_daxcondensedregular";
     color: #333;
 }
 
@@ -1410,7 +1413,7 @@ footer {
 .detail__desc .dropdown .dropdown__inner a {
     display: block;
     padding: 10px 30px;
-    
+    font-family: "sfu_daxcondensedregular";
 }
 
 .detail__desc .dropdown .dropdown__inner a:hover {
@@ -1458,7 +1461,7 @@ footer {
 }
 .checkout__infor--date {
     float: right;
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 14px;
     letter-spacing: 3.3px;
 }
@@ -1473,13 +1476,13 @@ label.frm input[type=radio] {
     margin-right: 10px;
 }
 .checkout__infor label.frm {
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 17px;
 }
 .error {
     display: none;
     color: red;
-    
+    font-family: "sfu_daxcondensedregular";
     margin-top: 5px;
 }
 .frm-item.has-error .error  {
@@ -1489,7 +1492,7 @@ label.frm input[type=radio] {
     background-color: #262626;
     border: none;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 20px;
     padding: 7px 20px;
     width: 50%;
@@ -1519,7 +1522,7 @@ label.frm input[type=radio] {
 }
 .price__item {
     float: right;
-    
+    font-family: "sfu_daxcondensedmedium";
     font-weight: bold;
 }
 .code__promo {
@@ -1534,7 +1537,7 @@ label.frm input[type=radio] {
     width: 100%;
     color: #7c7c7c;
     font-size: 18px;
-    
+    font-family: "sfu_daxcondensedmedium";
 }
 .btn-apply-checkout {
     height: 60px;
@@ -1542,7 +1545,7 @@ label.frm input[type=radio] {
     width: 100%;
     background: #000;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedmedium";
     font-size: 18px;
 }
 .btn-apply-checkout:hover {
@@ -1555,7 +1558,7 @@ label.frm input[type=radio] {
     width: 100%;
     background: #000;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedextrabold";
     font-size: 24px;
     display: block;
     width: 100%;
@@ -1589,7 +1592,7 @@ label.frm input[type=radio] {
     border: none;
     background: #262626;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedmedium";
     font-size: 18px;
     padding: 0 35px;
 }
@@ -1632,7 +1635,7 @@ label.frm input[type=radio] {
 .pagination__glab li a {
     padding: 5px 10px;
     font-size: 18px;
-    
+    font-family: "sfu_daxcondensedregular";
     font-weight: bold;
 }
 .pagination__glab li a .icon-n-e-x-x-t,
@@ -1662,12 +1665,11 @@ button.close {
     font-size: 20px;
 }
 .detail__desc--fix .fs-24.mgB-10 {
-    margin-bottom: 5px;
+    margin-bottom: 0;
     line-height: 100%;
 }
 .detail__desc--fix .fs-24.mgB-20 {
     margin-bottom: 10px;
-    line-height: 30px;
 }
 .detail__desc--intro {
     font-size: 13px;
@@ -1695,7 +1697,7 @@ button.close {
 }
 .reciep__content h2 {
     font-size: 17px;
-    
+    font-family: "sfu_daxcondensedextrabold";
     text-align: center;
     letter-spacing: 1.4px;
     margin-bottom: 25px;
@@ -1751,7 +1753,7 @@ button {
     border: none;
     background: #000;
     color: #fff;
-    
+    font-family: "sfu_daxcondensedmedium";
     padding: 3px 25px;
 }
 button:hover {
@@ -1781,7 +1783,7 @@ button:hover {
     padding: 0 15px;
 }
 .auth__user ul li a {
-    
+    font-family: "sfu_daxcondensedregular";
     font-size: 12px;
 }
 .header__left .auth__user a {
@@ -1873,7 +1875,7 @@ button:hover {
 #email__pay .frm {
     display: block;
     padding-left: 30%;
-    
+    font-family: "sfu_daxcondensedregular";
 }
 .detail__img .breakcum {
     text-align: center;
@@ -1890,13 +1892,4 @@ button:hover {
 .detail__img .swiper-button-next,
 .detail__img .swiper-button-prev {
     display: none;
-}
-.connect__title {
-    font-size: 22px;
-}
-.connect .fs-30 {
-    font-size: 22px;
-}
-.connect .icon-306026 {
-    opacity: .5;
 }

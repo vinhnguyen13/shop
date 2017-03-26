@@ -1,6 +1,8 @@
 // JavaScript Document
 $(document).ready(function () {
 
+    $('.detail__desc .btn-buy').on('click', addCart);
+
     $('.toggle__auth').on('click', function (e) {
         e.preventDefault();
         var _this = $(this),
@@ -132,6 +134,18 @@ $(document).ready(function () {
 		}
 	});
 });
+
+function addCart(e) {
+    var body = $("html, body");
+
+    body.stop().animate({scrollTop:0}, '1000', 'swing', function() {
+        //callback finish animate
+        $('.header__cart--num').addClass('active');
+        setTimeout(function () {
+            $('.header__cart--num').removeClass('active');
+        }, 250);
+    });
+}
 
 function checkMobile () {
 	var wW = $(window).outerWidth();

@@ -89,7 +89,7 @@
         width: 100%;
         border-radius: 0px;
         text-transform: uppercase;
-        font-family: "sfu_daxcondensed_light";
+        
         font-size: 20px;
         height: 45px;
     }
@@ -174,7 +174,7 @@
     }
     .checkout__final--tbl.table-responsive > tbody > tr td:before {
         font-size: 17px;
-        font-family: "sfu_daxcondensedmedium";
+        
     }
     .checkout__final--tbl.table-responsive > tbody > tr td p {
         text-align: left;
@@ -243,7 +243,7 @@
     }
     .header__left .dropdown .dropdown__inner a {
         font-size: 12px;
-        font-family: "sfu_daxcondensedmedium";
+        
         font-weight: bold;
         padding: 15px 0;
     }
@@ -474,6 +474,10 @@
     header {
         height: 40px;
     }
+    .header__cart--items {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 @media (max-width: 320px) {}
@@ -513,7 +517,7 @@
         font-size: 14px;
     }
     .product__item--infor .clearfix p.fs-18 {
-        font-family: "sfu_daxcondensedmedium";
+        
         font-size: 14px;
     }
     .product-type,
@@ -530,10 +534,8 @@
         height: inherit;
     }
     .product__item--infor .clearfix .product-name {
-        font-family: "sfu_daxcondensedmedium";
-        font-weight: bold;
-        letter-spacing: 1.5px;
-        margin: 0;
+        font-weight: bold;
+        margin: 0;
     }
     .product__item--infor div.clearfix .product-price {
         font-weight: normal;
