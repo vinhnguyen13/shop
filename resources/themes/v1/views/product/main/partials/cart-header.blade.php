@@ -1,5 +1,5 @@
 
-<h2 class="text-uper fontSFUBold fs-16">your cart</h2>
+<h2 class="text-uper font-700 fs-16">your cart</h2>
 @if(!empty($cart))
     <div class="header__cart--items">
         <?php
@@ -22,28 +22,28 @@
                     <img src="{{$product->thumb()}}" alt="">
                 </div>
                 <div class="overflow-all">
-                    <p class="text-uper fs-15 fontSFUBold">{{$product->name}}</p>
+                    <p class="text-uper fs-15 font-700">{{$product->name}}</p>
 
-                    <p class="product-type text-uper fontSFURe fs-13 mgB-10">{{$product->color}}</p>
+                    <p class="product-type text-uper font-500 fs-13 mgB-10">{{$product->color}}</p>
 
-                    <p class="pull-right fontSFUBold fs-12">đ {{number_format($subtotalProduct)}}</p>
+                    <p class="pull-right font-700 fs-12">đ {{number_format($subtotalProduct)}}</p>
 
-                    <p class="text-uper fontSFUBold fs-12">Size: {{$size}} - Quantity: {{$quantity}}</p>
+                    <p class="text-uper font-700 fs-12">Size: {{$size}} - Quantity: {{$quantity}}</p>
                 </div>
             </a>
         @endforeach
     </div>
     <div class="clearfix mgB-20">
-        <span class="text-uper fs-14 fontSFUMeBold">Tạm tính</span>
+        <span class="text-uper fs-14 font-600">Tạm tính</span>
 
         <p class="pull-right product-price">đ {{number_format($subtotal)}}</p>
     </div>
     <div class="text-center">
-        <p class="fontSFURe fs-15 mgB-15">Phí vận chuyển và thuế sẽ tính lúc thanh toán</p>
-        <a href="{{route('product.checkout', ['step'=>'step1'])}}" class="text-uper btn-checkout fontSFUL">Thanh toán</a>
+        <p class="font-500 fs-15 mgB-15">Phí vận chuyển và thuế sẽ tính lúc thanh toán</p>
+        <a href="{{route('product.checkout', ['step'=>'step1'])}}" class="text-uper btn-checkout ">Thanh toán</a>
     </div>
 @else
     <div class="text-center">
-        <p class="fontSFURe fs-15 mgB-15">Không có sản phẩm nào !</p>
+        <p class="font-500 fs-15 mgB-15">Không có sản phẩm nào !</p>
     </div>
 @endif

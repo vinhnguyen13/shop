@@ -3,7 +3,7 @@
 @section('content')
 <div class="userauth">
     <div class="userauth__inner">
-        <h3 class="text-center text-uper fontSFUBold fs-30 mgB-45">create account</h3>
+        <h3 class="text-center text-uper font-700 fs-30 mgB-45">create account</h3>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
             {{ csrf_field() }}
             <div class="frm-item">
@@ -38,8 +38,8 @@
             </div>
         </form>
         <div class="text-center mgT-40">
-            <p class="fontSFURe fs-16 text-uper mgB-10 text-decor"><a href="{{ route('login') }}">you have a account ?</a></p>
-            <p class="fontSFURe fs-16 text-uper text-decor"><a href="{{ route('password.form') }}">forgot your password ?</a></p>
+            <p class="font-500 fs-16 text-uper mgB-10 text-decor"><a href="{{ route('login') }}">you have a account ?</a></p>
+            <p class="font-500 fs-16 text-uper text-decor"><a href="{{ route('password.form') }}">forgot your password ?</a></p>
         </div>
     </div>
 </div>

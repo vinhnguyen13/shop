@@ -44,8 +44,8 @@
                             <li><span>/</span></li>
                             <li>{{$product->name}}</li>
                         </ul>
-                        <p class="text-uper fontSFURe font-bold lh-30 fs-24 mgB-10">{{$product->manufacturer->name or ''}}</p>
-                        <p class="text-uper fontSFURe font-bold fs-24 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
+                        <p class="text-uper font-500  lh-30 fs-24 mgB-10">{{$product->manufacturer->name or ''}}</p>
+                        <p class="text-uper font-500  fs-24 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
                         @if (!empty($details) && $details->count() > 0)
                         <div class="mgB-20">
                             <div class="dropdown">
@@ -72,7 +72,7 @@
                         @endif
                         <div class="detail__desc--intro">
                             <p class="title__detailproduct">Detail</p>
-                            <div class="fontSFUMeBold color-7c7c7c mgB-5">
+                            <div class="font-600 color-7c7c7c mgB-5">
                                 {!! $product->description !!}
                             </div>
                         </div>
@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="detail__related">
-            <div class="text-center text-uper fontSFUBold fs-25">related products</div>
+            <div class="text-center text-uper font-700 fs-25">related products</div>
             @include('product.main.partials.list-items')
         </div>
 

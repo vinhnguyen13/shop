@@ -70,7 +70,7 @@
 </div>
 <div class="connect container mgT-100">
     <div class="text-center mgB-60">
-        <span class="d-ib text-uper fontSFUMeBold fs-30 mgR-60 connect__title">connect us</span>
+        <span class="d-ib text-uper font-600 fs-30 mgR-60 connect__title">connect us</span>
         <a href="" class="mgR-20 fs-30"><span class="icon-facebook2"></span></a>
         <a href="" class="mgR-30 fs-30"><span class="icon-306026"></span></a>
         <a href="" class="fs-30"><span class="icon-play"></span></a>

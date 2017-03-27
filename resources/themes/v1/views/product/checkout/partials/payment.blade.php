@@ -1,5 +1,5 @@
 <div class="checkout__infor__payment step-checkout">
-    <p class="fontSFUBold mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
+    <p class="font-700 mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
     @if ($errors->has('payment_method'))
         <div class="frm-item has-error">
             <div class="error">{{ $errors->first('payment_method') }}</div>
@@ -66,7 +66,7 @@
     </div>
     <div class="text-center mgT-40">
         <button class="btn__comp--order">COMPLETE ORDER</button>
-        <p class="fontSFUMeBold fs-14 mgB-50">By Clicking "Complete Order" you are accepting <br> G-LAB Terms and Conditions.</p>
-        <a href="" class="fontSFUMeBold d-ib fs-12 text-uper font-bold"><span class="icon-b-a-c-k d-ib mgR-15 fs-13"></span>Return to filling infomation</a>
+        <p class="font-600 fs-14 mgB-50">By Clicking "Complete Order" you are accepting <br> G-LAB Terms and Conditions.</p>
+        <a href="" class="font-600 d-ib fs-12 text-uper "><span class="icon-b-a-c-k d-ib mgR-15 fs-13"></span>Return to filling infomation</a>
     </div>
 </div>

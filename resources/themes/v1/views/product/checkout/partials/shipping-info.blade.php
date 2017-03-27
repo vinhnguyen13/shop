@@ -1,7 +1,7 @@
 <div class="checkout__infor__shipping step-checkout">
     {{--SHIPPING--}}
     <div class="checkout__infor__user__shipping">
-        <p class="fontSFUBold mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
+        <p class="font-700 mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
         <div class="frm-item{{ $errors->has('shipping_name')?" has-error":""}}">
             <input name="shipping_name" placeholder="Họ Tên (*)" class="form-control" type="text">
             @if ($errors->has('shipping_name'))
@@ -39,7 +39,7 @@
     </div>
     {{--BILLING--}}
     <div class="checkout__infor__user__billing">
-        <p class="fontSFUBold mgB-20 fs-24 mgT-40">BILLING INFORMATION</p>
+        <p class="font-700 mgB-20 fs-24 mgT-40">BILLING INFORMATION</p>
         <div class="row mgB-20">
             <div class="col-sm-6">
                 <label for="" class="frm">

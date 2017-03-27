@@ -1,6 +1,6 @@
 <div class="checkout__infor__user step-checkout">
     {{--USER--}}
-    <p class="fontSFUBold mgB-20 fs-24 mgT-20">PLEASE ENTER YOUR EMAIL</p>
+    <p class="font-700 mgB-20 fs-24 mgT-20">PLEASE ENTER YOUR EMAIL</p>
     <div id="email__pay">
         {{ csrf_field() }}
         <div class="frm-item{{ $errors->has('email')?" has-error":""}}">

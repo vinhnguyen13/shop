@@ -1,7 +1,7 @@
 <div id="menu">
     <button id="menu-close"><span></span></button>
     <div class="menu__footer">
-        <div class="mgB-10 fs-14 fontSFUBold">FOLLOW US</div>
+        <div class="mgB-10 fs-14 font-700">FOLLOW US</div>
         <div class="center clearfix">
             <a href=""><span class="icon-facebook2"></span></a>
             <a href=""><span class="icon-306026"></span></a>
