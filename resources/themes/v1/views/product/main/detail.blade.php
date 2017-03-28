@@ -72,7 +72,7 @@
                         @endif
                         <div class="detail__desc--intro">
                             <p class="title__detailproduct">Detail</p>
-                            <div class="font-600 color-7c7c7c mgB-5">
+                            <div class="color-7c7c7c mgB-5">
                                 {!! $product->description !!}
                             </div>
                         </div>
