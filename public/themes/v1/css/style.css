@@ -1088,10 +1088,8 @@ footer {
     /* margin-bottom: 30px; */
 }
 
-.detail__desc--param p,
-.detail__desc--intro p {
+.detail__desc--param p {
     margin-bottom: 10px;
-    
     font-size: 16px;
 }
 
