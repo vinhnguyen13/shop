@@ -905,8 +905,8 @@ footer {
     display: flex;
     background: #e6e6e6;
     width: 20%;
-    border-right: 1px solid #c7c7c7;
-    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .connect__items--item a {
@@ -945,8 +945,8 @@ footer {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    border-top: 1px solid #c7c7c7;
-    border-left: 1px solid #c7c7c7;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
 }
 
 .header__right--mbsearch {
@@ -1890,11 +1890,9 @@ button:hover {
     display: none;
 }
 .connect__title {
-    font-size: 22px;
+    font-size: 24px;
 }
-.connect .fs-30 {
-    font-size: 22px;
-}
-.connect .icon-306026 {
+.connect .fs-30 {font-size: 24px;}
+.connect .connect__items .icon-306026 {
     opacity: .5;
 }
