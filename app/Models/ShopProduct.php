@@ -47,7 +47,7 @@ class ShopProduct extends Model
     {
         return [
             'name' => 'required',
-            'sku_producer' => 'required',
+            'sku_producer' => 'required|unique:shop_product,sku_producer,'.$this->id,
             'description' => 'required',
             'points' => 'numeric|min:0',
         ];
