@@ -63,9 +63,10 @@ class ProductController extends Controller
 
     public function detail(Request $request, $id)
     {
+        $size = $request->get('size');
         $product = ShopProduct::find($id);
         $products = app(ShopProduct::class)->getList(['limit'=>30]);
-        return view('product.main.detail', compact('product', 'products'));
+        return view('product.main.detail', compact('product', 'products', 'size'));
     }
 
     public function cartAdd(Request $request)

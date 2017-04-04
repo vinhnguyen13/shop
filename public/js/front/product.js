@@ -156,4 +156,9 @@ $(document).ready(function () {
         }
         return false;
     });
+
+    if(sizeSelected){
+        $('.dropdown__inner li[data-size="'+sizeSelected+'"] a').trigger('click');
+        $('.val-selected').trigger('click');
+    }
 });
