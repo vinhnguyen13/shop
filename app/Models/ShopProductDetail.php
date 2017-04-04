@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasValidator;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopProductDetail extends Model
@@ -141,17 +142,19 @@ class ShopProductDetail extends Model
         return false;
     }
 
-    public function updateOutOfStock(){
-        $this->update([
-            'debt_status'=>ShopProductDetail::DEBT_PENDING,
+    public function updateStockOut(){
+        $this->fill([
             'stock_status_id'=>ShopProductDetail::STOCK_OUT_OF_STOCK,
+            'stock_out_date'=>Carbon::now(),
+            'debt_status'=>ShopProductDetail::DEBT_PENDING,
         ]);
     }
 
-    public function updateInStock(){
-        $this->update([
-            'debt_status'=>ShopProductDetail::DEBT_START,
+    public function updateStockIn(){
+        $this->fill([
             'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
+            'stock_in_date'=>Carbon::now(),
+            'debt_status'=>ShopProductDetail::DEBT_START,
         ]);
     }
 }

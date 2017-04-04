@@ -192,7 +192,8 @@ class Payment
                         $orderProduct->reward = 0;
                         $orderProduct->save();
 
-                        $productDetail->updateOutOfStock();
+                        $productDetail->updateStockOut();
+                        $productDetail->save();
                         $pids[] = $product->id;
                     }
                 }

@@ -130,8 +130,10 @@ class ShopProduct extends MainShopProduct
                 $instance->processingDetail($values);
                 $instance->processingCategory($values);
                 $instance->updateAfterSave($values);
-                DB::commit();
-                return $instance;
+                if(empty($instance->errors)) {
+                    DB::commit();
+                    return $instance;
+                }
             } catch (\Exception $e) {
                 DB::rollBack();
                 throw $e;
@@ -358,16 +360,12 @@ class ShopProduct extends MainShopProduct
      * @param $data
      */
     public function saveProductDetail($productDetailID, $data){
-        $attributes = [
-            'product_id'=>$this->id,
-            'supplier_id'=>$data['supplier_id'],
-            'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
-            'size'=>trim($data['size']),
-            'price_in'=>$data['price_in'],
-            'price'=>$data['price'],
-            'new_status'=>$data['new_status'],
-            'stock_in_date'=>Carbon::now(),
-        ];
+        if($data['price'] < $data['price_in']){
+            $messageBag = new \Illuminate\Support\MessageBag();
+            $messageBag->add('price', 'The Price In must be less than the selling Price');
+            $this->errors[] = $messageBag;
+            return false;
+        }
         if(!empty($productDetailID)){
             $productDetail = ShopProductDetail::query()->where(['id'=>$productDetailID])->first();
             if(!empty($productDetail->attributes)) {
@@ -375,10 +373,19 @@ class ShopProduct extends MainShopProduct
             }
         }else{
             if(!empty($data['total'])){
+                $attributes = [
+                    'product_id'=>$this->id,
+                    'supplier_id'=>$data['supplier_id'],
+                    'size'=>trim($data['size']),
+                    'price_in'=>$data['price_in'],
+                    'price'=>$data['price'],
+                    'new_status'=>$data['new_status'],
+                ];
                 for($i=1;$i<=$data['total'];$i++){
                     $productDetail = new ShopProductDetail();
                     $productDetail->fill($attributes);
                     $productDetail->generateSKU();
+                    $productDetail->updateStockIn();
                     $validate = $productDetail->validate($productDetail->attributes);
                     if ($validate->passes()) {
                         $productDetail->save();
