@@ -12,8 +12,8 @@
         <div>
             <ul>
                 <li class="logo-white"><a href=""><img src="/themes/v1/icons/g-lab-logo-white.svg" /></a></li>
-                <li class="active"><a href="{{url('/')}}"><span class="menu__txt">home</span></a></li>
-                <li class="has-sub">
+                <li class="{{menu_active(['home'])}}"><a href="{{url('/')}}"><span class="menu__txt">home</span></a></li>
+                <li class="has-sub {{menu_active(['product.category'])}}">
                     <a href=""><span class="menu__txt">store</span> @if (!empty($categories))<span class="icon-chevron-thin-right"></span>@endif</a>
                     @if (!empty($categories))
                     <div class="menu__sub">
@@ -25,7 +25,7 @@
                     </div>
                     @endif
                 </li>
-                <li class="has-sub">
+                <li class="has-sub {{menu_active(['product.brand'])}}">
                     <a href=""><span class="menu__txt">brands</span> @if (!empty($manufacturers))<span class="icon-chevron-thin-right"></span>@endif</a>
                     @if (!empty($manufacturers))
                         <div class="menu__sub">
@@ -39,7 +39,7 @@
                 </li>
                 <li><a href=""><span class="menu__txt">consigment</span></a></li>
                 <li><a href=""><span class="menu__txt">location</span></a></li>
-                <li><a href="{{route('page.about')}}"><span class="menu__txt">about us</span></a></li>
+                <li class="{{menu_active(['page.about'])}}"><a href="{{route('page.about')}}"><span class="menu__txt">about us</span></a></li>
                 <li><a href=""><span class="menu__txt">support</span></a></li>
             </ul>
         </div>
