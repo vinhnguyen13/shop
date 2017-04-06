@@ -110,6 +110,14 @@ class ShopProductDetail extends Model
         }
     }
 
+    public function getTextNewStatus()
+    {
+        if($this->new_status == 1){
+            return 'New';
+        }
+        return 'Used';
+    }
+
     public function inStock(){
         return $this->stock_status_id === self::STOCK_IN_STOCK;
     }

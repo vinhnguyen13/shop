@@ -161,5 +161,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/cache', ['uses' => 'HomeController@cache', 'as' => 'admin.cache.index']);
         Route::get('/cache/clear', ['uses' => 'HomeController@cacheClear', 'as' => 'admin.cache.clear']);
+        Route::get('/cleanDB', ['uses' => 'HomeController@cleanDB', 'as' => 'admin.cleanDB']);
     });
 });

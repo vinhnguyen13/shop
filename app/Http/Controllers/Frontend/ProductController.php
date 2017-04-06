@@ -95,7 +95,8 @@ class ProductController extends Controller
     public function cartUpdate(Request $request)
     {
         $cart = app(Payment::class)->getCart();
-        $html = view('product.checkout.partials.products', compact('cart'))->render();
+        $checkoutInfo = app(Payment::class)->getCheckoutInfo();
+        $html = view('product.checkout.partials.products', compact('cart', 'checkoutInfo'))->render();
         return ['html'=>$html];
     }
 
@@ -112,6 +113,7 @@ class ProductController extends Controller
                 return redirect(route('product.checkout', ['step'=>$nextStep]));
             }
         }
+        $checkoutInfo = app(Payment::class)->getCheckoutInfo();
         if($request->isMethod('post')){
             $input = \Input::all();
             $checkoutRequest = new CheckoutRequest();
@@ -127,7 +129,7 @@ class ProductController extends Controller
             if(!empty($input['password'])){
                 app(User::class)->login($input['email'], $input['password']);
             }
-            app(Payment::class)->addCheckoutInfo($input);
+            $checkoutInfo = app(Payment::class)->addCheckoutInfo($input);
             if(!empty($nextStep)){
                 /*
                  * Redirect next step
@@ -137,17 +139,16 @@ class ProductController extends Controller
                 /*
                  * Order with information all steps
                  */
-                $checkoutInfo = app(Payment::class)->getCheckoutInfo();
                 unset($checkoutInfo['_token']);
                 $return = app(Payment::class)->checkout($checkoutInfo);
                 if(!empty($return->id)){
                     return redirect(route('product.payment.success', ['order'=>$return->id]));
                 }else{
-                    return Redirect::back();
+                    return Redirect::back()->withErrors($return);
                 }
             }
         }
-        return view('product.checkout.index', compact('cart', 'step', 'is_seller', 'view'));
+        return view('product.checkout.index', compact('cart', 'step', 'is_seller', 'view', 'checkoutInfo'));
     }
 
     public function order(Request $request)

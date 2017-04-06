@@ -7,6 +7,7 @@ $coupontotal = 0;
 $tax = 0;
 $total = 0;
 $quantities =[1=>1,2,3,4,5];
+$totalItem = 0;
 ?>
 @foreach($cart as $pid=>$item)
 <?php
@@ -17,6 +18,7 @@ $quantities =[1=>1,2,3,4,5];
     $subtotalProduct = $price * $quantity;
     $subtotal += $subtotalProduct;
     $tax += $product->taxWithPrice($price);
+    $totalItem += $quantity;
 ?>
 <div class="clearfix mgB-40 checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}">
     <div class="checkout__inforpro--img pull-left">
@@ -26,7 +28,7 @@ $quantities =[1=>1,2,3,4,5];
         <a href="" class="pro-remove removeCart"><span class="icon-uniF335"></span></a>
         <p class="font-600 fs-20">{!! $product->name !!}</p>
         <p class="font-600 fs-12"><em>SKU:</em> {{$product->sku_producer}}</p>
-        <p class="font-600 fs-12"><em>COLOR:</em> {{$product->color}}</p>
+{{--        <p class="font-600 fs-12"><em>COLOR:</em> {{$product->color}}</p>--}}
         <p class="font-600 fs-12"><em>SIZE:</em> {{$size}}</p>
         <p class="price__item">{{number_format($subtotalProduct)}} đ</p>
         <p class="font-600 fs-12">QTY: {!! Form::select('quantity_select', $quantities, $quantity, ['class' => 'quantity_select']) !!}</p>
@@ -34,6 +36,12 @@ $quantities =[1=>1,2,3,4,5];
 </div>
 @endforeach
 <?php
+$shippingPrice = 0;
+if(!empty($checkoutInfo['shipping_city_id'])){
+    $shipFee = app(\App\Services\Payment::class)->getShipFeeWithCity($checkoutInfo['shipping_city_id']);
+    $shippingPrice = !empty($shipFee->value) ? $shipFee->value : 0;
+}
+$shiptotal = $shippingPrice * $totalItem;
 $total = ($subtotal + $shiptotal) - $coupontotal;
 ?>
 <div class="clearfix mgB-40">
@@ -52,7 +60,6 @@ $total = ($subtotal + $shiptotal) - $coupontotal;
     <p class="pull-right font-600 fs-18 ">{{number_format($shiptotal)}} đ</p>
     <p class="font-600 fs-18 ">SHIPPING</p>
 </div>
-<p class="font-600 fs-18 color-7c7c7c mgB-40">Shipping fee will be caculated from your address</p>
 <div class="clearfix mgB-40">
     <p class="pull-right font-700 fs-24">{{number_format($total)}} đ</p>
     <p class="font-700 fs-24">TOTAL</p>

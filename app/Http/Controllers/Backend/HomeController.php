@@ -7,6 +7,12 @@
  */
 namespace App\Http\Controllers\Backend;
 
+use App\Models\ShopCustomer;
+use App\Models\ShopOrder;
+use App\Models\ShopOrderDetail;
+use App\Models\ShopOrderProduct;
+use App\Models\ShopProduct;
+use App\Models\ShopProductDetail;
 use App\Services\UploadMedia;
 use Illuminate\Http\Request;
 use Cache;
@@ -61,6 +67,22 @@ class HomeController extends Controller
             Cache::flush();
         }
         return Redirect::route('admin.cache.index');
+    }
+
+    public function cleanDB()
+    {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        ShopProductDetail::query()->update([
+            'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK,
+            'stock_in_date'=>null,
+            'debt_status'=>ShopProductDetail::DEBT_START,
+        ]);
+        app(ShopProduct::class)->updateStock();
+        ShopOrder::query()->truncate();
+        ShopOrderDetail::query()->truncate();
+        ShopOrderProduct::query()->truncate();
+        ShopCustomer::query()->truncate();
+
     }
 
 }

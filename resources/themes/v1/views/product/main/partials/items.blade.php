@@ -29,7 +29,7 @@
                     <div class="clearfix">
                         <div class="pull-left w-70">
                             <p class="product-name text-uper">{{$product->name}}</p>
-                            <p class="product-type text-uper">{{$product->color}}</p>
+                            {{--<p class="product-type text-uper">{{$product->color}}</p>--}}
                         </div>
                         <p class="product-price">đ {{number_format($price, 0)}}</p>
 

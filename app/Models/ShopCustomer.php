@@ -33,7 +33,7 @@ class ShopCustomer extends Model
         return [
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
         ];
     }
     /**

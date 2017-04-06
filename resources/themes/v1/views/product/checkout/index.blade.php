@@ -45,5 +45,5 @@
         var urlAddCart = "{{route('product.cart.add')}}";
         var urlLocation = "{{route('home.location')}}";
     </script>
-    <script src="{!! asset('js/front/checkout.js')  !!}"></script>
+    <script src="{!! asset('js/front/checkout.js?v='.$version_deploy)  !!}"></script>
 @endpush

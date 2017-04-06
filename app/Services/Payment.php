@@ -247,22 +247,21 @@ class Payment
                 $order->update(['invoice_code'=>$invID]);
                 $this->processingSaveOrderDetail($order, $carts);
                 $this->processingSaveOrderProduct($order);
-                $this->removeCartAll();
-                DB::commit();
-                /**
-                 * Remove quantity
-                 */
-
-                return $order;
-            }else{
-                $messageBag = $validate->getMessageBag();
-                if(!empty($order->errors)){
-                    foreach($order->errors as $error){
-                        $messageBag->merge($error->getMessages());
-                    }
+                if(empty($this->errors)) {
+                    $this->removeCartAll();
+                    $this->removeCheckoutInfo();
+                    DB::commit();
+                    return $order;
                 }
-                return $validate->getMessageBag();
             }
+            DB::rollBack();
+            $messageBag = $validate->getMessageBag();
+            if(!empty($this->errors)){
+                foreach($this->errors as $error){
+                    $messageBag->merge($error->getMessages());
+                }
+            }
+            return $validate->getMessageBag();
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -302,15 +301,17 @@ class Payment
         $total_price = 0;
         $total_tax = 0;
         $total = 0;
+        $shippingPrice = 0;
         $total_shipping = 0;
         if($values['payment_method'] == ShopPayment::KEY_PAYATSTORE){
             $order->order_status_id = ShopOrderStatus::STT_COMPLETE;
         }else{
             $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);
-            $total_shipping = $shipFee->value;
+            $shippingPrice = $shipFee->value;
             $order->order_status_id = ShopOrderStatus::STT_PENDING;
         }
         if(!empty($carts)){
+            $totalItem = 0;
             foreach($carts as $pid=>$item) {
                 $size = $item['size'];
                 $quantity = $item['quantity'];
@@ -318,7 +319,9 @@ class Payment
                 $price = $product->getPriceDefault($size);
                 $total_price += $price * $quantity;
                 $total_tax += $product->taxWithPrice($price);
+                $totalItem += $quantity;
             }
+            $total_shipping = $shippingPrice * $totalItem;
             $total = $total_price + $total_shipping + $total_tax;
         }
         /*

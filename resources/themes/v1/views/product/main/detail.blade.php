@@ -56,7 +56,7 @@
                                             <ul>
                                                 @foreach($details as $detail)
                                                     @if (!empty($detail->size))
-                                                        <li data-size="{{$detail->size}}"><a href=""><span class="pull-right detail__price">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-size="{{$detail->size}}" data-product="{{encrypt($detail->product_id)}}" data-detail="{{$detail->id}}">{{$detail->size}}</span></a></li>
+                                                        <li data-size="{{$detail->size}}"><a href=""><span class="pull-right detail__price">{{number_format($detail->getPrice())}} đ</span><span class="detail__size" data-size="{{$detail->size}}" data-product="{{encrypt($detail->product_id)}}" data-detail="{{$detail->id}}">{{$detail->size}} - {{$detail->getTextNewStatus()}}</span></a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -100,5 +100,5 @@
         var urlAddCart = "{{route('product.cart.add')}}";
         var sizeSelected = "{{$size}}";
     </script>
-    <script type="text/javascript" src="{!! asset('js/front/product.js')  !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/front/product.js?v='.$version_deploy)  !!}"></script>
 @endpush

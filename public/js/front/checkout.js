@@ -126,7 +126,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data.total > 0){
                         if($('.header__cart .val-selected .header__cart--num').length > 0) {
-                            $('.header__cart .val-selected .header__cart--num').html(data.total);
+                            $('.header__cart .val-selected .header__cart--num').html('('+data.total+')');
                             $('.header__cart .val-selected .header__cart--num').removeClass('hide');
                         }
                     }
