@@ -91,7 +91,7 @@ class ShopProduct extends MainShopProduct
     }
 
     public function getDetailsToForm(){
-        $details = $this->getDetailsGroupBySupplier();
+        $details = $this->getDetailsAvailable();
         return $details;
     }
 
@@ -380,6 +380,8 @@ class ShopProduct extends MainShopProduct
                     'price_in'=>$data['price_in'],
                     'price'=>$data['price'],
                     'new_status'=>$data['new_status'],
+                    'condition'=>$data['condition'],
+                    'consignment_fee'=>$data['consignment_fee'],
                 ];
                 for($i=1;$i<=$data['total'];$i++){
                     $productDetail = new ShopProductDetail();

@@ -75,7 +75,7 @@ class ProductController extends Controller
         $input = Input::all();
         $return = app(ShopProduct::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
-            return Redirect::route('admin.product.index');
+            return Redirect::route('admin.product.edit', ['id'=>$return->id]);
         }else{
             return Redirect::back()->withErrors($return);
         }

@@ -137,16 +137,8 @@ class ShopProduct extends Model
         return $url;
     }
 
-    public function getDetailsGroupBySupplier(){
-        $details = ShopProductDetail::query()->select([
-            'id',
-            'size',
-            'supplier_id',
-            'price_in',
-            'price',
-            'new_status',
-        ])
-            ->where(['product_id'=>$this->id, 'stock_status_id'=>1])->orderBy('created_at', 'DESC')->get();
+    public function getDetailsAvailable(){
+        $details = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'DESC')->get();
         return $details;
     }
 

@@ -7,11 +7,13 @@ $total = 0;
     <tr>
         <td class="text-left">Size</td>
         <td class="text-left">Supplier</td>
-        <td class="text-right">Price In</td>
-        <td class="text-right">Price</td>
-        <td class="text-left">New/Used</td>
-        <td class="text-left">Total</td>
-        <td style="width: 10%;"></td>
+        <td class="text-left">Price In</td>
+        <td class="text-left">Price</td>
+        <td class="text-left" style="width: 12%;">New/Used</td>
+        <td class="text-left">Condition</td>
+        <td class="text-left">Consignment Fee</td>
+        <td class="text-left" style="width: 5%;">Total</td>
+        <td style="width: 5%;"></td>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +28,7 @@ $total = 0;
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="6"></td>
+        <td colspan="8"></td>
         <td class="text-left"><button type="button" onclick="addMoreProductDetail();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add Detail"><i class="fa fa-plus-circle"></i></button></td>
     </tr>
     </tfoot>
@@ -44,8 +46,10 @@ $total = 0;
         html += '  <td class="text-right"><select class="form-control" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
-        html += '  <td class="text-left" style="width: 20%;"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
+        html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
         html += '  <input type="radio" name="product_detail[' + detail_row + '][new_status]" value="0"/> Used </td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][condition]" value="" placeholder="Condition" class="form-control" /></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="" placeholder="Consignment Fee" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][total]" value="1" placeholder="Total" class="form-control" /></td>';
         html += '  <td class="text-left"><button type="button" onclick="$(\'#detail-row' + detail_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
         html += '</tr>';

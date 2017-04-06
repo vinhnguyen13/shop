@@ -12,12 +12,17 @@
     <td class="text-right">
         <input type="text" name="product_detail[{{$key}}][price]" value="{{intval($detail->price)}}" placeholder="Price" class="form-control"/>
     </td>
-    <td class="text-left" style="width: 20%;">
+    <td class="text-left">
         <input type="radio" name="product_detail[{{$key}}][new_status]" value="1" {{($detail->new_status==1) ? 'checked="checked"' : ''}}/> New
         <input type="radio" name="product_detail[{{$key}}][new_status]" value="0" {{($detail->new_status==0) ? 'checked="checked"' : ''}}/> Used
     </td>
     <td class="text-right">
-        1
+        <input type="text" name="product_detail[{{$key}}][condition]" value="{{$detail->condition}}" placeholder="Condition" class="form-control"/>
+    </td>
+    <td class="text-right">
+        <input type="text" name="product_detail[{{$key}}][consignment_fee]" value="{{intval($detail->consignment_fee)}}" placeholder="Consignment Fee" class="form-control"/>
+    </td>
+    <td class="text-right">
     </td>
     <td class="text-left">
         <button type="button" onclick="removeProductDetail({{$key}});" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button>
