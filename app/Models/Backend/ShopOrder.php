@@ -13,7 +13,15 @@ class ShopOrder extends MainShopOrder
         $query = DB::table('shop_order AS a');
         $grid = new Grid($query, [
             'id',
-            'invoice_code',
+            'invoice_code'=>[
+                'filter' => false,
+                'label'=>'Invoice',
+                'format' => function($item){
+                    $html = $item->invoice_code.'<br/>';
+                    $html .= '<button type="button" class="btn btn-primary btn-xs btn-print" data-url="'.route('product.payment.success', ['order'=>$item->id, 'print'=>1]).'"><i class="fa fa-check"></i>Print</button>';
+                    return $html;
+                }
+            ],
             'billing' => [
                 'custom' => true,
                 'label'=>'Billing Info',
@@ -68,8 +76,8 @@ class ShopOrder extends MainShopOrder
                     $html = '';
                     if(!empty($orderDetails)){
                         $html .= '<p class="help-block small">';
-                        foreach($orderDetails as $orderDetail){
-                            $html .= $orderDetail->product->name. ' - Size: '.$orderDetail->size.' - Quantity: '.$orderDetail->quantity.'<br/>';
+                        foreach($orderDetails as $key=>$orderDetail){
+                            $html .= '<b>Product '.($key+1).':</b> '.$orderDetail->product->name. ' - Size: '.$orderDetail->size.' - Quantity: '.$orderDetail->quantity.'<br/>';
                         }
                         $html .= '</p>';
                     }

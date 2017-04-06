@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+    <div id="iframeplaceholder"></div>
 @endsection
 
 @push('styles')
@@ -87,6 +88,20 @@
             }
 
         });
+
+        $('.wrapOrder').on('click', '.btn-print', function (e) {
+            var url = $(this).attr('data-url');
+            loadiFrame(url);
+            $("#printIframe").load(
+                    function () {
+                        window.frames['myname'].focus();
+                        window.frames['myname'].print();
+                    }
+            );
+        });
+        function loadiFrame(src) {
+            $("#iframeplaceholder").html("<iframe id='printIframe' style='display:none;' name='myname' src='" + src + "' />");
+        }
     });
 </script>
 @endpush
