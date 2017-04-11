@@ -340,8 +340,8 @@ div.header__cart--item:hover {
 .header__cart--item .wrap-img img {
     height: inherit;
     width: inherit;
-    -o-object-fit: inherit;
-    object-fit: inherit;
+    -o-object-fit: initial;
+    object-fit: initial;
 }
 .header__cart a {
     display: block;
@@ -1616,9 +1616,9 @@ label.frm input[type=radio] {
     justify-content: left;
 }
 .products.row > div {
-    float: none;
-    display: -ms-flexbox;
-    display: flex;
+    /* float: none; */
+    /* display: -ms-flexbox; */
+    /* display: flex; */
 }
 .pagination__glab {
     text-align: center;
