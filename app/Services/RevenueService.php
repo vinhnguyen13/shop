@@ -36,6 +36,9 @@ class RevenueService
     public function gridDebtPaymentDueDate($params){
         $query = ShopOrderProduct::query();
         $query->where('debt_status', '=', ShopProductDetail::DEBT_DUE_DATE);
+        if(!empty($params['supplier'])){
+            $query->whereIn('supplier_id', [$params['supplier']]);
+        }
         $orders = $query->paginate(30,['*'],'trang');
         return $orders;
     }

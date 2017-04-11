@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Revenue', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Revenue Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Debt', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Debt Management']])
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     @endphp
     <div class="box wrapRevenue">
         <div class="box-header with-border">
-            <h3 class="box-title">Revenue Management</h3>
+            <h3 class="box-title">Debt Management</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
             <div class="col-md-12">
@@ -33,12 +33,14 @@
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>
                             </div>
                             <div class="col-xs-1">
-                                <button type="submit" class="btn btn-primary btn-payment-supplier">Payment for supplier</button>
+                                <button type="submit" class="btn btn-primary btn-payment-supplier">Debt payment</button>
+                            </div>
+                            <div class="col-xs-1">
+                                <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
                             </div>
                         </form>
                     </div>
                 </div><!-- /.box-body -->
-                <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
             </div>
             <div class="box-body-grid">
                 @include('revenue.partials.grid-revenue')
