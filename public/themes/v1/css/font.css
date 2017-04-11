@@ -26,6 +26,18 @@
   display: inline-block;
 }
 
+.icon-uniF140:before {
+  content: "\f140";
+}
+.icon-uniF141:before {
+  content: "\f141";
+}
+.icon-uniF142:before {
+  content: "\f142";
+}
+.icon-uniF143:before {
+  content: "\f143";
+}
 .icon-b-a-c-k:before {
   content: "\e910";
 }
@@ -118,4 +130,10 @@
 }
 .icon-expand_more:before {
   content: "\e5cf";
+}
+.icon-circle-plus:before {
+  content: "\e040";
+}
+.icon-circle-minus:before {
+  content: "\e041";
 }
