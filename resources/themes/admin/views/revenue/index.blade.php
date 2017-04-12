@@ -14,14 +14,14 @@
         </div><!-- /.box-header -->
         <div class="box-body">
             <div class="col-md-12">
-                <div class="box-body">
-                    <div class="row">
-                        <form id="revenueForm">
+                <div class="box box-info">
+                    <form id="revenueForm">
+                        <div class="box-body">
                             <div class="col-xs-2">
-                                <input type="text" class="form-control date" placeholder="FROM" name="from_date" value="{{date('d-m-Y')}}">
+                                <input type="text" class="form-control date" placeholder="FROM" name="from_date" value="">
                             </div>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control date" placeholder="TO" name="to_date" value="{{date('d-m-Y')}}">
+                                <input type="text" class="form-control date" placeholder="TO" name="to_date" value="">
                             </div>
                             <div class="col-xs-2">
                                 {!! Form::select('supplier', $suppliers, null, ['class' => 'form-control supplier-list']) !!}
@@ -29,17 +29,16 @@
                             <div class="col-xs-2">
                                 {!! Form::select('debt', app(\App\Models\ShopProductDetail::class)->getDebtStatus(), null, ['class'=>'form-control', 'placeholder'=>'Payment Status']) !!}
                             </div>
-                            <div class="col-xs-1">
+                        </div>
+                        <div class="box-footer">
+                            <div class="col-xs-4">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>
-                            </div>
-                            <div class="col-xs-1">
+                                <button type="submit" class="btn btn-primary btn-reset">Reset</button>
                                 <button type="submit" class="btn btn-primary btn-payment-supplier">Debt payment</button>
-                            </div>
-                            <div class="col-xs-1">
                                 <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div><!-- /.box-body -->
             </div>
             <div class="box-body-grid">
@@ -119,10 +118,26 @@
             format: "dd-mm-yyyy"
         });
 
+        $('.btn-payment-supplier').addClass('hide');
+        $('.btn-print').addClass('hide');
+
         $( ".supplier-list" ).select2();
+
+        $('.wrapRevenue').on('click', '.btn-reset', function (e) {
+            $('.wrapRevenue').trigger('revenue/loadGrid', [1]);
+            return false;
+        });
 
         $('.wrapRevenue').on('click', '.btn-filter', function (e) {
             var params = $('#revenueForm').serialize();
+            var supplierVal = $('.supplier-list').val();
+            if(supplierVal > 0){
+                $('.btn-payment-supplier').removeClass('hide');
+                $('.btn-print').removeClass('hide');
+            }else{
+                $('.btn-payment-supplier').addClass('hide');
+                $('.btn-print').addClass('hide');
+            }
             $('.wrapRevenue').trigger('revenue/loadGrid', [params]);
             return false;
         });
@@ -191,7 +206,8 @@
         });
 
         $('.wrapRevenue').on('click', '.btn-print', function (e) {
-            var url = urlDebtPaymentDueDate+'?print=1';
+            var params = $('#revenueForm').serialize();
+            var url = urlDebtPaymentDueDate+'?'+params+'&print=1';
             loadiFrame(url);
             $("#printIframe").load(
                     function() {
