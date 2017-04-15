@@ -956,7 +956,8 @@ footer {
 .breakcum li a {
     text-transform: uppercase;
     color: #404040;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .breakcum li.active a {
@@ -1132,8 +1133,7 @@ footer {
 }
 
 .filter__shop .checkout__inner {
-    padding-right: 350px;
-    position: relative;
+    
 }
 
 .table-customize {
@@ -1506,9 +1506,7 @@ label.frm input {
 }
 
 .filter__shop .checkout__inforpro {
-    position: absolute;
-    top: 0;
-    right: 0;
+    width: 350px;
 }
 
 .checkout__inforpro--img {
@@ -1924,10 +1922,13 @@ button:hover {
     color: #FF5722;
 }
 .total__yourcart {
-    margin-top: 30px;
-    border-top: 1px solid #ddd;
-    padding-top: 30px;
     margin-bottom: 30px;
+    margin-top: 30px;
+}
+.checkout__item--shop {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 .btn-small {
     display: block;
@@ -1960,17 +1961,26 @@ button:hover {
 .filter__item table {
     width: 100%;
     border: 1px solid #656565;
+    table-layout: fixed;
 }
 .filter__item table td {
     width: 20%;
-    padding: 10px 0 10px 20px;
+    padding: 10px 0 10px 0;
 }
 .filter__product .dropdown .val-selected {
     display: block;
     position: relative;
-    padding: 0px 0;
+    padding: 0px 15px;
     border-right: 1px solid #656565;
     font-weight: 600;
+}
+.filter__product .dropdown .val-selected .get-val {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 11px;
+}
+.filter__product .price__range {
+    padding: 0px 0 0 15px;
 }
 .filter__product .dropdown .val-selected span {
     position: absolute;
@@ -1982,13 +1992,120 @@ button:hover {
 .filter__product .filter__price {
     border: none;
     display: inline-block;
-    max-width: 80px;
+    max-width: 50px;
     text-align: right;
     margin-right: 5px;
     border: 1px solid transparent;
-    font-size: 13px;
+    font-size: 12px;
+    width: 100%;
 }
 .filter__product .dropdown .val-selected:hover span,
 .filter__product .dropdown .val-selected:hover {
     color: #939393;
+}
+.filter__item--btn {
+    margin: 40px 0;
+}
+.filter__item--btn .btn-reset,
+.filter__item--btn .btn-small {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    padding: 0 35px;
+    margin: 0 10px;
+    outline: none;
+}
+.filter__item--btn .btn-reset {
+    background-color: transparent;
+    border: 1px solid #000;
+    color: #000;
+}
+.filter__result table {
+    width: 100%;
+    table-layout: fixed;
+}
+.filter__result thead {
+    background-color: #f1f1f1;
+}
+.filter__result td {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 15px 0;
+    text-align: center;
+}
+.filter__result thead td {
+    padding: 8px 0;
+}
+.filter__result thead td p {
+    border-left: 1px solid #000;
+}
+.filter__result thead .icon-uniF140 {
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+    color: #7c7c7c;;
+}
+.filter__result thead td:first-child p {
+    border-left: none;
+}
+.filter__result .id__result {
+    width: 5%;
+}
+.filter__result .name__result {
+    width: 25%;
+}
+.filter__result .size__result {
+    width: 10%;
+}
+.filter__result .qty__result {
+    width: 10%;
+}
+.filter__result .condition__result {
+    width: 15%;
+}
+.filter__result .price__result {
+    width: 20%;
+}
+.filter__result .addcart__result {
+    width: 15%;
+}
+.pagi__filter {
+    float: right;
+    margin-top: 20px;
+}
+.pagi__filter input {
+    border: none;
+    text-align: center;
+    width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: 15px;
+}
+.pagi__filter a {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 25px;
+}
+.filter__item .dropdown__inner {
+    top: 35px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #000;
+    width: 100%;
+}
+.filter__item .dropdown__inner li a {
+    display: block;
+    padding: 5px 15px;
+    color: #262626;
+}
+.filter__item .dropdown__inner li a:hover {
+    background-color: #eaeaea;
+}
+.filter__item .dropdown__inner .frm {
+    font-size: 12px;
+    margin-left: 15px;
+    padding-left: 20px;
+    margin-bottom: 0;
+    margin-top: 7px;
 }

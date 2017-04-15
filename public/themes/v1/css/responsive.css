@@ -10,7 +10,17 @@
         width: 33.333%;
     }
 }
-
+@media (max-width: 1200px) {
+    .checkout__infor {
+        width: 100%;
+        margin-bottom: 50px;
+        padding-right: 0;
+    }
+    .filter__shop .checkout__inforpro {
+        width: 100%;
+        max-width: inherit;
+    }
+}
 @media (min-width: 1400px) {
     .products.row > div {
         width: 25%;
@@ -22,6 +32,9 @@
     }
     .wrap-checkout {
         width: 70% !important;
+    }
+    .filter__shop {
+        width: 85% !important;
     }
 }
 @media (max-width: 992px) {
@@ -535,8 +548,10 @@
         height: inherit;
     }
     .product__item--infor .clearfix .product-name {
-        font-weight: bold;
-        margin: 0;
+        
+font-weight: bold;
+        
+margin: 0;
     }
     .product__item--infor div.clearfix .product-price {
         font-weight: normal;
