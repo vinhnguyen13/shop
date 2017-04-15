@@ -1813,7 +1813,7 @@ button:hover {
     top: 0;
     right: 0;
     background: inherit;
-    padding: 17px 10px;
+    padding: 8px 10px;
 }
 #frm__payatstore button span {
     position: static;
