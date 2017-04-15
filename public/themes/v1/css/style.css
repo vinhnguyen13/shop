@@ -249,12 +249,11 @@ body.active:before {
 .frm-item textarea,
 .frm-item input {
     border: 1px solid #656565;
-    height: 60px;
+    height: 42px;
     padding: 5px 20px;
     /* box-shadow: 0px 0px 1px #7c7c7c; */
     width: 100%;
-    
-    font-size: 18px;
+    font-size: 14px;
 }
 
 
@@ -769,17 +768,6 @@ footer {
 .product__item {
     margin: 0;
     position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-align: strectch;
-    align-items: strectch;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
-    width: 100%;
 }
 
 .product__item--pic {
@@ -797,23 +785,17 @@ footer {
     width: 100%;
     height: 100%;
     padding: 0;
+    max-width: 480px;
+    max-height: 320px;
+    overflow: hidden;
 }
 
 .product__item--pic a .product__img:before {
-    /* content: ''; */
-    /* display: inline-block; */
-    /* height: 100%; */
-    /* vertical-align: middle; */
-    /* margin-right: -5px; */
+    
 }
 
 .product__item--pic a .product__img img {
-    /* display: inline-block; */
-    /* vertical-align: middle; */
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
+    
 }
 
 .products {
@@ -1146,9 +1128,12 @@ footer {
 }
 
 .checkout__inner {
-    position: relative;
     min-height: 550px;
+}
+
+.filter__shop .checkout__inner {
     padding-right: 350px;
+    position: relative;
 }
 
 .table-customize {
@@ -1276,10 +1261,9 @@ footer {
 }
 
 .checkout__infor {
-    width: 100%;
     padding-right: 50px;
     float: left;
-    /* padding-top: 40px; */
+    width: calc(100% - 350px);
 }
 
 .checkout__slect--payment {
@@ -1473,16 +1457,19 @@ footer {
 .checkout__infor--addpress {
     margin-bottom: 20px;
 }
-label.frm input[type=checkbox],
-label.frm input[type=radio] {
-    display: inline-block;
-    position: relative;
-    top: 0px;
-    margin-right: 10px;
-}
 .checkout__infor label.frm {
-    
-    font-size: 17px;
+    font-size: 14px;
+}
+label.frm {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+}
+label.frm input {
+    margin: 0;
+    position: absolute;
+    top: 3px;
+    left: 0;
 }
 .error {
     display: none;
@@ -1511,26 +1498,39 @@ label.frm input[type=radio] {
     height: 100px;
 }
 .checkout__inforpro {
-    width: 350px;
     padding: 20px 25px;
+    overflow: hidden;
+    max-width: 350px;
     -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.21);
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.21);
+}
+
+.filter__shop .checkout__inforpro {
     position: absolute;
     top: 0;
     right: 0;
 }
+
 .checkout__inforpro--img {
-    width: 140px;
-    margin-right: 35px;
+    width: 85px;
+    margin-right: 30px;
 }
 .pro-remove {
     font-size: 20px;
-    margin-top: 3px;
+    float: right;
+    cursor: pointer;
+}
+.header__cart--item .pro-remove {
+    
+}
+.header__cart--item .pro-remove:hover {
+    color: red;
 }
 .price__item {
     float: right;
-    
     font-weight: bold;
+    font-size: 11px;
+    margin-top: 2px;
 }
 .code__promo {
     float: left;
@@ -1540,20 +1540,18 @@ label.frm input[type=radio] {
 .code__promo input {
     border: 1px solid #7c7c7c;
     text-align: center;
-    height: 60px;
+    height: 40px;
     width: 100%;
     color: #7c7c7c;
-    font-size: 18px;
-    
+    font-size: 14px;
 }
 .btn-apply-checkout {
-    height: 60px;
     border: none;
     width: 100%;
     background: #000;
     color: #fff;
-    
-    font-size: 18px;
+    font-size: 14px;
+    height: 40px;
 }
 .btn-apply-checkout:hover {
     opacity: .8;
@@ -1576,7 +1574,7 @@ label.frm input[type=radio] {
 }
 .frm-item-icon [class^="icon-"] {
     position: absolute;
-    top: 22px;
+    top: 14px;
     right: 10px;
     color: #7c7c7c;
 }
@@ -1628,9 +1626,7 @@ label.frm input[type=radio] {
     justify-content: left;
 }
 .products.row > div {
-    /* float: none; */
-    /* display: -ms-flexbox; */
-    /* display: flex; */
+    
 }
 .pagination__glab {
     text-align: center;
@@ -1859,6 +1855,7 @@ button:hover {
 }
 .slide__qty .swiper-slide {
     text-align: center;
+    font-size: 11px;
 }
 .slide__qty .swiper-button-prev:before,
 .slide__qty .swiper-button-next:before {
@@ -1866,7 +1863,7 @@ button:hover {
 }
 .slide__qty .swiper-button-prev,
 .slide__qty .swiper-button-next {
-    font-size: 20px;
+    font-size: 15px;
     height: 100%;
     width: 20px;
     margin: 0;
@@ -1882,8 +1879,6 @@ button:hover {
 }
 #email__pay .frm {
     display: block;
-    padding-left: 30%;
-    
 }
 .detail__img .breakcum {
     text-align: center;

@@ -6,9 +6,6 @@
             <form action="{{route('product.checkout', ['step'=>$step])}}" method="post">
             {{ csrf_field() }}
             @if(!empty($cart))
-            <div class="checkout__inforpro">
-                @include('product.checkout.partials.products')
-            </div>
             <div class="checkout__infor">
                 <div class="clearfix">
                     <p class="checkout__infor--date">DATE : {{date('d F, Y')}}</p>
@@ -21,6 +18,9 @@
                     </div>
                 </div>
                 @include('product.checkout.partials.'.$view)
+            </div>
+            <div class="checkout__inforpro">
+                @include('product.checkout.partials.products')
             </div>
             @else
                 <div class="alert alert-info fade in alert-dismissable">
