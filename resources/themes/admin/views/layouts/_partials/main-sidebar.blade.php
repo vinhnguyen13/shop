@@ -48,7 +48,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin.order.index')}}"><i class="fa fa-circle-o"></i> Orders</a></li>
                     <li><a href="{{route('admin.profit.index')}}"><i class="fa fa-circle-o"></i> Profit</a></li>
-                    <li><a href="{{route('admin.debt.index')}}"><i class="fa fa-circle-o"></i> Debt</a></li>
+                    <li><a href="{{route('admin.profit.debt')}}"><i class="fa fa-circle-o"></i> Debt</a></li>
                     <li><a href="{{route('admin.customer.index')}}"><i class="fa fa-circle-o"></i> Customers</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Voucher</a></li>
                     <li><a href="{{route('admin.shipper.transport')}}"><i class="fa fa-circle-o"></i> Transport</a></li>
