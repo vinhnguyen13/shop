@@ -42,7 +42,7 @@
                 </div><!-- /.box-body -->
             </div>
             <div class="box-body-grid">
-                @include('revenue.partials.grid-revenue')
+                @include('profit.partials.grid-debt')
             </div>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix">
@@ -109,9 +109,9 @@
 <script src="/themes/admin/plugins/select2/select2.js"></script>
 <script type="text/javascript">
     $(function() {
-        var urlLoadGrid = '{{route('admin.revenue.index')}}';
+        var urlLoadGrid = '{{route('admin.profit.index')}}';
         var urlUserVerify = '{{route('admin.user.verify')}}';
-        var urlDebtPaymentDueDate = '{{route('admin.revenue.debtPaymentDueDate')}}';
+        var urlDebtPaymentDueDate = '{{route('admin.profit.debtPaymentDueDate')}}';
 
         $('.date').datepicker({
             autoclose: true,

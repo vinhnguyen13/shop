@@ -127,10 +127,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/order-product', ['uses' => 'OrderProductController@index', 'as'=>'admin.order-product.index']);
         /*
-         * Revenue
+         * Profit & Debt
          */
-        Route::any('/revenue', ['uses' => 'RevenueController@index', 'as'=>'admin.revenue.index']);
-        Route::any('/revenue/debt-payment-due-date', ['uses' => 'RevenueController@getDebtPaymentDueDate', 'as'=>'admin.revenue.debtPaymentDueDate']);
+        Route::any('/profit', ['uses' => 'ProfitController@index', 'as'=>'admin.profit.index']);
+        Route::any('/revenue/debt-payment-due-date', ['uses' => 'RevenueController@getDebtPaymentDueDate', 'as'=>'admin.profit.debtPaymentDueDate']);
+        Route::any('/debt', ['uses' => 'ProfitController@debt', 'as'=>'admin.debt.index']);
         /*
          * Coupon Event routing
          */
