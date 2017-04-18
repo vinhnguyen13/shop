@@ -8,14 +8,14 @@
     @php
     $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Supplier -', 0);
     @endphp
-    <div class="box wrapRevenue">
+    <div class="box wrapDebt">
         <div class="box-header with-border">
             <h3 class="box-title">Debt Management</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
             <div class="col-md-12">
                 <div class="box box-info">
-                    <form id="revenueForm">
+                    <form id="DebtForm">
                         <div class="box-body">
                             <div class="col-xs-2">
                                 <input type="text" class="form-control date" placeholder="FROM" name="from_date" value="">
@@ -33,9 +33,9 @@
                         <div class="box-footer">
                             <div class="col-xs-4">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>
-                                <button type="submit" class="btn btn-primary btn-reset">Reset</button>
+                                <button type="submit" class="btn btn-reset">Reset</button>
                                 <button type="submit" class="btn btn-primary btn-payment-supplier">Debt payment</button>
-                                <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
+                                <button type="button" class="btn btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
                             </div>
                         </div>
                     </form>
@@ -123,13 +123,13 @@
 
         $( ".supplier-list" ).select2();
 
-        $('.wrapRevenue').on('click', '.btn-reset', function (e) {
-            $('.wrapRevenue').trigger('revenue/loadGrid', [1]);
+        $('.wrapDebt').on('click', '.btn-reset', function (e) {
+            $('.wrapDebt').trigger('Debt/loadGrid', [1]);
             return false;
         });
 
-        $('.wrapRevenue').on('click', '.btn-filter', function (e) {
-            var params = $('#revenueForm').serialize();
+        $('.wrapDebt').on('click', '.btn-filter', function (e) {
+            var params = $('#DebtForm').serialize();
             var supplierVal = $('.supplier-list').val();
             if(supplierVal > 0){
                 $('.btn-payment-supplier').removeClass('hide');
@@ -138,16 +138,16 @@
                 $('.btn-payment-supplier').addClass('hide');
                 $('.btn-print').addClass('hide');
             }
-            $('.wrapRevenue').trigger('revenue/loadGrid', [params]);
+            $('.wrapDebt').trigger('Debt/loadGrid', [params]);
             return false;
         });
 
-        $('.wrapRevenue').on('click', '.btn-payment-supplier', function (e) {
+        $('.wrapDebt').on('click', '.btn-payment-supplier', function (e) {
             $('#modal-relogin').modal('show');
             return false;
         });
 
-        $('.wrapRevenue').on('click', '.btn-payment-supplier-verified', function (e) {
+        $('.wrapDebt').on('click', '.btn-payment-supplier-verified', function (e) {
             var email = $('input[name="email"]').val();
             var password = $('input[name="password"]').val();
             $('#modal-relogin .alert-danger').addClass('hide');
@@ -160,10 +160,11 @@
                     data: {email: email, password: password},
                     success: function (data) {
                         if(data.code == 0){
+                            var params = $('#DebtForm').serialize();
                             $.ajax({
                                 type: "get",
                                 dataType: 'html',
-                                url: urlDebtPaymentDueDate,
+                                url: urlDebtPaymentDueDate+'?'+params,
                                 success: function (data) {
                                     $('#modal-relogin').modal('hide');
                                     $('#modal-consignment .modal-body div div').html(data);
@@ -187,17 +188,17 @@
             return false;
         });
 
-        $('.wrapRevenue').bind('revenue/loadGrid', function (event, params) {
+        $('.wrapDebt').bind('Debt/loadGrid', function (event, params) {
             if (urlLoadGrid) {
-                $('.wrapRevenue').loading({display: true});
+                $('.wrapDebt').loading({display: true});
                 $.ajax({
                     type: "post",
                     dataType: 'html',
                     url: urlLoadGrid,
                     data: params,
                     success: function (data) {
-                        $('.wrapRevenue .box-body-grid').html(data);
-                        $('.wrapRevenue').loading({display: false});
+                        $('.wrapDebt .box-body-grid').html(data);
+                        $('.wrapDebt').loading({display: false});
                     },
                     error: function (error) {
                     }
@@ -205,8 +206,8 @@
             }
         });
 
-        $('.wrapRevenue').on('click', '.btn-print', function (e) {
-            var params = $('#revenueForm').serialize();
+        $('.wrapDebt').on('click', '.btn-print', function (e) {
+            var params = $('#DebtForm').serialize();
             var url = urlDebtPaymentDueDate+'?'+params+'&print=1';
             loadiFrame(url);
             $("#printIframe").load(
