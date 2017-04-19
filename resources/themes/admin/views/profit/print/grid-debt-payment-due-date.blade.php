@@ -55,7 +55,7 @@
                     <?php
                     $date1 = date('d-m-Y', strtotime($order->created_at));
                     $date2 = date('d-m-Y', strtotime('+'.\App\Models\ShopProductDetail::DUE_DAYS.' days', strtotime($order->created_at)));
-                    $revenue = $order->total * $order->supplier->discount_available / 100;
+                    $revenue = $order->supplier->consignmentFeeValue($order->total);
                     $consignmentPayment = $order->total - $revenue;
                     $consignment1 = number_format($consignmentPayment);
                     $consignment2 = number_format($order->price);

@@ -27,7 +27,7 @@ class ShopOrderProduct extends Model
                 'format' => function($item){
                     $model = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
                     $html = \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $model->name);
-                    $html .= '<p class="help-block small">Discount: '.number_format($model->discount_available).'%</p>';
+                    $html .= '<p class="help-block small">Consignment Fee: '.number_format($model->consignment_fee).'%</p>';
                     return $html;
                 },
             ],

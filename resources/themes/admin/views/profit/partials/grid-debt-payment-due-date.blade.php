@@ -21,10 +21,10 @@
             <?php
             $date = date('d-m-Y', strtotime($order->created_at));
             $supplierHtml = '<a href="'.route('admin.supplier.index', ['id'=>$order->supplier_id]).'">'.$order->supplier->name.'</a><br>';
-            $supplierHtml .= '<p class="help-block small">Discount: '.number_format($order->supplier->discount_available).' %</p>';
+            $supplierHtml .= '<p class="help-block small">Consignment Fee: '.$order->supplier->consignmentFeeLabel().'</p>';
             $priceHtml = number_format($order->price).'<br/>';
             $priceHtml .= '<p class="help-block small">Price In: '.number_format($order->price_in).'</p>';
-            $revenue = $order->total * $order->supplier->discount_available / 100;
+            $revenue = $order->supplier->consignmentFeeValue($order->total);
             $revenueHtml = number_format($revenue);
             $consignmentPayment = $order->total - $revenue;
             $consignmentPaymentHtml = number_format($consignmentPayment);

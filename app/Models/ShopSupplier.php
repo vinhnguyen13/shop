@@ -10,9 +10,11 @@ class ShopSupplier extends Model
     use HasValidator;
     protected $table = 'shop_supplier';
     protected $fillable = ['name', 'code', 'address', 'country_id', 'city_id', 'district_id',
-        'phone', 'fax', 'email', 'payment_method', 'discount_type', 'discount_available', 'type_goods', 'notes', 'order', 'url', 'logo'];
+        'phone', 'fax', 'email', 'payment_method', 'consignment_fee_type', 'consignment_fee', 'type_goods', 'notes', 'order', 'url', 'logo'];
 
-    const prefix_code = 'ch';
+    const PREFIX_CODE = 'ch';
+    const CONSIGNMENT_FEE_TYPE_PERCENT = 1;
+    const CONSIGNMENT_FEE_TYPE_PRICE = 2;
     /**
      * The "booting" method of the model.
      *
@@ -50,8 +52,29 @@ class ShopSupplier extends Model
     public function updateCode()
     {
         if(empty($this->code)) {
-            $code = self::prefix_code . str_pad($this->id, 2, '0', STR_PAD_LEFT);
+            $code = self::PREFIX_CODE . str_pad($this->id, 2, '0', STR_PAD_LEFT);
             $this->update(['code' => $code]);
+        }
+    }
+
+    public function consignmentFeeLabel()
+    {
+        if($this->consignment_fee_type == self::CONSIGNMENT_FEE_TYPE_PERCENT){
+            return number_format($this->consignment_fee).' %';
+        }else{
+            return number_format($this->consignment_fee).' VND';
+        }
+    }
+
+    public function consignmentFeeValue($price)
+    {
+        if(empty($price)){
+            return 0;
+        }
+        if($this->consignment_fee_type == self::CONSIGNMENT_FEE_TYPE_PERCENT){
+            return $price * ($this->consignment_fee / 100);
+        }else{
+            return $this->consignment_fee;
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+$suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id', '')->prepend('- Please Select -', 0);
 $total = 0;
 ?>
 <table id="productDetail" class="table table-striped table-bordered table-hover">

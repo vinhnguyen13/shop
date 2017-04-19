@@ -18,8 +18,8 @@ class ShopSupplier extends MainShopSupplier
             'code' => [
                 'filter' => 'like',
             ],
-            'discount_type',
-            'discount_available',
+            'consignment_fee_type',
+            'consignment_fee',
         ]);
         return $grid;
     }

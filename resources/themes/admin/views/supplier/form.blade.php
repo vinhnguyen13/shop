@@ -61,13 +61,13 @@ $isNewRecord = !empty($model->id) ? false : true;
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Discount Type') }}
-                    {{ Form::text('discount_type', $model->discount_type,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Consignment Fee Type') }}
+                    {{ Form::text('consignment_fee_type', $model->consignment_fee_type,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label(null, 'Discount Available') }}
-                    {{ Form::text('discount_available', $model->discount_available,['class' => 'form-control'])}}
+                    {{ Form::label(null, 'Consignment Fee') }}
+                    {{ Form::text('consignment_fee', $model->consignment_fee,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
