@@ -148,6 +148,7 @@ $(document).ready(function () {
                     if(data.html){
                         $('.header__cart .dropdown__inner').html(data.html);
                     }
+                    $('.header__cart .val-selected').trigger('click');
                     $('body').loading({remove: true});
                 },
                 error: function (error) {
@@ -159,6 +160,6 @@ $(document).ready(function () {
 
     if(sizeSelected){
         $('.dropdown__inner li[data-size="'+sizeSelected+'"] a').trigger('click');
-        $('.val-selected').trigger('click');
+        $('#frmAddCart .val-selected').trigger('click');
     }
 });
