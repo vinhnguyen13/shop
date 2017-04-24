@@ -18,21 +18,24 @@
             <?php
             $cities = \App\Models\SysCity::query()->orderBy('id')->pluck('name', 'id')->prepend('Tỉnh/Thành phố', 0);
             $districts = ['Quận/Huyện'];
-            if($checkoutInfo['shipping_city_id']){
+            $shipping_city_id = !empty($checkoutInfo['shipping_city_id']) ? $checkoutInfo['shipping_city_id'] : null;
+            if(!empty($checkoutInfo['shipping_city_id'])){
                 $districts = \App\Models\SysDistrict::query()->where(['city_id'=>$checkoutInfo['shipping_city_id']])->orderBy('id')->pluck('name', 'id')->prepend('Quận/Huyện', 0);
             }
             $wards = ['Phường/Xã'];
-            if($checkoutInfo['shipping_district_id']){
+            $shipping_district_id = !empty($checkoutInfo['shipping_district_id']) ? $checkoutInfo['shipping_district_id'] : null;
+            if(!empty($checkoutInfo['shipping_district_id'])){
                 $wards = \App\Models\SysWard::query()->where(['district_id'=>$checkoutInfo['shipping_district_id']])->orderBy('id')->pluck('name', 'id')->prepend('Phường/Xã', 0);
             }
+            $shipping_ward_id = !empty($checkoutInfo['shipping_ward_id']) ? $checkoutInfo['shipping_ward_id'] : null;
             ?>
-            {!! Form::select('shipping_city_id', $cities, $checkoutInfo['shipping_city_id'], ['class' => 'select-city', 'data-child'=>'district']) !!}
+            {!! Form::select('shipping_city_id', $cities, $shipping_city_id, ['class' => 'select-city', 'data-child'=>'district']) !!}
         </div>
         <div class="frm-item same-district">
-            {!! Form::select('shipping_district_id', $districts, $checkoutInfo['shipping_district_id'], ['class' => 'select-district', 'data-child'=>'ward']) !!}
+            {!! Form::select('shipping_district_id', $districts, $shipping_district_id, ['class' => 'select-district', 'data-child'=>'ward']) !!}
         </div>
         <div class="frm-item same-ward">
-            {!! Form::select('shipping_ward_id', $wards, $checkoutInfo['shipping_ward_id'], ['class' => 'select-ward']) !!}
+            {!! Form::select('shipping_ward_id', $wards, $shipping_ward_id, ['class' => 'select-ward']) !!}
         </div>
         <div class="frm-item{{ $errors->has('shipping_phone')?" has-error":""}}">
             <input name="shipping_phone" placeholder="Điện thoại  (*)" class="form-control" type="number" value="{{$checkoutInfo['shipping_phone'] or ''}}">
@@ -76,21 +79,24 @@
             <?php
             $cities = \App\Models\SysCity::query()->orderBy('id')->pluck('name', 'id')->prepend('Tỉnh/Thành phố', 0);
             $districts = ['Quận/Huyện'];
-            if($checkoutInfo['billing_city_id']){
+            $billing_city_id = !empty($checkoutInfo['billing_city_id']) ? $checkoutInfo['billing_city_id'] : null;
+            if(!empty($checkoutInfo['billing_city_id'])){
                 $districts = \App\Models\SysDistrict::query()->where(['city_id'=>$checkoutInfo['billing_city_id']])->orderBy('id')->pluck('name', 'id')->prepend('Quận/Huyện', 0);
             }
             $wards = ['Phường/Xã'];
-            if($checkoutInfo['billing_district_id']){
+            $billing_district_id = !empty($checkoutInfo['billing_district_id']) ? $checkoutInfo['billing_district_id'] : null;
+            if(!empty($checkoutInfo['billing_district_id'])){
                 $wards = \App\Models\SysWard::query()->where(['district_id'=>$checkoutInfo['billing_district_id']])->orderBy('id')->pluck('name', 'id')->prepend('Phường/Xã', 0);
             }
+            $billing_ward_id = !empty($checkoutInfo['billing_ward_id']) ? $checkoutInfo['billing_ward_id'] : null;
             ?>
-            {!! Form::select('billing_city_id', $cities, $checkoutInfo['billing_city_id'], ['class' => 'select-city', 'data-child'=>'district']) !!}
+            {!! Form::select('billing_city_id', $cities, $billing_city_id, ['class' => 'select-city', 'data-child'=>'district']) !!}
         </div>
         <div class="frm-item same-district">
-            {!! Form::select('billing_district_id', $districts, $checkoutInfo['billing_district_id'], ['class' => 'select-district', 'data-child'=>'ward']) !!}
+            {!! Form::select('billing_district_id', $districts, $billing_district_id, ['class' => 'select-district', 'data-child'=>'ward']) !!}
         </div>
         <div class="frm-item same-ward">
-            {!! Form::select('billing_ward_id', $wards, $checkoutInfo['billing_ward_id'], ['class' => 'select-ward']) !!}
+            {!! Form::select('billing_ward_id', $wards, $billing_ward_id, ['class' => 'select-ward']) !!}
         </div>
         <div class="frm-item{{ $errors->has('billing_phone')?" has-error":""}}">
             <input name="billing_phone" placeholder="Điện thoại (*)" class="form-control" type="number" value="{{$checkoutInfo['billing_phone'] or ''}}">
