@@ -1,6 +1,6 @@
 @foreach($products as $product)
     <?php
-    $url = route('product.detail', ['id'=>$product->id, 'slug'=>str_slug($product->name)]);
+    $url = $product->url();
     $details = $product->getDetailsGroupBySize();
     $price = $product->getPriceDefault();
     ?>
