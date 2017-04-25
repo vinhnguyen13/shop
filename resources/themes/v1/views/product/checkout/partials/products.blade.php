@@ -26,12 +26,13 @@ $totalItem = 0;
     </div>
     <div class="overflow-all">
         <a href="" class="pro-remove removeCart"><span class="icon-uniF335"></span></a>
-        <p class="font-600 fs-20"><a href="{{$product->url()}}">{!! $product->name !!}</a></p>
+        <p class="font-600 fs-14"><a href="{{$product->url()}}">{!! $product->name !!}</a></p>
         <p class="font-600 fs-11"><em>SKU:</em> {{$product->sku_producer}}</p>
 {{--        <p class="font-600 fs-11"><em>COLOR:</em> {{$product->color}}</p>--}}
         <p class="font-600 fs-11"><em>SIZE:</em> {{$size}}</p>
         <p class="price__item">{{number_format($subtotalProduct)}} đ</p>
-        <div class="up__down--qty">
+        <div class="up__down--qty font-600 fs-11">
+            <em>QTY:</em>
             <span class="qty__down"><span class="icon-circle-minus"></span></span>
             <span class="qty__val">{{$quantity}}</span>
             <span class="qty__up"><span class="icon-circle-plus"></span></span>
