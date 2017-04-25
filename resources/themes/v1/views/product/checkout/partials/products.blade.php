@@ -31,7 +31,14 @@ $totalItem = 0;
 {{--        <p class="font-600 fs-11"><em>COLOR:</em> {{$product->color}}</p>--}}
         <p class="font-600 fs-11"><em>SIZE:</em> {{$size}}</p>
         <p class="price__item">{{number_format($subtotalProduct)}} đ</p>
-        <p class="font-600 fs-11">QTY: {!! Form::select('quantity_select', $quantities, $quantity, ['class' => 'quantity_select']) !!}</p>
+        <p class="font-600 fs-11">QTY:
+        <div class="up__down--qty">
+            <span class="qty__down"><span class="icon-circle-minus"></span></span>
+            <span class="qty__val">{{$quantity}}</span>
+            <span class="qty__up"><span class="icon-circle-plus"></span></span>
+            <input name="quantity_select" class="quantity_select" type="hidden" value="{{$quantity}}">
+        </div>
+        </p>
     </div>
 </div>
 @endforeach

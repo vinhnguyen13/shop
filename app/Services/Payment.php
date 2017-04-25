@@ -47,6 +47,9 @@ class Payment
      * @return array|mixed
      */
     public function addCart($productID, $detailID, $size, $quantity){
+        if(empty($quantity)){
+            $quantity = 1;
+        }
         $product = ShopProduct::find($productID);
         $totalDetail = $product->countDetailsBySize($size);
         if($quantity > $totalDetail){

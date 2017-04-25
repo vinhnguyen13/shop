@@ -105,15 +105,6 @@ $(document).ready(function(){
         return false;
     });
 
-    $('.'+wrapCheckoutInfoProduct).on('change', '.quantity_select', function(){
-        var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
-        var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
-        var quantity = $(this).val();
-        console.log(product, size);
-        if(size && product){
-            $('.'+wrapCheckoutInfoProduct).trigger('checkout/func/updateCart', [product, size, quantity]);
-        }
-    });
 
     $('.'+wrapCheckoutInfoProduct).bind('checkout/func/updateCart', function (event, product, size, quantity) {
         $(this).loading({inside_right: true});
@@ -153,5 +144,38 @@ $(document).ready(function(){
         }, 500);
     });
 
+    // qty up down number
+    $('.up__down--qty input[type=hidden]').each(function() {
+        var _this = $(this),
+            val = _this.val();
+        _this.parent().find('.qty__val').html(val);
+    });
+    $('.'+wrapCheckoutInfoProduct).on('click', '.up__down--qty .qty__up', function(){
+        var _this = $(this),
+            valTxt = _this.parent().find('.qty__val'),
+            valHidden = _this.parent().find('input[type=hidden]').val(),
+            countUp = parseInt(valHidden) + 1;
+        valTxt.html(countUp);
+        _this.parent().find('input[type=hidden]').val(countUp);
+        var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
+        var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
+        if(size && product){
+            $('.'+wrapCheckoutInfoProduct).trigger('checkout/func/updateCart', [product, size, countUp]);
+        }
+    });
+    $('.'+wrapCheckoutInfoProduct).on('click', '.up__down--qty .qty__down', function(){
+        var _this = $(this),
+            valTxt = _this.parent().find('.qty__val'),
+            valHidden = _this.parent().find('input[type=hidden]').val(),
+            countUp = parseInt(valHidden) - 1;
+        if ( countUp < 0 ) return;
+        valTxt.html(countUp);
+        _this.parent().find('input[type=hidden]').val(countUp);
+        var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
+        var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
+        if(size && product){
+            $('.'+wrapCheckoutInfoProduct).trigger('checkout/func/updateCart', [product, size, countUp]);
+        }
+    });
 });
 
