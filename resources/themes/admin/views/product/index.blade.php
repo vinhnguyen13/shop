@@ -7,7 +7,6 @@
 @section('grid')
     <div class="grid-action">
         <a href="{{ route('admin.product.create') }}" class="btn btn-success">Create</a>
-        <a href="{{ route('admin.product.import') }}" class="btn btn-success">Import</a>
     </div>
 @endsection
 

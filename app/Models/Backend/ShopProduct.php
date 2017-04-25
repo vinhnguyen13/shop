@@ -45,7 +45,9 @@ class ShopProduct extends MainShopProduct
                 'label' => 'Product Detail',
                 'format' => function($item){
                     $count = ShopProductDetail::query()->where(['product_id'=>$item->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->count();
-                    return \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Total: '.$count, ['target'=>'_blank']);
+                    $html = \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Total: '.$count, ['target'=>'_blank']);
+                    $html .= '<a href="'.route('admin.product.import', ['product_id'=>$item->id]).'" class="btn btn-xs btn-success">Import</a>';
+                    return $html;
                 },
             ],
             'sku_producer',
