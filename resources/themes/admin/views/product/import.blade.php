@@ -30,11 +30,11 @@
                     <tr>
                         <td class="text-left">Size</td>
                         <td class="text-left">Supplier</td>
+                        <td class="text-left">Consignment Fee</td>
                         <td class="text-left">Price In</td>
                         <td class="text-left">Price</td>
                         <td class="text-left" style="width: 12%;">New/Used</td>
                         <td class="text-left">Condition</td>
-                        <td class="text-left">Consignment Fee</td>
                         <td class="text-left" style="width: 5%;">Total</td>
                         <td style="width: 5%;"></td>
                     </tr>
@@ -54,6 +54,9 @@
                                     <span class="form-control">{{$detail->supplier->name}}</span>
                                 </td>
                                 <td class="text-left">
+                                    <span class="form-control">{{$detail->consignment_fee}}</span>
+                                </td>
+                                <td class="text-left">
                                     <span class="form-control">{{intval($detail->price_in)}}</span>
                                 </td>
                                 <td class="text-left">
@@ -64,9 +67,6 @@
                                 </td>
                                 <td class="text-left">
                                     <span class="form-control">{{$detail->condition}}</span>
-                                </td>
-                                <td class="text-left">
-                                    <span class="form-control">{{$detail->consignment_fee}}</span>
                                 </td>
                                 <td class="text-right">
                                 </td>
@@ -109,12 +109,12 @@
         html  = '<tr id="detail-row' + detail_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
         html += '  <td class="text-right"><select class="form-control" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
         html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
         html += '  <input type="radio" name="product_detail[' + detail_row + '][new_status]" value="0"/> Used </td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][condition]" value="" placeholder="Condition" class="form-control" /></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="" placeholder="Consignment Fee" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][total]" value="1" placeholder="Total" class="form-control" /></td>';
         html += '  <td class="text-left"><button type="button" onclick="$(\'#detail-row' + detail_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
         html += '</tr>';

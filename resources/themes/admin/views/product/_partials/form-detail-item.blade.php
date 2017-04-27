@@ -7,6 +7,9 @@
         {!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control']) !!}
     </td>
     <td class="text-right">
+        <input type="text" name="product_detail[{{$key}}][consignment_fee]" value="{{intval($detail->consignment_fee)}}" placeholder="Consignment Fee" class="form-control"/>
+    </td>
+    <td class="text-right">
         <input type="text" name="product_detail[{{$key}}][price_in]" value="{{intval($detail->price_in)}}" placeholder="Price In" class="form-control"/>
     </td>
     <td class="text-right">
@@ -18,9 +21,6 @@
     </td>
     <td class="text-right">
         <input type="text" name="product_detail[{{$key}}][condition]" value="{{$detail->condition}}" placeholder="Condition" class="form-control"/>
-    </td>
-    <td class="text-right">
-        <input type="text" name="product_detail[{{$key}}][consignment_fee]" value="{{intval($detail->consignment_fee)}}" placeholder="Consignment Fee" class="form-control"/>
     </td>
     <td class="text-right">
     </td>
