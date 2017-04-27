@@ -19,7 +19,8 @@
                     @endforeach
                 </div>
             @endif
-            {{ Form::open(['route' => 'admin.product.import']) }}
+            {{ Form::open(['route' => 'admin.product.store']) }}
+                {{ Form::hidden('id', $model->id) }}
                 <?php
                 $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id', '')->prepend('- Please Select -', 0);
                 $total = 0;
