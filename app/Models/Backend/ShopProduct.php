@@ -375,6 +375,15 @@ class ShopProduct extends MainShopProduct
             }
         }else{
             if(!empty($data['total'])){
+                $consignment_fee = $data['consignment_fee'];
+//                $consignment_fee_type = $data['consignment_fee_type'];
+                if(empty(intval($data['consignment_fee']))){
+                    $supplier = ShopSupplier::query()->where(['id'=>$data['supplier_id']])->first();
+                    if($supplier){
+                        $consignment_fee = $supplier->consignment_fee;
+                        $consignment_fee_type = $supplier->consignment_fee_type;
+                    }
+                }
                 $attributes = [
                     'product_id'=>$this->id,
                     'supplier_id'=>$data['supplier_id'],
@@ -383,7 +392,8 @@ class ShopProduct extends MainShopProduct
                     'price'=>$data['price'],
                     'new_status'=>$data['new_status'],
                     'condition'=>$data['condition'],
-                    'consignment_fee'=>$data['consignment_fee'],
+                    'consignment_fee_type'=>$consignment_fee_type,
+                    'consignment_fee'=>$consignment_fee,
                 ];
                 for($i=1;$i<=$data['total'];$i++){
                     $productDetail = new ShopProductDetail();

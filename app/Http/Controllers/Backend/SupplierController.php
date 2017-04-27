@@ -65,4 +65,14 @@ class SupplierController extends Controller
         return Redirect::route('admin.supplier.index');
     }
 
+
+    public function get(Request $request)
+    {
+        $id = Input::get('id');
+        $model = ShopSupplier::find($id);
+        if(!empty($model)) {
+            return $model->getAttributes();
+        }
+    }
+
 }

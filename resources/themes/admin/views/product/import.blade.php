@@ -108,8 +108,8 @@
         var dropdownSipplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
         html  = '<tr id="detail-row' + detail_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
-        html += '  <td class="text-right"><select class="form-control" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control" /></td>';
+        html += '  <td class="text-right"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control consignment_fee" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
         html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
@@ -165,6 +165,19 @@
 
     $('#productDetail').on('click', '.viewSKU', function(){
         reloadProductDetail();
+    });
+
+    $('#productDetail').on('change', '.dd_supplier', function(){
+        var parent = $(this).closest('tr');
+        var spid = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: '{{ route('admin.supplier.get')}}',
+            data: {id: spid},
+            success: function (data) {
+                parent.find('.consignment_fee').val(data.consignment_fee);
+            }
+        });
     });
 </script>
 @endpush
