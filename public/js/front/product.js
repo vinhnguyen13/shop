@@ -16,8 +16,6 @@ $(document).ready(function () {
         swiperDetail = new Swiper('.slidedetailpage', {
             pagination: '.swiper-pagination',
             paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
             spaceBetween: 10
         });
 
