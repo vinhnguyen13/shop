@@ -57,6 +57,20 @@ class ShopSupplier extends Model
         }
     }
 
+    public static function consignmentFeeTypeLabel($id = null)
+    {
+        $data = [
+            self::CONSIGNMENT_FEE_TYPE_PERCENT => '%',
+            self::CONSIGNMENT_FEE_TYPE_PRICE => 'VND',
+        ];
+
+        if ($id !== null && isset($data[$id])) {
+            return $data[$id];
+        } else {
+            return $data;
+        }
+    }
+
     public function consignmentFeeLabel()
     {
         if($this->consignment_fee_type == self::CONSIGNMENT_FEE_TYPE_PERCENT){
