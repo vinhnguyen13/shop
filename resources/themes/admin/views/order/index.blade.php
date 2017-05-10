@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label>Order Status</label>
-                        {{Form::select('status', \App\Models\ShopOrderStatus::getStatus(), null, ['class'=>'form-control'])}}
+                        <div class="opt-status"></div>
                     </div>
                     <div class="form-group">
                         <label>Member Access</label>
@@ -59,10 +59,27 @@
 <script type="text/javascript">
     $(function() {
         var urlOrderUpdateStatus = '{{route('admin.order.updateStatus')}}';
+        var urlOrderFetStatusForUpdate = '{{route('admin.order.getStatusForUpdate')}}';
         $('.wrapOrder').on('click', '.btn-update-order', function (e) {
             var orderID = $(this).attr('data-order');
-            $('#modal-update-order').find('.btn-update-order-status').attr('data-order', orderID);
-            $('#modal-update-order').modal('show');
+            var orderStatus = $(this).attr('data-order-status');
+            if (orderStatus) {
+                $('#modal-update-order').loading({display: true});
+                $.ajax({
+                    type: "post",
+                    dataType: 'html',
+                    url: urlOrderFetStatusForUpdate,
+                    data: {status: orderStatus},
+                    success: function (data) {
+                        $('#modal-update-order').loading({display: false});
+                        $('#modal-update-order').find('.opt-status').html(data);
+                        $('#modal-update-order').find('.btn-update-order-status').attr('data-order', orderID);
+                        $('#modal-update-order').modal('show');
+                    },
+                    error: function (error) {
+                    }
+                });
+            }
             return false;
         });
 

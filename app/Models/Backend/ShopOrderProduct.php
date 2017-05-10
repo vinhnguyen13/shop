@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Helpers\Grid;
 use App\Models\ShopOrderProduct as Model;
+use App\Models\ShopOrderStatus;
 use DB;
 
 class ShopOrderProduct extends Model
@@ -36,6 +37,15 @@ class ShopOrderProduct extends Model
                     $html = \Html::link(route('admin.product-detail.index', ['product_id'=>$item->product_id]), $item->product_name);
                     return $html;
                 },
+            ],
+            'order_status_id' => [
+                'filter' => false,
+                'label'=>'Status',
+                'format' => function($item){
+                    $count = ShopOrderProduct::query()->where(['order_id'=>$item->id])->count();
+                    $html = ShopOrderStatus::getStatus($item->order_status_id);
+                    return $html;
+                }
             ],
             'size',
             'quantity',

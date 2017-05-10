@@ -123,6 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/order/show/{id}', ['uses' => 'OrderController@show', 'as'=>'admin.order.show']);
         Route::get('/order/delete/{id}', ['uses' => 'OrderController@delete', 'as'=>'admin.order.delete']);
         Route::post('/order/update-status', ['uses' => 'OrderController@updateStatus', 'as'=>'admin.order.updateStatus']);
+        Route::post('/order/get-status-for-update', ['uses' => 'OrderController@getStatusForUpdate', 'as'=>'admin.order.getStatusForUpdate']);
         /*
          * Order Product
          */

@@ -52,4 +52,41 @@ class ShopOrderStatus extends Model
             return $data;
         }
     }
+
+    public static function getStatusWithCurrentStatus($id = null, $is_admin = true)
+    {
+        if(!empty($id)){
+            $return = [];
+            switch($id){
+                case self::STT_PENDING:
+                    $return = [
+                        self::STT_PROCESSING => 'Processing',
+                        self::STT_SHIPPED => 'Shipped',
+                        self::STT_COMPLETE => 'Complete',
+                        self::STT_CANCELED => 'Canceled',
+                    ];
+                    break;
+                case self::STT_PROCESSING:
+                    $return = [
+                        self::STT_SHIPPED => 'Shipped',
+                        self::STT_COMPLETE => 'Complete',
+                        self::STT_CANCELED => 'Canceled',
+                    ];
+                    break;
+                case self::STT_SHIPPED:
+                    $return = [
+                        self::STT_COMPLETE => 'Complete',
+                        self::STT_CANCELED => 'Canceled',
+                    ];
+                    break;
+                case self::STT_COMPLETE:
+                    $return = [
+                        self::STT_CANCELED => 'Canceled',
+                    ];
+                    break;
+            }
+            return $return;
+        }
+
+    }
 }

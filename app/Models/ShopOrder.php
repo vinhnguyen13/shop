@@ -86,6 +86,24 @@ class ShopOrder extends Model
                 $this->save();
                 app(Payment::class)->processingSaveOrderProduct($this);
             }
+        }elseif($status == ShopOrderStatus::STT_CANCELED){
+            $totalOrderProduct = ShopOrderProduct::query()->where(['order_id' => $this->id])->count();
+            if(!empty($totalOrderProduct)) {
+                $orderProducts = ShopOrderProduct::query()->where(['order_id' => $this->id])->get();
+                if (!empty($orderProducts)) {
+                    foreach ($orderProducts as $orderProduct) {
+                        $productDetail = $orderProduct->productDetail;
+                        if(!empty($productDetail)){
+                            $productDetail->updateStockIn();
+                            $productDetail->save();
+                        }
+                        $orderProduct->order_status_id = $status;
+                        $orderProduct->save();
+                    }
+                }
+            }
+            $this->order_status_id = $status;
+            $this->save();
         }else{
             $this->order_status_id = $status;
             $this->save();

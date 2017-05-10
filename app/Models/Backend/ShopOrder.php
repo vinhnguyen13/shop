@@ -62,9 +62,13 @@ class ShopOrder extends MainShopOrder
                     $count = ShopOrderProduct::query()->where(['order_id'=>$item->id])->count();
                     $html = ShopOrderStatus::getStatus($item->order_status_id);
                     $html .= '<p class="help-block small">'.\Html::link(route('admin.order-product.index', ['order_id'=>$item->id]), 'Products: '.$count, ['target'=>'_blank']).'</p>';
+                    $btnColorClass = 'btn-danger';
+                    $btnLabel = 'Cancel';
                     if($item->order_status_id != ShopOrderStatus::STT_COMPLETE) {
-                        $html .= '<button type="button" class="btn btn-danger btn-xs btn-update-order" data-order="'.$item->id.'"><i class="fa fa-check"></i>Update</button>';
+                        $btnColorClass = 'btn-primary';
+                        $btnLabel= 'Update';
                     }
+                    $html .= '<button type="button" class="btn '.$btnColorClass.' btn-xs btn-update-order" data-order="'.$item->id.'" data-order-status="'.$item->order_status_id.'"><i class="fa fa-check"></i>'.$btnLabel.'</button>';
                     return $html;
                 }
             ],

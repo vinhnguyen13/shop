@@ -24,6 +24,14 @@ class OrderController extends Controller
         }
     }
 
+    public function getStatusForUpdate(Request $request)
+    {
+        $crStatus = Input::get('status');
+        if ($request->ajax()) {
+            return \Form::select('status', \App\Models\ShopOrderStatus::getStatusWithCurrentStatus($crStatus), null, ['class'=>'form-control']);
+        }
+    }
+
     public function updateStatus(Request $request)
     {
         $input = Input::all();
