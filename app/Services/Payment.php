@@ -306,7 +306,7 @@ class Payment
         $total = 0;
         $shippingPrice = 0;
         $total_shipping = 0;
-        if($values['payment_method'] == ShopPayment::KEY_PAYATSTORE){
+        if($values['payment_method'] == ShopPayment::KEY_PAYATSTORECASH || $values['payment_method'] == ShopPayment::KEY_PAYATSTORETRANSFER){
             $order->order_status_id = ShopOrderStatus::STT_COMPLETE;
         }else{
             $shipFee = $this->getShipFeeWithCity($values['shipping_city_id']);

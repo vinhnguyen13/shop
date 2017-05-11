@@ -34,7 +34,7 @@ class ShopOrderProduct extends Model
             ],
             'product_name'=>[
                 'format' => function($item){
-                    $html = \Html::link(route('admin.product-detail.index', ['product_id'=>$item->product_id]), $item->product_name);
+                    $html = \Html::link(route('admin.product-detail.index', ['id'=>$item->product_detail_id]), $item->product_name);
                     return $html;
                 },
             ],
@@ -68,7 +68,7 @@ class ShopOrderProduct extends Model
             'updated_at',
 
         ]);
-        $grid->setHiddenColumn(['product_id', 'price_in']);
+        $grid->setHiddenColumn(['product_id', 'price_in', 'product_detail_id']);
         $grid->removeActionColumn();
         return $grid;
     }

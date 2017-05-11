@@ -13,5 +13,6 @@ class ShopPayment extends Model
     const KEY_IB_ONLINE = 'IB_ONLINE';
     const KEY_ATM_OFFLINE = 'ATM_OFFLINE';
     const KEY_VISA = 'VISA';
-    const KEY_PAYATSTORE = 'PayAtStore';
+    const KEY_PAYATSTORECASH = 'PayAtStoreCash';
+    const KEY_PAYATSTORETRANSFER = 'PayAtStoreTransfer';
 }
