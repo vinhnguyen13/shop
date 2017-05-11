@@ -16,8 +16,12 @@ class ShopShipFee extends Model
             'city_id' => [
                 'label' => 'City',
                 'format' => function($item){
-                    $model = SysCity::query()->where(['id'=>$item->city_id])->first();
-                    return $model->name;
+                    $cityName = '';
+                    if($item->city_id){
+                        $model = SysCity::query()->where(['id'=>$item->city_id])->first();
+                        $cityName = $model->name;
+                    }
+                    return $cityName;
                 }
             ],
             'weigh',
