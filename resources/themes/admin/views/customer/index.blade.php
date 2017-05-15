@@ -5,7 +5,7 @@
 @endsection
 
 @section('grid')
-    <div class="grid-action"><a href="{{ route('admin.customer.create') }}" class="btn btn-success">Create</a></div>
+    {{--<div class="grid-action"><a href="{{ route('admin.customer.create') }}" class="btn btn-success">Create</a></div>--}}
 @endsection
 
 @section('content')

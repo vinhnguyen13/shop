@@ -172,6 +172,9 @@ class ProductController extends Controller
         $print = $request->get('print');
         if(!empty($orderID)){
             $order = ShopOrder::find($orderID);
+            if(empty($order)){
+                return redirect('/');
+            }
         }
         if(!empty($print)){
             return view('product.payment.print.success', compact('order'));

@@ -18,8 +18,14 @@ class ShopSupplier extends MainShopSupplier
             'code' => [
                 'filter' => 'like',
             ],
-            'consignment_fee_type',
+            'phone',
             'consignment_fee',
+            'consignment_fee_type' => [
+                'format' => function($item){
+                    $html = ShopSupplier::consignmentFeeTypeLabel($item->consignment_fee_type);
+                    return $html;
+                }
+            ],
         ]);
         return $grid;
     }

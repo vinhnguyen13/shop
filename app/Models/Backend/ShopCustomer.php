@@ -17,6 +17,7 @@ class ShopCustomer extends MainShopCustomer
             'email',
             'created_at',
         ]);
+        $grid->removeActionColumn();
         return $grid;
     }
 }

@@ -62,37 +62,13 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                 <div class="form-group">
                     {{ Form::label(null, 'Consignment Fee Type') }}
-                    {{ Form::text('consignment_fee_type', $model->consignment_fee_type,['class' => 'form-control'])}}
+                    <input type="radio" name="consignment_fee_type" value="1" class="consignment_fee_type" @if($model->consignment_fee_type == 1) checked="checked" @endif>%
+                    <input type="radio" name="consignment_fee_type" value="2" class="consignment_fee_type" @if($model->consignment_fee_type == 2) checked="checked" @endif>VND
                 </div>
 
                 <div class="form-group">
                     {{ Form::label(null, 'Consignment Fee') }}
                     {{ Form::text('consignment_fee', $model->consignment_fee,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Type Goods') }}
-                    {{ Form::text('type_goods', $model->type_goods,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Notes') }}
-                    {{ Form::text('notes', $model->notes,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Order') }}
-                    {{ Form::text('order', $model->order,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Url') }}
-                    {{ Form::text('url', $model->url,['class' => 'form-control'])}}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label(null, 'Logo') }}
-                    {{ Form::text('logo', $model->logo,['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
