@@ -131,7 +131,7 @@ class ShopProduct extends MainShopProduct
                 $instance->processingSpecial($values);
                 $instance->processingDetail($values);
                 $instance->processingCategory($values);
-                $instance->updateAfterSave($values);
+                $instance->updateStock();
                 if(empty($instance->errors)) {
                     DB::commit();
                     return $instance;
@@ -312,18 +312,6 @@ class ShopProduct extends MainShopProduct
         }
     }
 
-    /**
-     * @param $values
-     */
-    public function updateAfterSave($values){
-        $total = 0;
-        $stock_in = ShopProductDetail::query()->where(['product_id'=>$this->id])->count();
-        if(!empty($stock_in)){
-            $total = $stock_in;
-        }
-        $this->attributes['stock_in'] = $total;
-        $this->update();
-    }
 
     /**
      * @param $type
