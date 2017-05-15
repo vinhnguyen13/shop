@@ -77,7 +77,12 @@ class HomeController extends Controller
             'stock_in_date'=>null,
             'debt_status'=>ShopProductDetail::DEBT_START,
         ]);
-        app(ShopProduct::class)->updateStock();
+        $products = ShopProduct::query()->get();
+        if(!empty($products)){
+            foreach($products as $product){
+                $product->updateStock();
+            }
+        }
         ShopOrder::query()->truncate();
         ShopOrderDetail::query()->truncate();
         ShopOrderProduct::query()->truncate();
