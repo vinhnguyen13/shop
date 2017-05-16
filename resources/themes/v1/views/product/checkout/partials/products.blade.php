@@ -1,4 +1,4 @@
-<p class="font-700 mgB-30 text-center fs-24">YOUR CART</p>
+<p class="font-700 mgB-30 text-center fs-17">YOUR CART</p>
 <?php
 $total = 0;
 $subtotal = 0;

@@ -1,5 +1,5 @@
 <div class="checkout__infor__payment step-checkout">
-    <p class="font-700 mgT-30 fs-24 text-center mgB-50">PAYMENT MENTHOD</p>
+    <p class="font-700 fs-24 mgB-50">PAYMENT MENTHOD</p>
     @include('product.checkout.partials.errors')
     @if ($errors->has('payment_method'))
         <div class="frm-item has-error">

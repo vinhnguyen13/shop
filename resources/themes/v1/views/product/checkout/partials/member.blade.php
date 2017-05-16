@@ -1,6 +1,6 @@
 <div class="checkout__infor__user step-checkout">
     {{--USER--}}
-    <p class="font-700 mgB-20 fs-24 mgT-20">PLEASE ENTER YOUR EMAIL</p>
+    <p class="font-700 fs-24 mgB-50">PLEASE ENTER YOUR EMAIL</p>
     @include('product.checkout.partials.errors')
     <div id="email__pay">
         {{ csrf_field() }}
