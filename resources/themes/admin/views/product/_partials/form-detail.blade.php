@@ -5,12 +5,13 @@ $total = 0;
 <table id="productDetail" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
-        <td class="text-left">Size</td>
-        <td class="text-left">Supplier</td>
-        <td class="text-left">Consignment Fee</td>
+        <td class="text-left" style="width: 5%;">Size</td>
+        <td class="text-left" style="width: 12%;">Supplier</td>
+        <td class="text-left" style="width: 12%;">Consignment Fee</td>
+        <td class="text-left" style="width: 5%;">Consignment Fee Type</td>
         <td class="text-left">Price In</td>
         <td class="text-left">Price</td>
-        <td class="text-left" style="width: 12%;">New/Used</td>
+        <td class="text-left" style="width: 5%;">New/Used</td>
         <td class="text-left">Condition</td>
         <td class="text-left" style="width: 5%;">Total</td>
         <td style="width: 5%;"></td>
@@ -28,7 +29,7 @@ $total = 0;
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="8"></td>
+        <td colspan="9"></td>
         <td class="text-left"><button type="button" onclick="addMoreProductDetail();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add Detail"><i class="fa fa-plus-circle"></i></button></td>
     </tr>
     </tfoot>
@@ -43,11 +44,13 @@ $total = 0;
         var dropdownSipplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
         html  = '<tr id="detail-row' + detail_row + '">';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
-        html += '  <td class="text-right"><select class="form-control" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control" /></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control" /></td>';
-        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
-        html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
+        html += '  <td class="text-right"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control consignment_fee" /></td>';
+        html += '  <td class="text-center"><input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="1" class="consignment_fee_type" checked="checked"/>% ' +
+                '<input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="2" class="consignment_fee_type" />VND</td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control price_in" /></td>';
+        html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control price" /></td>';
+        html += '  <td class="text-center"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
         html += '  <input type="radio" name="product_detail[' + detail_row + '][new_status]" value="0"/> Used </td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][condition]" value="" placeholder="Condition" class="form-control" /></td>';
         html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][total]" value="1" placeholder="Total" class="form-control" /></td>';
@@ -100,6 +103,35 @@ $total = 0;
 
     $('#productDetail').on('click', '.viewSKU', function(){
         reloadProductDetail();
+    });
+
+    $('#productDetail').on('change', '.dd_supplier', function(){
+        var parent = $(this).closest('tr');
+        var val = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: '{{ route('admin.supplier.get')}}',
+            data: {id: val},
+            success: function (data) {
+                parent.find('.consignment_fee').val(data.consignment_fee);
+                parent.find('.consignment_fee_type[value="'+data.consignment_fee_type+'"]').prop('checked', true);
+                $('#productDetail').trigger('product/import/priceRule', [parent]);
+            }
+        });
+    });
+
+    $('#productDetail').on('keypress change keyup', '.consignment_fee', function(){
+        var parent = $(this).closest('tr');
+        $('#productDetail').trigger('product/import/priceRule', [parent]);
+    });
+
+    $('#productDetail').bind('product/import/priceRule', function (event, parent) {
+        var val = parent.find('.consignment_fee').val();
+        if(val && val != 0){
+            parent.find('.price_in').prop('disabled', true);
+        }else{
+            parent.find('.price_in').prop('disabled', false);
+        }
     });
 </script>
 @endpush

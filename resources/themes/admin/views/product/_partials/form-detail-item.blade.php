@@ -4,10 +4,14 @@
         <input type="text" name="product_detail[{{$key}}][size]" value="{{$detail->size}}" placeholder="Size" class="form-control"/>
     </td>
     <td class="text-right">
-        {!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control']) !!}
+        {!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control dd_supplier']) !!}
     </td>
     <td class="text-right">
-        <input type="text" name="product_detail[{{$key}}][consignment_fee]" value="{{intval($detail->consignment_fee)}}" placeholder="Consignment Fee" class="form-control"/>
+        <input type="text" name="product_detail[{{$key}}][consignment_fee]" value="{{intval($detail->consignment_fee)}}" placeholder="Consignment Fee" class="form-control consignment_fee"/>
+    </td>
+    <td class="text-left">
+        <input type="radio" name="product_detail[{{$key}}][consignment_fee_type]" class="consignment_fee_type" value="1" {{($detail->consignment_fee_type==1) ? 'checked="checked"' : ''}}/> %
+        <input type="radio" name="product_detail[{{$key}}][consignment_fee_type]" class="consignment_fee_type" value="2" {{($detail->consignment_fee_type==2) ? 'checked="checked"' : ''}}/> VND
     </td>
     <td class="text-right">
         <input type="text" name="product_detail[{{$key}}][price_in]" value="{{intval($detail->price_in)}}" placeholder="Price In" class="form-control"/>
