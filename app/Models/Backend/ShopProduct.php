@@ -364,7 +364,7 @@ class ShopProduct extends MainShopProduct
         }else{
             if(!empty($data['total'])){
                 $consignment_fee = $data['consignment_fee'];
-//                $consignment_fee_type = $data['consignment_fee_type'];
+                $consignment_fee_type = 1;
                 if(empty(intval($data['consignment_fee']))){
                     $supplier = ShopSupplier::query()->where(['id'=>$data['supplier_id']])->first();
                     if($supplier){
