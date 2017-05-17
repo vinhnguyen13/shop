@@ -43,9 +43,9 @@
                         </ul>
                         <p class="text-uper font-500  lh-30 fs-24 mgB-10">{{$product->manufacturer->name or ''}}</p>
                         <p class="text-uper font-500  fs-24 mgB-0 lh-40 mgB-20">{{$product->name}}</p>
-                        @if (!empty($details) && $details->count() > 0)
                         <div class="mgB-20">
                             <div class="dropdown">
+                            @if (!empty($details) && $details->count() > 0)
                                 <form id="frmAddCart" method="POST">
                                     <a href="" class="val-selected clearfix"><span class="icon-chevron-thin-down"></span><div class="get-val">choose your size</div></a>
                                     <div class="dropdown-up-style hide">
@@ -62,11 +62,13 @@
                                             <input type="hidden" name="quantity" value="1">
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn-buy text-uper">add to cart</button>
                                 </form>
+                            @else
+                                <a href="" class="val-selected clearfix"><div class="get-val">out of stock</div></a>
+                            @endif
                             </div>
-                            <button type="submit" class="btn-buy text-uper">add to cart</button>
                         </div>
-                        @endif
                         <div class="detail__desc--intro">
                             <p class="title__detailproduct">Detail</p>
                             <div class="color-7c7c7c mgB-5">
