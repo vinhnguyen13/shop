@@ -45,6 +45,8 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::get('/product/cart/update', ['uses' => 'ProductController@cartUpdate'])->name('product.cart.update');
     Route::get('/product/checkout/{step}', ['uses' => 'ProductController@checkout'])->name('product.checkout');
     Route::post('/product/checkout/{step}', ['uses' => 'ProductController@checkout'])->name('product.checkout');
+    Route::get('/product/checkout-for-staff', ['uses' => 'ProductController@checkoutForStaff'])->name('product.checkout.forStaff');
+    Route::post('/product/checkout-for-staff', ['uses' => 'ProductController@checkoutForStaff'])->name('product.checkout.forStaff');
     Route::post('/product/order', ['uses' => 'ProductController@order'])->name('product.order');
     Route::get('/product/payment/success', ['uses' => 'ProductController@paySuccess'])->name('product.payment.success');
     Route::get('/product/payment/fail', ['uses' => 'ProductController@payFail'])->name('product.payment.fail');

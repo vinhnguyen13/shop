@@ -151,6 +151,11 @@ class ProductController extends Controller
         return view('product.checkout.index', compact('cart', 'step', 'is_seller', 'view', 'checkoutInfo'));
     }
 
+    public function checkoutForStaff(Request $request)
+    {
+        return view('product.checkout.for-staff', compact('cart', 'step', 'is_seller', 'view', 'checkoutInfo'));
+    }
+
     public function order(Request $request)
     {
         if($request->isMethod('post')) {
