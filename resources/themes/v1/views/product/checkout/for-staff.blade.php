@@ -248,4 +248,35 @@
 @endpush
 
 @push('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.filter__item .dropdown').dropdown({
+            selectedValue: true
+        });
+
+        // qty up down number
+        $('.up__down--qty input[type=hidden]').each(function() {
+            var _this = $(this),
+                    val = _this.val();
+            _this.parent().find('.qty__val').html(val);
+        });
+        $('.up__down--qty .qty__up').on('click', function() {
+            var _this = $(this),
+                    valTxt = _this.parent().find('.qty__val'),
+                    valHidden = _this.parent().find('input[type=hidden]').val(),
+                    countUp = parseInt(valHidden) + 1;
+            valTxt.html(countUp);
+            _this.parent().find('input[type=hidden]').val(countUp);
+        });
+        $('.up__down--qty .qty__down').on('click', function() {
+            var _this = $(this),
+                    valTxt = _this.parent().find('.qty__val'),
+                    valHidden = _this.parent().find('input[type=hidden]').val(),
+                    countUp = parseInt(valHidden) - 1;
+            if ( countUp < 0 ) return;
+            valTxt.html(countUp);
+            _this.parent().find('input[type=hidden]').val(countUp);
+        });
+    });
+</script>
 @endpush
