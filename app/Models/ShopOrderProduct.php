@@ -27,4 +27,20 @@ class ShopOrderProduct extends Model
     {
         return $this->hasOne('App\Models\ShopSupplier', 'id', 'supplier_id');
     }
+
+    public function consignmentFeeValue($price)
+    {
+        if(empty($price)){
+            return 0;
+        }
+        if($this->consignment_fee != 0){
+            if($this->consignment_fee_type == ShopSupplier::CONSIGNMENT_FEE_TYPE_PERCENT){
+                return $price * ($this->consignment_fee / 100);
+            }else{
+                return $this->consignment_fee;
+            }
+        }else{
+            return $this->price - $this->price_in;
+        }
+    }
 }

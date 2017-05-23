@@ -19,7 +19,7 @@ class RevenueService
     public function gridRevenue($params){
         $query = ShopOrderProduct::query();
         $query->where(['order_status_id'=>[ShopOrderStatus::STT_COMPLETE]]);
-        $query->where('consignment_fee', '=', 0);
+//        $query->where('consignment_fee', '=', 0);
         if(!empty($params['from_date']) & !empty($params['to_date'])){
             $query->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($params['from_date']) ), date("Y-m-d 23:59:59", strtotime($params['to_date']) )]);
         }
@@ -55,6 +55,7 @@ class RevenueService
     public function gridDebtPaymentDueDate($params){
         $query = ShopOrderProduct::query();
         $query->where('debt_status', '=', ShopProductDetail::DEBT_DUE_DATE);
+        $query->where('consignment_fee', '!=', 0);
         if(!empty($params['supplier'])){
             $query->whereIn('supplier_id', [$params['supplier']]);
         }

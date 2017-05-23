@@ -17,6 +17,7 @@
             <th>Payment</th>
             <th>Revenue</th>
             <th>Consignment Payment</th>
+            <th>Payment Method</th>
             <th width="5%" title="Pay to supplier status">Payment Status</th>
         </tr>
         @foreach($orders as $order)
@@ -26,7 +27,7 @@
             $supplierHtml .= '<p class="help-block small">Consignment Fee: '.$order->supplier->consignmentFeeLabel().'</p>';
             $priceHtml = number_format($order->price).'<br/>';
             $priceHtml .= '<p class="help-block small">Price In: '.number_format($order->price_in).'</p>';
-            $revenue = $order->supplier->consignmentFeeValue($order->total);
+            $revenue = $order->consignmentFeeValue($order->total);
             $revenueHtml = number_format($revenue);
             $consignmentPayment = $order->total - $revenue;
             $consignmentPaymentHtml = number_format($consignmentPayment);
@@ -34,6 +35,7 @@
             $paymentTotal += $order->total;
             $revenueTotal += $revenue;
             $consignmentPaymentTotal += $consignmentPayment;
+            $paymentMethodHtml = $order->order->payment_method;
             ?>
             <tr>
                 <td>{{$order->id}}</td>
@@ -47,6 +49,7 @@
                 <td>{{number_format($order->total)}}</td>
                 <td>{!! $revenueHtml !!}</td>
                 <td>{!! $consignmentPaymentHtml !!}</td>
+                <td>{!! $paymentMethodHtml !!}</td>
                 <td>{!! app(\App\Models\ShopProductDetail::class)->getDebtStatus($order->debt_status) !!}</td>
             </tr>
         @endforeach

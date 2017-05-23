@@ -34,8 +34,6 @@
                             <div class="col-xs-4">
                                 <button type="submit" class="btn btn-primary btn-filter">Find</button>
                                 <button type="submit" class="btn btn-primary btn-reset">Reset</button>
-                                <button type="submit" class="btn btn-primary btn-payment-supplier">Debt payment</button>
-                                <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print Example</button>
                             </div>
                         </div>
                     </form>
@@ -118,9 +116,6 @@
             format: "dd-mm-yyyy"
         });
 
-        $('.btn-payment-supplier').addClass('hide');
-        $('.btn-print').addClass('hide');
-
         $( ".supplier-list" ).select2();
 
         $('.wrapRevenue').on('click', '.btn-reset', function (e) {
@@ -131,61 +126,10 @@
         $('.wrapRevenue').on('click', '.btn-filter', function (e) {
             var params = $('#revenueForm').serialize();
             var supplierVal = $('.supplier-list').val();
-            if(supplierVal > 0){
-                $('.btn-payment-supplier').removeClass('hide');
-                $('.btn-print').removeClass('hide');
-            }else{
-                $('.btn-payment-supplier').addClass('hide');
-                $('.btn-print').addClass('hide');
-            }
             $('.wrapRevenue').trigger('revenue/loadGrid', [params]);
             return false;
         });
 
-        $('.wrapRevenue').on('click', '.btn-payment-supplier', function (e) {
-            $('#modal-relogin').modal('show');
-            return false;
-        });
-
-        $('.wrapRevenue').on('click', '.btn-payment-supplier-verified', function (e) {
-            var email = $('input[name="email"]').val();
-            var password = $('input[name="password"]').val();
-            $('#modal-relogin .alert-danger').addClass('hide');
-            if (urlUserVerify) {
-                $('#modal-relogin').loading({display: true});
-                $.ajax({
-                    type: "post",
-                    dataType: 'json',
-                    url: urlUserVerify,
-                    data: {email: email, password: password},
-                    success: function (data) {
-                        if(data.code == 0){
-                            $.ajax({
-                                type: "get",
-                                dataType: 'html',
-                                url: urlDebtPaymentDueDate,
-                                success: function (data) {
-                                    $('#modal-relogin').modal('hide');
-                                    $('#modal-consignment .modal-body div div').html(data);
-                                    $('#modal-consignment').modal('show');
-                                },
-                                error: function (error) {
-                                }
-                            });
-                        }else{
-                            $('#modal-relogin .alert-danger p').html(data.message);
-                            $('#modal-relogin .alert-danger').removeClass('hide');
-
-                        }
-                        $('#modal-relogin').loading({display: false});
-                    },
-                    error: function (error) {
-                    }
-                });
-            }
-
-            return false;
-        });
 
         $('.wrapRevenue').bind('revenue/loadGrid', function (event, params) {
             if (urlLoadGrid) {
@@ -205,23 +149,6 @@
             }
         });
 
-        $('.wrapRevenue').on('click', '.btn-print', function (e) {
-            var params = $('#revenueForm').serialize();
-            var url = urlDebtPaymentDueDate+'?'+params+'&print=1';
-            loadiFrame(url);
-            $("#printIframe").load(
-                    function() {
-                        window.frames['myname'].focus();
-                        window.frames['myname'].print();
-                    }
-            );
-//            var _window = window.open(url);
-//            _window.window.print();
-        });
-        function loadiFrame(src)
-        {
-            $("#iframeplaceholder").html("<iframe id='printIframe' style='display:none;' name='myname' src='" + src + "' />");
-        }
     });
 </script>
 @endpush
