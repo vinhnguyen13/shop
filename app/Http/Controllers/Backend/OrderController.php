@@ -42,6 +42,7 @@ class OrderController extends Controller
             $order = ShopOrder::find($orderID);
             if(!empty($order->id)){
                 $order->updateStatus($status);
+                return [''];
             }
 
         }

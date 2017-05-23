@@ -11,6 +11,7 @@ class ShopProductDetail extends MainShopProductDetail
 {
     public function gridIndex(){
         $query = DB::table('shop_product_detail AS a');
+        $query->orderBy('created_at', 'asc');
         $grid = new Grid($query, [
             'id',
             'product_id'=>[
@@ -57,9 +58,24 @@ class ShopProductDetail extends MainShopProductDetail
                 }
             ],
             'size',
-            'price_in',
-            'price',
-            'new_status',
+            'price_in'=>[
+                'label'=>'Price In',
+                'format' => function($item) {
+                    return number_format($item->price_in);
+                }
+            ],
+            'price'=>[
+                'label'=>'Price',
+                'format' => function($item) {
+                    return number_format($item->price);
+                }
+            ],
+            'new_status'=>[
+                'label'=>'New Status',
+                'format' => function($item) {
+                    return app(self::class)->getTextNewStatus();
+                }
+            ],
             'stock_status_id'=>[
                 'label'=>'Stock Status',
                 'format' => function($item) {

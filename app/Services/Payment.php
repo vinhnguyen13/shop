@@ -155,7 +155,7 @@ class Payment
     }
 
     public function processingSaveOrderProduct($order){
-        if ($order->order_status_id != ShopOrderStatus::STT_COMPLETE) {
+        if (!in_array($order->order_status_id, [ShopOrderStatus::STT_COMPLETE, ShopOrderStatus::STT_SHIPPED])) {
             return false;
         }
         /*

@@ -98,6 +98,7 @@
                     data: {orderID: orderID, status: status, email: email, password: password},
                     success: function (data) {
                         $('#modal-update-order').loading({display: false});
+                        location.reload();
                     },
                     error: function (error) {
                     }

@@ -66,7 +66,7 @@ class ShopOrder extends Model
 
     public function updateStatus($status)
     {
-        if($status == ShopOrderStatus::STT_COMPLETE){
+        if( in_array($status, [ShopOrderStatus::STT_COMPLETE, ShopOrderStatus::STT_SHIPPED])){
             $totalOrderProduct = ShopOrderProduct::query()->where(['order_id' => $this->id])->count();
             $flag = true;
             if(empty($totalOrderProduct)) {

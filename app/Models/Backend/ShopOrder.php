@@ -11,6 +11,7 @@ class ShopOrder extends MainShopOrder
 {
     public function gridIndex(){
         $query = DB::table('shop_order AS a');
+        $query->orderBy('created_at', 'desc');
         $grid = new Grid($query, [
             'id',
             'invoice_code'=>[
@@ -81,7 +82,7 @@ class ShopOrder extends MainShopOrder
                     if(!empty($orderDetails)){
                         $html .= '<p class="help-block small">';
                         foreach($orderDetails as $key=>$orderDetail){
-                            $html .= '<b>Product '.($key+1).':</b> '.$orderDetail->product->name. ' - Size: '.$orderDetail->size.' - Quantity: '.$orderDetail->quantity.'<br/>';
+                            $html .= '<b>Product '.($key+1).':</b> <a href="'.route('admin.product.index', ['id'=>$orderDetail->product->id]).'">'.$orderDetail->product->name. '</a> - Size: '.$orderDetail->size.' - Quantity: '.$orderDetail->quantity.'<br/>';
                         }
                         $html .= '</p>';
                     }
