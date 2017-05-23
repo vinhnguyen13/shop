@@ -77,6 +77,16 @@ class HomeController extends Controller
             'stock_in_date'=>null,
             'debt_status'=>ShopProductDetail::DEBT_START,
         ]);
+        $productDetails = ShopProductDetail::query()->get();
+        if(!empty($productDetails)){
+            foreach($productDetails as $productDetail){
+                $supplier = $productDetail->supplier;
+                $productDetail->update([
+                    'consignment_fee'=>$supplier->consignment_fee,
+                    'consignment_fee_type'=>$supplier->consignment_fee_type,
+                ]);
+            }
+        }
         $products = ShopProduct::query()->get();
         if(!empty($products)){
             foreach($products as $product){

@@ -18,7 +18,26 @@ class RevenueService
 {
     public function gridRevenue($params){
         $query = ShopOrderProduct::query();
-        $query->where(['order_status_id'=>ShopOrderStatus::STT_COMPLETE]);
+        $query->where(['order_status_id'=>[ShopOrderStatus::STT_COMPLETE]]);
+        $query->where('consignment_fee', '=', 0);
+        if(!empty($params['from_date']) & !empty($params['to_date'])){
+            $query->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($params['from_date']) ), date("Y-m-d 23:59:59", strtotime($params['to_date']) )]);
+        }
+        if(!empty($params['supplier'])){
+            $query->whereIn('supplier_id', [$params['supplier']]);
+        }
+        if(isset($params['debt']) && is_numeric($params['debt'])){
+            $debtStatus = $params['debt'];
+            $query->where('debt_status', '=', $debtStatus);
+        }
+        $orders = $query->paginate(30,['*'],'trang');
+        return $orders;
+    }
+
+    public function gridDebt($params){
+        $query = ShopOrderProduct::query();
+        $query->where(['order_status_id'=>[ShopOrderStatus::STT_COMPLETE]]);
+        $query->where('consignment_fee', '!=', 0);
         if(!empty($params['from_date']) & !empty($params['to_date'])){
             $query->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($params['from_date']) ), date("Y-m-d 23:59:59", strtotime($params['to_date']) )]);
         }

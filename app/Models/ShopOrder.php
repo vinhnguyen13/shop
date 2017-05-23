@@ -80,11 +80,17 @@ class ShopOrder extends Model
                         }
                     }
                 }
-            }
-            if($flag == true){
+                if($flag == true){
+                    $this->order_status_id = $status;
+                    $this->save();
+                    app(Payment::class)->processingSaveOrderProduct($this);
+                }
+            }else{
                 $this->order_status_id = $status;
                 $this->save();
-                app(Payment::class)->processingSaveOrderProduct($this);
+                ShopOrderProduct::query()->where(['order_id' => $this->id])->update([
+                    'order_status_id'=>$status,
+                ]);
             }
         }elseif($status == ShopOrderStatus::STT_CANCELED){
             $totalOrderProduct = ShopOrderProduct::query()->where(['order_id' => $this->id])->count();

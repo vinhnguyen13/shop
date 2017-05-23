@@ -42,7 +42,7 @@
                 </div><!-- /.box-body -->
             </div>
             <div class="box-body-grid">
-                @include('profit.partials.grid-debt')
+                @include('profit.partials.grid-profit')
             </div>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix">

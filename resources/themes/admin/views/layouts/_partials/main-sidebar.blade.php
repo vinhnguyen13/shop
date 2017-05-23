@@ -47,11 +47,9 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin.order.index')}}"><i class="fa fa-circle-o"></i> Orders</a></li>
-                    <li><a href="{{route('admin.profit.index')}}"><i class="fa fa-circle-o"></i> Profit</a></li>
-                    <li><a href="{{route('admin.profit.debt')}}"><i class="fa fa-circle-o"></i> Debt</a></li>
                     <li><a href="{{route('admin.customer.index')}}"><i class="fa fa-circle-o"></i> Customers</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Voucher</a></li>
-                    <li><a href="{{route('admin.shipper.transport')}}"><i class="fa fa-circle-o"></i> Transport</a></li>
+                    {{--<li><a href="#"><i class="fa fa-circle-o"></i> Voucher</a></li>--}}
+                    {{--<li><a href="{{route('admin.shipper.transport')}}"><i class="fa fa-circle-o"></i> Transport</a></li>--}}
                 </ul>
             </li>
             <li class="treeview">
@@ -72,9 +70,11 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Sales</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Products</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Customers</a></li>
+                    <li><a href="{{route('admin.profit.index')}}"><i class="fa fa-circle-o"></i> Profit</a></li>
+                    <li><a href="{{route('admin.profit.debt')}}"><i class="fa fa-circle-o"></i> Debt</a></li>
+                    {{--<li><a href="#"><i class="fa fa-circle-o"></i> Sales</a></li>--}}
+                    {{--<li><a href="#"><i class="fa fa-circle-o"></i> Products</a></li>--}}
+                    {{--<li><a href="#"><i class="fa fa-circle-o"></i> Customers</a></li>--}}
                 </ul>
             </li>
             <li class="treeview">

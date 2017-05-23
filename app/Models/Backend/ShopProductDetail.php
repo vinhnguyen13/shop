@@ -39,7 +39,9 @@ class ShopProductDetail extends MainShopProductDetail
                 'label'=>'Supplier',
                 'format' => function($item){
                     $model = ShopSupplier::query()->where(['id'=>$item->supplier_id])->first();
-                    return \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $model->name);
+                    $html = \Html::link(route('admin.supplier.index', ['id'=>$item->supplier_id]), $model->name);
+                    $html .= '<p class="help-block small">Consignment Fee: '.number_format($model->consignment_fee).'%</p>';
+                    return $html;
                 },
             ],
             'sku',

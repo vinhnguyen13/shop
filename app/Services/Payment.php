@@ -182,6 +182,8 @@ class Payment
                         }
                         $orderProduct->order_status_id = $order->order_status_id;
                         $orderProduct->supplier_id = $productDetail->supplier_id;
+                        $orderProduct->consignment_fee = $productDetail->consignment_fee;
+                        $orderProduct->consignment_fee_type = $productDetail->consignment_fee_type;
                         $orderProduct->debt_status = ShopProductDetail::DEBT_PENDING;
                         $orderProduct->product_name = $product->name;
                         $orderProduct->color = $product->color;

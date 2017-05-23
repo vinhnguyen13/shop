@@ -24,7 +24,7 @@ class ProfitController extends Controller
     {
         app(RevenueService::class)->updateDebtDueDate();
         $all = Input::all();
-        $orders = app(RevenueService::class)->gridRevenue($all);
+        $orders = app(RevenueService::class)->gridDebt($all);
         if ($request->ajax()) {
             return view('profit.partials.grid-debt', compact('orders'));
         }else{
