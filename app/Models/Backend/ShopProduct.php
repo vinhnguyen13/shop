@@ -350,7 +350,7 @@ class ShopProduct extends MainShopProduct
      * @param $data
      */
     public function saveProductDetail($productDetailID, $data){
-        if($data['price'] < $data['price_in']){
+        if(!empty($data['price']) && !empty($data['price_in']) &&  $data['price'] < $data['price_in']){
             $messageBag = new \Illuminate\Support\MessageBag();
             $messageBag->add('price', 'The Price In must be less than the selling Price');
             $this->errors[] = $messageBag;
