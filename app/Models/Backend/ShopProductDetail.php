@@ -75,7 +75,7 @@ class ShopProductDetail extends MainShopProductDetail
             'new_status'=>[
                 'label'=>'New Status',
                 'format' => function($item) {
-                    return app(self::class)->getTextNewStatus();
+                    return ShopProductDetail::find($item->id)->getTextNewStatus();
                 }
             ],
             'stock_status_id'=>[
