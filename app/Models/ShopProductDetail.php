@@ -6,7 +6,7 @@ use App\Models\Traits\HasValidator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class ShopProductDetail extends Model
+class ShopProductDetail extends ModelgetTextNewStatus
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
@@ -112,7 +112,8 @@ class ShopProductDetail extends Model
 
     public function getTextNewStatus()
     {
-        if($this->new_status == 1){
+        $num = intval($this->new_status);
+        if($num == 1){
             return 'New';
         }
         return 'Used';
