@@ -6,7 +6,7 @@ use App\Models\Traits\HasValidator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class ShopProductDetail extends ModelgetTextNewStatus
+class ShopProductDetail extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
