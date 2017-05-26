@@ -350,11 +350,13 @@ class ShopProduct extends MainShopProduct
      * @param $data
      */
     public function saveProductDetail($productDetailID, $data){
-        if(!empty($data['price']) && !empty($data['price_in']) &&  $data['price'] < $data['price_in']){
-            $messageBag = new \Illuminate\Support\MessageBag();
-            $messageBag->add('price', 'The Price In must be less than the selling Price');
-            $this->errors[] = $messageBag;
-            return false;
+        if(!empty($data['price']) && !empty($data['price_in'])){
+            if($data['price'] < $data['price_in']) {
+                $messageBag = new \Illuminate\Support\MessageBag();
+                $messageBag->add('price', 'The Price In must be less than the selling Price');
+                $this->errors[] = $messageBag;
+                return false;
+            }
         }
         if(!empty($productDetailID)){
             $productDetail = ShopProductDetail::query()->where(['id'=>$productDetailID])->first();
@@ -376,7 +378,7 @@ class ShopProduct extends MainShopProduct
                     'product_id'=>$this->id,
                     'supplier_id'=>$data['supplier_id'],
                     'size'=>trim($data['size']),
-                    'price_in'=>$data['price_in'],
+                    'price_in'=>(!empty($data['price_in']) ? $data['price_in'] : 0),
                     'price'=>$data['price'],
                     'new_status'=>$data['new_status'],
                     'condition'=>$data['condition'],
