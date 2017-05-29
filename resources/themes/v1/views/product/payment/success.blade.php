@@ -64,6 +64,7 @@
             <p class="font-600 fs-14 mgB-5">CUSTOMER: {{$order->customer->name}}</p>
             <p class="font-600 fs-14 mgB-5">EMAIL: {{$order->customer->email}}</p>
             <p class="font-600 fs-14 mgB-5">PHONE:  {{$order->customer->phone}}</p>
+            <p class="font-600 fs-14 mgB-5">ADDRESS:  {{$order->customer->locationToText()}}</p>
             <p class="font-700 fs-14 text-center mgT-20 mgB-20">NOTICE!!!</p>
             <p class="font-500 fs-13 font-600 text-center mgB-40">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
             <p class="font-700 fs-14 text-center mgT-20 mgB-20">THANK YOU AND HOPE YOU HAD GREAT SHOPPING EXPERIENCE</p>

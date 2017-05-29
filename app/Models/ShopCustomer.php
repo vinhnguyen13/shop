@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Traits\HasValidator;
+use App\Models\Traits\Location;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopCustomer extends Model
 {
-    use HasValidator;
+    use HasValidator, Location;
     protected $table = 'shop_customer';
     protected $fillable = ['customer_group_id','user_id', 'name', 'email', 'address', 'country_id', 'city_id', 'district_id', 'ward_id', 'street_id', 'tax_code', 'phone', 'company', 'card', 'ip'];
     /**

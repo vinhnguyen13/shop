@@ -9,7 +9,6 @@ use DB;
 
 class ShopCustomer extends MainShopCustomer
 {
-    use Location;
     public function gridIndex(){
         $query = DB::table('shop_customer AS a');
         $grid = new Grid($query, [
