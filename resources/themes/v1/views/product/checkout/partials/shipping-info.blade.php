@@ -1,5 +1,13 @@
 <div class="checkout__infor__shipping step-checkout">
     <div class="checkout__infor__user__shipping">
+        @if($is_seller)
+        <p class="font-700 mgB-20 fs-24 mgT-20">CUSTOMER</p>
+        <div class="clearfix pdR-15 mgB-40">
+            <div class="find-customer" data-url="{{route('product.loadCustomers')}}">
+                <input name="customer_attribute" type="text" placeholder="Email, phone, Name">
+            </div>
+        </div>
+        @endif
         <p class="font-700 mgB-20 fs-24 mgT-20">SHIPPING INFOMATION</p>
         @include('product.checkout.partials.errors')
         <div class="frm-item{{ $errors->has('shipping_name')?" has-error":""}}">

@@ -33,6 +33,7 @@
 
 @push('styles')
     <link href="{!! asset('css/front/checkout.css') !!}" rel="stylesheet">
+    <link href="{!! asset('https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css') !!}" rel="stylesheet">
 @endpush
 
 @push('scripts')
@@ -42,5 +43,6 @@
         var urlAddCart = "{{route('product.cart.add')}}";
         var urlLocation = "{{route('home.location')}}";
     </script>
+    <script src="{!! asset('http://code.jquery.com/ui/1.11.1/jquery-ui.min.js?v='.$version_deploy)  !!}"></script>
     <script src="{!! asset('js/front/checkout.js?v='.$version_deploy)  !!}"></script>
 @endpush

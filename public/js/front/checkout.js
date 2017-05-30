@@ -46,6 +46,45 @@ $(document).ready(function(){
         return false;
     });
 
+    $('.'+wrapCheckoutShipping).find('.find-customer input').autocomplete({
+        source: function( request, response ) {
+            var urlFindCustomer = $('.'+wrapCheckoutShipping).find('.find-customer').attr('data-url');
+            $.ajax({
+                dataType: "json",
+                type : 'Get',
+                url: urlFindCustomer,
+                success: function(data) {
+                    $('.'+wrapCheckoutShipping).find('.find-customer input').removeClass('ui-autocomplete-loading');
+                    // hide loading image
+                    response( $.map( data, function(item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
+                        // your operation on data
+                    }));
+                },
+                error: function(data) {
+                    $('.'+wrapCheckoutShipping).find('.find-customer input').removeClass('ui-autocomplete-loading');
+                }
+            });
+        },
+        minLength: 3,
+        open: function() {},
+        close: function() {},
+        focus: function(event,ui) {},
+        select: function (event, ui)
+        {
+            var test = ui.item ? ui.item.id : 0;
+            console.log(ui.item.value);
+            if (test > 0)
+            {
+            }
+        }
+    });
+    /*$('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){
+
+    });*/
 
     $('.'+wrapCheckoutUserShipping).bind('checkout/ui/autoFillBillingForm', function (event, data) {
         $('.'+wrapCheckoutUserShipping).on('keyup', 'input[name="shipping_name"]', function(){

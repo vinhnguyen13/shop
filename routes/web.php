@@ -50,6 +50,7 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::post('/product/order', ['uses' => 'ProductController@order'])->name('product.order');
     Route::get('/product/payment/success', ['uses' => 'ProductController@paySuccess'])->name('product.payment.success');
     Route::get('/product/payment/fail', ['uses' => 'ProductController@payFail'])->name('product.payment.fail');
+    Route::get('/product/load-customers', ['uses' => 'ProductController@loadCustomers'])->name('product.loadCustomers');
     /*
      * Location
      */

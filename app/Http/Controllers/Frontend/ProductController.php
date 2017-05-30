@@ -192,4 +192,23 @@ class ProductController extends Controller
     {
         return view('product.payment.fail');
     }
+
+    public function loadCustomers()
+    {
+        return [
+            [
+                'id'=>'1',
+                'name'=>'vinh',
+            ],
+            [
+                'id'=>'2',
+                'name'=>'vinhnguyen',
+            ]
+        ];
+    }
+
+    public function getCustomer()
+    {
+
+    }
 }
