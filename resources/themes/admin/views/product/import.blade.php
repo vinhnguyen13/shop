@@ -113,6 +113,7 @@
         }
     </style>
 @endpush
+
 @push('scripts')
     <script src="/themes/admin/plugins/select2/select2.js"></script>
     <script type="text/javascript">

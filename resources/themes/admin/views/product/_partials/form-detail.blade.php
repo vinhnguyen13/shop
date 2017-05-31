@@ -37,8 +37,25 @@ $total = 0;
 @if (!empty($details))
     <a class="btn btn-primary btn-xs" href="{{route('admin.product-detail.index', ['product_id'=>$model->id])}}">Product Detail Management</a>
 @endif
+
+@push('styles')
+<link rel="stylesheet" href="/themes/admin/plugins/select2/select2.min.css">
+<style>
+    .select2-dropdown.select2-dropdown--below{
+        /*width: 300px !important;*/
+        display: inline-block;
+        display: table;
+    }
+</style>
+@endpush
+
 @push('scripts')
+<script src="/themes/admin/plugins/select2/select2.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#productDetail').trigger('product/import/supplier');
+    });
+
     var detail_row = parseInt({{$total}});
     function addMoreProductDetail() {
         var dropdownSipplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
@@ -63,6 +80,7 @@ $total = 0;
             format: "dd/mm/yyyy"
         });
         detail_row++;
+        $('#productDetail').trigger('product/import/supplier');
     }
 
     function removeProductDetail(key) {
@@ -132,6 +150,38 @@ $total = 0;
         }else{
             parent.find('.price_in').prop('disabled', false);
         }
+    });
+
+    $('#productDetail').bind('product/import/supplier', function (event) {
+        $(".dd_supplier").select2({
+            ajax: {
+                url: "{{ route('admin.supplier.lists')}}",
+                dataType: 'json',
+                headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                delay: 250,
+                type: 'POST',
+                data: function (params) {
+                    return {
+                        input: params.term, // search term
+                    };
+                },
+                processResults: function (data) {
+                    var arr = []
+                    $.each(data, function (index, value) {
+                        arr.push({
+                            id: index,
+                            text: value
+                        })
+                    })
+                    return {
+                        results: arr
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 0,
+        });
     });
 </script>
 @endpush
