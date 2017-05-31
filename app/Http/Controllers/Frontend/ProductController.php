@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Helpers\AppHelper;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Backend\ShopManufacturer;
+use App\Models\Frontend\ShopCustomer;
 use App\Models\Frontend\ShopOrder;
 use App\Models\Frontend\ShopProduct;
 use App\Models\Frontend\User;
@@ -193,22 +194,24 @@ class ProductController extends Controller
         return view('product.payment.fail');
     }
 
-    public function loadCustomers()
+    public function loadCustomers(Request $request)
     {
-        return [
-            [
-                'id'=>'1',
-                'name'=>'vinh',
-            ],
-            [
-                'id'=>'2',
-                'name'=>'vinhnguyen',
-            ]
-        ];
+        $input = $request->get('input');
+        $customers = ShopCustomer::query()
+            ->where('email', 'like','%'.$input.'%')
+            ->orWhere('name', 'like','%'.$input.'%')
+            ->orWhere('phone', 'like','%'.$input.'%')
+            ->limit(5)
+            ->pluck('name', 'id');
+        return $customers;
     }
 
-    public function getCustomer()
+    public function loadCustomer(Request $request)
     {
-
+        $cid = $request->get('cid');
+        if(!empty($cid)){
+            $customer = ShopCustomer::find($cid);
+            return $customer;
+        }
     }
 }

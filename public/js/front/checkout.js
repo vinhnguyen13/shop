@@ -20,46 +20,60 @@ $(document).ready(function(){
 
     $('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){
         $(this).loading({inside_right: true});
-        var timer = 0;
-        var child = $(this).attr('data-child');
-        var parent = $(this).parent().parent();
-        var id = $(this).val();
+        var childClass = $(this).attr('data-child');
+        var parentObj = $(this).parent().parent();
+        var idCurrent = $(this).val();
+        $('.'+wrapCheckoutShipping).trigger('checkout/ui/selectLocation', [childClass, parentObj, idCurrent]);
+        return false;
+    });
 
+    $('.'+wrapCheckoutShipping).bind('checkout/ui/selectLocation', function (event, childClass, parentObj, idCurrent, idActive) {
+        var timer = 0;
         timer = setTimeout(function () {
             $.ajax({
                 type: "post",
                 url: urlLocation,
-                data: {id: id, child: child},
+                data: {id: idCurrent, child: childClass},
                 success: function (data) {
                     var html = '';
                     $.each(data, function(key, value) {
+                        var selected = '';
+                        if(idActive && idActive == key){
+                            selected = ' selected';
+                        }
                         html +=
-                            '<option value="'+key+'">'
+                            '<option value="'+key+'"'+selected+'>'
                             + value +
                             '</option>';
                     });
-                    parent.find('.select-'+child).html(html);
+                    parentObj.find('.select-'+childClass).html(html);
                     $('body').loading({remove: true});
+                    /*if(idChild){
+                        parentObj.find('.select-'+childClass).val(idChild)
+                            .trigger('change');
+                    }*/
                 }
             });
         }, 500);
-        return false;
-    });
+    })
 
     $('.'+wrapCheckoutShipping).find('.find-customer input').autocomplete({
         source: function( request, response ) {
-            var urlFindCustomer = $('.'+wrapCheckoutShipping).find('.find-customer').attr('data-url');
+            var urlAjax = $('.'+wrapCheckoutShipping).find('.find-customer').attr('data-url-customers');
+            var input = $('.'+wrapCheckoutShipping).find('.find-customer input').val();
             $.ajax({
                 dataType: "json",
-                type : 'Get',
-                url: urlFindCustomer,
+                type : 'post',
+                url: urlAjax,
+                data:{input: input},
                 success: function(data) {
                     $('.'+wrapCheckoutShipping).find('.find-customer input').removeClass('ui-autocomplete-loading');
                     // hide loading image
-                    response( $.map( data, function(item) {
+                    response( $.map( data, function(text, key) {
                         return {
-                            label: item.name,
-                            value: item.id
+                            label: text,
+                            value: text,
+                            id: key
                         };
                         // your operation on data
                     }));
@@ -75,16 +89,38 @@ $(document).ready(function(){
         focus: function(event,ui) {},
         select: function (event, ui)
         {
-            var test = ui.item ? ui.item.id : 0;
-            console.log(ui.item.value);
-            if (test > 0)
+            var urlAjax = $('.'+wrapCheckoutShipping).find('.find-customer').attr('data-url-customer');
+            var cid = ui.item ? ui.item.id : 0;
+            if (cid > 0)
             {
+                $.ajax({
+                    dataType: "json",
+                    type : 'post',
+                    url: urlAjax,
+                    data:{cid: cid},
+                    success: function(data) {
+                        console.log(data);
+                        $('input[name="shipping_name"]').val(data.name);
+                        $('input[name="billing_name"]').val(data.name);
+                        $('input[name="shipping_address"]').val(data.address);
+                        $('input[name="billing_address"]').val(data.address);
+                        $('input[name="shipping_phone"]').val(data.phone);
+                        $('input[name="billing_phone"]').val(data.phone);
+
+                        $('.' + wrapCheckoutShipping).find('.same-city select')
+                            .val(data.city_id)
+                            .attr('selected');
+                        $('.'+wrapCheckoutShipping).trigger('checkout/ui/selectLocation', ['district', $('.' + wrapCheckoutShipping), data.city_id, data.district_id]);
+                        $('.'+wrapCheckoutShipping).trigger('checkout/ui/selectLocation', ['ward', $('.' + wrapCheckoutShipping), data.district_id, data.ward_id]);
+
+                    },
+                    error: function(data) {
+                        $('.'+wrapCheckoutShipping).find('.find-customer input').removeClass('ui-autocomplete-loading');
+                    }
+                });
             }
         }
     });
-    /*$('.'+wrapCheckoutShipping).on('change', '.select-city, .select-district', function(){
-
-    });*/
 
     $('.'+wrapCheckoutUserShipping).bind('checkout/ui/autoFillBillingForm', function (event, data) {
         $('.'+wrapCheckoutUserShipping).on('keyup', 'input[name="shipping_name"]', function(){
