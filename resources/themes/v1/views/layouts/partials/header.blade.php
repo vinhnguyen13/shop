@@ -18,10 +18,10 @@
             </div>
         </div>
         <div class="pull-right lh-50 header__right">
-            <form class="search" id="search">
+            <form class="search" id="search" action="{{route('product.search')}}" method="get">
                 <a href="" class="header__right--mbsearch"><span class="icon-search"></span></a>
                 <div class="frm-icon">
-                    <input type="text" placeholder="Search" />
+                    <input name="word" type="text" placeholder="Search" />
                     <button type="submit" class="icon-frm"><span class="icon-slice9"></span></button>
                 </div>
             </form>

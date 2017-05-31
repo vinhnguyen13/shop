@@ -49,6 +49,16 @@ class ProductController extends Controller
         return view('product.main.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
     }
 
+    public function search(Request $request)
+    {
+        $word = $request->get('word');
+        $products = app(ShopProduct::class)->getList(['word'=>$word, 'limit'=>ShopProduct::PAGINATE]);
+        if($request->ajax()) {
+            return $this->loadMore($request, $products);
+        }
+        return view('product.main.index', compact('products'))->with('breadcrumbs', app(AppHelper::class)->getBreadcrumb());
+    }
+
     private function loadMore($request, $products){
         if($request->ajax()) {
             $next_page = false;

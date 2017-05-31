@@ -27,6 +27,10 @@ class ShopProduct extends MainShopProduct
                 app(AppHelper::class)->setBreadcrumb([route('product.category', ['category'=>str_slug($category->slug)])=>$category->name]);
             }
         }
+        if(!empty($params['word'])){
+            $query->where('sku_producer', 'like', '%'.$params['word'].'%');
+            $query->orWhere('name', 'like', '%'.$params['word'].'%');
+        }
         if(!empty($params['brand'])){
             $manufacturer = ShopManufacturer::query()->where(['slug'=>$params['brand']])->first();
             if(!empty($manufacturer)){
