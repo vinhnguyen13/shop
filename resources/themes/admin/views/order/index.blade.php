@@ -6,6 +6,34 @@
 
 @section('grid')
     <div class="grid-action"><a href="{{ route('admin.order.create') }}" class="btn btn-success">Create</a></div>
+    <div style="clear: both; margin-left: 0px;" class="span3 tlo2 my_height_box"></div>
+    <div class="container">
+        <div class="row-fluid">
+            {{--<form id="DebtForm" method="get">--}}
+                <div class="box-header ui-sortable-handle">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Filter</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control date" placeholder="Invoice" name="invoice_code" value="{{input('invoice_code')}}">
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control date" placeholder="Phone" name="phone" value="{{input('phone')}}">
+                    </div>
+                    <div class="col-xs-4">
+                        {{--<input type="text" class="form-control date" placeholder="Status" name="status" value="{{input('status')}}">--}}
+                        {!! Form::select('status', array_merge(['0'=>'Choose Status'], \App\Models\ShopOrderStatus::getStatus()), input('status'), ['class' => 'form-control status-list']) !!}
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-filter">Find</button>
+                    </div>
+                </div>
+            {{--</form>--}}
+        </div>
+    </div>
 @endsection
 
 @section('content')

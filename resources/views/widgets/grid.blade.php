@@ -39,9 +39,9 @@
 				@endforeach
 				@yield('grid')
 			</div>
-			@if($total)<div class="grid-counter">{{ $start }} - {{ $end }} of <span>{{ $total }}</span></div>@endif
 		</div>
 		<div class="grid-horizontal-scroll">
+			@if($total)<div class="grid-counter">{{ $start }} - {{ $end }} of <span>{{ $total }}</span></div>@endif
 			<table class="grid{{ $class }}" data-ajax="{{ $ajax }}">
 				<thead>
 					<tr class="grid-title">

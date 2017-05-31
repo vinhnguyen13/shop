@@ -9,8 +9,21 @@ use DB;
 
 class ShopOrder extends MainShopOrder
 {
-    public function gridIndex(){
+    public function gridIndex($input){
         $query = DB::table('shop_order AS a');
+        if(!empty($input['invoice_code'])) {
+            $query->where('invoice_code', 'like', '%'.$input['invoice_code'].'%');
+        }
+        if(!empty($input['phone'])) {
+//            $query->where(['billing_phone' => $input['phone']])->orWhere(['shipping_phone' => $input['phone']]);
+            $query->where(function($query) use($input) {
+                $query->orWhere('billing_phone', 'like', '%'.$input['phone'].'%')->orWhere('shipping_phone', 'like', '%'.$input['phone'].'%');
+            });
+        }
+        if(!empty($input['status'])) {
+            $query->where(['order_status_id' => $input['status']]);
+        }
+
         $query->orderBy('created_at', 'desc');
         $grid = new Grid($query, [
             'id',
