@@ -103,6 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         Route::get('/supplier/edit/{id}', ['uses' => 'SupplierController@edit', 'as'=>'admin.supplier.edit']);
         Route::get('/supplier/show/{id}', ['uses' => 'SupplierController@show', 'as'=>'admin.supplier.show']);
         Route::get('/supplier/delete/{id}', ['uses' => 'SupplierController@delete', 'as'=>'admin.supplier.delete']);
+        Route::post('/supplier/lists', ['uses' => 'SupplierController@lists', 'as'=>'admin.supplier.lists']);
         Route::post('/supplier/get', ['uses' => 'SupplierController@get', 'as'=>'admin.supplier.get']);
         /*
          * Customer

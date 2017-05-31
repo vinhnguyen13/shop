@@ -65,6 +65,18 @@ class SupplierController extends Controller
         return Redirect::route('admin.supplier.index');
     }
 
+    public function lists(Request $request)
+    {
+        $input = $request->get('input');
+        $models = ShopSupplier::query()->select(['id', \DB::raw('CONCAT(name, "-", phone, "-", email) AS name')])
+            ->where('email', 'like','%'.$input.'%')
+            ->orWhere('name', 'like','%'.$input.'%')
+            ->orWhere('phone', 'like','%'.$input.'%')
+            ->limit(5)
+//            ->toSql();
+            ->pluck('name', 'id');
+        return $models;
+    }
 
     public function get(Request $request)
     {
