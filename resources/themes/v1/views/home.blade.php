@@ -110,14 +110,9 @@
 @endpush
 
 @push('scripts')
-    <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("img.lazy").lazyload({
-                effect : "fadeIn"
-            });
-
             var swiper = new Swiper('.slidehomepage', {
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',

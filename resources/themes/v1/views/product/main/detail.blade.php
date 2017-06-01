@@ -93,7 +93,6 @@
 
 @push('scripts')
     <script type="text/javascript" src="/themes/v1/js/imagesloaded.pkgd.min.js"></script>
-    <script type="text/javascript" src="/themes/v1/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
     <script>
         var urlAddCart = "{{route('product.cart.add')}}";

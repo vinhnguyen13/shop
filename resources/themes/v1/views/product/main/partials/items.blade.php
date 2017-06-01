@@ -9,7 +9,7 @@
             <div class="product__item--pic">
                 <a href="{{$url}}">
                     <div class="product__img">
-                        <img data-original="{{$product->thumb()}}" alt="" class="lazy" />
+                        <img src="{{$product->thumb()}}" alt="" />
                     </div>
                 </a>
                 <div class="product__item--infor">
