@@ -83,7 +83,8 @@ $(document).ready(function () {
         .done( function( instance ) {
             var hWrapSlide = $('.slidedetailpage').outerHeight() + $('.slidedetailpage').offset().top,
                 hPagi = $('.slidedetail__pagi').outerHeight(),
-                offsetPagi = $('.slidedetail__pagi').position().top;
+                offsetPagi = $('.slidedetail__pagi').position().top,
+                wW = $(window).outerWidth();
 
             $(window).on('scroll', function () {
                 var val = $(this).scrollTop();
@@ -93,34 +94,49 @@ $(document).ready(function () {
                 }else {
                     $('.slidedetail__pagi').show();
                 }
-                fixColumn(val);
+                //fixColumn(val);
             }).trigger('scroll');
 
-            function fixColumn(val) {
-                //console.log(val);
-                var wrapFix = $('.detail__desc--fix'),
-                    parentFix = $('.detail__desc--inner'),
-                    offsetWrapTop = parentFix.offset().top,
-                    hWrapFix = wrapFix.outerHeight(),
-                    hColLeft = $('.detail__img').outerHeight();
+            if ( wW > 768 ) {
+                $(".detail__desc").stick_in_parent({
+                    offset_top: 100,
+                    parent: "[data-sticky_parent]"
+                });
 
-                if ( (val + hWrapFix) >= hColLeft ) {
-                    console.log("bottom");
-                    wrapFix.css({
-                        top: hColLeft - hWrapFix
-                    });
-                }else if ( val + 55 > offsetWrapTop ) {
-                    wrapFix.addClass('fixed');
-                    wrapFix.css({
-                        top: val
-                    });
-                }else {
-                    wrapFix.removeClass('fixed');
-                    wrapFix.css({
-                        top: 0
-                    });
-                }
+                $(".detail__desc")
+                .on('sticky_kit:bottom', function(e) {
+                    $(this).parent().css('position', 'static');
+                })
+                .on('sticky_kit:unbottom', function(e) {
+                    $(this).parent().css('position', 'relative');
+                });
             }
+
+            // function fixColumn(val) {
+            //     //console.log(val);
+            //     var wrapFix = $('.detail__desc--fix'),
+            //         parentFix = $('.detail__desc--inner'),
+            //         offsetWrapTop = parentFix.offset().top,
+            //         hWrapFix = wrapFix.outerHeight(),
+            //         hColLeft = $('.detail__img').outerHeight();
+
+            //     if ( (val + hWrapFix) >= hColLeft ) {
+            //         console.log("bottom");
+            //         wrapFix.css({
+            //             top: hColLeft - hWrapFix
+            //         });
+            //     }else if ( val + 55 > offsetWrapTop ) {
+            //         wrapFix.addClass('fixed');
+            //         wrapFix.css({
+            //             top: val
+            //         });
+            //     }else {
+            //         wrapFix.removeClass('fixed');
+            //         wrapFix.css({
+            //             top: 0
+            //         });
+            //     }
+            // }
         });
     /**
      * Buy button

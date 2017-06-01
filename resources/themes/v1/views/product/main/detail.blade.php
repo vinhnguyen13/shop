@@ -7,8 +7,8 @@
     $quantities = [1,2,3,4,5];
     ?>
     <div class="container detail">
-        <div class="row">
-            <div class="detail__img col-sm-8">
+        <div class="row" data-sticky_parent>
+            <div class="detail__img col-sm-8" data-sticky_column>
                 <ul class="breakcum">
                     <li><a href="{{url('/')}}">home</a></li>
                     <li><span>/</span></li>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="slidedetail__pagi"></div>
             </div>
-            <div class="col-sm-4 detail__desc">
+            <div class="col-sm-4 detail__desc" data-sticky_column>
                 <div class="detail__desc--inner">
                     <div class="detail__desc--fix">
                         <ul class="breakcum">
@@ -94,6 +94,7 @@
 @push('scripts')
     <script type="text/javascript" src="/themes/v1/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="/themes/v1/js/swiper.jquery.min.js"></script>
+    <script type="text/javascript" src="/themes/v1/js/jquery.sticky-kit.min.js"></script>
     <script>
         var urlAddCart = "{{route('product.cart.add')}}";
         var sizeSelected = "{{$size}}";
