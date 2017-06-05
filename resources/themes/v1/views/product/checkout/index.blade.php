@@ -34,6 +34,11 @@
 @push('styles')
     <link href="{!! asset('css/front/checkout.css') !!}" rel="stylesheet">
     <link href="{!! asset('https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css') !!}" rel="stylesheet">
+    <style>
+        input[type='text'].ui-autocomplete-loading {
+            background:  url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+        }
+    </style>
 @endpush
 
 @push('scripts')

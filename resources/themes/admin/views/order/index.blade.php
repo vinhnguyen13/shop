@@ -113,7 +113,7 @@
 
         $('#modal-update-order').on('click', '.btn-update-order-status', function (e) {
             var orderID = $(this).attr('data-order');
-            var status = $('select[name="status"]').val();
+            var status = $('.opt-status select[name="status"]').val();
             var email = $('input[name="email"]').val();
             var password = $('input[name="password"]').val();
             console.log(orderID, status);
