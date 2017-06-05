@@ -166,4 +166,25 @@ class ShopProductDetail extends Model
             'debt_status'=>ShopProductDetail::DEBT_START,
         ]);
     }
+
+    public function consignmentFeeLabel()
+    {
+        if($this->consignment_fee_type == ShopSupplier::CONSIGNMENT_FEE_TYPE_PERCENT){
+            return number_format($this->consignment_fee).' %';
+        }else{
+            return number_format($this->consignment_fee).' VND';
+        }
+    }
+
+    public function consignmentFeeValue($price)
+    {
+        if(empty($price)){
+            return 0;
+        }
+        if($this->consignment_fee_type == ShopSupplier::CONSIGNMENT_FEE_TYPE_PERCENT){
+            return $price * ($this->consignment_fee / 100);
+        }else{
+            return $this->consignment_fee;
+        }
+    }
 }

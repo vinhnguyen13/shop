@@ -23,8 +23,8 @@
         @foreach($orders as $order)
             <?php
             $date = date('d-m-Y', strtotime($order->created_at));
-            $supplierHtml = '<a href="'.route('admin.supplier.index', ['id'=>$order->supplier_id]).'">'.$order->supplier->name.'</a><br>';
-            $supplierHtml .= '<p class="help-block small">Consignment Fee: '.$order->supplier->consignmentFeeLabel().'</p>';
+            $supplierHtml = '<a href="'.route('admin.supplier.index', ['id'=>$order->supplier_id]).'">'.$order->supplier->name.'</a> ('.$order->supplier->consignmentFeeLabel().')<br>';
+            $supplierHtml .= '<p class="help-block small">Consignment Fee: '.$order->productDetail->consignmentFeeLabel().'</p>';
             $priceHtml = number_format($order->price).'<br/>';
             $priceHtml .= '<p class="help-block small">Price In: '.number_format($order->price_in).'</p>';
             $revenue = $order->consignmentFeeValue($order->total);
