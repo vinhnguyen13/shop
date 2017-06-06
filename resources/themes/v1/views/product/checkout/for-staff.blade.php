@@ -13,7 +13,7 @@
             <div class="checkout__infor">
                 <div class="filter__product">
                     <div class="frm-item">
-                        <div class="frm-item-icon">
+                        <div class="frm-item-icon searchProduct" data-url-products="{{route('api.product.search')}}" data-url-product="{{route('api.product.get')}}">
                             <input type="text" placeholder="Name , SKU , Color ...">
                             <button><span class="icon-slice9"></span></button>
                         </div>
@@ -245,13 +245,73 @@
 @endsection
 
 @push('styles')
+<link href="{!! asset('https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css') !!}" rel="stylesheet">
+<style>
+    input[type='text'].ui-autocomplete-loading {
+        background:  url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+    }
+</style>
 @endpush
 
 @push('scripts')
+<script src="{!! asset('http://code.jquery.com/ui/1.11.1/jquery-ui.min.js?v='.$version_deploy)  !!}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        var wrapFilter = 'filter__shop';
         $('.filter__item .dropdown').dropdown({
             selectedValue: true
+        });
+
+        $('.'+wrapFilter).find('.searchProduct input').autocomplete({
+            source: function( request, response ) {
+                var urlAjax = $('.'+wrapFilter).find('.searchProduct').attr('data-url-products');
+                var input = $('.'+wrapFilter).find('.searchProduct input').val();
+                $.ajax({
+                    dataType: "json",
+                    type : 'post',
+                    url: urlAjax,
+                    data:{input: input},
+                    success: function(data) {
+                        $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
+                        // hide loading image
+                        response( $.map( data, function(text, key) {
+                            return {
+                                label: text,
+                                value: text,
+                                id: key
+                            };
+                            // your operation on data
+                        }));
+                    },
+                    error: function(data) {
+                        $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
+                    }
+                });
+            },
+            minLength: 3,
+            open: function() {},
+            close: function() {},
+            focus: function(event,ui) {},
+            select: function (event, ui)
+            {
+                var urlAjax = $('.'+wrapFilter).find('.searchProduct').attr('data-url-product');
+                var pid = ui.item ? ui.item.id : 0;
+                if (pid > 0)
+                {
+                    $.ajax({
+                        dataType: "json",
+                        type : 'post',
+                        url: urlAjax,
+                        data:{pid: pid},
+                        success: function(data) {
+
+                        },
+                        error: function(data) {
+                            $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
+                        }
+                    });
+                }
+            }
         });
 
         // qty up down number

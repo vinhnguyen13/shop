@@ -203,25 +203,4 @@ class ProductController extends Controller
     {
         return view('product.payment.fail');
     }
-
-    public function loadCustomers(Request $request)
-    {
-        $input = $request->get('input');
-        $customers = ShopCustomer::query()
-            ->where('email', 'like','%'.$input.'%')
-            ->orWhere('name', 'like','%'.$input.'%')
-            ->orWhere('phone', 'like','%'.$input.'%')
-            ->limit(5)
-            ->pluck('name', 'id');
-        return $customers;
-    }
-
-    public function loadCustomer(Request $request)
-    {
-        $cid = $request->get('cid');
-        if(!empty($cid)){
-            $customer = ShopCustomer::find($cid);
-            return $customer;
-        }
-    }
 }

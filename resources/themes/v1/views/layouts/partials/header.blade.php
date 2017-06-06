@@ -12,6 +12,9 @@
                 @else
                     <ul>
                         <li><a href="javascript:;">{{auth()->user()->name}}</a></li>
+                        @if(auth()->user()->is_seller)
+                        <li><a href="{{route('product.checkout.forStaff')}}">Staff</a></li>
+                        @endif
                         <li><a href="{{route('logout')}}">LOGOUT</a></li>
                     </ul>
                 @endif

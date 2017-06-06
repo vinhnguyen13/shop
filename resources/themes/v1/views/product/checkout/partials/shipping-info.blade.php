@@ -3,7 +3,7 @@
         @if($is_seller)
         <p class="font-700 mgB-20 fs-24 mgT-20">CUSTOMER</p>
         <div class="clearfix pdR-15 mgB-40">
-            <div class="find-customer" data-url-customers="{{route('product.loadCustomers')}}" data-url-customer="{{route('product.loadCustomer')}}">
+            <div class="find-customer" data-url-customers="{{route('api.customer.search')}}" data-url-customer="{{route('api.customer.get')}}">
                 <input name="customer_attribute" type="text" placeholder="Email, phone, Name">
             </div>
         </div>
