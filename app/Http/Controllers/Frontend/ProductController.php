@@ -166,7 +166,8 @@ class ProductController extends Controller
     public function checkoutForStaff(Request $request)
     {
         $sizes = [8,9,10];
-        $details = ShopProductDetail::query()/*->where(['size'=>8])*/->paginate(100);
+        $details = ShopProductDetail::query()->select(['id', 'product_id', 'size', \DB::raw('COUNT(*) AS qty')])
+        /*->where(['size'=>8])*/->groupBy(['size'])->paginate(100);
         return view('product.checkout.for-staff', compact('sizes', 'details'));
     }
 

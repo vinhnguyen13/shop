@@ -141,7 +141,7 @@
                                     <td><p>{{$key+1}}</p></td>
                                     <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
                                     <td><p>{{$detail->size}}</p></td>
-                                    <td><p>1</p></td>
+                                    <td><p>{{$detail->qty}}</p></td>
                                     <td><p class="text-uper">{{$detail->getTextNewStatus()}}</p></td>
                                     <td><p>đ {{number_format($price, 0)}}</p></td>
                                     <td>
