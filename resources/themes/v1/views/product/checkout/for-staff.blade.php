@@ -31,15 +31,13 @@
                                         </a>
                                         <div class="dropdown-up-style hide">
                                             <div class="dropdown__inner">
+                                                @if (!empty($manufacturers))
                                                 <ul>
-                                                    <li><a href="" data-value="1">Adidas</a></li>
-                                                    <li><a href="" data-value="2">Nike</a></li>
-                                                    <li><a href="" data-value="3">Adidas</a></li>
-                                                    <li><a href="" data-value="4">Adidas</a></li>
-                                                    <li><a href="" data-value="5">Adidas</a></li>
-                                                    <li><a href="" data-value="6">Adidas</a></li>
-                                                    <li><a href="" data-value="7">Adidas</a></li>
+                                                    @foreach($manufacturers as $manufacturer)
+                                                    <li><a href="" data-value="{{$manufacturer->id}}">{{$manufacturer->name}}</a></li>
+                                                    @endforeach
                                                 </ul>
+                                                @endif
                                             </div>
                                         </div>
                                         <input type="hidden" value="" />
@@ -54,17 +52,15 @@
                                         </a>
                                         <div class="dropdown-up-style hide">
                                             <div class="dropdown__inner">
+                                                @if (!empty($sizes))
                                                 <ul>
                                                     <li><label for="" class="frm"><input type="radio" />Men US</label></li>
                                                     <li><label for="" class="frm"><input type="radio" />Women US</label></li>
-                                                    <li><a href="" data-value="1">7</a></li>
-                                                    <li><a href="" data-value="2">8</a></li>
-                                                    <li><a href="" data-value="3">9</a></li>
-                                                    <li><a href="" data-value="4">1</a></li>
-                                                    <li><a href="" data-value="5">3</a></li>
-                                                    <li><a href="" data-value="6">4</a></li>
-                                                    <li><a href="" data-value="7">5</a></li>
+                                                    @foreach($sizes as $size)
+                                                        <li><a href="" data-value="{{$size}}">{{$size}}</a></li>
+                                                    @endforeach
                                                 </ul>
+                                                @endif
                                             </div>
                                         </div>
                                         <input type="hidden" value="" />
@@ -133,102 +129,32 @@
                                 <td class="addcart__result"><p>Add cart</p></td>
                             </tr>
                             </thead>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="5">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">Air Jordan 1 bred 2016</p></td>
-                                <td><p>9</p></td>
-                                <td><p>1</p></td>
-                                <td><p class="text-uper">new</p></td>
-                                <td><p>6.800.000</p></td>
-                                <td>
-                                    <div class="up__down--qty">
-                                        <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                        <span class="qty__val">1</span>
-                                        <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                        <input type="hidden" value="1">
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (!empty($details))
+
+                                @foreach($details as $key=>$detail)
+                                    @php
+                                    $product = $detail->product;
+                                    $price = $detail->getPrice();
+                                    $url = $product->url();
+                                    @endphp
+                                <tr>
+                                    <td><p>{{$key+1}}</p></td>
+                                    <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
+                                    <td><p>{{$detail->size}}</p></td>
+                                    <td><p>1</p></td>
+                                    <td><p class="text-uper">{{$detail->getTextNewStatus()}}</p></td>
+                                    <td><p>đ {{number_format($price, 0)}}</p></td>
+                                    <td>
+                                        <div class="up__down--qty">
+                                            <span class="qty__down"><span class="icon-circle-minus"></span></span>
+                                            <span class="qty__val">1</span>
+                                            <span class="qty__up"><span class="icon-circle-plus"></span></span>
+                                            <input type="hidden" value="5">
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </table>
                         <div class="clearfix">
                             <div class="pagi__filter">

@@ -13,6 +13,7 @@ use App\Models\Backend\ShopManufacturer;
 use App\Models\Frontend\ShopCustomer;
 use App\Models\Frontend\ShopOrder;
 use App\Models\Frontend\ShopProduct;
+use App\Models\Frontend\ShopProductDetail;
 use App\Models\Frontend\User;
 use App\Services\Payment;
 use Illuminate\Http\Request;
@@ -164,7 +165,9 @@ class ProductController extends Controller
 
     public function checkoutForStaff(Request $request)
     {
-        return view('product.checkout.for-staff', compact('cart', 'step', 'is_seller', 'view', 'checkoutInfo'));
+        $sizes = [8,9,10];
+        $details = ShopProductDetail::query()/*->where(['size'=>8])*/->paginate(100);
+        return view('product.checkout.for-staff', compact('sizes', 'details'));
     }
 
     public function order(Request $request)
