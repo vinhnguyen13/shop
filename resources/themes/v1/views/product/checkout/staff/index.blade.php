@@ -130,26 +130,26 @@
                             </tr>
                             </thead>
                             @if (!empty($details))
-
                                 @foreach($details as $key=>$detail)
                                     @php
                                     $product = $detail->product;
                                     $price = $detail->getPrice();
                                     $url = $product->url();
+                                    $size = $detail->size;
                                     @endphp
-                                <tr>
+                                <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}">
                                     <td><p>{{$key+1}}</p></td>
                                     <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
-                                    <td><p>{{$detail->size}}</p></td>
+                                    <td><p>{{$size}}</p></td>
                                     <td><p>{{$detail->qty}}</p></td>
                                     <td><p class="text-uper">{{$detail->getTextNewStatus()}}</p></td>
                                     <td><p>đ {{number_format($price, 0)}}</p></td>
                                     <td>
                                         <div class="up__down--qty">
                                             <span class="qty__down"><span class="icon-circle-minus"></span></span>
-                                            <span class="qty__val">1</span>
+                                            <span class="qty__val">0</span>
                                             <span class="qty__up"><span class="icon-circle-plus"></span></span>
-                                            <input type="hidden" value="5">
+                                            <input type="hidden" value="0">
                                         </div>
                                     </td>
                                 </tr>
@@ -182,87 +182,7 @@
 @push('scripts')
 <script src="{!! asset('http://code.jquery.com/ui/1.11.1/jquery-ui.min.js?v='.$version_deploy)  !!}"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        var wrapFilter = 'filter__shop';
-        $('.filter__item .dropdown').dropdown({
-            selectedValue: true
-        });
-
-        $('.'+wrapFilter).find('.searchProduct input').autocomplete({
-            source: function( request, response ) {
-                var urlAjax = $('.'+wrapFilter).find('.searchProduct').attr('data-url-products');
-                var input = $('.'+wrapFilter).find('.searchProduct input').val();
-                $.ajax({
-                    dataType: "json",
-                    type : 'post',
-                    url: urlAjax,
-                    data:{input: input},
-                    success: function(data) {
-                        $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
-                        // hide loading image
-                        response( $.map( data, function(text, key) {
-                            return {
-                                label: text,
-                                value: text,
-                                id: key
-                            };
-                            // your operation on data
-                        }));
-                    },
-                    error: function(data) {
-                        $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
-                    }
-                });
-            },
-            minLength: 3,
-            open: function() {},
-            close: function() {},
-            focus: function(event,ui) {},
-            select: function (event, ui)
-            {
-                var urlAjax = $('.'+wrapFilter).find('.searchProduct').attr('data-url-product');
-                var pid = ui.item ? ui.item.id : 0;
-                if (pid > 0)
-                {
-                    $.ajax({
-                        dataType: "json",
-                        type : 'post',
-                        url: urlAjax,
-                        data:{pid: pid},
-                        success: function(data) {
-
-                        },
-                        error: function(data) {
-                            $('.'+wrapFilter).find('.searchProduct input').removeClass('ui-autocomplete-loading');
-                        }
-                    });
-                }
-            }
-        });
-
-        // qty up down number
-        $('.up__down--qty input[type=hidden]').each(function() {
-            var _this = $(this),
-                    val = _this.val();
-            _this.parent().find('.qty__val').html(val);
-        });
-        $('.up__down--qty .qty__up').on('click', function() {
-            var _this = $(this),
-                    valTxt = _this.parent().find('.qty__val'),
-                    valHidden = _this.parent().find('input[type=hidden]').val(),
-                    countUp = parseInt(valHidden) + 1;
-            valTxt.html(countUp);
-            _this.parent().find('input[type=hidden]').val(countUp);
-        });
-        $('.up__down--qty .qty__down').on('click', function() {
-            var _this = $(this),
-                    valTxt = _this.parent().find('.qty__val'),
-                    valHidden = _this.parent().find('input[type=hidden]').val(),
-                    countUp = parseInt(valHidden) - 1;
-            if ( countUp < 0 ) return;
-            valTxt.html(countUp);
-            _this.parent().find('input[type=hidden]').val(countUp);
-        });
-    });
+    var urlAddCart = "{{route('product.cart.add')}}";
 </script>
+<script type="text/javascript" src="{!! asset('js/front/checkout-for-staff.js?v='.$version_deploy)  !!}"></script>
 @endpush

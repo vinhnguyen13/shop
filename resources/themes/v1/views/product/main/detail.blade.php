@@ -100,5 +100,5 @@
         var urlAddCart = "{{route('product.cart.add')}}";
         var sizeSelected = "{{$size}}";
     </script>
-    <script type="text/javascript" src="{!! asset('js/front/product.js?v='.$version_deploy)  !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/front/product-detail.js?v='.$version_deploy)  !!}"></script>
 @endpush

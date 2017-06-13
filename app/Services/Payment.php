@@ -46,9 +46,9 @@ class Payment
      * @param $quantity
      * @return array|mixed
      */
-    public function addCart($productID, $detailID, $size, $quantity){
+    public function addCart($productID, $detailID, $size, $quantity = 1){
         if(empty($quantity)){
-            $quantity = 1;
+            return $this->removeCart($productID, $size);
         }
         $product = ShopProduct::find($productID);
         $totalDetail = $product->countDetailsBySize($size);

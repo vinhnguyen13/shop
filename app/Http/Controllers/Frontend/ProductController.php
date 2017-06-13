@@ -89,10 +89,11 @@ class ProductController extends Controller
         $productID = !empty($product) ? decrypt($product) : null;
         $detail = $request->get('detail');
         $detailID = !empty($detail) ? decrypt($detail) : null;
-        $cart = app(Payment::class)->addCart($productID, $detailID, $size, $quantity);
+        $cartNew = app(Payment::class)->addCart($productID, $detailID, $size, $quantity);
+        $cart = app(Payment::class)->getCart();
         $total = !empty($cart) ? count($cart) : 0;
         $html = view('product.main.partials.cart-header', compact('cart'))->render();
-        return ['total'=>$total, 'html'=>$html];
+        return ['total'=>$total, 'cartNew'=>$cartNew, 'html'=>$html];
     }
 
     public function cartRemove(Request $request)
@@ -168,7 +169,7 @@ class ProductController extends Controller
         $sizes = [8,9,10];
         $details = ShopProductDetail::query()->select(['id', 'product_id', 'size', \DB::raw('COUNT(*) AS qty')])
         /*->where(['size'=>8])*/->groupBy(['size'])->paginate(100);
-        return view('product.checkout.for-staff', compact('sizes', 'details'));
+        return view('product.checkout.staff.index', compact('sizes', 'details'));
     }
 
     public function order(Request $request)
