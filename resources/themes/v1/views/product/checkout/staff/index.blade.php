@@ -146,7 +146,7 @@
                                     <td><p class="text-uper">{{$lblStatus}}</p></td>
                                     <td><p>đ {{number_format($price, 0)}}</p></td>
                                     <td>
-                                        <div class="up__down--qty">
+                                        <div class="up__down--qty" data-qty="{{$qty}}">
                                             <span class="qty__down"><span class="icon-circle-minus{{ $qty == 0 ? ' hide' : '' }}"></span></span>
                                             <span class="qty__val">0</span>
                                             <span class="qty__up"><span class="icon-circle-plus {{ $qty == 0 ? ' hide' : '' }}"></span></span>
