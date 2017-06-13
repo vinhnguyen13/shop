@@ -129,26 +129,27 @@
                                 <td class="addcart__result"><p>Add cart</p></td>
                             </tr>
                             </thead>
-                            @if (!empty($details))
-                                @foreach($details as $key=>$detail)
+                            @if (!empty($products))
+                                @foreach($products as $key=>$product)
                                     @php
-                                    $product = $detail->product;
-                                    $price = $detail->getPrice();
+                                    $price = $product->getPriceDefault();
                                     $url = $product->url();
-                                    $size = $detail->size;
+                                    $qty = $product->countDetailsBySize($size);
+                                    $detail = $product->getDetailDefault($size);
+                                    $lblStatus = !empty($detail) ? $detail->getTextNewStatus() : '';
                                     @endphp
                                 <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}">
                                     <td><p>{{$key+1}}</p></td>
                                     <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
                                     <td><p>{{$size}}</p></td>
-                                    <td><p>{{$detail->qty}}</p></td>
-                                    <td><p class="text-uper">{{$detail->getTextNewStatus()}}</p></td>
+                                    <td><p>{{$qty}}</p></td>
+                                    <td><p class="text-uper">{{$lblStatus}}</p></td>
                                     <td><p>đ {{number_format($price, 0)}}</p></td>
                                     <td>
                                         <div class="up__down--qty">
-                                            <span class="qty__down"><span class="icon-circle-minus"></span></span>
+                                            <span class="qty__down"><span class="icon-circle-minus{{ $qty == 0 ? ' hide' : '' }}"></span></span>
                                             <span class="qty__val">0</span>
-                                            <span class="qty__up"><span class="icon-circle-plus"></span></span>
+                                            <span class="qty__up"><span class="icon-circle-plus {{ $qty == 0 ? ' hide' : '' }}"></span></span>
                                             <input type="hidden" value="0">
                                         </div>
                                     </td>

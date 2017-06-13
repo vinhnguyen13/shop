@@ -166,14 +166,14 @@ class ShopProduct extends Model
 
     public function getPriceDefault($size = null, $direction = 'asc'){
         $price = 0;
-        $productDetailDefault = $this->getDetailsDefault($size, $direction = 'asc');
+        $productDetailDefault = $this->getDetailDefault($size, $direction = 'asc');
         if(!empty($productDetailDefault)){
             $price = $productDetailDefault->price;
         }
         return $price;
     }
 
-    public function getDetailsDefault($size = null, $direction = 'asc')
+    public function getDetailDefault($size = null, $direction = 'asc')
     {
         $query = ShopProductDetail::query()->where(['product_id'=>$this->id]);
         if(!empty($size)){
