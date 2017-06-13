@@ -20,6 +20,7 @@
                     </div>
 
                     <div class="filter__item">
+                        <form class="frm-filter">
                         <table>
                             <tr>
                                 <td>
@@ -40,7 +41,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <input type="hidden" value="" />
+                                        <input type="hidden" value="" name="manufacture" />
                                     </div>
                                 </td>
                                 <td>
@@ -63,7 +64,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <input type="hidden" value="" />
+                                        <input type="hidden" value="" name="size" />
                                     </div>
                                 </td>
                                 <td>
@@ -86,6 +87,7 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        <input type="hidden" value="" name="color" />
                                     </div>
                                 </td>
                                 <td>
@@ -94,7 +96,7 @@
                                             <p class="font-600">From</p>
                                         </div>
                                         <div class="pull-right">
-                                            <input type="text" value="0.0" class="filter__price" />đ
+                                            <input type="text" value="0.0" class="filter__price" name="from_price" />đ
                                         </div>
                                     </div>
                                 </td>
@@ -104,19 +106,21 @@
                                             <p class="font-600">To</p>
                                         </div>
                                         <div class="pull-right pdR-10">
-                                            <input type="text" value="0.0" class="filter__price" />đ
+                                            <input type="text" value="0.0" class="filter__price" name="to_price" />đ
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="filter__item--btn text-center">
-                            <button class="btn-small">APPLY</button>
+                            <button class="btn-small btn-apply">APPLY</button>
                             <button class="btn-reset">RESET</button>
                         </div>
+                        </form>
                     </div>
 
                     <div class="filter__result">
+                        @if (!empty($products))
                         <table>
                             <thead>
                             <tr>
@@ -129,33 +133,31 @@
                                 <td class="addcart__result"><p>Add cart</p></td>
                             </tr>
                             </thead>
-                            @if (!empty($products))
-                                @foreach($products as $key=>$product)
-                                    @php
-                                    $price = $product->getPriceDefault();
-                                    $url = $product->url();
-                                    $qty = $product->countDetailsBySize($size);
-                                    $detail = $product->getDetailDefault($size);
-                                    $lblStatus = !empty($detail) ? $detail->getTextNewStatus() : '';
-                                    @endphp
-                                <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}">
-                                    <td><p>{{$key+1}}</p></td>
-                                    <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
-                                    <td><p>{{$size}}</p></td>
-                                    <td><p>{{$qty}}</p></td>
-                                    <td><p class="text-uper">{{$lblStatus}}</p></td>
-                                    <td><p>đ {{number_format($price, 0)}}</p></td>
-                                    <td>
-                                        <div class="up__down--qty" data-qty="{{$qty}}">
-                                            <span class="qty__down"><span class="icon-circle-minus{{ $qty == 0 ? ' hide' : '' }}"></span></span>
-                                            <span class="qty__val">0</span>
-                                            <span class="qty__up"><span class="icon-circle-plus {{ $qty == 0 ? ' hide' : '' }}"></span></span>
-                                            <input type="hidden" value="0">
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
+                            @foreach($products as $key=>$product)
+                                @php
+                                $price = $product->getPriceDefault();
+                                $url = $product->url();
+                                $qty = $product->countDetailsBySize($size);
+                                $detail = $product->getDetailDefault($size);
+                                $lblStatus = !empty($detail) ? $detail->getTextNewStatus() : '';
+                                @endphp
+                            <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}">
+                                <td><p>{{$key+1}}</p></td>
+                                <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
+                                <td><p>{{$size}}</p></td>
+                                <td><p>{{$qty}}</p></td>
+                                <td><p class="text-uper">{{$lblStatus}}</p></td>
+                                <td><p>đ {{number_format($price, 0)}}</p></td>
+                                <td>
+                                    <div class="up__down--qty" data-qty="{{$qty}}">
+                                        <span class="qty__down"><span class="icon-circle-minus{{ $qty == 0 ? ' hide' : '' }}"></span></span>
+                                        <span class="qty__val">0</span>
+                                        <span class="qty__up"><span class="icon-circle-plus {{ $qty == 0 ? ' hide' : '' }}"></span></span>
+                                        <input type="hidden" value="0">
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                         </table>
                         <div class="clearfix">
                             <div class="pagi__filter">
@@ -164,6 +166,12 @@
                                 <a href=""><span class="icon-navigate_next"></span></a>
                             </div>
                         </div>
+                        @else
+                            <div class="alert alert-info fade in alert-dismissable">
+                                <h4><i class="icon fa fa-warning"></i> Thông báo!</h4>
+                                Không có sản phẩm bạn muốn tìm kiếm
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -184,6 +192,7 @@
 <script src="{!! asset('http://code.jquery.com/ui/1.11.1/jquery-ui.min.js?v='.$version_deploy)  !!}"></script>
 <script type="text/javascript">
     var urlAddCart = "{{route('product.cart.add')}}";
+    var urlCheckoutForStaff = "{{route('product.checkout.forStaff')}}";
 </script>
 <script type="text/javascript" src="{!! asset('js/front/checkout-for-staff.js?v='.$version_deploy)  !!}"></script>
 @endpush

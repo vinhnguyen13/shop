@@ -121,4 +121,10 @@ $(document).ready(function() {
             $('.'+wrapFilterResult).trigger('checkout/func/updateCart', [product, size, countUp]);
         }
     });
+
+    $('.filter__item--btn').on('click', '.btn-apply', function(){
+        var form = $('.frm-filter').serialize();
+        console.log(form);
+        return false;
+    });
 });
