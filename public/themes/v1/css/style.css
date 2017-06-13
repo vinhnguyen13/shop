@@ -1263,7 +1263,7 @@ footer {
 .checkout__infor {
     padding-right: 50px;
     float: left;
-    width: calc(100% - 350px);
+    /*width: calc(100% - 350px);*/
 }
 
 .checkout__slect--payment {
