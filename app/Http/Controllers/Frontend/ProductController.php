@@ -170,10 +170,11 @@ class ProductController extends Controller
 //        $sizes = [8, 9, 10];
         if($request->isMethod('post')) {
             $size = $request->get('size');
+            $cart = app(Payment::class)->getCart();
             $details = ShopProductDetail::query()
                 ->where(['size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->groupBy('product_id')
                 ->paginate(20);
-            return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details'));
+            return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details', 'cart'));
         }
         return view('product.checkout.staff.index', compact('size', 'sizes'));
     }

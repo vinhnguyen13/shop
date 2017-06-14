@@ -95,29 +95,37 @@ $(document).ready(function() {
     $('.filter__result').on('click', '.up__down--qty .qty__up', function() {
         var _this = $(this),
             valTxt = _this.parent().find('.qty__val'),
+            valQty = _this.closest('tr').attr('data-qty'),
             valHidden = _this.parent().find('input[type=hidden]').val(),
             countUp = parseInt(valHidden) + 1;
+        if(countUp >  valQty){
+            return false;
+        }
         valTxt.html(countUp);
+        _this.closest('tr').find('td:eq(3)').html(valQty - countUp);
         _this.parent().find('input[type=hidden]').val(countUp);
         var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
         var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
         if(size && product){
-            console.log(countUp);
             $('.'+wrapFilterResult).trigger('checkout/func/updateCart', [product, size, countUp]);
         }
     });
     $('.filter__result').on('click', '.up__down--qty .qty__down', function() {
         var _this = $(this),
             valTxt = _this.parent().find('.qty__val'),
+            valQty = _this.closest('tr').attr('data-qty'),
             valHidden = _this.parent().find('input[type=hidden]').val(),
             countUp = parseInt(valHidden) - 1;
         if ( countUp < 0 ) return;
+        if(countUp >  valQty){
+            return false;
+        }
         valTxt.html(countUp);
+        _this.closest('tr').find('td:eq(3)').html(valQty - countUp);
         _this.parent().find('input[type=hidden]').val(countUp);
         var product = $(this).closest('.checkout__inforpro-detail').attr('data-product');
         var size = $(this).closest('.checkout__inforpro-detail').attr('data-size');
         if(size && product){
-            console.log(countUp);
             $('.'+wrapFilterResult).trigger('checkout/func/updateCart', [product, size, countUp]);
         }
     });
