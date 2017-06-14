@@ -34,6 +34,7 @@
                                             <div class="dropdown__inner">
                                                 @if (!empty($manufacturers))
                                                 <ul>
+                                                    <li><a href="" data-value="0">- None -</a></li>
                                                     @foreach($manufacturers as $manufacturer)
                                                     <li><a href="" data-value="{{$manufacturer->id}}">{{$manufacturer->name}}</a></li>
                                                     @endforeach
@@ -41,7 +42,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <input type="hidden" value="" name="manufacture" />
+                                        <input type="hidden" value="" name="manufacturer" />
                                     </div>
                                 </td>
                                 <td>
@@ -55,8 +56,8 @@
                                             <div class="dropdown__inner">
                                                 @if (!empty($sizes))
                                                 <ul>
-                                                    <li><label for="" class="frm"><input type="radio" />Men US</label></li>
-                                                    <li><label for="" class="frm"><input type="radio" />Women US</label></li>
+                                                    {{--<li><label for="" class="frm"><input type="radio" />Men US</label></li>--}}
+                                                    {{--<li><label for="" class="frm"><input type="radio" />Women US</label></li>--}}
                                                     @foreach($sizes as $size)
                                                         <li><a href="" data-value="{{$size}}">{{$size}}</a></li>
                                                     @endforeach
@@ -96,7 +97,7 @@
                                             <p class="font-600">From</p>
                                         </div>
                                         <div class="pull-right">
-                                            <input type="text" value="0.0" class="filter__price" name="from_price" />đ
+                                            <input type="text" value="" class="filter__price" name="from_price" />đ
                                         </div>
                                     </div>
                                 </td>
@@ -106,7 +107,7 @@
                                             <p class="font-600">To</p>
                                         </div>
                                         <div class="pull-right pdR-10">
-                                            <input type="text" value="0.0" class="filter__price" name="to_price" />đ
+                                            <input type="text" value="" class="filter__price" name="to_price" />đ
                                         </div>
                                     </div>
                                 </td>

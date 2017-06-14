@@ -170,10 +170,32 @@ class ProductController extends Controller
 //        $sizes = [8, 9, 10];
         if($request->isMethod('post')) {
             $size = $request->get('size');
+            $color = $request->get('color');
+            $manufacturer = $request->get('manufacturer');
+            $from_price = $request->get('from_price');
+            $to_price = $request->get('to_price');
             $cart = app(Payment::class)->getCart();
-            $details = ShopProductDetail::query()
-                ->where(['size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->groupBy('product_id')
-                ->paginate(20);
+            $query = ShopProductDetail::query()
+                ->join('shop_product', function($query) use ($manufacturer) {
+                    //link customer to their orders
+                    $query->on('shop_product_detail.product_id', '=', 'shop_product.id');
+                    //consider only enabled orders
+                    if(!empty($manufacturer)) {
+                        $query->where('shop_product.manufacturer_id', '=', $manufacturer);
+                    }
+                    //consider only orders where status != 0
+                })
+                ->where(['shop_product_detail.stock_status_id' => ShopProductDetail::STOCK_IN_STOCK]);
+            if(!empty($size)){
+                $query->where(['size'=>$size]);
+            }
+            if(!empty($color)){
+                $query->where(['color'=>$color]);
+            }
+            if(!empty($from_price) || !empty($to_price)){
+                $query->whereBetween('price', [$from_price, $to_price]);
+            }
+            $details = $query->groupBy('product_id')->paginate(20);
             return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details', 'cart'));
         }
         return view('product.checkout.staff.index', compact('size', 'sizes'));

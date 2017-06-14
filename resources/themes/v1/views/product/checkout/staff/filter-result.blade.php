@@ -26,7 +26,7 @@
             }
             @endphp
             <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}" data-qty="{{$qty}}">
-                <td><p>{{$key+1}}</p></td>
+                <td><p>{{$product->id}}</p></td>
                 <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
                 <td><p>{{$size}}</p></td>
                 <td><p>{{$qty - $qtyChose}}</p></td>

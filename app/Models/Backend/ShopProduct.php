@@ -53,7 +53,6 @@ class ShopProduct extends MainShopProduct
             'sku_producer',
             'stock_in',
             'stock_out',
-            'status',
             'created_at',
         ]);
         return $grid;
