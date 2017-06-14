@@ -87,12 +87,12 @@ $(document).ready(function() {
     });
 
     // qty up down number
-    $('.up__down--qty input[type=hidden]').each(function() {
+    $('.filter__result .up__down--qty input[type=hidden]').each(function() {
         var _this = $(this),
             val = _this.val();
         _this.parent().find('.qty__val').html(val);
     });
-    $('.up__down--qty .qty__up').on('click', function() {
+    $('.filter__result').on('click', '.up__down--qty .qty__up', function() {
         var _this = $(this),
             valTxt = _this.parent().find('.qty__val'),
             valHidden = _this.parent().find('input[type=hidden]').val(),
@@ -106,7 +106,7 @@ $(document).ready(function() {
             $('.'+wrapFilterResult).trigger('checkout/func/updateCart', [product, size, countUp]);
         }
     });
-    $('.up__down--qty .qty__down').on('click', function() {
+    $('.filter__result').on('click', '.up__down--qty .qty__down', function() {
         var _this = $(this),
             valTxt = _this.parent().find('.qty__val'),
             valHidden = _this.parent().find('input[type=hidden]').val(),
@@ -123,8 +123,41 @@ $(document).ready(function() {
     });
 
     $('.filter__item--btn').on('click', '.btn-apply', function(){
-        var form = $('.frm-filter').serialize();
-        console.log(form);
+        var data = $('.frm-filter').serialize();
+        $(this).loading({inside_right: true});
+        if(data){
+            $.ajax({
+                type: "post",
+                url: urlCheckoutForStaff,
+                data: data,
+                success: function (data) {
+                    $('body').loading({remove: true});
+                    $('.filter__result').html(data);
+                },
+                error: function (error) {
+                }
+            });
+        }
+        return false;
+    });
+
+    $('.filter__result').on('click', '.btn-more', function(){
+        var data = $('.frm-filter').serialize();
+        var urlCheckoutForStaffPaginate = $(this).attr('href');
+        $(this).loading({inside_right: true});
+        if(data){
+            $.ajax({
+                type: "post",
+                url: urlCheckoutForStaffPaginate,
+                data: data,
+                success: function (data) {
+                    $('body').loading({remove: true});
+                    $('.filter__result').html(data);
+                },
+                error: function (error) {
+                }
+            });
+        }
         return false;
     });
 });

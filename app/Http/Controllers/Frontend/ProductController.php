@@ -166,14 +166,16 @@ class ProductController extends Controller
 
     public function checkoutForStaff(Request $request)
     {
-        $sizes = [8, 9, 10];
+        $sizes = app(ShopProduct::class)->getSizes();
+//        $sizes = [8, 9, 10];
         if($request->isMethod('post')) {
-            $size = 8;
-            $products = ShopProduct::query()
-                /*->where(['size'=>8])*/
-                ->paginate(100);
+            $size = $request->get('size');
+            $details = ShopProductDetail::query()
+                ->where(['size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->groupBy('product_id')
+                ->paginate(20);
+            return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details'));
         }
-        return view('product.checkout.staff.index', compact('size', 'sizes', 'products'));
+        return view('product.checkout.staff.index', compact('size', 'sizes'));
     }
 
     public function order(Request $request)

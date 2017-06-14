@@ -215,4 +215,8 @@ class ShopProduct extends Model
         ]);
     }
 
+    public function getSizes(){
+        $query = ShopProductDetail::query()->groupBy('size');
+        return $query->pluck('size', 'id');
+    }
 }
