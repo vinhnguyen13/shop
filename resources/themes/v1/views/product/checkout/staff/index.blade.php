@@ -10,7 +10,7 @@
             </ul>
         </div>
         <div class="checkout__inner clearfix">
-            <div class="checkout__infor">
+            <div class="checkout__infor" style="width:100%;">
                 <div class="filter__product">
                     <div class="frm-item">
                         <div class="frm-item-icon searchProduct" data-url-products="{{route('api.product.search')}}" data-url-product="{{route('api.product.get')}}">
