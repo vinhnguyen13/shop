@@ -169,6 +169,7 @@ class ProductController extends Controller
         $sizes = app(ShopProduct::class)->getSizes();
 //        $sizes = [8, 9, 10];
         if($request->isMethod('post')) {
+            $word = $request->get('word');
             $size = $request->get('size');
             $color = $request->get('color');
             $manufacturer = $request->get('manufacturer');
@@ -194,6 +195,13 @@ class ProductController extends Controller
             }
             if(!empty($from_price) || !empty($to_price)){
                 $query->whereBetween('price', [$from_price, $to_price]);
+            }
+            if(!empty($word)){
+                $query->where(function($query) use ($word){
+                    $query->where('name', 'like', '%'.$word.'%');
+                    $query->orWhere('shop_product.color', 'like', '%'.$word.'%');
+                    $query->orWhere('shop_product.sku_producer', 'like', '%'.$word.'%');
+                });
             }
             $details = $query->groupBy('product_id')->paginate(20);
             return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details', 'cart'));
