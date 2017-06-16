@@ -58,6 +58,7 @@
                                                     <ul>
                                                         {{--<li><label for="" class="frm"><input type="radio" />Men US</label></li>--}}
                                                         {{--<li><label for="" class="frm"><input type="radio" />Women US</label></li>--}}
+                                                        <li><a href="" data-value="0">- None -</a></li>
                                                         @foreach($sizes as $size)
                                                             <li><a href="" data-value="{{$size}}">{{$size}}</a></li>
                                                         @endforeach

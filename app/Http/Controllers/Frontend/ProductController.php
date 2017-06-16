@@ -203,8 +203,8 @@ class ProductController extends Controller
                     $query->orWhere('shop_product.sku_producer', 'like', '%'.$word.'%');
                 });
             }
-            $details = $query->groupBy('product_id')->paginate(20);
-            return view('product.checkout.staff.filter-result', compact('size', 'sizes', 'details', 'cart'));
+            $details = $query->groupBy('size')->paginate(20);
+            return view('product.checkout.staff.filter-result', compact('sizes', 'details', 'cart'));
         }
         return view('product.checkout.staff.index', compact('size', 'sizes'));
     }

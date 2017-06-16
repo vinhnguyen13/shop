@@ -11,11 +11,12 @@
             <td class="addcart__result"><p>Add cart</p></td>
         </tr>
         </thead>
-        @foreach($details as $key=>$detail)
+        @foreach($details as $indx=>$detail)
             @php
             $product = $detail->product;
             $price = $product->getPriceDefault();
             $url = $product->url();
+            $size = $detail->size;
             $qty = $product->countDetailsBySize($size);
             $lblStatus = !empty($detail) ? $detail->getTextNewStatus() : '';
 
@@ -26,8 +27,13 @@
             }
             @endphp
             <tr class="checkout__inforpro-detail" data-product="{{encrypt($product->id)}}" data-size="{{$size}}" data-qty="{{$qty}}">
-                <td><p>{{$product->id}}</p></td>
-                <td><p class="text-uper"><a href="{{$url}}" target="_blank">{{$product->name}}</a></p></td>
+                <td><p>{{$indx+1}}</p></td>
+                <td>
+                    <p class="text-uper">
+                        <a href="{{$url}}" target="_blank">{{$product->name}}</a>
+                    </p>
+                    <p class="help-block small">{{$detail->sku}}</p>
+                </td>
                 <td><p>{{$size}}</p></td>
                 <td><p>{{$qty - $qtyChose}}</p></td>
                 <td><p class="text-uper">{{$lblStatus}}</p></td>
