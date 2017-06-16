@@ -32,65 +32,6 @@ class User extends MainUser
         ]);
         return $grid;
     }
-    /**
-     * @param $input
-     */
-    public function updateOrCreate(array $attributes, array $values = []){
-        $instance = $this->firstOrNew($attributes);
-        $instance->fill($values);
-        $validate = $instance->validate($instance->attributes);
-        $instance->processingUser($values);
-        if ($validate->passes()) {
-            $instance->save();
-            $instance->processingProfile($values);
-        } else {
-            return $validate->getMessageBag();
-        }
-        if(!empty($instance->errors)){
-            $messageBag = $validate->getMessageBag();
-            foreach($instance->errors as $error){
-                $messageBag->merge($error->getMessages());
-            }
-            return $validate->getMessageBag();
-        }
-        return $instance;
-    }
-
-    /**
-     * @param $values
-     */
-    public function processingUser($values)
-    {
-        if(!empty($values['password'])){
-            $this->password = \Hash::make($values['password']);
-        }
-    }
-
-    /**
-     * @param $values
-     */
-    public function processingProfile($values)
-    {
-        if (!empty($values['images'])) {
-            $imageService = $this->getImageService();
-            foreach ($values['images'] as $key => $image) {
-                $image = $image[0];
-                if ($imageService->exists($image)) {
-                    $newPath = app(UploadMedia::class)->getPathDay(UserProfile::uploadFolder . DS);
-                    $path = pathinfo($image);
-                    $imageService->moveWithSize($path['dirname'], $newPath, $path['basename']);
-                    $folders = explode(DS, $path['dirname']);
-                    $imageService->deleteDirectory(UserProfile::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folders[2]);
-                    $profile = app(UserProfile::class)->firstOrNew(['user_id' => $this->id]);
-                    $profile->fill([
-                        'avatar' => $path['basename'],
-                        'folder' => str_replace(DS . UploadMedia::TEMP_FOLDER . DS . $folders[2], '', $path['dirname']),
-                    ])->save();
-                }
-                break;
-            }
-        }
-    }
 
     /**
      * @return array
@@ -115,4 +56,5 @@ class User extends MainUser
         }
         return $imageList;
     }
+
 }

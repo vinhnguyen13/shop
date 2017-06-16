@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Frontend\Auth;
 
-use App\User;
+use App\Models\Frontend\User;
 use Validator;
 use App\Http\Controllers\Frontend\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Redirect;
+
 
 class RegisterController extends Controller
 {
@@ -63,10 +65,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $return = app()->make(User::class)->updateOrCreate([], $data);
+        if(!empty($return)){
+            return $return;
+        }
+        return Redirect::back()->withErrors($return);
     }
 }
