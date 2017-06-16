@@ -33,7 +33,9 @@ $isNewRecord = !empty($user->id) ? false : true;
 
                 <div class="form-group">
                     {{ Form::label(null, 'Password') }}
-                    {{ Form::password('password', ['class' => 'form-control'])}}
+                    <a class="changePss">Change pass</a>
+{{--                    {{ Form::password('password', ['class' => 'form-control'])}}--}}
+
                 </div>
 
                 <div class="form-group">
@@ -51,3 +53,16 @@ $isNewRecord = !empty($user->id) ? false : true;
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $(function() {
+        var input = '<input class="form-control" name="password" type="password" value="">';
+        $('.box-body').on('click', '.changePss', function (e) {
+            $(this).parent().append(input);
+            return false;
+        });
+
+    });
+</script>
+@endpush
