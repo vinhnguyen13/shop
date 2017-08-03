@@ -12,7 +12,7 @@
 @section('filter')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Horizontal Form</h3>
+            <h3 class="box-title">Order Management</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
             <div class="box-body">
