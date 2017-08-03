@@ -1,6 +1,7 @@
 <div id="grid-loading"><img src="{!! asset('images/loading.gif') !!}" /></div>
 <div class="grid-wrap">
 	<form class="grid-form" method="get" action="{{ route($route) }}" autocomplete="off">
+		@yield('filter')
 		<div class="grid-head clearfix">
 			<div id="grid-actions">
 				<div class="grid-action has-popup">
@@ -40,6 +41,7 @@
 				@yield('grid')
 			</div>
 		</div>
+
 		<div class="grid-horizontal-scroll">
 			@if($total)<div class="grid-counter">{{ $start }} - {{ $end }} of <span>{{ $total }}</span></div>@endif
 			<table class="grid{{ $class }}" data-ajax="{{ $ajax }}">
