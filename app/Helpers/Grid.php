@@ -15,6 +15,7 @@ class Grid {
 	private $filters;
 	private $ajax = true;
 	private $action = true;
+	private $gridAction = true;
 	private $actionButtons = [];
 	private $hiddenColumns = [];
 	private $from = '';
@@ -107,6 +108,10 @@ class Grid {
 	
 	public function removeActionColumn() {
 		$this->action = false;
+	}
+
+	public function removeGridAction() {
+		$this->gridAction = false;
 	}
 	
 	public function getLabels() {
@@ -235,6 +240,7 @@ class Grid {
 		
 		return view('widgets.grid', [
 			'actionButtons' => $this->actionButtons,
+			'gridAction' => $this->gridAction,
 			'items' => $items,
 			'grid' => $this,
 			'labels' => $labels,

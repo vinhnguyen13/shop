@@ -2,6 +2,7 @@
 <div class="grid-wrap">
 	<form class="grid-form" method="get" action="{{ route($route) }}" autocomplete="off">
 		@yield('filter')
+		@if($gridAction)
 		<div class="grid-head clearfix">
 			<div id="grid-actions">
 				<div class="grid-action has-popup">
@@ -41,6 +42,7 @@
 				@yield('grid')
 			</div>
 		</div>
+		@endif
 
 		<div class="grid-horizontal-scroll">
 			@if($total)<div class="grid-counter">{{ $start }} - {{ $end }} of <span>{{ $total }}</span></div>@endif
