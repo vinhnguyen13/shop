@@ -13,17 +13,11 @@ class ShopSize extends Model
 {
     use HasValidator;
     protected $table = 'shop_size';
-    protected $fillable = ['supplier_id', 'sku_producer', 'name', 'description', 'location', 'stock_in', 'stock_out', 'stock_status_id', 'image', 'manufacturer_id', 'shipping', 'price', 'color', 'points', 'tax_class_id', 'date_available', 'weight', 'weight_class_id', 'length', 'width', 'height', 'length_class_id', 'order', 'status'];
-
-    const uploadFolder = 'products';
-    const TYPE_IMAGE = 'image';
-    const TYPE_DISCOUNT = 'discount';
-    const TYPE_SPECIAL = 'special';
-    const TYPE_DETAIL = 'detail';
+    protected $fillable = ['name', 'category_id', 'size_person_id', 'manufacturer_id', 'size_locales_id', 'size_category_id', 'status'];
 
     const STATUS_DELETE = -1;
+    const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
-
     /**
      * The "booting" method of the model.
      *
@@ -47,176 +41,21 @@ class ShopSize extends Model
     {
         return [
             'name' => 'required',
-            'sku_producer' => 'required|unique:shop_product,sku_producer,'.$this->id,
-            'description' => 'required',
-            'points' => 'numeric|min:0',
+            'category_id' => 'required',
         ];
     }
 
-    public function images(){
-        return $this->hasMany(ShopProductImage::class, 'product_id')->orderBy('order');
-    }
-
-    public function manufacturer(){
-        return $this->hasOne(ShopManufacturer::class, 'id', 'manufacturer_id');
-    }
-
-    public function details(){
-        return $this->hasMany(ShopProductDetail::class, 'product_id');
-    }
-
-    public function tax(){
-        return $this->hasOne(ShopTaxClass::class, 'id', 'tax_class_id');
-    }
-
-    public function taxWithPrice($price){
-        if(!empty($this->tax)){
-            if($this->tax->type == ShopTaxClass::TYPE_FLAT){
-                return $this->tax->rate;
-            }elseif($this->tax->type == ShopTaxClass::TYPE_PERCEN){
-                return ($this->tax->rate / 100) * $price;
-            }
-        }
-        return 0;
-    }
-
-    public function categoriesName(){
-        return '';
-    }
-
-    /**
-     * @param null $folder
-     * @return array
-     */
-    public function propertyMedias($folder = null)
+    public function getStatus($id = null)
     {
-        $sizes = [
-            'large' => [960, 960, 'resize'],
-            'medium' => [480, 480, 'resize'],
-            'thumb' => [240, 240, 'resize'],
+        $data = [
+            self::STATUS_DELETE => trans('Delete'),
+            self::STATUS_INACTIVE => trans('InActive'),
+            self::STATUS_ACTIVE => trans('Active'),
         ];
-        if (empty($folder)) {
-            $folder = uniqid();
+        if (isset($data[$id])) {
+            return $data[$id];
+        } else {
+            return $data;
         }
-        return [
-            'sizes' => $sizes,
-            'folderTmp' => $folder,
-            'pathReal' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS),
-            'pathTmpNotDay' => self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS,
-            'pathTmp' => app(UploadMedia::class)->getPathDay(self::uploadFolder . DS . UploadMedia::TEMP_FOLDER . DS . $folder . DS),
-        ];
-    }
-
-    /**
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    public function getImageService(){
-        $imageService = app(ImageService::class);
-        $propertyMedia = $this->propertyMedias();
-        $imageService->setSize($propertyMedia['sizes']);
-        return $imageService;
-    }
-
-    public function url()
-    {
-        $url = route('product.detail', ['id'=>$this->id, 'slug'=>str_slug($this->name)]);
-        return $url;
-
-    }
-
-    public function thumb($size = 'medium')
-    {
-        $url = '/images/default-shoes.jpg';
-        $imageService = app(ImageService::class);
-        $propertyMedia = app(ShopProduct::class)->propertyMedias();
-        $imageService->setSize($propertyMedia['sizes']);
-        $folder = $imageService->folder($size);
-        if(app(ImageService::class)->exists($this->folder.DS.$folder.DS.$this->image)){
-            $url = Storage::url($this->folder.DS.$folder.DS.$this->image);
-        }
-        return $url;
-    }
-
-    public function getDetailsAvailable(){
-        $details = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'DESC')->get();
-        return $details;
-    }
-
-    public function getDetailsGroupBySize(){
-        $sub = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC');
-        $details = ShopProductDetail::query()->select([
-            'id',
-            'product_id',
-            'size',
-            'supplier_id',
-            'price_in',
-            'price',
-            'new_status',
-        ])->from(DB::raw("(".$sub->toSql().") as `sub`"))
-            ->mergeBindings($sub->getQuery())
-            ->groupBy(DB::raw("size"))->orderBy('size')->get();
-        return $details;
-    }
-
-    public function getDetailsForCheckout($limit = 1)
-    {
-        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', 'ASC')->limit($limit)->get();
-        return $details;
-    }
-
-    public function getPriceDefault($size = null, $direction = 'asc'){
-        $price = 0;
-        $productDetailDefault = $this->getDetailDefault($size, $direction = 'asc');
-        if(!empty($productDetailDefault)){
-            $price = $productDetailDefault->price;
-        }
-        return $price;
-    }
-
-    public function getDetailDefault($size = null, $direction = 'asc')
-    {
-        $query = ShopProductDetail::query()->where(['product_id'=>$this->id]);
-        if(!empty($size)){
-            $query->where(['size'=>$size]);
-        }
-        $query->orderBy('price', $direction);
-        return $query->first();
-    }
-
-    public function getDetailsBySize($size, $quantity, $direction = 'asc')
-    {
-        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', $direction)->limit($quantity)->get();
-        return $details;
-    }
-
-    public function countDetailsBySize($size)
-    {
-        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->count();
-        return $details;
-    }
-
-    public function updateStockByIds($ids){
-        if(!empty($ids)){
-            foreach($ids as $id){
-                $product = self::find($id);
-                $product->updateStock();
-            }
-        }
-    }
-
-    public function updateStock(){
-        $stock_in = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->count();
-        $stock_in_count = $stock_in ? $stock_in : 0;
-        $stock_out = ShopProductDetail::query()->where(['product_id'=>$this->id, 'stock_status_id'=>ShopProductDetail::STOCK_OUT_OF_STOCK])->count();
-        $stock_out_count = $stock_out ? $stock_out : 0;
-        $this->update([
-            'stock_in'=>$stock_in_count,
-            'stock_out'=>$stock_out_count
-        ]);
-    }
-
-    public function getSizes(){
-        $query = ShopProductDetail::query()->groupBy('size');
-        return $query->pluck('size', 'id');
     }
 }

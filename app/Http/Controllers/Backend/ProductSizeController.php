@@ -7,47 +7,47 @@
  */
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Backend\ShopProduct;
+use App\Models\Backend\ShopSize;
 use Illuminate\Http\Request;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 
-class SizeController extends Controller
+class ProductSizeController extends Controller
 {
     public function index(Request $request)
     {
-        $grid = app(ShopProduct::class)->gridIndex();
+        $grid = app(ShopSize::class)->gridIndex();
         if ($request->ajax()) {
             return $grid->table();
         }else{
-            return view('size.index', compact('grid'));
+            return view('product-size.index', compact('grid'));
         }
     }
 
     public function create(Request $request)
     {
-        $model = new ShopProduct();
+        $model = new ShopSize();
         $sku_producer = $request->get('sku_producer');
         $model->sku_producer = $sku_producer;
-        return view('size.form', compact('model', 'sku_producer'));
+        return view('product-size.form', compact('model', 'sku_producer'));
     }
 
     public function show(Request $request, $id)
     {
-        $model = ShopProduct::find($id);
-        return view('size.view', compact('model'));
+        $model = ShopSize::find($id);
+        return view('product-size.view', compact('model'));
     }
 
     public function edit(Request $request, $id)
     {
-        $model = ShopProduct::find($id);
+        $model = ShopSize::find($id);
         if(!empty($model)) {
             $image = $model->getImagesToForm();
             $discounts = $model->getDiscountToForm();
             $specials = $model->getSpecialToForm();
             $details = $model->getDetailsToForm();
             $categoriesSelected = $model->getCategoriesToForm();
-            return view('size.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
+            return view('product-size.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
         }else
             return abort(404, 'Not Found');
     }
@@ -55,7 +55,7 @@ class SizeController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        $return = app(ShopProduct::class)->updateOrCreate(['id'=>$input['id']], $input);
+        $return = app(ShopSize::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
             return Redirect::route('admin.product.index');
             return Redirect::route('admin.product.edit', ['id'=>$return->id]);
@@ -66,7 +66,7 @@ class SizeController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $model = ShopProduct::find($id);
+        $model = ShopSize::find($id);
         if(!empty($model)) {
             $model->processingDelete();
         }
