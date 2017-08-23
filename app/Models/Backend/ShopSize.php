@@ -16,7 +16,7 @@ class ShopSize extends MainShopSize
         $grid = new Grid($query, [
             'id',
             'category_id' => [
-                'label' => 'Category',
+                'label' => 'Product Category',
                 'format' => function($item){
                     $item = ShopCategory::find($item->category_id);
                     $html = '';
