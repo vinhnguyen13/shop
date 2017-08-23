@@ -15,23 +15,10 @@ class ShopSize extends MainShopSize
         $query = DB::table('shop_size AS a');
         $grid = new Grid($query, [
             'id',
-            'name',
-            'size_category_id' => [
-                'label' => 'Size Category',
+            'category_id' => [
+                'label' => 'Category',
                 'format' => function($item){
-                    $item = ShopSizeCategory::find($item->size_category_id);
-                    $html = '';
-                    if(!empty($item->id)){
-                        $html = $item->name;
-                    }
-                    return $html;
-                }
-            ],
-
-            'size_locales_id' => [
-                'label' => 'Locales',
-                'format' => function($item){
-                    $item = ShopSizeLocales::find($item->size_locales_id);
+                    $item = ShopCategory::find($item->category_id);
                     $html = '';
                     if(!empty($item->id)){
                         $html = $item->name;
@@ -61,10 +48,10 @@ class ShopSize extends MainShopSize
                     return $html;
                 }
             ],
-            'category_id' => [
-                'label' => 'Category',
+            'size_locales_id' => [
+                'label' => 'Locales',
                 'format' => function($item){
-                    $item = ShopCategory::find($item->category_id);
+                    $item = ShopSizeLocales::find($item->size_locales_id);
                     $html = '';
                     if(!empty($item->id)){
                         $html = $item->name;
@@ -72,6 +59,18 @@ class ShopSize extends MainShopSize
                     return $html;
                 }
             ],
+            'size_category_id' => [
+                'label' => 'Size Category',
+                'format' => function($item){
+                    $item = ShopSizeCategory::find($item->size_category_id);
+                    $html = '';
+                    if(!empty($item->id)){
+                        $html = $item->name;
+                    }
+                    return $html;
+                }
+            ],
+            'name',
             'status' => [
                 'label' => 'Status',
                 'format' => function($item){
