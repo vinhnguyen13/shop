@@ -69,7 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
         /*
          * Product Size
          */
-        Route::get('/product-size', ['uses' => 'ProductSizeController@index', 'as'=>'admin.product.index']);
+        Route::get('/product-size', ['uses' => 'ProductSizeController@index', 'as'=>'admin.productSize.index']);
+        Route::get('/product-size/create', ['uses' => 'ProductSizeController@create', 'as'=>'admin.productSize.create']);
         /*
          * Manufacturers
          */

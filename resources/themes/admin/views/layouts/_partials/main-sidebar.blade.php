@@ -33,6 +33,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin.category.index')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     <li><a href="{{route('admin.product.index')}}"><i class="fa fa-circle-o"></i> Products</a></li>
+                    <li><a href="{{route('admin.productSize.index')}}"><i class="fa fa-circle-o"></i> Product Size</a></li>
                     <li><a href="{{route('admin.manufacturer.index')}}"><i class="fa fa-circle-o"></i> Manufacturers</a></li>
                     {{--<li><a href="{{route('admin.shipper.index')}}"><i class="fa fa-circle-o"></i> Shippers</a></li>--}}
                     <li><a href="{{route('admin.shipFee.index')}}"><i class="fa fa-circle-o"></i> Ship Fee</a></li>
