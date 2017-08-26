@@ -18,7 +18,11 @@ class Controller extends BaseController
     {
         $minutes = 10;
         $categories = Cache::remember('categories', $minutes, function() {
-            return DB::table('shop_category')->get();
+            return DB::table('shop_category')->whereNotIn('id', function($query){
+                $query->select('category_id')
+                    ->from('shop_category_parent')
+                    ->groupBy('category_id');
+            })->get();
         });
         $manufacturers = Cache::remember('manufacturers', $minutes, function() {
             return DB::table('shop_manufacturer')->get();
