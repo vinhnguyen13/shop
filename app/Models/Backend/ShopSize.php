@@ -70,7 +70,7 @@ class ShopSize extends MainShopSize
                     return $html;
                 }
             ],
-            'name',
+            'value',
             'status' => [
                 'label' => 'Status',
                 'format' => function($item){
@@ -84,5 +84,28 @@ class ShopSize extends MainShopSize
             ],
         ]);
         return $grid;
+    }
+    /**
+     * Create or update a related record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        $instance = $this->firstOrNew($attributes);
+        $instance->fill($values);
+        $instance->processingSave($values);
+        $instance->save();
+        return $instance;
+    }
+
+    /**
+     * @param $values
+     */
+    public function processingSave($values)
+    {
+
     }
 }

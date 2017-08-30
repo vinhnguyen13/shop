@@ -13,7 +13,7 @@ class ShopSize extends Model
 {
     use HasValidator;
     protected $table = 'shop_size';
-    protected $fillable = ['name', 'category_id', 'size_person_id', 'manufacturer_id', 'size_locales_id', 'size_category_id', 'status'];
+    protected $fillable = ['value', 'category_id', 'size_person_id', 'manufacturer_id', 'size_locales_id', 'size_category_id', 'status'];
 
     const STATUS_DELETE = -1;
     const STATUS_INACTIVE = 0;

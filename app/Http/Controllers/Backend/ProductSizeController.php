@@ -7,7 +7,12 @@
  */
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Backend\ShopCategory;
+use App\Models\Backend\ShopManufacturer;
 use App\Models\Backend\ShopSize;
+use App\Models\Backend\ShopSizeCategory;
+use App\Models\Backend\ShopSizeLocales;
+use App\Models\Backend\ShopSizePerson;
 use Illuminate\Http\Request;
 use Input;
 use Illuminate\Support\Facades\Redirect;
@@ -27,9 +32,14 @@ class ProductSizeController extends Controller
     public function create(Request $request)
     {
         $model = new ShopSize();
+        $categories = ShopCategory::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+        $sizePersons = ShopSizePerson::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+        $manufacturers = ShopManufacturer::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+        $locales = ShopSizeLocales::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+        $sizeCategories = ShopSizeCategory::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
         $sku_producer = $request->get('sku_producer');
         $model->sku_producer = $sku_producer;
-        return view('product-size.form', compact('model', 'sku_producer'));
+        return view('product-size.form', compact('model', 'categories', 'sizePersons', 'manufacturers', 'locales', 'sizeCategories'));
     }
 
     public function show(Request $request, $id)
@@ -42,12 +52,12 @@ class ProductSizeController extends Controller
     {
         $model = ShopSize::find($id);
         if(!empty($model)) {
-            $image = $model->getImagesToForm();
-            $discounts = $model->getDiscountToForm();
-            $specials = $model->getSpecialToForm();
-            $details = $model->getDetailsToForm();
-            $categoriesSelected = $model->getCategoriesToForm();
-            return view('product-size.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
+            $categories = ShopCategory::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            $sizePersons = ShopSizePerson::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            $manufacturers = ShopManufacturer::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            $locales = ShopSizeLocales::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            $sizeCategories = ShopSizeCategory::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
+            return view('product-size.form', compact('model', 'categories', 'sizePersons', 'manufacturers', 'locales', 'sizeCategories'));
         }else
             return abort(404, 'Not Found');
     }
@@ -57,8 +67,7 @@ class ProductSizeController extends Controller
         $input = Input::all();
         $return = app(ShopSize::class)->updateOrCreate(['id'=>$input['id']], $input);
         if(!empty($return->id)){
-            return Redirect::route('admin.product.index');
-            return Redirect::route('admin.product.edit', ['id'=>$return->id]);
+            return Redirect::route('admin.productSize.index');
         }else{
             return Redirect::back()->withErrors($return);
         }

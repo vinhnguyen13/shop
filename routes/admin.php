@@ -71,6 +71,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'], 'module' => 'Backend
          */
         Route::get('/product-size', ['uses' => 'ProductSizeController@index', 'as'=>'admin.productSize.index']);
         Route::get('/product-size/create', ['uses' => 'ProductSizeController@create', 'as'=>'admin.productSize.create']);
+        Route::post('/product-size/store', ['uses' => 'ProductSizeController@store', 'as'=>'admin.productSize.store']);
+        Route::get('/product-size/edit/{id}', ['uses' => 'ProductSizeController@edit', 'as'=>'admin.productSize.edit']);
+        Route::get('/product-size/show/{id}', ['uses' => 'ProductSizeController@show', 'as'=>'admin.productSize.show']);
+        Route::get('/product-size/delete/{id}', ['uses' => 'ProductSizeController@delete', 'as'=>'admin.productSize.delete']);
         /*
          * Manufacturers
          */
