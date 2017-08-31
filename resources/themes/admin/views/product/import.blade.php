@@ -28,7 +28,7 @@
                 <table id="productDetail" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <td class="text-left" style="width: 5%;">Size</td>
+                        <td class="text-left" style="width: 6%;">Size</td>
                         <td class="text-left" style="width: 12%;">Supplier</td>
                         <td class="text-left" style="width: 12%;">Consignment Fee</td>
                         <td class="text-left" style="width: 5%;">Consignment Fee Type</td>
@@ -123,10 +123,12 @@
 
         var detail_row = parseInt({{$total}});
         function addMoreProductDetail() {
-            var dropdownSipplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
+            var dropdownSupplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
+            var dropdownSizes = '{!! Form::select('', $sizes, null, ['class' => 'form-control']) !!}';
             html  = '<tr id="detail-row' + detail_row + '">';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
-            html += '  <td class="text-right"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSipplier).html()+'</select></td>';
+//            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
+            html += '  <td class="text-right"><select class="form-control dd_sizes" name="product_detail[' + detail_row + '][size]">'+$(dropdownSizes).html()+'</select></td>';
+            html += '  <td class="text-right"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSupplier).html()+'</select></td>';
             html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control consignment_fee" /></td>';
             html += '  <td class="text-center"><input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="1" class="consignment_fee_type" checked="checked"/>% ' +
                     '<input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="2" class="consignment_fee_type" />VND</td>';

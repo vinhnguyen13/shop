@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $profile = $user->profile()->first();
-        $image = $user->getImagesToForm();
+        $image = $user->getImages();
         if(!empty($user))
             return view('user.form', compact('user', 'profile', 'image'));
         else

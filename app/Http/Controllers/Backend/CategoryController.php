@@ -43,7 +43,7 @@ class CategoryController extends Controller
     {
         $model = ShopCategory::find($id);
         if(!empty($model)) {
-            $image = $model->getImagesToForm();
+            $image = $model->getImages();
             return view('category.form', compact('model', 'image'));
         }else
             return abort(404, 'Not Found');

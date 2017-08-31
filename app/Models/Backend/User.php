@@ -36,7 +36,7 @@ class User extends MainUser
     /**
      * @return array
      */
-    public function getImagesToForm(){
+    public function getImages(){
         $profile = UserProfile::query()->where(['user_id'=>$this->id])->first();
         $imageList = [];
         $imageService = $this->getImageService();

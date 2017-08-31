@@ -58,7 +58,7 @@ class ShopProduct extends MainShopProduct
         return $grid;
     }
 
-    public function getImagesToForm(){
+    public function getImages(){
         $images = ShopProductImage::query()->where(['product_id'=>$this->id])->orderBy('order', 'asc')->get();
         $imageList = [];
         $imageService = $this->getImageService();
@@ -81,22 +81,22 @@ class ShopProduct extends MainShopProduct
         return $imageList;
     }
 
-    public function getDiscountToForm(){
+    public function getDiscount(){
         $discounts = ShopProductDiscount::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
         return $discounts;
     }
 
-    public function getSpecialToForm(){
+    public function getSpecial(){
         $specials = ShopProductSpecial::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
         return $specials;
     }
 
-    public function getDetailsToForm(){
+    public function getDetails(){
         $details = $this->getDetailsAvailable();
         return $details;
     }
 
-    public function getCategoriesToForm(){
+    public function getCategories(){
         $categories = ShopProductCategory::query()->where(['product_id'=>$this->id])->get();
         if(!empty($categories)){
             $return = [];
@@ -105,6 +105,17 @@ class ShopProduct extends MainShopProduct
                 $return[] = $category->category_id;
             }
             return $return;
+        }
+    }
+
+    public function getSizes($categoriesSelected = null){
+        $categories = $categoriesSelected;
+        if($categoriesSelected==null){
+            $categories = $this->getCategories();
+        }
+        if(!empty($categories)){
+            $sizes = ShopSize::query()->whereIn('category_id', $categories)->orderBy('id')->pluck('value', 'id')->prepend('- Please Select -', 0);
+            return $sizes;
         }
     }
 

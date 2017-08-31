@@ -109,7 +109,7 @@ class ShopCategory extends MainShopCategory
         }
     }
 
-    public function getImagesToForm(){
+    public function getImages(){
         $imageList = [];
         if(!empty($this->image)){
             $name = $this->image;
@@ -128,7 +128,7 @@ class ShopCategory extends MainShopCategory
         return $imageList;
     }
 
-    public function getCategoriesToForm(){
+    public function getCategories(){
         $categories = ShopCategoryParent::query()->where(['category_id'=>$this->id])->get();
         $return = [];
         if(!empty($categories)){

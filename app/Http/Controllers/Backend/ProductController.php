@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Backend\ShopProduct;
+use App\Models\Backend\ShopSize;
 use Illuminate\Http\Request;
 use Input;
 use Illuminate\Support\Facades\Redirect;
@@ -38,12 +39,13 @@ class ProductController extends Controller
         if(!empty($product_id)){
             $model = ShopProduct::find($product_id);
             if(!empty($model)) {
-                $image = $model->getImagesToForm();
-                $discounts = $model->getDiscountToForm();
-                $specials = $model->getSpecialToForm();
-                $details = $model->getDetailsToForm();
-                $categoriesSelected = $model->getCategoriesToForm();
-                return view('product.import', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
+                $image = $model->getImages();
+                $discounts = $model->getDiscount();
+                $specials = $model->getSpecial();
+                $details = $model->getDetails();
+                $categoriesSelected = $model->getCategories();
+                $sizes = $model->getSizes($categoriesSelected);
+                return view('product.import', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected', 'sizes'));
             }
         }
     }
@@ -58,11 +60,11 @@ class ProductController extends Controller
     {
         $model = ShopProduct::find($id);
         if(!empty($model)) {
-            $image = $model->getImagesToForm();
-            $discounts = $model->getDiscountToForm();
-            $specials = $model->getSpecialToForm();
-            $details = $model->getDetailsToForm();
-            $categoriesSelected = $model->getCategoriesToForm();
+            $image = $model->getImages();
+            $discounts = $model->getDiscount();
+            $specials = $model->getSpecial();
+            $details = $model->getDetails();
+            $categoriesSelected = $model->getCategories();
             return view('product.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
         }else
             return abort(404, 'Not Found');
@@ -110,7 +112,7 @@ class ProductController extends Controller
         $model = ShopProduct::find($pid);
         $html = '';
         if(!empty($model)) {
-            $details = $model->getDetailsToForm();
+            $details = $model->getDetails();
             $suppliers = \App\Models\ShopSupplier::query()->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
             foreach ($details as $key => $detail) {
                 $html .= view('product._partials.form-detail-item', compact('key', 'detail', 'suppliers'))->render();
