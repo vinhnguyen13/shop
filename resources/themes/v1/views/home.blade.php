@@ -23,7 +23,7 @@
     <div class="swiper-button-prev"></div>
 </div>
 <div class="container">
-    @include('product.main.partials.list-items')
+    @include('product.main.partials.list-items', ['products'=>$footwears])
 </div>
 <div class="swiper-container slidehomepage slidehomepage-2">
     <div class="swiper-wrapper">
@@ -46,7 +46,7 @@
     <div class="swiper-button-prev"></div>
 </div>
 <div class="container">
-    @include('product.main.partials.list-items')
+    @include('product.main.partials.list-items', ['products'=>$apparels])
 </div>
 <div class="swiper-container slidehomepage slidehomepage--last">
     <div class="swiper-wrapper">

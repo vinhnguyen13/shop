@@ -16,8 +16,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = app(ShopProduct::class)->getList(['limit'=>30]);
-        return view('home', compact('products'));
+        $footwears = app(ShopProduct::class)->getList(['category'=>'footwear', 'limit'=>30]);
+        $apparels = app(ShopProduct::class)->getList(['category'=>'apparel', 'limit'=>30]);
+        return view('home', compact('footwears', 'apparels'));
     }
 
     public function location()
