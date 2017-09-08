@@ -65,7 +65,8 @@ class ProductController extends Controller
             $specials = $model->getSpecial();
             $details = $model->getDetails();
             $categoriesSelected = $model->getCategories();
-            return view('product.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected'));
+            $sizes = $model->getSizes($categoriesSelected);
+            return view('product.form', compact('model', 'image', 'discounts', 'specials', 'details', 'categoriesSelected', 'sizes'));
         }else
             return abort(404, 'Not Found');
     }

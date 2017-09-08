@@ -114,7 +114,7 @@ class ShopProduct extends Model
             $categories = $this->getCategories();
         }
         if(!empty($categories)){
-            $sizes = ShopSize::query()->whereIn('category_id', $categories)->orderBy('id')->pluck('value', 'id')->prepend('- Please Select -', 0);
+            $sizes = ShopSize::query()->whereIn('category_id', $categories)->orderBy('id')->pluck('value', 'value')->prepend('- Please Select -', 0);
             return $sizes;
         }
     }
