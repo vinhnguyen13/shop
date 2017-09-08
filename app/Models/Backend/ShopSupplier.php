@@ -3,10 +3,10 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopSupplier as MainShopSupplier;
+use App\Models\ShopSupplier as Model;
 use DB;
 
-class ShopSupplier extends MainShopSupplier
+class ShopSupplier extends Model
 {
     public function gridIndex(){
         $query = DB::table('shop_supplier AS a');

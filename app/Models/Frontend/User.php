@@ -2,9 +2,9 @@
 
 namespace App\Models\Frontend;
 
-use App\Models\User as MainUser;
+use App\Models\User as Model;
 
-class User extends MainUser
+class User extends Model
 {
     public function loginBySocial($userSocial, $provider){
         if(empty($userSocial)){

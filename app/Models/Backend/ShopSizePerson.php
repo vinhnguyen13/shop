@@ -2,9 +2,9 @@
 
 namespace App\Models\Backend;
 
-use App\Models\ShopSizePerson as MainShopSizePerson;
+use App\Models\ShopSizePerson as Model;
 
-class ShopSizePerson extends MainShopSizePerson
+class ShopSizePerson extends Model
 {
 
 }

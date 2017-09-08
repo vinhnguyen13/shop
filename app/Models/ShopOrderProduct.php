@@ -43,4 +43,8 @@ class ShopOrderProduct extends Model
             return $this->price - $this->price_in;
         }
     }
+
+    public function getSize(){
+        return $this->size_value;
+    }
 }

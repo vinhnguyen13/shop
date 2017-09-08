@@ -2,14 +2,14 @@
 
 namespace App\Models\Backend;
 
-use App\Models\ShopSize as MainShopSize;
+use App\Models\ShopSize as Model;
 use App\Helpers\Grid;
 use App\Models\ShopSizeCategory;
 use App\Models\ShopSizeLocales;
 use App\Models\ShopSizePerson;
 use DB;
 
-class ShopSize extends MainShopSize
+class ShopSize extends Model
 {
     public function gridIndex(){
         $query = DB::table('shop_size AS a');

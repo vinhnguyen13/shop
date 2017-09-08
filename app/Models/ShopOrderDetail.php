@@ -18,4 +18,8 @@ class ShopOrderDetail extends Model
     {
         return $this->hasOne('App\Models\ShopProduct', 'id', 'product_id');
     }
+
+    public function getSize(){
+        return $this->size_value;
+    }
 }

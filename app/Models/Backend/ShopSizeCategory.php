@@ -2,9 +2,9 @@
 
 namespace App\Models\Backend;
 
-use App\Models\ShopSizeCategory as MainShopSizeCategory;
+use App\Models\ShopSizeCategory as Model;
 
-class ShopSizeCategory extends MainShopSizeCategory
+class ShopSizeCategory extends Model
 {
 
 }

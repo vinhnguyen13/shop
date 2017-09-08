@@ -3,11 +3,11 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopOrder as MainShopOrder;
+use App\Models\ShopOrder as Model;
 use App\Models\ShopOrderStatus;
 use DB;
 
-class ShopOrder extends MainShopOrder
+class ShopOrder extends Model
 {
     public function gridIndex($input){
         $query = DB::table('shop_order AS a');

@@ -2,9 +2,9 @@
 
 namespace App\Models\Frontend;
 
-use App\Models\ShopCustomer as MainShopCustomer;
+use App\Models\ShopCustomer as Model;
 
-class ShopCustomer extends MainShopCustomer
+class ShopCustomer extends Model
 {
 
 }

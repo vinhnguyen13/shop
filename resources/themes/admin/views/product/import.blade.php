@@ -48,7 +48,7 @@
                         @foreach($details as $key=>$detail)
                             <tr id="detail-row{{$key}}" data-product-detail="{{$detail->id}}">
                                 <td class="text-right">
-                                    <span class="form-control">{{$detail->size}}</span>
+                                    <span class="form-control">{{$detail->getSize()}}</span>
 
                                 </td>
                                 <td class="text-left">

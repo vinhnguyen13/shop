@@ -3,11 +3,11 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopProductDetail as MainShopProductDetail;
+use App\Models\ShopProductDetail as Model;
 use DB;
 use Carbon\Carbon;
 
-class ShopProductDetail extends MainShopProductDetail
+class ShopProductDetail extends Model
 {
     public function gridIndex(){
         $query = DB::table('shop_product_detail AS a');

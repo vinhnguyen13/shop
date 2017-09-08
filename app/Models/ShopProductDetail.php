@@ -10,7 +10,7 @@ class ShopProductDetail extends Model
 {
     use HasValidator;
     protected $table = 'shop_product_detail';
-    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size','price_in', 'price', 'new_status', 'condition', 'consignment_fee', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note', 'debt_status'];
+    protected $fillable = ['product_id', 'supplier_id', 'stock_status_id', 'sku', 'color' , 'size_id', 'size_value','price_in', 'price', 'new_status', 'condition', 'consignment_fee', 'stock_in_date', 'stock_in_type', 'stock_in_note', 'stock_out_date', 'stock_out_type', 'stock_out_note', 'debt_status'];
 
     const SPLIT_CODE = '-';
 
@@ -186,5 +186,9 @@ class ShopProductDetail extends Model
         }else{
             return $this->consignment_fee;
         }
+    }
+
+    public function getSize(){
+        return $this->size_value;
     }
 }

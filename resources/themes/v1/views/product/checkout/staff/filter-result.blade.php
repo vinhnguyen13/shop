@@ -16,7 +16,7 @@
             $product = $detail->product;
             $price = $product->getPriceDefault();
             $url = $product->url();
-            $size = $detail->size;
+            $size = $detail->getSize();
             $qty = $product->countDetailsBySize($size);
             $lblStatus = !empty($detail) ? $detail->getTextNewStatus() : '';
 

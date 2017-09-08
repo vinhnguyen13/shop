@@ -147,14 +147,14 @@ class ShopProduct extends Model
         $details = ShopProductDetail::query()->select([
             'id',
             'product_id',
-            'size',
+            'size_value',
             'supplier_id',
             'price_in',
             'price',
             'new_status',
         ])->from(DB::raw("(".$sub->toSql().") as `sub`"))
             ->mergeBindings($sub->getQuery())
-            ->groupBy(DB::raw("size"))->orderBy('size')->get();
+            ->groupBy(DB::raw("size_value"))->orderBy('size_value')->get();
         return $details;
     }
 
@@ -177,7 +177,7 @@ class ShopProduct extends Model
     {
         $query = ShopProductDetail::query()->where(['product_id'=>$this->id]);
         if(!empty($size)){
-            $query->where(['size'=>$size]);
+            $query->where(['size_value'=>$size]);
         }
         $query->orderBy('price', $direction);
         return $query->first();
@@ -185,13 +185,13 @@ class ShopProduct extends Model
 
     public function getDetailsBySize($size, $quantity, $direction = 'asc')
     {
-        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', $direction)->limit($quantity)->get();
+        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size_value'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->orderBy('created_at', $direction)->limit($quantity)->get();
         return $details;
     }
 
     public function countDetailsBySize($size)
     {
-        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->count();
+        $details = ShopProductDetail::query()->where(['product_id' => $this->id, 'size_value'=>$size, 'stock_status_id' => ShopProductDetail::STOCK_IN_STOCK])->count();
         return $details;
     }
 
@@ -216,7 +216,7 @@ class ShopProduct extends Model
     }
 
     public function getSizes(){
-        $query = ShopProductDetail::query()->groupBy('size');
-        return $query->pluck('size', 'id');
+        $query = ShopProductDetail::query()->groupBy('size_value');
+        return $query->pluck('size_value', 'id');
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopShipper as MainShopShipper;
+use App\Models\ShopShipper as Model;
 use DB;
 
-class ShopShipper extends MainShopShipper
+class ShopShipper extends Model
 {
 
     public function gridIndex(){

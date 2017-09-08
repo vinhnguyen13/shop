@@ -6,11 +6,11 @@ use App\Helpers\AppHelper;
 use App\Helpers\Grid;
 use App\Models\Backend\ShopManufacturer;
 use App\Models\Backend\ShopCategory;
-use App\Models\ShopProduct as MainShopProduct;
+use App\Models\ShopProduct as Model;
 use DB;
 
 
-class ShopProduct extends MainShopProduct
+class ShopProduct extends Model
 {
     const PAGINATE = 20;
 

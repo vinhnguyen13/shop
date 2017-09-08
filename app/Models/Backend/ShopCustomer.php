@@ -3,11 +3,11 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopCustomer as MainShopCustomer;
+use App\Models\ShopCustomer as Model;
 use App\Models\Traits\Location;
 use DB;
 
-class ShopCustomer extends MainShopCustomer
+class ShopCustomer extends Model
 {
     public function gridIndex(){
         $query = DB::table('shop_customer AS a');

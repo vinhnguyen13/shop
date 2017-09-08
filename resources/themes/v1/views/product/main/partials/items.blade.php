@@ -17,7 +17,7 @@
                         @if (!empty($details) && count($details) > 0)
                             <div class="size-item">
                                 @foreach($details as $detail)
-                                    <a href="{{$url}}?size={{$detail->size}}" class="size">{{$detail->size}}</a>
+                                    <a href="{{$url}}?size={{$detail->getSize()}}" class="size">{{$detail->getSize()}}</a>
                                 @endforeach
                             </div>
                             <p class="text-uper">available size</p>

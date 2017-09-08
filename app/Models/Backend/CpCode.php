@@ -2,8 +2,8 @@
 
 namespace App\Models\Backend;
 
-use App\Models\CpCode as MainCpCode;
-class CpCode extends MainCpCode
+use App\Models\CpCode as Model;
+class CpCode extends Model
 {
 
     public static function saveRandomCode($post)

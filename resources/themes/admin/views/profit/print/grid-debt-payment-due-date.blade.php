@@ -72,7 +72,7 @@
                         <td>
                             <p class="fontSFUMeBold">{{$order->product_name}}  (SKU : {{$order->sku}})</p>
                         </td>
-                        <td class="text-center"><p class="fontSFUMeBold">{{$order->size}}</p></td>
+                        <td class="text-center"><p class="fontSFUMeBold">{{$order->getSize()}}</p></td>
                         <td class="text-center"><p class="fontSFUMeBold">{{$order->quantity}}</p></td>
                         <td class="text-right">
                             <p class="fontSFUMeBold">{{$consignment1}}</p>

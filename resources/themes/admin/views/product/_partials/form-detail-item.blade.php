@@ -1,7 +1,7 @@
 <tr id="detail-row{{$key}}" data-product-detail="{{$detail->id}}">
     <td class="text-right">
         <input type="hidden" name="product_detail[{{$key}}][id]" value="{{$detail->id}}">
-        <input type="text" name="product_detail[{{$key}}][size]" value="{{$detail->size}}" placeholder="Size" class="form-control"/>
+        <input type="text" name="product_detail[{{$key}}][size]" value="{{$detail->getSize()}}" placeholder="Size" class="form-control"/>
     </td>
     <td class="text-right">
         {!! Form::select('product_detail['.$key.'][supplier_id]', $suppliers, $detail->supplier_id, ['class' => 'form-control dd_supplier']) !!}

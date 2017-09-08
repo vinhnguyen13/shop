@@ -21,14 +21,14 @@
             <div class="reciep__content--items">
                 @foreach($orderDetails as $orderProduct)
                     <?php
-                    $price = $orderProduct->product->getPriceDefault($orderProduct->size);
+                    $price = $orderProduct->product->getPriceDefault($orderProduct->getSize());
                     $quantity = $orderProduct->quantity;
                     ?>
                     <div class="clearfix">
                         <div class="pull-left" style="width: 70%;">
                             <p class="font-700 fs-14">{{$orderProduct->product->name}}  (SKU : {{$orderProduct->product->sku_producer}})</p>
                             <div>
-                                <span class="font-500 fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->size}}</span>
+                                <span class="font-500 fs-13 d-ib mgR-15 color-7c7c7c">Size : {{$orderProduct->getSize()}}</span>
                                 <span class="font-500 fs-13 d-ib mgR-15 color-7c7c7c">Qty: {{$orderProduct->quantity}}</span>
                             </div>
                         </div>

@@ -39,7 +39,7 @@
                 <td><a href="{{route('admin.product-detail.index', ['id'=>$order->product_detail_id])}}">{{$order->sku}}</a></td>
                 <td>{!! $supplierHtml !!}</td>
                 <td>{{$order->product_name}}</td>
-                <td>{{$order->size}}</td>
+                <td>{{$order->getSize()}}</td>
                 <td>{{$order->quantity}}</td>
                 <td>{!! $priceHtml !!}</td>
                 <td>{{number_format($order->total)}}</td>

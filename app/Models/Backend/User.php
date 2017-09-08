@@ -2,7 +2,7 @@
 
 namespace App\Models\Backend;
 use App\Helpers\Grid;
-use App\Models\User as MainUser;
+use App\Models\User as Model;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +13,7 @@ use DB;
  *
  * @mixin \Eloquent
  */
-class User extends MainUser
+class User extends Model
 {
     public function gridUser(){
         $query = DB::table('users AS a');

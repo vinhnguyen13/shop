@@ -3,14 +3,14 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopCategory as MainShopCategory;
+use App\Models\ShopCategory as Model;
 use App\Models\ShopCategoryParent;
 use App\Services\ImageService;
 use App\Services\UploadMedia;
 use DB;
 use Storage;
 
-class ShopCategory extends MainShopCategory
+class ShopCategory extends Model
 {
     /**
      * @return Grid

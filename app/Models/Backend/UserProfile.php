@@ -2,9 +2,9 @@
 
 namespace App\Models\Backend;
 
-use App\Models\UserProfile as MainUserProfile;
+use App\Models\UserProfile as Model;
 
-class UserProfile extends MainUserProfile
+class UserProfile extends Model
 {
 
 }

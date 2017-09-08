@@ -3,7 +3,7 @@
 namespace App\Models\Backend;
 
 use App\Helpers\Grid;
-use App\Models\ShopProduct as MainShopProduct;
+use App\Models\ShopProduct as Model;
 use App\Models\ShopProductCategory;
 use App\Models\ShopProductDiscount;
 use App\Models\ShopProductImage;
@@ -14,7 +14,7 @@ use Storage;
 use DB;
 use Carbon\Carbon;
 
-class ShopProduct extends MainShopProduct
+class ShopProduct extends Model
 {
     private $errors = [];
 
