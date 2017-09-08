@@ -45,6 +45,6 @@ class ShopOrderProduct extends Model
     }
 
     public function getSize(){
-        return $this->size_value;
+        return $this->size;
     }
 }

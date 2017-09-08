@@ -47,7 +47,7 @@ class ShopOrderProduct extends Model
                     return $html;
                 }
             ],
-            'size_value',
+            'size',
             'quantity',
             'price'=>[
                 'label'=>'Price',
