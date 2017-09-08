@@ -3,13 +3,13 @@
 $isNewRecord = !empty($model->id) ? false : true;
 ?>
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Product Size', 'h1_href'=>route('admin.productSize.index'), 'h1_small'=>$isNewRecord ? 'Create' : 'Edit']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Size', 'h1_href'=>route('admin.productSize.index'), 'h1_small'=>$isNewRecord ? 'Create' : 'Edit']])
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title"><?php echo $isNewRecord ? "Create" : "Edit"?> Product Size</h3>
+            <h3 class="box-title"><?php echo $isNewRecord ? "Create" : "Edit"?> Size</h3>
         </div>
         <div class="box-body">
             {{ Form::open(['route' => 'admin.productSize.store', 'files' => true]) }}

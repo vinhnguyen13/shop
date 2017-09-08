@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Product Size', 'h1_href'=>route('admin.productSize.index'), 'h1_small'=>'Product Size']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Size', 'h1_href'=>route('admin.productSize.index'), 'h1_small'=>'Size']])
 @endsection
 
 @section('grid')
@@ -13,7 +13,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Product Size</h3>
+            <h3 class="box-title">Size</h3>
         </div>
         {!! $grid->table() !!}
     </div>

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 
-class ProductSizeController extends Controller
+class SizeController extends Controller
 {
     public function index(Request $request)
     {

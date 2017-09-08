@@ -82,7 +82,18 @@ class ShopSize extends MainShopSize
                     return $html;
                 }
             ],
+            'custom_column' => [
+                'custom' => true,
+                'label' => 'Action',
+                'format' => function($item) {
+                    $uri = \Request::route()->getUri();
+                    $show = link_to(url("$uri/show", [$item->id]), '', ['class' => 'glyphicon glyphicon-eye-open', 'data-toggle' => 'tooltip', 'data-original-title' => 'View']);
+                    $edit = link_to(url("$uri/edit", [$item->id]), '', ['class' => 'glyphicon glyphicon-pencil', 'data-toggle' => 'tooltip', 'data-original-title' => 'Delete']);
+                    return $show.$edit;
+                }
+            ]
         ]);
+        $grid->removeActionColumn();
         return $grid;
     }
     /**
