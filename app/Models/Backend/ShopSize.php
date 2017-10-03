@@ -107,9 +107,14 @@ class ShopSize extends Model
     {
         $instance = $this->firstOrNew($attributes);
         $instance->fill($values);
+        $validate = $instance->validate($instance->attributes);
         $instance->processingSave($values);
-        $instance->save();
-        return $instance;
+        if ($validate->passes()) {
+            $instance->save();
+            return $instance;
+        }else{
+            return $validate->getMessageBag();
+        }
     }
 
     /**

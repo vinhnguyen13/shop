@@ -40,7 +40,7 @@ class ShopSize extends Model
     public function rules()
     {
         return [
-            'name' => 'required',
+            'value' => 'required',
             'category_id' => 'required',
         ];
     }

@@ -12,6 +12,15 @@ $isNewRecord = !empty($model->id) ? false : true;
             <h3 class="box-title"><?php echo $isNewRecord ? "Create" : "Edit"?> Size</h3>
         </div>
         <div class="box-body">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
             {{ Form::open(['route' => 'admin.productSize.store', 'files' => true]) }}
             {{ Form::hidden('id', $model->id) }}
             <div class="form-group">
