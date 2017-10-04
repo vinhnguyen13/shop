@@ -169,20 +169,14 @@ class ProductController extends Controller
         $sizes = app(ShopProduct::class)->getSizes();
 //        $sizes = [8, 9, 10];
         if($request->isMethod('post')) {
-            $word = $request->get('word');
-            $size = $request->get('size');
-            $color = $request->get('color');
-            $manufacturer = $request->get('manufacturer');
-            $from_price = $request->get('from_price');
-            $to_price = $request->get('to_price');
             $cart = app(Payment::class)->getCart();
             $details = app(ShopProductDetail::class)->findProductByStaff([
-                'word'=>$word,
-                'manufacturer'=>$manufacturer,
-                'size'=>$size,
-                'color'=>$color,
-                'from_price'=>$from_price,
-                'to_price'=>$to_price,
+                'word'=>$request->get('word'),
+                'size'=>$request->get('size'),
+                'color'=>$request->get('color'),
+                'manufacturer'=>$request->get('manufacturer'),
+                'from_price'=>$request->get('from_price'),
+                'to_price'=>$request->get('to_price'),
             ]);
             return view('product.checkout.staff.filter-result', compact('sizes', 'details', 'cart'));
         }
