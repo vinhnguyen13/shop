@@ -177,22 +177,22 @@ class ProductController extends Controller
             $to_price = $request->get('to_price');
             $cart = app(Payment::class)->getCart();
             $query = ShopProductDetail::query()
-                ->join('shop_product', function($query) use ($manufacturer) {
+                ->join('shop_product', function($query) use ($manufacturer, $size, $color) {
                     //link customer to their orders
                     $query->on('shop_product_detail.product_id', '=', 'shop_product.id');
                     //consider only enabled orders
                     if(!empty($manufacturer)) {
                         $query->where('shop_product.manufacturer_id', '=', $manufacturer);
                     }
+                    if(!empty($size)){
+                        $query->where(['shop_product_detail.size'=>$size]);
+                    }
+                    if(!empty($color)){
+                        $query->where(['shop_product_detail.color'=>$color]);
+                    }
                     //consider only orders where status != 0
                 })
                 ->where(['shop_product_detail.stock_status_id' => ShopProductDetail::STOCK_IN_STOCK]);
-            if(!empty($size)){
-                $query->where(['size'=>$size]);
-            }
-            if(!empty($color)){
-                $query->where(['color'=>$color]);
-            }
             if(!empty($from_price) || !empty($to_price)){
                 $query->whereBetween('price', [$from_price, $to_price]);
             }
@@ -203,7 +203,7 @@ class ProductController extends Controller
                     $query->orWhere('shop_product.sku_producer', 'like', '%'.$word.'%');
                 });
             }
-            $details = $query->groupBy('size')->paginate(20);
+            $details = $query->groupBy('shop_product.id')->paginate(20);
             return view('product.checkout.staff.filter-result', compact('sizes', 'details', 'cart'));
         }
         return view('product.checkout.staff.index', compact('size', 'sizes'));

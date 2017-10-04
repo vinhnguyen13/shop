@@ -28,7 +28,7 @@
                 <table id="productDetail" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <td class="text-left" style="width: 6%;">Size</td>
+                        <td class="text-left" style="width: 10%;">Size</td>
                         <td class="text-left" style="width: 12%;">Supplier</td>
                         <td class="text-left" style="width: 12%;">Consignment Fee</td>
                         <td class="text-left" style="width: 5%;">Consignment Fee Type</td>
@@ -47,7 +47,7 @@
                         @endphp
                         @foreach($details as $key=>$detail)
                             <tr id="detail-row{{$key}}" data-product-detail="{{$detail->id}}">
-                                <td class="text-right">
+                                <td class="text-left">
                                     <span class="form-control">{{$detail->getSize()}}</span>
 
                                 </td>
@@ -72,7 +72,7 @@
                                 <td class="text-left">
                                     <span class="form-control">{{$detail->condition}}</span>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-left">
                                 </td>
                                 <td class="text-left">
                                 </td>
@@ -126,18 +126,18 @@
             var dropdownSupplier = '{!! Form::select('', $suppliers, null, ['class' => 'form-control']) !!}';
             var dropdownSizes = '{!! Form::select('', $sizes, null, ['class' => 'form-control']) !!}';
             html  = '<tr id="detail-row' + detail_row + '">';
-//            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
-            html += '  <td class="text-right"><select class="form-control dd_sizes" name="product_detail[' + detail_row + '][size]">'+$(dropdownSizes).html()+'</select></td>';
-            html += '  <td class="text-right"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSupplier).html()+'</select></td>';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control consignment_fee" /></td>';
-            html += '  <td class="text-center"><input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="1" class="consignment_fee_type" checked="checked"/>% ' +
+//            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][size]" value="" placeholder="Size" class="form-control" /></td>';
+            html += '  <td class="text-left"><select class="form-control dd_sizes" name="product_detail[' + detail_row + '][size]">'+$(dropdownSizes).html()+'</select></td>';
+            html += '  <td class="text-left"><select class="form-control dd_supplier" name="product_detail[' + detail_row + '][supplier_id]">'+$(dropdownSupplier).html()+'</select></td>';
+            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][consignment_fee]" value="0" placeholder="Consignment Fee" class="form-control consignment_fee" /></td>';
+            html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="1" class="consignment_fee_type" checked="checked"/>% ' +
                     '<input type="radio" name="product_detail[' + detail_row + '][consignment_fee_type]" value="2" class="consignment_fee_type" />VND</td>';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control price_in" /></td>';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control price" /></td>';
-            html += '  <td class="text-center"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
+            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][price_in]" value="" placeholder="Price In" class="form-control price_in" /></td>';
+            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][price]" value="" placeholder="Price" class="form-control price" /></td>';
+            html += '  <td class="text-left"><input type="radio" name="product_detail[' + detail_row + '][new_status]" value="1" checked="checked"/> New';
             html += '  <input type="radio" name="product_detail[' + detail_row + '][new_status]" value="0"/> Used </td>';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][condition]" value="" placeholder="Condition" class="form-control" /></td>';
-            html += '  <td class="text-right"><input type="text" name="product_detail[' + detail_row + '][total]" value="1" placeholder="Total" class="form-control" /></td>';
+            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][condition]" value="" placeholder="Condition" class="form-control" /></td>';
+            html += '  <td class="text-left"><input type="text" name="product_detail[' + detail_row + '][total]" value="1" placeholder="Total" class="form-control" /></td>';
             html += '  <td class="text-left"><button type="button" onclick="$(\'#detail-row' + detail_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
             html += '</tr>';
 

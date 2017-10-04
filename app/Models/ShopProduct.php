@@ -215,8 +215,45 @@ class ShopProduct extends Model
         ]);
     }
 
-    public function getSizes(){
-        $query = ShopProductDetail::query()->groupBy('size');
-        return $query->pluck('size', 'id');
+    public function getSizes($categoriesSelected = null){
+        $categories = $categoriesSelected;
+        if($categoriesSelected==null){
+            $categories = $this->getCategories();
+        }
+        if(!empty($categories)){
+            $sizes = ShopSize::query()->whereIn('category_id', $categories)->orderBy('id')->pluck('value', 'value');
+            return $sizes;
+        }
+    }
+
+    public function getCategories(){
+        if($this->id){
+            $categories = ShopProductCategory::query()->where(['product_id'=>$this->id])->get();
+        }else{
+            $categories = ShopProductCategory::query()->get();
+        }
+        if(!empty($categories)){
+            $return = [];
+            foreach ($categories as $category)
+            {
+                $return[] = $category->category_id;
+            }
+            return $return;
+        }
+    }
+
+    public function getDiscount(){
+        $discounts = ShopProductDiscount::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
+        return $discounts;
+    }
+
+    public function getSpecial(){
+        $specials = ShopProductSpecial::query()->where(['product_id'=>$this->id])->orderBy('date_end', 'desc')->get();
+        return $specials;
+    }
+
+    public function getDetails(){
+        $details = $this->getDetailsAvailable();
+        return $details;
     }
 }
