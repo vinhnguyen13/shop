@@ -7,4 +7,5 @@ Homestead.yaml
 .env
 /.buildpath
 /.project
+/.settings
 _ide_helper.php
