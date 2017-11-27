@@ -59,18 +59,22 @@ class ShopSize extends Model
                     return $html;
                 }
             ],
-            'size_category_id' => [
-                'label' => 'Size Category',
+            'value' => [
+                'label' => 'Value',
                 'format' => function($item){
-                    $item = ShopSizeCategory::find($item->size_category_id);
-                    $html = '';
-                    if(!empty($item->id)){
-                        $html = $item->name;
+                    $html = ''; 
+                    if(!empty($item->size_category_id)){
+                        $itemCategory = ShopSizeCategory::find($item->size_category_id);
+                        if(!empty($itemCategory->id)){
+                            $html = $itemCategory->name;
+                        }
+                        $html .= !empty($item->value) ? ' ('.$item->value.')' : '';
+                    }else{
+                        $html = $item->value;
                     }
                     return $html;
                 }
             ],
-            'value',
             'status' => [
                 'label' => 'Status',
                 'format' => function($item){
@@ -93,6 +97,7 @@ class ShopSize extends Model
                 }
             ]
         ]);
+        $grid->setHiddenColumn(['size_category_id']);
         $grid->removeActionColumn();
         return $grid;
     }

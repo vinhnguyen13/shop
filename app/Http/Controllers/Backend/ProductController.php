@@ -30,7 +30,9 @@ class ProductController extends Controller
         $model = new ShopProduct();
         $sku_producer = $request->get('sku_producer');
         $model->sku_producer = $sku_producer;
-        return view('product.form', compact('model', 'sku_producer'));
+        $categoriesSelected = $model->getCategories();
+        $sizes = $model->getSizes($categoriesSelected);
+        return view('product.form', compact('model', 'sku_producer', 'categoriesSelected', 'sizes'));
     }
 
     public function import(Request $request)
