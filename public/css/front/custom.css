@@ -1,0 +1,14 @@
+.input-label{
+	color: #9c2727;
+	height: 20px;
+	width: 200px;
+	clear: both;
+	border: 0;
+}
+.input-label::placeholder { 
+    color: #9c2727;
+}
+.input-label::focus { 
+    border: 0;
+    -webkit-appearance: none;
+}

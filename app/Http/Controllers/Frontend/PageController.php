@@ -25,5 +25,15 @@ class PageController extends Controller
     {
         return view('page.instagram');
     }
+    
+    public function printInvoice()
+    {
+        $print = request('print');
+        if(!empty($print)){
+            return view('product.payment.print.success', compact('order'));
+        }else{
+            return view('page.print-invoice');
+        }
+    }
 
 }
