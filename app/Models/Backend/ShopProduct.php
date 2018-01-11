@@ -19,7 +19,13 @@ class ShopProduct extends Model
     private $errors = [];
 
     public function gridIndex(){
-        $query = DB::table('shop_product AS a');
+        $query = DB::table('shop_product AS a')->where("status", '=', 1)->orWhere(function($query){
+            $query->where("stock_in", '>', 3);            
+        });
+        echo "<pre>";
+        print_r($query->wheres);
+        echo "<pre>";
+        exit;
         $grid = new Grid($query, [
             'id',
             'name' => [

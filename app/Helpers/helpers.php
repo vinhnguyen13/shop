@@ -26,3 +26,11 @@ if (! function_exists('input')) {
         }
     }
 }
+
+if (! function_exists('url_exists')) {
+    function url_exists($url) {
+        $headers = @get_headers($url);
+        if(strpos($headers[0],'200')===false)return false;
+        return true;
+    }
+}
