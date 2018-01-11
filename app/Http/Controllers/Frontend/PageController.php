@@ -31,7 +31,7 @@ class PageController extends Controller
         $print = request('print');
         if(!empty($print)){
             $invoice = [
-                'invoice_number'=>'invoice_number',
+                'invoice_number'=>'GLAB-1231243',
                 'product_name'=>'product_name',
                 'subtotal'=>'4000',
                 'ship_amount'=>'500',
