@@ -14,7 +14,7 @@
             {{--<p class="font-600 fs-14 mgB-5">SERVED BY:</p>--}}
             <p class="font-600 fs-14 mgB-5">INVOICE #:<input type="text" class="input-label" placeholder="INVOICE NUMBER"></p>
             <div class="reciep__content--items">
-                    <div class="clearfix">
+                    <div class="clearfix product-item">
                         <div class="pull-left">
                             <p class="font-700 fs-14"><input type="text" class="input-label" placeholder="Product Name - SKU"></p>
                             <div>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="overflow-all">
-                            <p class="font-700 fs-14">000 đ</p>
+                            <p class="font-700 fs-14"><input type="text" class="input-label" placeholder="Product Price"> đ</p>
                         </div>
                     </div>
             </div>
@@ -66,7 +66,7 @@
 <script type="text/javascript">
     $(function() {
         $('.reciep').on('click', '.btn-print', function (e) {
-            var url = '{{route('page.print-invoice')}}';
+            var url = '{{route('page.print-invoice')}}?print=1';
             loadiFrame(url);
             $("#printIframe").load(
                     function () {
