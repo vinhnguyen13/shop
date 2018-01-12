@@ -36,10 +36,10 @@
                     <p class="font-700 fs-14">PAY BY</p>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <p class="font-700 fs-14">{{$invoice['subtotal']}} đ</p>
-                    <p class="font-700 fs-14">{{$invoice['ship_amount']}} đ</p>
-                    <p class="font-700 fs-14">{{$invoice['discount_amount']}} đ</p>
-                    <p class="font-700 fs-14">{{$invoice['total']}} đ</p>
+                    <p class="font-700 fs-14">{{number_format($invoice['subtotal'])}} đ</p>
+                    <p class="font-700 fs-14">{{number_format($invoice['ship_amount'])}} đ</p>
+                    <p class="font-700 fs-14">{{number_format($invoice['discount_amount'])}} đ</p>
+                    <p class="font-700 fs-14">{{number_format($invoice['total'])}} đ</p>
                     <p class="font-700 fs-14">Pay At Store</p>
                 </div>
             </div>
