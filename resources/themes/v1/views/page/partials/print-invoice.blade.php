@@ -14,6 +14,7 @@
             {{--<p class="font-600 fs-14 mgB-5">SERVED BY:</p>--}}
             <p class="font-600 fs-14 mgB-5">INVOICE #: {{$invoice['invoice_number']}}</p>
             <div class="reciep__content--items">
+            @if(!empty($invoice['orders']))
                 @foreach($invoice['orders'] as $orderProduct)
                     <div class="clearfix">
                         <div class="pull-left">
@@ -28,6 +29,7 @@
                         </div>
                     </div>
                 @endforeach
+            @endif
             </div>
             <div class="row mgB-20">
                 <div class="col-xs-6 text-right">

@@ -89,7 +89,7 @@ body.active:before {
     object-fit: cover;
 }
 
-.btn {
+.btn-glab {
     border-radius: 0;
     background: rgb(0, 0, 0);
     border: none;
@@ -1725,6 +1725,7 @@ button.close {
 }
 .reciep__content--items .overflow-all {
     text-align: right;
+    overflow: inherit;
 }
 .reciep__content--items > div {
     padding: 5px 0;

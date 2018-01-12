@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Glab') }}</title>
     {!! $metaHTML or '' !!}
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/bootstrap.min.css?v='.$version_deploy) }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/reset.min.css?v='.$version_deploy) }}">
     <link rel="stylesheet" href="{{ asset('/themes/v1/css/font.css?v='.$version_deploy) }}">
     @stack('styles')

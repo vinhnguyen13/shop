@@ -69,7 +69,7 @@
             <p class="font-500 fs-13 font-600 text-center mgB-40">Sản phẩm chỉ được đổi trả trong vòng 03 ngày kể từ ngày mua hàng với điều kiện quý khách còn giữ hóa đơn và sản phẩm chưa qua sử dụng còn nguyên nhãn mác từ nhà sản xuất.</p>
             <p class="font-700 fs-14 text-center mgT-20 mgB-20">THANK YOU AND HOPE YOU HAD GREAT SHOPPING EXPERIENCE</p>
             <div class="text-right mgT-30">
-                <button class="btn btn-default btn-sm btn-print"><i class="fa fa-print"></i>Print</button>
+                <button class="btn btn-glab btn-default btn-sm btn-print"><i class="fa fa-print"></i>Print</button>
             </div>
         </div>
     </div>

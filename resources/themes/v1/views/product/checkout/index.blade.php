@@ -24,7 +24,7 @@
                     <h4><i class="icon fa fa-warning"></i> Thông báo!</h4>
                     Không có sản phẩm nào trong giỏ hàng.
                 </div>
-                <a href="{{url('/')}}" class="btn btn-block btn-success">Tiếp tục mua hàng</a>
+                <a href="{{url('/')}}" class="btn btn-glab btn-block btn-success">Tiếp tục mua hàng</a>
             @endif
             </form>
         </div>

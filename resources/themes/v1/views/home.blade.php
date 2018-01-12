@@ -8,14 +8,14 @@
             <img src="/themes/v1/images/img-slide-1.jpg" alt="" />
             <div class="desc">
                 <h2>NIKE AIR JORDAN 11 PRM COOL GREY <br> NOW AVAILABLE</h2>
-                <a href="" class="btn">shop now</a>
+                <a href="" class="btn btn-glab">shop now</a>
             </div>
         </div>
         <div class="swiper-slide wrap-img">
             <img src="/themes/v1/images/img-slide-2.jpg" alt="" />
             <div class="desc">
                 <h2>air force i</h2>
-                <a href="" class="btn">shop now</a>
+                <a href="" class="btn btn-glab">shop now</a>
             </div>
         </div>
     </div>
@@ -31,14 +31,14 @@
             <img src="/themes/v1/images/img-slide-1.jpg" alt="" />
             <div class="desc">
                 <h2>air force i</h2>
-                <a href="" class="btn">shop now</a>
+                <a href="" class="btn btn-glab">shop now</a>
             </div>
         </div>
         <div class="swiper-slide wrap-img">
             <img src="/themes/v1/images/img-slide-2.jpg" alt="" />
             <div class="desc">
                 <h2>air force i</h2>
-                <a href="" class="btn">shop now</a>
+                <a href="" class="btn btn-glab">shop now</a>
             </div>
         </div>
     </div>
@@ -54,14 +54,14 @@
             <img src="/themes/v1/images/d-s-c-01558.jpg" alt="" />
             <div class="desc">
                 <h2>WE REPRESENT THE SNEAKER CULTURE <br> BLOW YOUR MIND</h2>
-                <a href="" class="btn">READ NOW</a>
+                <a href="" class="btn btn-glab">READ NOW</a>
             </div>
         </div>
         <div class="swiper-slide wrap-img">
             <img src="/themes/v1/images/img-slide-2.jpg" alt="" />
             <div class="desc">
                 <h2>WE REPRESENT THE SNEAKER CULTURE <br> BLOW YOUR MIND</h2>
-                <a href="" class="btn">READ NOW</a>
+                <a href="" class="btn btn-glab">READ NOW</a>
             </div>
         </div>
     </div>
