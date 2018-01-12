@@ -63,5 +63,5 @@ Route::group(['middleware' => ['web'], 'module' => 'Frontend', 'namespace' => 'A
     Route::get('/about', ['uses' => 'PageController@about'])->name('page.about');
     Route::get('/scanner-barcode', ['uses' => 'PageController@scannerBarcode'])->name('page.scanner-barcode');
     Route::get('/instagram', ['uses' => 'PageController@instagram'])->name('page.instagram');
-    Route::get('/print-invoice', ['uses' => 'PageController@printInvoice'])->name('page.print-invoice');
+    Route::any('/print-invoice', ['uses' => 'PageController@printInvoice'])->name('page.print-invoice');
 });
