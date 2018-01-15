@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="overflow-all">
-                            <p class="font-700 fs-14">{{$orderProduct['product_total']}} đ</p>
+                            <p class="font-700 fs-14">{{number_format($orderProduct['product_total'])}} đ</p>
                         </div>
                     </div>
                 @endforeach
