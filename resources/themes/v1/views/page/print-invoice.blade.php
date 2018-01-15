@@ -85,7 +85,12 @@
         	return false;
         });
         
-        $('.reciep .product-items').on('blur', '.product-item-total', function (e) {
+        $('.reciep .product-items').on('blur', '.product-item-total-display', function (e) {
+        	var _val = $(this).val();
+        	_val = _val.split('.').join('');
+        	var newVal = moneyFormat(_val);
+        	$(this).val(newVal);
+        	$(this).closest('.product-item').find('.product-item-total').val(_val);
 			updateAmount();
         	return true;
         });  
@@ -116,8 +121,9 @@
     					html += '</div>';
     				html += '</div>';
 					html += '<div class="overflow-all">';
-						html += '<p class="font-700 fs-14"><input type="text" class="input-label product-item-total" name="invoice[orders]['+idx+'][product_total]" placeholder="Product Price Total"> đ</p>';
+						html += '<p class="font-700 fs-14"><input type="text" class="input-label product-item-total-display" placeholder="Product Price Total"> đ</p>';
 					html += '</div>';
+					html += '<input type="text" class="input-label product-item-total" name="invoice[orders]['+idx+'][product_total]" placeholder="Product Price Total">';
 				html += '</div>';
 			return html;
         }
@@ -127,17 +133,27 @@
         	var _wrapAmount = $('.reciep__content--amount');
         	$('.reciep .product-items .product-item').each(function() {
         		_productAmount = parseInt($(this).find('.product-item-total').val());		
-        		console.log(_productAmount);	
         		_productSubTotal += _productAmount;   
         	});
-        	_wrapAmount.find('.subtotal').html(_productSubTotal+' đ');
+        	_wrapAmount.find('.subtotal').html(moneyFormat(_productSubTotal)+' đ');
             _wrapAmount.find('.subtotalValue').val(_productSubTotal);
             var _shipAmountValue = parseInt(_wrapAmount.find('.shipAmountValue').val());
             var _discountAmountValue = parseInt(_wrapAmount.find('.discountAmountValue').val());
             _productTotal = _productSubTotal + _shipAmountValue - _discountAmountValue;
-            _wrapAmount.find('.total').html(_productTotal+' đ');
+            _wrapAmount.find('.total').html(moneyFormat(_productTotal)+' đ');
             _wrapAmount.find('.totalValue').val(_productTotal);
         }
+
+        function moneyFormat(val) {
+			val = parseInt(val);
+    	    return val.format(0, 3, '.', ',');;
+    	}
+        Number.prototype.format = function(n, x, s, c) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                num = this.toFixed(Math.max(0, ~~n));
+
+            return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+        };
     });
 </script>
 
