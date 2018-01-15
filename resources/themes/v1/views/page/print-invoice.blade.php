@@ -123,7 +123,7 @@
 					html += '<div class="overflow-all">';
 						html += '<p class="font-700 fs-14"><input type="text" class="input-label product-item-total-display" placeholder="Product Price Total"> đ</p>';
 					html += '</div>';
-					html += '<input type="text" class="input-label product-item-total" name="invoice[orders]['+idx+'][product_total]" placeholder="Product Price Total">';
+					html += '<input type="hidden" class="input-label product-item-total" name="invoice[orders]['+idx+'][product_total]" placeholder="Product Price Total">';
 				html += '</div>';
 			return html;
         }
