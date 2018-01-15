@@ -128,7 +128,7 @@ class ShopCategory extends Model
         return $imageList;
     }
 
-    public function getCategories(){
+    public function getParentCategories(){
         $categories = ShopCategoryParent::query()->where(['category_id'=>$this->id])->get();
         $return = [];
         if(!empty($categories)){

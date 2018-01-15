@@ -224,6 +224,7 @@ class ShopProduct extends Model
             $sizes = ShopSize::query()->whereIn('category_id', $categories)->orderBy('id')->pluck('value', 'value');
             return $sizes;
         }
+        return [];
     }
 
     public function getCategories(){

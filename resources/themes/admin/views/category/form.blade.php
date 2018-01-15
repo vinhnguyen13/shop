@@ -17,7 +17,7 @@ $isNewRecord = !empty($model->id) ? false : true;
 
                 <?php
                 $categories = \App\Models\ShopCategory::where(['status'=>true, 'parent_id'=>0])->orderBy('id')->pluck('name', 'id')->prepend('- Please Select -', 0);
-                $categoriesSelected = app(\App\Models\Backend\ShopCategory::class)->getCategoriesToForm();
+                $categoriesSelected = $model->getParentCategories();
                 ?>
                 <div class="form-group">
                     {{ Form::label(null, 'Parent') }}
