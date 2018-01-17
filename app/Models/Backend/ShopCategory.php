@@ -17,23 +17,9 @@ class ShopCategory extends Model
      */
     public function gridIndex()
     {
-//        $objects = \DB::table('shop_category AS a')->select('a.id', 'b.parent_id')->leftJoin('shop_category_parent AS b', 'a.id', '=', 'b.category_id')->get()->toArray();
-//        $return = categoryMultiLevel($objects, null);
-        $query = DB::table('shop_category AS a');
-        $grid = new Grid($query, [
-            'id',
-            'name' => [
-                'label' => 'Name',
-                'filter' => 'like',
-            ],
-            'slug',
-            'status' => [
-            ],
-            'updated_at' => [
-                'filter' => false,
-            ],
-        ]);
-        return $grid;
+        $objects = \DB::table('shop_category AS a')->select('a.id', 'a.name', 'a.slug', 'a.status', 'a.updated_at', 'b.parent_id')->leftJoin('shop_category_parent AS b', 'a.id', '=', 'b.category_id')->get()->toArray();
+        $return = categoryMultiLevel($objects, null);
+        return $return;
     }
 
     /**

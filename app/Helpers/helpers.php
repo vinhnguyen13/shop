@@ -38,12 +38,11 @@ if (! function_exists('url_exists')) {
 if (! function_exists('categoryMultiLevel')) {
     function categoryMultiLevel(array $objects, $parent=0, $depth=0, array &$result=array()) {
         foreach ($objects as $key => $object) {
-            $object = (array) $object;
-            if ($object['parent_id'] == $parent) {
-                $object['depth'] = $depth;
+            if ($object->parent_id == $parent) {
+                $object->depth = $depth;
                 array_push($result, $object);
                 unset($objects[$key]);
-                categoryMultiLevel($objects, $object['id'], $depth + 1, $result);
+                categoryMultiLevel($objects, $object->id, $depth + 1, $result);
             }
         }
         return $result;
