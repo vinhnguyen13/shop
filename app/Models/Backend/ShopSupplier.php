@@ -5,6 +5,7 @@ namespace App\Models\Backend;
 use App\Helpers\Grid;
 use App\Models\ShopSupplier as Model;
 use DB;
+use App\Models\Backend\ShopProductDetail;
 
 class ShopSupplier extends Model
 {
@@ -26,6 +27,15 @@ class ShopSupplier extends Model
                     return $html;
                 }
             ],
+            'product' => [
+                'custom' => true,
+                    'label' => 'Product',
+                    'format' => function ($item) {
+                        $totalProduct = ShopProductDetail::query()->where(['supplier_id'=>$item->id])->count();
+                        $html = \Html::link(route('admin.product-detail.index', ['supplier_id'=>$item->id]), $totalProduct);
+                    return $html;
+                }
+            ]
         ]);
         return $grid;
     }

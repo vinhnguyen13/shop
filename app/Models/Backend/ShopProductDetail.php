@@ -31,7 +31,9 @@ class ShopProductDetail extends Model
                     if(!empty($input["{$column}"])) {
                         $word = $input[$column];
                         $query->leftJoin('shop_product AS b', "b.id", '=', 'a.product_id');
-                        $query->where('b.id', '=', $word)->orWhere('b.name', 'Like', '%'.$word.'%');
+                        $query->where(function ($query) use($word) {
+                            $query->where('b.id', '=', $word)->orWhere('b.name', 'Like', '%'.$word.'%');
+                        });
                     }
                 }]
             ],
@@ -43,6 +45,15 @@ class ShopProductDetail extends Model
                     $html .= '<p class="help-block small">Consignment Fee: '.number_format($item->consignment_fee).'%</p>';
                     return $html;
                 },
+                'filter' => [function($column, $config, $input){
+                    $html = \Form::text("supplier_id", !empty($input[$column]) ? $input[$column] : null, ['class' => 'simple-filter']);
+                    return $html;
+                }, function($column, $config, $query, $input){
+                    if(!empty($input["{$column}"])) {
+                        $word = $input[$column];
+                        $query->where('a.supplier_id', '=', $word);
+                    }
+                }]
             ],
             'sku',
             'qr'=>[

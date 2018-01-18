@@ -38,6 +38,7 @@ class ProductController extends Controller
     public function import(Request $request)
     {
         $product_id = Input::get('product_id');
+        $supplier_id = Input::get('supplier_id');
         if(!empty($product_id)){
             $model = ShopProduct::find($product_id);
             if(!empty($model)) {
