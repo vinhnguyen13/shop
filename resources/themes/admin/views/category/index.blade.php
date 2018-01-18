@@ -1,15 +1,24 @@
 @extends('layouts.app')
 
 @section('content-header')
-    @include('layouts._partials.content-header', ['data'=>['h1'=>'Profit', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Profit Management']])
+    @include('layouts._partials.content-header', ['data'=>['h1'=>'Category', 'h1_href'=>route('admin.order.index'), 'h1_small'=>'Category Management']])
 @endsection
 
 @section('content')
     <div class="box wrapRevenue">
         <div class="box-header with-border">
-            <h3 class="box-title">Profit Management</h3>
+            <h3 class="box-title">Category Management</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
+        	<div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-footer">
+                        <div class="col-xs-4">
+                            <a href="{{route('admin.category.create')}}" class="btn btn-success">Create</a>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div>
             <div class="box-body-grid">
                 @if(!empty($categories))
                     <table class="table table-bordered">
@@ -71,60 +80,14 @@
         <!-- /.Modal -->
     </div>
 
-    <div id="iframeplaceholder"></div>
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="/themes/admin/plugins/datepicker/datepicker3.css">
-<link rel="stylesheet" href="/themes/admin/plugins/select2/select2.min.css">
 @endpush
 
 @push('scripts')
-<script src="/themes/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script src="/themes/admin/plugins/select2/select2.js"></script>
 <script type="text/javascript">
     $(function() {
-        var urlLoadGrid = '{{route('admin.profit.index')}}';
-        var urlUserVerify = '{{route('admin.user.verify')}}';
-        var urlDebtPaymentDueDate = '{{route('admin.profit.debtPaymentDueDate')}}';
-
-        $('.date').datepicker({
-            autoclose: true,
-            format: "dd-mm-yyyy"
-        });
-
-        $( ".supplier-list" ).select2();
-
-        $('.wrapRevenue').on('click', '.btn-reset', function (e) {
-            $('.wrapRevenue').trigger('revenue/loadGrid', [1]);
-            return false;
-        });
-
-        $('.wrapRevenue').on('click', '.btn-filter', function (e) {
-            var params = $('#revenueForm').serialize();
-            var supplierVal = $('.supplier-list').val();
-            $('.wrapRevenue').trigger('revenue/loadGrid', [params]);
-            return false;
-        });
-
-
-        $('.wrapRevenue').bind('revenue/loadGrid', function (event, params) {
-            if (urlLoadGrid) {
-                $('.wrapRevenue').loading({display: true});
-                $.ajax({
-                    type: "post",
-                    dataType: 'html',
-                    url: urlLoadGrid,
-                    data: params,
-                    success: function (data) {
-                        $('.wrapRevenue .box-body-grid').html(data);
-                        $('.wrapRevenue').loading({display: false});
-                    },
-                    error: function (error) {
-                    }
-                });
-            }
-        });
 
     });
 </script>
