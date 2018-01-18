@@ -19,6 +19,7 @@
                             <th>Slug</th>
                             <th>Status</th>
                             <th>Updated At</th>
+                            <th>Action</th>
                         </tr>
                         @foreach($categories as $category)
                             @php
@@ -30,6 +31,11 @@
                                 <td>{{$category->slug}}</td>
                                 <td>{{$category->status}}</td>
                                 <td>{{$category->updated_at}}</td>
+                                <td>
+                                    <a href="{{route('admin.category.show', ['id'=>$category->id])}}" class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-original-title="View"></a>
+                                    <a href="{{route('admin.category.edit', ['id'=>$category->id])}}" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-original-title="Edit"></a>
+                                    <a href="{{route('admin.category.delete', ['id'=>$category->id])}}" class="glyphicon glyphicon-trash glyphicon-last-child" data-toggle="tooltip" data-original-title="Delete"></a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
