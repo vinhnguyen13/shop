@@ -49,6 +49,7 @@ class ShopProduct extends Model
                     $count = ShopProductDetail::query()->where(['product_id'=>$item->id, 'stock_status_id'=>ShopProductDetail::STOCK_IN_STOCK])->count();
                     $html = \Html::link(route('admin.product-detail.index', ['product_id'=>$item->id]), 'Total: '.$count, ['target'=>'_blank']);
                     $html .= '<a href="'.route('admin.product.import', ['product_id'=>$item->id]).'" class="btn btn-xs btn-success">Import</a>';
+                    $html .= '<a href="'.route('admin.product-detail.index', ['product_id'=>$item->id]).'" class="btn btn-xs btn-success">View</a>';
                     return $html;
                 },
             ],

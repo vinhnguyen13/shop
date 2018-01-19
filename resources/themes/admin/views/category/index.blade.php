@@ -27,6 +27,7 @@
                             <th>Name</th>
                             <th>Slug</th>
                             <th>Status</th>
+                            <th>Products</th>
                             <th>Updated At</th>
                             <th>Action</th>
                         </tr>
@@ -39,7 +40,8 @@
                                 <td>{{$level.' '.$category->name}}</td>
                                 <td>{{$category->slug}}</td>
                                 <td>{{$category->status}}</td>
-                                <td>{{$category->updated_at}}</td>
+                                <td>{{$category->total}}</td>
+                                <td>{{date('d-m-Y', strtotime($category->updated_at))}}</td>
                                 <td>
                                     <a href="{{route('admin.category.show', ['id'=>$category->id])}}" class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-original-title="View"></a>
                                     <a href="{{route('admin.category.edit', ['id'=>$category->id])}}" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-original-title="Edit"></a>
@@ -58,25 +60,6 @@
         </div>
         <!-- Modal -->
 
-        <div class="modal fade" id="modal-consignment" data-backdrop="static">
-            <div class="modal-dialog" style="width: 100%">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"><i class="fa fa-book"></i> Thanh toán cho CH03 </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="col-xs-12">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-print" data-dismiss="modal"><i class="fa fa-check"></i> Print & Update Payment Status</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- /.Modal -->
     </div>
 

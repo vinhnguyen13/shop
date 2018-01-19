@@ -17,7 +17,8 @@ class ShopCategory extends Model
      */
     public function gridIndex()
     {
-        $objects = \DB::table('shop_category AS a')->select('a.id', 'a.name', 'a.slug', 'a.status', 'a.updated_at', 'b.parent_id')->leftJoin('shop_category_parent AS b', 'a.id', '=', 'b.category_id')->get()->toArray();
+        $objects = \DB::table('shop_category AS a')->select('a.id', 'a.name', 'a.slug', 'a.status', 'a.updated_at', 'b.parent_id', DB::raw("(SELECT COUNT(*) FROM shop_product_category WHERE category_id = a.id) AS total"))
+        ->leftJoin('shop_category_parent AS b', 'a.id', '=', 'b.category_id')->get()->toArray();
         $return = categoryMultiLevel($objects, null);
         return $return;
     }
